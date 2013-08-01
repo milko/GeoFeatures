@@ -19,18 +19,25 @@
  *======================================================================================*/
 
 /**
- * Local includes.
+ * Local definitions.
  *
- * This include file contains local definitions.
+ * This include file contains all local definitions.
  */
-require_once( 'local.inc.php' );
+require_once( "local.inc.php" );
 
 /**
- * Class includes.
+ * Global definitions.
+ *
+ * This include file contains all global definitions.
+ */
+require_once( kPATH_GEOFEATURES_LIBRARY_ROOT."/includes.inc.php" );
+
+/**
+ * Service class definitions.
  *
  * This include file contains the service class definitions.
  */
-require_once( "CGeoFeatureService.php" );
+require_once( kPATH_GEOFEATURES_LIBRARY_CLASS."/CGeoFeatureService.php" );
 
 
 /*=======================================================================================

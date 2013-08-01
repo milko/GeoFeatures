@@ -31,11 +31,25 @@
 require_once( "local.inc.php" );
 
 /**
- * Class definitions.
+ * Global definitions.
  *
- * This include file contains all class definitions.
+ * This include file contains all global definitions.
  */
-require_once( "CBilFilesReader.php" );
+require_once( kPATH_GEOFEATURES_LIBRARY_ROOT."/includes.inc.php" );
+
+/**
+ * Service definitions.
+ *
+ * This include file contains the service definitions.
+ */
+require_once( kPATH_GEOFEATURES_LIBRARY_CLASS."/CGeoFeatureService.inc.php" );
+
+/**
+ * Reader class definitions.
+ *
+ * This include file contains the reader class definitions.
+ */
+require_once( kPATH_GEOFEATURES_LIBRARY_CLASS."/CBilFilesReader.php" );
 
 
 /*=======================================================================================
@@ -708,31 +722,31 @@ try
 		//
 		// Init record.
 		//
-		$record = array( '_id' => (int) $key );
+		$record = array( kAPI_DATA_ID => (int) $key );
 		
 		//
 		// Load point coordinates.
 		//
-		$record[ 'pt' ] = array( 'type' => 'Point',
-								 'coordinates' => $value[ kOFFSET_POINT ] );
-		$record[ 'dms' ] = $value[ kOFFSET_COORD ];
+		$record[ kAPI_DATA_POINT ] = array( 'type' => kAPI_GEOMETRY_TYPE_POINT,
+											'coordinates' => $value[ kOFFSET_POINT ] );
+		$record[ kAPI_DATA_DMS ] = $value[ kOFFSET_COORD ];
 								  
 		//
 		// Load tile coordinates.
 		//
-		$record[ 'tile' ] = $value[ kOFFSET_TILE ];
+		$record[ kAPI_DATA_TILE ] = $value[ kOFFSET_TILE ];
 
 		//
 		// Load box coordinates.
 		//
-		$record[ 'bdec' ] = $value[ kOFFSET_BOX_DEC ];
-		$record[ 'bdms' ] = $value[ kOFFSET_BOX_DMS ];
+		$record[ kAPI_DATA_BOX_DEC ] = $value[ kOFFSET_BOX_DEC ];
+		$record[ kAPI_DATA_BOX_DMS ] = $value[ kOFFSET_BOX_DMS ];
 		
 		//
 		// Load elevation.
 		//
 		if( array_key_exists( 'alt', $value ) )
-			$record[ 'elev' ] = (int) $value[ 'alt' ];
+			$record[ kAPI_DATA_ELEVATION ] = (int) $value[ 'alt' ];
 		
 		//
 		// Init climate data.
@@ -749,7 +763,7 @@ try
 		// Load Global Environment Stratification.
 		//
 		if( array_key_exists( 'gens', $value ) )
-			$cur[ 'gens' ] = $value[ 'gens' ];
+			$cur[ kAPI_DATA_CLIMATE_GENS ] = $value[ 'gens' ];
 		
 		//
 		// Load bioclimatic data.
@@ -761,7 +775,7 @@ try
 				$tmp[ $i ] = $value[ "bio$i" ];
 		}
 		if( count( $tmp ) )
-			$cur[ 'bio' ] = $tmp;
+			$cur[ kAPI_DATA_CLIMATE_BIO ] = $tmp;
 		
 		//
 		// Load precipitation.
@@ -773,7 +787,7 @@ try
 				$tmp[ $i ] = $value[ "prec$i" ];
 		}
 		if( count( $tmp ) )
-			$cur[ 'prec' ] = $tmp;
+			$cur[ kAPI_DATA_CLIMATE_PREC ] = $tmp;
 		
 		//
 		// Load temperature.
@@ -789,13 +803,13 @@ try
 				$tmp[ 'h' ][ $i ] = $value[ "tmax$i" ];
 		}
 		if( count( $tmp ) )
-			$cur[ 'temp' ] = $tmp;
+			$cur[ kAPI_DATA_CLIMATE_TEMP ] = $tmp;
 		
 		//
 		// Load climate.
 		//
 		if( count( $clim ) )
-			$record[ 'clim' ] = $clim;
+			$record[ kAPI_DATA_CLIMATE ] = $clim;
 		
 		//
 		// Add to records.

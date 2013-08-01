@@ -113,7 +113,7 @@ define( "kBUF_RECORD_COUNT", 4096 );
  *
  * Eventual exceptions will include file and trace information.
  */
-define( "kENV_TRACE", TRUE );
+define( "kENV_TRACE", FALSE );
 
 /**
  * Verbose.

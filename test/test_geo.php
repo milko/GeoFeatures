@@ -18,6 +18,27 @@
  *																						*
  *======================================================================================*/
 
+/**
+ * Local definitions.
+ *
+ * This include file contains all local definitions.
+ */
+require_once( "local.inc.php" );
+
+/**
+ * Global definitions.
+ *
+ * This include file contains all global definitions.
+ */
+require_once( kPATH_GEOFEATURES_LIBRARY_ROOT."/includes.inc.php" );
+
+/**
+ * Service definitions.
+ *
+ * This include file contains the service definitions.
+ */
+require_once( kPATH_GEOFEATURES_LIBRARY_CLASS."/CGeoFeatureService.inc.php" );
+
 
 /*=======================================================================================
  *	TEST GEOGRAPHIC QUERIES																*
@@ -31,9 +52,9 @@ try
 	//
 	// Connect to database.
 	//
-	$client = new MongoClient( 'mongodb://192.168.181.101:27017' );
-	$database = $client->selectDB( 'GEO' );
-	$collection = $database->selectCollection( 'WORLDCLIM30' );
+	$client = new MongoClient( kDEFAULT_SERVER );
+	$database = $client->selectDB( kDEFAULT_DATABASE );
+	$collection = $database->selectCollection( kDEFAULT_COLLECTION );
 	
 	//
 	// Test proximity.

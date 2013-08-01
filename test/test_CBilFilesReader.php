@@ -19,15 +19,26 @@
  *																						*
  *======================================================================================*/
 
-//
-// Local includes.
-//
-require_once( 'local.inc.php' );
+/**
+ * Local definitions.
+ *
+ * This include file contains all local definitions.
+ */
+require_once( "local.inc.php" );
 
-//
-// Class includes.
-//
-require_once( "CBilFilesReader.php" );
+/**
+ * Global definitions.
+ *
+ * This include file contains all global definitions.
+ */
+require_once( kPATH_GEOFEATURES_LIBRARY_ROOT."/includes.inc.php" );
+
+/**
+ * Class definitions.
+ *
+ * This include file contains the class definitions.
+ */
+require_once( kPATH_GEOFEATURES_LIBRARY_CLASS."/CBilFilesReader.php" );
 
 
 /*=======================================================================================

@@ -19,15 +19,26 @@
  *																						*
  *======================================================================================*/
 
-//
-// Local includes.
-//
-require_once( 'local.inc.php' );
+/**
+ * Local definitions.
+ *
+ * This include file contains all local definitions.
+ */
+require_once( "local.inc.php" );
 
-//
-// Class includes.
-//
-require_once( "CGeoFeatureService.php" );
+/**
+ * Global definitions.
+ *
+ * This include file contains all global definitions.
+ */
+require_once( kPATH_GEOFEATURES_LIBRARY_ROOT."/includes.inc.php" );
+
+/**
+ * Class definitions.
+ *
+ * This include file contains the class definitions.
+ */
+require_once( kPATH_GEOFEATURES_LIBRARY_CLASS."/CGeoFeatureService.php" );
 
 
 /*=======================================================================================
@@ -37,7 +48,7 @@ require_once( "CGeoFeatureService.php" );
 //
 // Test service URL.
 //
-$url = "http://localhost/worldclimtest/MongoDB%20reader/GeoFeatures.remote.php";
+$url = "http://localhost/geofeatures/service/GeoFeatures.php";
 
 //
 // Test class.
@@ -71,6 +82,22 @@ try
 	$response = file_get_contents( $request );
 	echo( 'Response<pre>' ); print_r( $response ); echo( '</pre>' );
 	echo( '<hr />' );
+	
+	//
+	// Test unsupported operation.
+	//
+	echo( '<h4>Test unsupported operation</h4>' );
+	$op = 'unsupported';
+	$geo = kAPI_GEOMETRY_TILE.'=33065587,774896741';
+	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION ) );
+	$request = "$url?$op&$mod&$geo";
+	echo( "Request: <code>$request</code><br />" );
+	echo( '<h5>$response = file_get_contents( $request );</h5>' );
+	$response = file_get_contents( $request );
+	echo( '<h5>$response = json_decode( $response );</h5>' );
+	$response = json_decode( $response );
+	echo( 'Response<pre>' ); print_r( $response ); echo( '</pre>' );
+	echo( '<hr />' );
 
 	//
 	// Test TILE.
@@ -89,16 +116,62 @@ try
 	echo( '<hr />' );
 
 	//
-	// Test CONTAINS.
+	// Test COUNT TILE.
 	//
-	echo( '<h4>Test CONTAINS</h4>' );
+	echo( '<h4>Test COUNT TILE</h4>' );
+	$op = kAPI_OP_TILE;
+	$geo = kAPI_GEOMETRY_TILE.'=33065587,774896741';
+	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION, kAPI_OP_COUNT ) );
+	$request = "$url?$op&$mod&$geo";
+	echo( "Request: <code>$request</code><br />" );
+	echo( '<h5>$response = file_get_contents( $request );</h5>' );
+	$response = file_get_contents( $request );
+	echo( '<h5>$response = json_decode( $response );</h5>' );
+	$response = json_decode( $response );
+	echo( 'Response<pre>' ); print_r( $response ); echo( '</pre>' );
+	echo( '<hr />' );
+
+	//
+	// Test CONTAINS point.
+	//
+	echo( '<h4>Test CONTAINS point</h4>' );
 	$op = kAPI_OP_CONTAINS;
 	$geo = kAPI_GEOMETRY_POINT.'='.implode( ',', array( -16.6463, 28.2768 ) );
-//	$geo = kAPI_GEOMETRY_RECT.'='
-//		.implode( ',', array( -16.6463,28.2768 ) )
-//		.';'
-//		.implode( ',', array( -16.6380,28.2685 ) );
-/*	$geo = kAPI_GEOMETRY_POLY.'='
+	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION ) );
+	$request = "$url?$op&$mod&$geo";
+	echo( "Request: <code>$request</code><br />" );
+	echo( '<h5>$response = file_get_contents( $request );</h5>' );
+	$response = file_get_contents( $request );
+	echo( '<h5>$response = json_decode( $response );</h5>' );
+	$response = json_decode( $response );
+	echo( 'Response<pre>' ); print_r( $response ); echo( '</pre>' );
+	echo( '<hr />' );
+
+	//
+	// Test CONTAINS rect.
+	//
+	echo( '<h4>Test CONTAINS rect</h4>' );
+	$op = kAPI_OP_CONTAINS;
+	$geo = kAPI_GEOMETRY_RECT.'='
+		.implode( ',', array( -16.6463,28.2768 ) )
+		.';'
+		.implode( ',', array( -16.6380,28.2685 ) );
+	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION ) );
+	$request = "$url?$op&$mod&$geo";
+	echo( "Request: <code>$request</code><br />" );
+	echo( '<h5>$response = file_get_contents( $request );</h5>' );
+	$response = file_get_contents( $request );
+	echo( '<h5>$response = json_decode( $response );</h5>' );
+	$response = json_decode( $response );
+	echo( 'Response<pre>' ); print_r( $response ); echo( '</pre>' );
+	echo( '<hr />' );
+
+	//
+	// Test CONTAINS polygon.
+	//
+	echo( '<h4>Test CONTAINS polygon</h4>' );
+	$op = kAPI_OP_CONTAINS;
+	$geo = kAPI_GEOMETRY_POLY.'='
 		.implode( ',', array( 9.5387,46.2416 ) )
 		.';'
 		.implode( ',', array( 9.5448,46.2369 ) )
@@ -122,7 +195,7 @@ try
 		.implode( ',', array( 9.5463,46.2443 ) )
 		.';'
 		.implode( ',', array( 9.5445,46.2422 ) );
-*/	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION ) );
+	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION ) );
 	$request = "$url?$op&$mod&$geo";
 	echo( "Request: <code>$request</code><br />" );
 	echo( '<h5>$response = file_get_contents( $request );</h5>' );
@@ -207,8 +280,8 @@ try
 	echo( '<h5>$response = file_get_contents( $request );</h5>' );
 	$response = file_get_contents( $request );
 	echo( '<h5>$response = json_decode( $response );</h5>' );
-	$response = json_decode( $response );
-	echo( 'Response<pre>' ); print_r( $response ); echo( '</pre>' );
+	$response = json_decode( $response, TRUE );
+	echo( 'Response<pre>' ); print_r( $response[ 'status' ] ); echo( '</pre>' );
 	echo( '<hr />' );
 
 	//
@@ -240,7 +313,7 @@ try
 	$geo = kAPI_GEOMETRY_POINT.'='.implode( ',', array( -16.6463, 28.2768 ) );
 	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION ) );
 	$limit = kAPI_PAGE_LIMIT.'=5';
-	$request = "$url?$op&$mod&$geo&$start&$limit";
+	$request = "$url?$op&$mod&$geo&$limit";
 	echo( "Request: <code>$request</code><br />" );
 	echo( '<h5>$response = file_get_contents( $request );</h5>' );
 	$response = file_get_contents( $request );
@@ -257,9 +330,10 @@ exit;
 	$op = kAPI_OP_NEAR;
 	$geo = kAPI_GEOMETRY_POINT.'='.implode( ',', array( -16.6463, 28.2768 ) );
 	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION ) );
+	$limit = kAPI_PAGE_LIMIT.'=5';
 	$elevation = kAPI_ENV_ELEVATION.'=3240,3250';
-	$distance = kAPI_GEOMETRY_DISTANCE.'=1';
-	$request = "$url?$op&$mod&$geo&$elevation&$distance";
+	$distance = kAPI_GEOMETRY_DISTANCE.'=1000';
+	$request = "$url?$op&$mod&$geo&$limit&$elevation&$distance";
 	echo( "Request: <code>$request</code><br />" );
 	echo( '<h5>$response = file_get_contents( $request );</h5>' );
 	$response = file_get_contents( $request );

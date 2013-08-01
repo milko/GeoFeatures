@@ -965,7 +965,7 @@ class CBilFilesIterator implements Iterator
 	 */
 	public function key()
 	{
-		return (int) ($this->mRow * $this->mCols) + ($this->mCol + 1);				// ==>
+		return (int) ($this->mRow * $this->mCols) + $this->mCol + 1;				// ==>
 	
 	} // key.
 

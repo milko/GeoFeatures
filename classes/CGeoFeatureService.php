@@ -595,7 +595,7 @@ class CGeoFeatureService extends ArrayObject
 			//
 			// Execute command.
 			//
-			switch( $this->mOperation )
+			switch( $tmp = $this->mOperation )
 			{
 				case kAPI_OP_PING:
 					$this->_RequestPing();
@@ -624,7 +624,7 @@ class CGeoFeatureService extends ArrayObject
 				default:
 					throw new Exception
 						( "Unable to handle request: "
-						 ."unsupported operation [$this->mOperation]." );		// !@! ==>
+						 ."missing or unsupported operation." );				// !@! ==>
 			}
 		}
 		
@@ -1639,7 +1639,7 @@ class CGeoFeatureService extends ArrayObject
 			//
 			switch( $type = $geometry[ 'type' ] )
 			{
-				case 'Tiles':
+				case kAPI_GEOMETRY_TYPE_TILE:
 					break;
 				
 				default:
@@ -1652,13 +1652,13 @@ class CGeoFeatureService extends ArrayObject
 			//
 			// Init query.
 			//
-			$query = array( '_id' => array( '$in' => $geometry[ 'coordinates' ] ) );
+			$query = array( kAPI_DATA_ID => array( '$in' => $geometry[ 'coordinates' ] ) );
 			
 			//
 			// Add elevation.
 			//
 			if( ($elevation = $this->_Elevation()) !== NULL )
-				$query[ 'elev' ]
+				$query[ kAPI_DATA_ELEVATION ]
 					= array( '$gte' => $elevation[ 0 ],
 							 '$lte' => $elevation[ 1 ] );
 			
@@ -1759,7 +1759,7 @@ class CGeoFeatureService extends ArrayObject
 			//
 			switch( $type = $geometry[ 'type' ] )
 			{
-				case 'Point':
+				case kAPI_GEOMETRY_TYPE_POINT:
 					if( ($dist = $this->_Distance()) !== NULL )
 						$geometry = _Point2Sphere( $geometry, $dist );
 					else
@@ -1769,10 +1769,10 @@ class CGeoFeatureService extends ArrayObject
 					}
 					break;
 				
-				case 'Rect':
+				case kAPI_GEOMETRY_TYPE_RECT:
 					$geometry = $this->_Rect2Polygon( $geometry );
 				
-				case 'Polygon':
+				case kAPI_GEOMETRY_TYPE_POLY:
 					break;
 				
 				default:
@@ -1820,10 +1820,10 @@ class CGeoFeatureService extends ArrayObject
 			// Init query.
 			//
 			$query = ( isset( $dist ) )
-				   ? array( 'pt' =>
+				   ? array( kAPI_DATA_POINT =>
 						array( '$geoWithin' =>
 							array( '$centerSphere' => $geometry ) ) )
-				   : array( 'pt' =>
+				   : array( kAPI_DATA_POINT =>
 						array( '$geoWithin' =>
 							array( '$geometry' => $geometry ) ) );
 			
@@ -1831,7 +1831,7 @@ class CGeoFeatureService extends ArrayObject
 			// Add elevation.
 			//
 			if( ($elevation = $this->_Elevation()) !== NULL )
-				$query[ 'elev' ]
+				$query[ kAPI_DATA_ELEVATION ]
 					= array( '$gte' => $elevation[ 0 ],
 							 '$lte' => $elevation[ 1 ] );
 			
@@ -1923,13 +1923,13 @@ class CGeoFeatureService extends ArrayObject
 			//
 			switch( $type = $geometry[ 'type' ] )
 			{
-				case 'Point':
+				case kAPI_GEOMETRY_TYPE_POINT:
 					$geometry = $this->_Point2Rect( $geometry, $this->_Distance() );
 				
-				case 'Rect':
+				case kAPI_GEOMETRY_TYPE_RECT:
 					$geometry = $this->_Rect2Polygon( $geometry );
 				
-				case 'Polygon':
+				case kAPI_GEOMETRY_TYPE_POLY:
 					break;
 				
 				default:
@@ -1976,7 +1976,7 @@ class CGeoFeatureService extends ArrayObject
 			//
 			// Init query.
 			//
-			$query = array( 'pt' =>
+			$query = array( kAPI_DATA_POINT =>
 						array( '$geoIntersects' =>
 							array( '$geometry' => $geometry ) ) );
 			
@@ -1984,7 +1984,7 @@ class CGeoFeatureService extends ArrayObject
 			// Add elevation.
 			//
 			if( ($elevation = $this->_Elevation()) !== NULL )
-				$query[ 'elev' ]
+				$query[ kAPI_DATA_ELEVATION ]
 					= array( '$gte' => $elevation[ 0 ],
 							 '$lte' => $elevation[ 1 ] );
 			
@@ -2073,7 +2073,7 @@ class CGeoFeatureService extends ArrayObject
 			//
 			switch( $type = $geometry[ 'type' ] )
 			{
-				case 'Point':
+				case kAPI_GEOMETRY_TYPE_POINT:
 					break;
 				
 				default:
@@ -2120,11 +2120,11 @@ class CGeoFeatureService extends ArrayObject
 			//
 			$op = array(
 				'$geoNear' => array(
-					'includeLocs' => 'pt',
+					'includeLocs' => kAPI_DATA_POINT,
 					'near' => $geometry[ 'coordinates' ],
 					'spherical' => TRUE,
 					'distanceMultiplier' => self::kDistMult,
-					'distanceField' => 'distance',
+					'distanceField' => kAPI_DATA_DISTANCE,
 					'limit' => $limit ) );
 			$ref = & $op[ '$geoNear' ];
 			
@@ -2141,7 +2141,7 @@ class CGeoFeatureService extends ArrayObject
 			{
 				if( ! array_key_exists( 'query', $ref ) )
 					$ref[ 'query' ] = Array();
-				$ref[ 'query' ][ 'elev' ]
+				$ref[ 'query' ][ kAPI_DATA_ELEVATION ]
 					= array( '$gte' => $tmp[ 0 ],
 							 '$lte' => $tmp[ 1 ] );
 			}
@@ -2167,7 +2167,7 @@ class CGeoFeatureService extends ArrayObject
 					//
 					$keys = array_keys( $results );
 					foreach( $keys as $key )
-						$results[ $key ][ 'distance' ] *= self::kDistMult;
+						$results[ $key ][ kAPI_DATA_DISTANCE ] *= self::kDistMult;
 				
 				} // Has a result.
 				
@@ -2262,7 +2262,7 @@ class CGeoFeatureService extends ArrayObject
 			foreach( $theCoordinates as $key => $value )
 				$theCoordinates[ $key ] = (int) $value;
 				
-			return array( 'type' => 'Tiles',
+			return array( 'type' => kAPI_GEOMETRY_TYPE_TILE,
 						  'coordinates' => $theCoordinates );						// ==>
 		}
 		
@@ -2305,7 +2305,7 @@ class CGeoFeatureService extends ArrayObject
 			//
 			$this->_CastCoordinates( $theCoordinates );
 				
-			return array( 'type' => 'Point',
+			return array( 'type' => kAPI_GEOMETRY_TYPE_POINT,
 						  'coordinates' => $theCoordinates );						// ==>
 		}
 		
@@ -2351,7 +2351,7 @@ class CGeoFeatureService extends ArrayObject
 			//
 			$this->_CastCoordinates( $theCoordinates );
 				
-			return array( 'type' => 'Rect',
+			return array( 'type' => kAPI_GEOMETRY_TYPE_RECT,
 						  'coordinates' => $theCoordinates );						// ==>
 		}
 		
@@ -2397,7 +2397,7 @@ class CGeoFeatureService extends ArrayObject
 			//
 			$this->_CastCoordinates( $theCoordinates );
 				
-			return array( 'type' => 'Polygon',
+			return array( 'type' => kAPI_GEOMETRY_TYPE_POLY,
 						  'coordinates' => $theCoordinates );						// ==>
 		}
 		
@@ -2573,7 +2573,7 @@ class CGeoFeatureService extends ArrayObject
 		//
 		// Check point.
 		//
-		if( ($tmp = $theCoordinate[ 'type' ]) == 'Point' )
+		if( ($tmp = $theCoordinate[ 'type' ]) == kAPI_GEOMETRY_TYPE_POINT )
 		{
 			//
 			// Init local storage.
@@ -2612,7 +2612,7 @@ class CGeoFeatureService extends ArrayObject
 				$bottom = 90 - ($bottom + 90);
 			
 			return array(
-				'type' => 'Rect',
+				'type' => kAPI_GEOMETRY_TYPE_RECT,
 				'coordinates' => array(
 					array( $left, $top ),
 					array( $right, $bottom ) ) );									// ==>
@@ -2650,7 +2650,7 @@ class CGeoFeatureService extends ArrayObject
 		//
 		// Check point.
 		//
-		if( ($tmp = $theCoordinate[ 'type' ]) == 'Point' )
+		if( ($tmp = $theCoordinate[ 'type' ]) == kAPI_GEOMETRY_TYPE_POINT )
 			return array( $theCoordinate[ 'coordinates' ], $theRadius / 6371 );		// ==>
 		
 		throw new Exception
@@ -2681,7 +2681,7 @@ class CGeoFeatureService extends ArrayObject
 		//
 		// Check point.
 		//
-		if( ($tmp = $theCoordinate[ 'type' ]) == 'Rect' )
+		if( ($tmp = $theCoordinate[ 'type' ]) == kAPI_GEOMETRY_TYPE_RECT )
 		{
 			//
 			// Init local storage.
@@ -2689,7 +2689,7 @@ class CGeoFeatureService extends ArrayObject
 			$ptcoords = & $theCoordinate[ 'coordinates' ];
 			
 			return array(
-				'type' => 'Polygon',
+				'type' => kAPI_GEOMETRY_TYPE_POLY,
 				'coordinates' => array(
 					array(
 						$ptcoords[ 0 ],
@@ -2728,13 +2728,25 @@ class CGeoFeatureService extends ArrayObject
 		$this->_Status( kAPI_STATUS_STATE, kAPI_STATE_ERROR );
 		
 		//
-		// Set exception elements.
+		// Set main exception elements.
 		//
 		$elements = array( kAPI_STATUS_CODE => $theException->getCode(),
-						   kAPI_STATUS_MESSAGE => $theException->getMessage(),
-						   kAPI_STATUS_FILE => $theException->getFile(),
-						   kAPI_STATUS_LINE => $theException->getLine(),
-						   kAPI_STATUS_TRACE => $theException->getTrace() );
+						   kAPI_STATUS_MESSAGE => $theException->getMessage() );
+		
+		//
+		// Set trace elements.
+		//
+		if( defined( 'kENV_TRACE' )
+		 && kENV_TRACE )
+		{
+			$elements[ kAPI_STATUS_FILE ] = $theException->getFile();
+			$elements[ kAPI_STATUS_LINE ] = $theException->getLine();
+			$elements[ kAPI_STATUS_TRACE ] = $theException->getTrace();
+		}
+		
+		//
+		// Set status.
+		//
 		foreach( $elements as $key => $value )
 		{
 			if( ! empty( $value ) )

@@ -29,31 +29,11 @@
  *
  * This string indicates the root namespace name for this library.
  */
-define( "kPATH_MYWRAPPER_NAMESPACE_ROOT",	"GeoFeatures" );
+define( "kPATH_GEOFEATURES_NAMESPACE_ROOT",	"GeoFeatures" );
 
 /*=======================================================================================
- *	LIBRARY PATHS																		*
+ *	LIBRARY SUB-PATHS																	*
  *======================================================================================*/
-
-/**
- * Class library root.
- *
- * This value defines the <b><i>absolute</i></b> path to the MyWrapper class library root
- * directory.
- */
-define( "kPATH_GEOFEATURES_LIBRARY_ROOT",	"/Library/WebServer/Library/GeoFeatures" );
-
-/*=======================================================================================
- *	LIBRARY SUB-PATHS																		*
- *======================================================================================*/
-
-/**
- * GeoFeatures class library definitions.
- *
- * This value defines the <b><i>absolute</i></b> path to the MyWrapper class library
- * definitions directory.
- */
-define( "kPATH_GEOFEATURES_LIBRARY_DEFINE",		kPATH_MYWRAPPER_LIBRARY_ROOT."/defines" );
 
 /**
  * GeoFeatures class library sources.
@@ -61,7 +41,7 @@ define( "kPATH_GEOFEATURES_LIBRARY_DEFINE",		kPATH_MYWRAPPER_LIBRARY_ROOT."/defi
  * This value defines the <b><i>absolute</i></b> path to the MyWrapper class library sources
  * directory.
  */
-define( "kPATH_GEOFEATURES_LIBRARY_CLASS",		kPATH_MYWRAPPER_LIBRARY_ROOT."/classes" );
+define( "kPATH_GEOFEATURES_LIBRARY_CLASS",		kPATH_GEOFEATURES_LIBRARY_ROOT."/classes" );
 
 /**
  * GeoFeatures batch scripts and files.
@@ -69,7 +49,7 @@ define( "kPATH_GEOFEATURES_LIBRARY_CLASS",		kPATH_MYWRAPPER_LIBRARY_ROOT."/class
  * This value defines the <b><i>absolute</i></b> path to the MyWrapper library data
  * directory.
  */
-define( "kPATH_GEOFEATURES_LIBRARY_BATCH",		kPATH_MYWRAPPER_LIBRARY_ROOT."/batch" );
+define( "kPATH_GEOFEATURES_LIBRARY_BATCH",		kPATH_GEOFEATURES_LIBRARY_ROOT."/batch" );
 
 /**
  * GeoFeatures service scripts and files.
@@ -77,7 +57,7 @@ define( "kPATH_GEOFEATURES_LIBRARY_BATCH",		kPATH_MYWRAPPER_LIBRARY_ROOT."/batch
  * This value defines the <b><i>absolute</i></b> path to the MyWrapper library service
  * directory.
  */
-define( "kPATH_GEOFEATURES_LIBRARY_SERVICE",	kPATH_MYWRAPPER_LIBRARY_ROOT."/service" );
+define( "kPATH_GEOFEATURES_LIBRARY_SERVICE",	kPATH_GEOFEATURES_LIBRARY_ROOT."/service" );
 
 /*=======================================================================================
  *	CLASS AUTOLOADER																	*
@@ -86,7 +66,7 @@ define( "kPATH_GEOFEATURES_LIBRARY_SERVICE",	kPATH_MYWRAPPER_LIBRARY_ROOT."/serv
 /**
  * This section allows automatic inclusion of the library classes.
  */
-function MyAutoload( $theClassName )
+function GeoFeaturesAutoload( $theClassName )
 {
 	//
 	// Separate namespace elements.
@@ -97,12 +77,12 @@ function MyAutoload( $theClassName )
 	// Handle our classes.
 	//
 	if( (count( $namespaces ) > 1)								// Declared a namespace
-	 && ($namespaces[ 0 ] == kPATH_MYWRAPPER_NAMESPACE_ROOT) )	// and corresponds.
+	 && ($namespaces[ 0 ] == kPATH_GEOFEATURES_LIBRARY_ROOT) )	// and corresponds.
 	{
 		//
 		// Replace root namespace with class directory.
 		//
-		$namespaces[ 0 ] = kPATH_MYWRAPPER_LIBRARY_CLASS;
+		$namespaces[ 0 ] = kPATH_GEOFEATURES_LIBRARY_CLASS;
 		
 		//
 		// Create path.
@@ -115,7 +95,7 @@ function MyAutoload( $theClassName )
 	// Handle without namespaces.
 	//
 	else
-		$path = kPATH_MYWRAPPER_LIBRARY_CLASS."/$theClassName.php";
+		$path = kPATH_GEOFEATURES_LIBRARY_CLASS."/$theClassName.php";
 		
 	//
 	// Require class.
@@ -123,6 +103,6 @@ function MyAutoload( $theClassName )
 	if( file_exists( $path ) )
 		require_once( $path );
 
-} spl_autoload_register( kPATH_MYWRAPPER_NAMESPACE_ROOT.'Autoload' );
+} spl_autoload_register( 'GeoFeaturesAutoload' );
 
 ?>

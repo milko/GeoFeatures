@@ -98,7 +98,7 @@ define( "kAPI_OP_COUNT",				'count' );
  *
  * Type: no data.
  */
-define( "kAPI_OP_REQUEST",				'copy-request' );
+define( "kAPI_OP_REQUEST",				'cpy-request' );
 
 /**
  * Connection.
@@ -107,7 +107,7 @@ define( "kAPI_OP_REQUEST",				'copy-request' );
  *
  * Type: no data.
  */
-define( "kAPI_OP_CONNECTION",			'copy-connection' );
+define( "kAPI_OP_CONNECTION",			'cpy-connection' );
 
 /*=======================================================================================
  *	GEOMETRY PARAMETERS																	*
@@ -189,6 +189,46 @@ define( "kAPI_GEOMETRY_POLY",			'polygon' );
  * Type: float.
  */
 define( "kAPI_GEOMETRY_DISTANCE",		'distance' );
+
+/*=======================================================================================
+ *	GEOMETRY TYPES																		*
+ *======================================================================================*/
+
+/**
+ * Tile.
+ *
+ * A list of tile identifiers.
+ *
+ * Type: string.
+ */
+define( "kAPI_GEOMETRY_TYPE_TILE",		'Tiles' );
+
+/**
+ * Point.
+ *
+ * A point.
+ *
+ * Type: string.
+ */
+define( "kAPI_GEOMETRY_TYPE_POINT",		'Point' );
+
+/**
+ * Rect.
+ *
+ * A rectangle.
+ *
+ * Type: string.
+ */
+define( "kAPI_GEOMETRY_TYPE_RECT",		'Rect' );
+
+/**
+ * Polygon.
+ *
+ * A polygon.
+ *
+ * Type: string.
+ */
+define( "kAPI_GEOMETRY_TYPE_POLY",		'Polygon' );
 
 /*=======================================================================================
  *	ENVIRONMENT PARAMETERS																*
@@ -452,17 +492,230 @@ define( "kAPI_CONNECTION_DATABASE",		'database' );
 define( "kAPI_CONNECTION_COLLECTION",	'collection' );
 
 /*=======================================================================================
- *	DEFAULT LIMITS																		*
+ *	RESPONSE DATA BLOCK PARAMETERS														*
  *======================================================================================*/
 
 /**
- * Maximum records.
+ * Identifier.
  *
- * This tag identifies the default maximum records count.
+ * This tag represents the offset of the record identifier, it is an integer representing
+ * the ordinal position of the current tile.
+ *
+ * The data is divided in a 30 seconds grid made of 43200 longitudes and 18000 latitudes,
+ * this identifier is calculated with this formula: <tt>Z = (Y * 43200) + X + 1</tt> where
+ * <tt>Y</tt> represents the zero based vertical tile position and <tt>X</tt> represents
+ * the zero based horizontal tile position.
  *
  * Type: integer.
  */
-define( "kAPI_DEFAULT_LIMIT",			100 );
+define( "kAPI_DATA_ID",					'_id' );
+
+/**
+ * Tile center.
+ *
+ * This tag represents the center point of the tile, it is an array structured as a GeoJson
+ * point:
+ *
+ * <ul>
+ *	<li><tt>type</tt>: The constant <tt>Point</tt>.
+ *	<li><tt>coordinates</tt>: An array of two elements representing respectively the
+ *		longitude and latitude of the point in decimal degrees.
+ * </ul>
+ *
+ * Type: array.
+ */
+define( "kAPI_DATA_POINT",				'pt' );
+
+/**
+ * Tile center coordinates.
+ *
+ * This tag represents the center point of the tile in degrees, minutes and seconds
+ * notation (<tt>DDD°MM'SS"H</tt>) as an array of two elements representing respectively
+ * the longitude and latitude.
+ *
+ * Type: array.
+ */
+define( "kAPI_DATA_DMS",				'dms' );
+
+/**
+ * Tile grid coordinates.
+ *
+ * This tag represents the grid coordinates of the tile, it is an array in which the first
+ * element represents the zero based <tt>X</tt> coordinate and the second the zero based
+ * <tt>Y</tt> coordinate; both values are integers.
+ *
+ * Type: array.
+ */
+define( "kAPI_DATA_TILE",				'tile' );
+
+/**
+ * Tile decimal bounds.
+ *
+ * This tag represents the tile vertices in decimal degrees, it is an array of two elements
+ * that respectively represent the top-left and bottom-right bounds of the rectangle that
+ * encloses the tile; each element is an array of longitude and latitude coordinates in
+ * decimal degrees.
+ *
+ * Type: array.
+ */
+define( "kAPI_DATA_BOX_DEC",			'bdec' );
+
+/**
+ * Tile degrees, minutes and seconds bounds.
+ *
+ * This tag represents the tile vertices in degrees, minutes and seconds. It is an array of
+ * two elements that respectively represent the top-left and bottom-right bounds of the
+ * rectangle that encloses the tile; each element is an array of longitude and latitude
+ * coordinates in degrees, minutes and seconds notation (<tt>DDD°MM'SS"H</tt>).
+ *
+ * Type: array.
+ */
+define( "kAPI_DATA_BOX_DMS",			'bdms' );
+
+/**
+ * Tile elevation.
+ *
+ * This tag represents the tile elevation in meters.
+ *
+ * Type: integer.
+ */
+define( "kAPI_DATA_ELEVATION",			'elev' );
+
+/**
+ * Distance.
+ *
+ * This tag represents the distance in meters, this property is returned by services that
+ * select tiles based on distance.
+ *
+ * Type: integer.
+ */
+define( "kAPI_DATA_DISTANCE",			'dist' );
+
+/**
+ * Climate section.
+ *
+ * This tag represents the climate data section, this section is divided in a series of
+ * subsections, each referring to a period to which the climate data refers to.
+ *
+ * Currently there is only one subsection, <tt>2000</tt>, which refers to current climate
+ * conditions, eventually other subsections could be added which refer to future climate
+ * scenarios.
+ *
+ * Type: array.
+ */
+define( "kAPI_DATA_CLIMATE",			'clim' );
+
+/*=======================================================================================
+ *	CLIMATE BLOCK PARAMETERS															*
+ *======================================================================================*/
+
+/**
+ * Global Environment Stratification.
+ *
+ * This tag represents the global environment stratification for the current tile, it is
+ * an array of three elements representing:
+ *
+ * <ul>
+ *	<li><tt>id</tt>: The global environment stratification identifier composed of the
+ *		concatenation of the <i>environmental zone code</i> and the
+ *		<i>stratification code</i>.
+ *	<li><tt>c</tt>: The climatic zone code:
+ *	 <ul>
+ *		<li><tt>1</tt>: Arctic / Alpine.
+ *		<li><tt>2</tt>: Boreal / Alpine.
+ *		<li><tt>3</tt>: Cool temperate.
+ *		<li><tt>4</tt>: Warm temperate.
+ *		<li><tt>5</tt>: Sub-tropical.
+ *		<li><tt>6</tt>: Drylands.
+ *		<li><tt>7</tt>: Tropical.
+ *	 </ul>
+ *	<li><tt>c</tt>: The environmental zone code:
+ *	 <ul>
+ *		<li><tt>A</tt>: Arctic.
+ *		<li><tt>B</tt>: Arctic.
+ *		<li><tt>C</tt>: Extremely cold and wet.
+ *		<li><tt>D</tt>: Extremely cold and wet.
+ *		<li><tt>E</tt>: Cold and wet.
+ *		<li><tt>F</tt>: Extremely cold and mesic.
+ *		<li><tt>G</tt>: Cold and mesic.
+ *		<li><tt>H</tt>: Cool temperate and dry.
+ *		<li><tt>I</tt>: Cool temperate and xeric.
+ *		<li><tt>J</tt>: Cool temperate and moist.
+ *		<li><tt>K</tt>: Warm temperate and mesic.
+ *		<li><tt>L</tt>: Warm temperate and xeric.
+ *		<li><tt>M</tt>: Hot and mesic.
+ *		<li><tt>N</tt>: Hot and dry.
+ *		<li><tt>O</tt>: Hot and arid.
+ *		<li><tt>P</tt>: Extremely hot and arid.
+ *		<li><tt>Q</tt>: Extremely hot and xeric.
+ *		<li><tt>R</tt>: Extremely hot and moist.
+ *	 </ul>
+ * </ul>
+ *
+ * Type: array.
+ */
+define( "kAPI_DATA_CLIMATE_GENS",		'gens' );
+
+/**
+ * Bioclimatic variables.
+ *
+ * This tag collects the bioclimatic variables which represent annual trends, seasonality
+ * and extreme or limiting environmental factors. The secion is represented by an array of
+ * 19 elements each representing a specific bioclimatic variable:
+ *
+ * <ul>
+ *	<li><tt>1</tt>: Annual Mean Temperature [<tt>C° * 10</tt>].
+ *	<li><tt>2</tt>: Mean Diurnal Range (<tt>Mean of monthly (max temp - min temp)</tt>)
+ *		[<tt>C° * 10</tt>].
+ *	<li><tt>3</tt>: Isothermality (<tt>bio[2]/bio[7]) (* 100)</tt>.
+ *	<li><tt>4</tt>: Temperature Seasonality (<tt>standard deviation *100</tt>).
+ *	<li><tt>5</tt>: Max Temperature of Warmest Month [C° * 10].
+ *	<li><tt>6</tt>: Min Temperature of Coldest Month [C° * 10].
+ *	<li><tt>7</tt>: Temperature Annual Range (<tt>bio[5]-bio[6]</tt>).
+ *	<li><tt>8</tt>: Mean Temperature of Wettest Quarter [C° * 10].
+ *	<li><tt>9</tt>: Mean Temperature of Driest Quarter [C° * 10].
+ *	<li><tt>10</tt>: Mean Temperature of Warmest Quarter [C° * 10].
+ *	<li><tt>11</tt>: Mean Temperature of Coldest Quarter [C° * 10].
+ *	<li><tt>12</tt>: Annual Precipitation.
+ *	<li><tt>13</tt>: Precipitation of Wettest Month.
+ *	<li><tt>14</tt>: Precipitation of Driest Month.
+ *	<li><tt>15</tt>: Precipitation Seasonality (Coefficient of Variation).
+ *	<li><tt>16</tt>: Precipitation of Wettest Quarter.
+ *	<li><tt>17</tt>: Precipitation of Driest Quarter.
+ *	<li><tt>18</tt>: Precipitation of Warmest Quarter.
+ *	<li><tt>19</tt>: Precipitation of Coldest Quarter.
+ * </ul>
+ *
+ * Type: array.
+ */
+define( "kAPI_DATA_CLIMATE_BIO",		'bio' );
+
+/**
+ * Monthly precipitation.
+ *
+ * This tag collects the monthly precipitation, it is an array of 12 elements, one per
+ * month (<tt>mm.</tt>).
+ *
+ * Type: array.
+ */
+define( "kAPI_DATA_CLIMATE_PREC",		'prec' );
+
+/**
+ * Monthly temperature.
+ *
+ * This tag collects the monthly temperature, it is an array of 3 elements:
+ *
+ * <ul>
+ *	<li><tt>l</tt>: Average monthly minimum temperature [<tt>C° * 10</tt>].
+ *	<li><tt>m</tt>: average monthly mean temperature [<tt>C° * 10</tt>].
+ *	<li><tt>h</tt>: average monthly maximum temperature [<tt>C° * 10</tt>].
+ * </ul>
+ *
+ * All three elements are an array of 12 elements, one per month.
+ *
+ * Type: array.
+ */
+define( "kAPI_DATA_CLIMATE_TEMP",		'temp' );
 
 
 ?>
