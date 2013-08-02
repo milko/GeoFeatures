@@ -141,7 +141,7 @@ class CGeoFeatureService extends ArrayObject
 	 *
 	 * This data member will hold the service request distance.
 	 *
-	 * @var numeric
+	 * @var integer
 	 */
 	 protected $mDistance = NULL;
 
@@ -1669,7 +1669,7 @@ class CGeoFeatureService extends ArrayObject
 							 '$lte' => $elevation[ 1 ] );
 			
 			//
-			// Perform range.
+			// Perform aggregate.
 			//
 			if( $this->_Modifiers( kAPI_OP_RANGE ) !== NULL )
 			{
@@ -1905,53 +1905,118 @@ class CGeoFeatureService extends ArrayObject
 				$query[ kAPI_DATA_ELEVATION ]
 					= array( '$gte' => $elevation[ 0 ],
 							 '$lte' => $elevation[ 1 ] );
-			
+
 			//
-			// Perform query.
+			// Aggregate.
 			//
-			$results = $this->Collection()->find( $query );
-			
-			//
-			// Set total.
-			//
-			$this->_Status( kAPI_STATUS_TOTAL, $results->count( FALSE ) );
-			
-			//
-			// Handle count.
-			//
-			if( $this->_Modifiers( kAPI_OP_COUNT ) !== NULL )
-				$this->_BuildResponse();
-			
-			//
-			// Load results.
+			if( $this->_Modifiers( kAPI_OP_RANGE ) !== NULL )
+			{
+				//
+				// Init pipeline.
+				//
+				$pipeline = Array();
+
+				//
+				// Add query.
+				//
+				$this->_AggregateMatch( $pipeline, $query );
+
+				//
+				// Add initial project.
+				//
+				$this->_AggregateStart( $pipeline, $query );
+
+				//
+				// Add group.
+				//
+				$this->_AggregateGroup( $pipeline );
+
+				//
+				// Add output project.
+				//
+				$this->_AggregateEnd( $pipeline );
+
+				//
+				// Perform aggregation.
+				//
+				$results = $this->Collection()->aggregate( $pipeline );
+				if( $results[ 'ok' ] )
+				{
+					//
+					// Set results.
+					//
+					$results = ( array_key_exists( 'result', $results ) )
+						? $results[ 'result' ][ 0 ]
+						: Array();
+
+					//
+					// Set total.
+					//
+					$this->_Status( kAPI_STATUS_TOTAL, $results[ kAPI_AGGREGATE_COUNT ] );
+					unset( $results[ kAPI_AGGREGATE_COUNT ] );
+
+					//
+					// Set results.
+					//
+					$this->_BuildResponse( $results );
+
+				} // Successful.
+
+			} // Aggregate.
+
+ 			//
+			// Query.
 			//
 			else
 			{
 				//
-				// Skip to start.
+				// Perform query.
 				//
-				$this->_Status( kAPI_STATUS_START, $start );
-				if( $start )
-					$results->skip( $start );
-				
+				$results = $this->Collection()->find( $query );
+
 				//
-				// Set limit.
+				// Set total.
 				//
-				$this->_Status( kAPI_STATUS_LIMIT, $limit );
-				$results->limit( $limit );
-				
+				$this->_Status( kAPI_STATUS_TOTAL, $results->count( FALSE ) );
+
 				//
-				// Set count.
+				// Handle count.
 				//
-				$this->_Status( kAPI_STATUS_COUNT, $results->count( TRUE ) );
-				
+				if( $this->_Modifiers( kAPI_OP_COUNT ) !== NULL )
+					$this->_BuildResponse();
+
 				//
-				// Set results.
+				// Load results.
 				//
-				$this->_BuildResponse( iterator_to_array( $results ) );
-			
-			} // Not a count.
-		
+				else
+				{
+					//
+					// Skip to start.
+					//
+					$this->_Status( kAPI_STATUS_START, $start );
+					if( $start )
+						$results->skip( $start );
+
+					//
+					// Set limit.
+					//
+					$this->_Status( kAPI_STATUS_LIMIT, $limit );
+					$results->limit( $limit );
+
+					//
+					// Set count.
+					//
+					$this->_Status( kAPI_STATUS_COUNT, $results->count( TRUE ) );
+
+					//
+					// Set results.
+					//
+					$this->_BuildResponse( iterator_to_array( $results ) );
+
+				} // Not a count.
+
+			} // Query.
+
 		} // Provided geometry.
 		
 		else
@@ -2203,7 +2268,7 @@ class CGeoFeatureService extends ArrayObject
 			// Add distance.
 			//
 			if( ($tmp = $this->_Distance()) !== NULL )
-				$ref[ 'maxDistance' ] = (($tmp * 1000) / self::kDistMult);
+				$ref[ 'maxDistance' ] = ($tmp / self::kDistMult);
 			
 			//
 			// Add elevation.
@@ -2246,6 +2311,14 @@ class CGeoFeatureService extends ArrayObject
 				//
 				else
 				{
+					//
+					// Round distances.
+					//
+					$keys = array_keys( $results );
+					foreach( $keys as $key )
+						$results[ $key ][ kAPI_DATA_DISTANCE ]
+							= (int) round( $results[ $key ][ kAPI_DATA_DISTANCE ] );
+
 					//
 					// Set limit.
 					//

@@ -48,7 +48,7 @@ require_once( kPATH_GEOFEATURES_LIBRARY_CLASS."/CGeoFeatureService.php" );
 //
 // Test service URL.
 //
-$url = "http://localhost/geofeatures/service/GeoFeatures.php";
+$url = "http://localhost/lib/GeoFeatures/service/GeoFeatures.php";
 
 //
 // Test class.
@@ -116,22 +116,6 @@ try
 	echo( '<hr />' );
 
 	//
-	// Test COUNT TILE.
-	//
-	echo( '<h4>Test COUNT TILE</h4>' );
-	$op = kAPI_OP_TILE;
-	$geo = kAPI_GEOMETRY_TILE.'=33065587,774896741';
-	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION, kAPI_OP_COUNT ) );
-	$request = "$url?$op&$mod&$geo";
-	echo( "Request: <code>$request</code><br />" );
-	echo( '<h5>$response = file_get_contents( $request );</h5>' );
-	$response = file_get_contents( $request );
-	echo( '<h5>$response = json_decode( $response );</h5>' );
-	$response = json_decode( $response );
-	echo( 'Response<pre>' ); print_r( $response ); echo( '</pre>' );
-	echo( '<hr />' );
-
-	//
 	// Test RANGE TILE.
 	//
 	echo( '<h4>Test RANGE TILE</h4>' );
@@ -146,7 +130,22 @@ try
 	$response = json_decode( $response );
 	echo( 'Response<pre>' ); print_r( $response ); echo( '</pre>' );
 	echo( '<hr />' );
-exit;
+
+	//
+	// Test COUNT TILE.
+	//
+	echo( '<h4>Test COUNT TILE</h4>' );
+	$op = kAPI_OP_TILE;
+	$geo = kAPI_GEOMETRY_TILE.'=33065587,774896741';
+	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION, kAPI_OP_COUNT ) );
+	$request = "$url?$op&$mod&$geo";
+	echo( "Request: <code>$request</code><br />" );
+	echo( '<h5>$response = file_get_contents( $request );</h5>' );
+	$response = file_get_contents( $request );
+	echo( '<h5>$response = json_decode( $response );</h5>' );
+	$response = json_decode( $response );
+	echo( 'Response<pre>' ); print_r( $response ); echo( '</pre>' );
+	echo( '<hr />' );
 
 	//
 	// Test CONTAINS point.
@@ -174,6 +173,25 @@ exit;
 		.';'
 		.implode( ',', array( -16.6380,28.2685 ) );
 	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION ) );
+	$request = "$url?$op&$mod&$geo";
+	echo( "Request: <code>$request</code><br />" );
+	echo( '<h5>$response = file_get_contents( $request );</h5>' );
+	$response = file_get_contents( $request );
+	echo( '<h5>$response = json_decode( $response );</h5>' );
+	$response = json_decode( $response );
+	echo( 'Response<pre>' ); print_r( $response ); echo( '</pre>' );
+	echo( '<hr />' );
+
+	//
+	// Test RANGE CONTAINS rect.
+	//
+	echo( '<h4>Test RANGE CONTAINS rect</h4>' );
+	$op = kAPI_OP_CONTAINS;
+	$geo = kAPI_GEOMETRY_RECT.'='
+		.implode( ',', array( -10,30 ) )
+		.';'
+		.implode( ',', array( -11,29 ) );
+	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION, kAPI_OP_RANGE ) );
 	$request = "$url?$op&$mod&$geo";
 	echo( "Request: <code>$request</code><br />" );
 	echo( '<h5>$response = file_get_contents( $request );</h5>' );
@@ -346,7 +364,7 @@ exit;
 	$op = kAPI_OP_NEAR;
 	$geo = kAPI_GEOMETRY_POINT.'='.implode( ',', array( -16.6463, 28.2768 ) );
 	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION ) );
-	$distance = kAPI_GEOMETRY_DISTANCE.'=2';
+	$distance = kAPI_GEOMETRY_DISTANCE.'=2000';
 	$limit = kAPI_PAGE_LIMIT.'=5';
 	$request = "$url?$op&$mod&$geo&$distance&$limit";
 	echo( "Request: <code>$request</code><br />" );
@@ -364,7 +382,7 @@ exit;
 	$op = kAPI_OP_NEAR;
 	$geo = kAPI_GEOMETRY_POINT.'='.implode( ',', array( -16.6463, 28.2768 ) );
 	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION ) );
-	$distance = kAPI_GEOMETRY_DISTANCE.'=2';
+	$distance = kAPI_GEOMETRY_DISTANCE.'=2000';
 	$elevation = kAPI_ENV_ELEVATION.'=3300,4000';
 	$request = "$url?$op&$mod&$geo&$distance&$elevation";
 	echo( "Request: <code>$request</code><br />" );

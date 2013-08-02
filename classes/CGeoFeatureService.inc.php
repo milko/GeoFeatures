@@ -196,7 +196,7 @@ define( "kAPI_GEOMETRY_POLY",			'polygon' );
  *		used to limit the search to tiles within the provided value.
  * </ul>
  *
- * The value is expressed in kilometers.
+ * The value is expressed in meters.
  *
  * Examples:
  * <tt>1.250</tt>
