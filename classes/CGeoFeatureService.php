@@ -180,7 +180,7 @@ class CGeoFeatureService extends ArrayObject
 	 *
 	 * Type: double.
 	 */
-	const kDistMult = 6378.1;
+	const kDistMult = 6371000;
 
 	/**
 	 * kKilometerDegs.
@@ -1103,6 +1103,12 @@ class CGeoFeatureService extends ArrayObject
 			$this->_Modifiers( kAPI_OP_COUNT, TRUE );
 	
 		//
+		// Check RANGE.
+		//
+		elseif( array_key_exists( kAPI_OP_RANGE, $theIndex ) )
+			$this->_Modifiers( kAPI_OP_RANGE, TRUE );
+	
+		//
 		// Check REQUEST.
 		//
 		if( array_key_exists( kAPI_OP_REQUEST, $theIndex ) )
@@ -1663,59 +1669,124 @@ class CGeoFeatureService extends ArrayObject
 							 '$lte' => $elevation[ 1 ] );
 			
 			//
+			// Perform range.
+			//
+			if( $this->_Modifiers( kAPI_OP_RANGE ) !== NULL )
+			{
+				//
+				// Init pipeline.
+				//
+				$pipeline = Array();
+				
+				//
+				// Add query.
+				//
+				$this->_AggregateMatch( $pipeline, $query );
+				
+				//
+				// Add initial project.
+				//
+				$this->_AggregateStart( $pipeline, $query );
+				
+				//
+				// Add group.
+				//
+				$this->_AggregateGroup( $pipeline );
+				
+				//
+				// Add output project.
+				//
+				$this->_AggregateEnd( $pipeline );
+				
+				//
+				// Perform aggregation.
+				//
+				$results = $this->Collection()->aggregate( $pipeline );
+				if( $results[ 'ok' ] )
+				{
+					//
+					// Set results.
+					//
+					$results = ( array_key_exists( 'result', $results ) )
+							 ? $results[ 'result' ][ 0 ]
+							 : Array();
+			
+					//
+					// Set total.
+					//
+					$this->_Status( kAPI_STATUS_TOTAL, $results[ kAPI_AGGREGATE_COUNT ] );
+					unset( $results[ kAPI_AGGREGATE_COUNT ] );
+			
+					//
+					// Set results.
+					//
+					$this->_BuildResponse( $results );
+				
+				} // Successful.
+			
+			} // Aggregation.
+			
+			//
 			// Perform query.
-			//
-			$results = $this->Collection()->find( $query );
-			
-			//
-			// Set total.
-			//
-			$this->_Status( kAPI_STATUS_TOTAL, $results->count( FALSE ) );
-			
-			//
-			// Handle count.
-			//
-			if( $this->_Modifiers( kAPI_OP_COUNT ) !== NULL )
-				$this->_BuildResponse();
-			
-			//
-			// Load results.
 			//
 			else
 			{
 				//
-				// Skip to start.
+				// Perform query.
 				//
-				if( ($start = $this->_Start()) !== NULL )
-				{
-					$this->_Status( kAPI_STATUS_START, $start );
-					if( $start )
-						$results->skip( $start );
-				
-				} // Provided start.
-				
-				//
-				// Set limit.
-				//
-				if( ($limit = $this->_Limit()) !== NULL )
-				{
-					$this->_Status( kAPI_STATUS_LIMIT, $limit );
-					$results->limit( $limit );
-				
-				} // Provided start.
-				
-				//
-				// Set count.
-				//
-				if( $start || $limit )
-					$this->_Status( kAPI_STATUS_COUNT, $results->count( TRUE ) );
-				
-				//
-				// Set results.
-				//
-				$this->_BuildResponse( iterator_to_array( $results ) );
+				$results = $this->Collection()->find( $query );
 			
-			} // Not a count.
+				//
+				// Set total.
+				//
+				$this->_Status( kAPI_STATUS_TOTAL, $results->count( FALSE ) );
+			
+				//
+				// Handle count.
+				//
+				if( $this->_Modifiers( kAPI_OP_COUNT ) !== NULL )
+					$this->_BuildResponse();
+			
+				//
+				// Load results.
+				//
+				else
+				{
+					//
+					// Skip to start.
+					//
+					if( ($start = $this->_Start()) !== NULL )
+					{
+						$this->_Status( kAPI_STATUS_START, $start );
+						if( $start )
+							$results->skip( $start );
+				
+					} // Provided start.
+				
+					//
+					// Set limit.
+					//
+					if( ($limit = $this->_Limit()) !== NULL )
+					{
+						$this->_Status( kAPI_STATUS_LIMIT, $limit );
+						$results->limit( $limit );
+				
+					} // Provided start.
+				
+					//
+					// Set count.
+					//
+					if( $start || $limit )
+						$this->_Status( kAPI_STATUS_COUNT, $results->count( TRUE ) );
+				
+					//
+					// Set results.
+					//
+					$this->_BuildResponse( iterator_to_array( $results ) );
+			
+				} // Not a count.
+			
+			} // Regular query
 		
 		} // Provided geometry.
 		
@@ -2132,7 +2203,7 @@ class CGeoFeatureService extends ArrayObject
 			// Add distance.
 			//
 			if( ($tmp = $this->_Distance()) !== NULL )
-				$ref[ 'query' ][ 'maxDistance' ] = ($tmp / self::kDistMult);
+				$ref[ 'maxDistance' ] = (($tmp * 1000) / self::kDistMult);
 			
 			//
 			// Add elevation.
@@ -2153,26 +2224,11 @@ class CGeoFeatureService extends ArrayObject
 			if( $results[ 'ok' ] )
 			{
 				//
-				// Convert distances.
+				// Set results.
 				//
-				if( array_key_exists( 'result', $results ) )
-				{
-					//
-					// Get results.
-					//
-					$results = $results[ 'result' ];
-					
-					//
-					// Convert distance.
-					//
-					$keys = array_keys( $results );
-					foreach( $keys as $key )
-						$results[ $key ][ kAPI_DATA_DISTANCE ] *= self::kDistMult;
-				
-				} // Has a result.
-				
-				else
-					$results = Array();
+				$results = ( array_key_exists( 'result', $results ) )
+						 ? $results[ 'result' ]
+						 : Array();
 			
 				//
 				// Set total.
@@ -2217,6 +2273,305 @@ class CGeoFeatureService extends ArrayObject
 				 ."missing geometry." );										// !@! ==>
 	
 	} // _RequestNear.
+
+		
+
+/*=======================================================================================
+ *																						*
+ *								PROTECTED AGGREGATE INTERFACE							*
+ *																						*
+ *======================================================================================*/
+
+
+	 
+	/*===================================================================================
+	 *	_AggregateMatch																	*
+	 *==================================================================================*/
+
+	/**
+	 * Add match to pipeline.
+	 *
+	 * This method will add the provided match query to the provided pipeline.
+	 *
+	 * The method expects the provided pipeline to be an array.
+	 *
+	 * @param array				   &$thePipeline		Request pipeline.
+	 * @param array					$theQuery			Request query.
+	 *
+	 * @access protected
+	 */
+	protected function _AggregateMatch( &$thePipeline, $theQuery = Array() )
+	{
+		//
+		// Add match to pipeline.
+		//
+		if( count( $theQuery ) )
+			$thePipeline[] = array( '$match' => $theQuery );
+	
+	} // _AggregateMatch.
+
+	 
+	/*===================================================================================
+	 *	_AggregateStart																	*
+	 *==================================================================================*/
+
+	/**
+	 * Select relevant fields for pipeline.
+	 *
+	 * This method will add the initial project to the provided pipeline, this operation
+	 * will select only the relevant fields that will go through the pipeline:
+	 *
+	 * <ul>
+	 *	<li><tt>{@link kAPI_DATA_ELEVATION}</tt>: Elevation, values range.
+	 *	<li><tt>{@link kAPI_DATA_CLIMATE_GENS}</tt>: Global environment stratification,
+	 *		distinct values.
+	 *	<li><tt>{@link kAPI_DATA_CLIMATE_BIO}</tt>: Bioclimatic variables, values range.
+	 *	<li><tt>{@link kAPI_DATA_CLIMATE_PREC}</tt>: Precipitation, values range.
+	 *	<li><tt>{@link kAPI_DATA_CLIMATE_TEMP}</tt>: Temperature, values range.
+	 * </ul>
+	 *
+	 * The method expects the provided pipeline to be an array.
+	 *
+	 * @param array				   &$thePipeline		Request pipeline.
+	 *
+	 * @access protected
+	 */
+	protected function _AggregateStart( &$thePipeline )
+	{
+		//
+		// Init local storage.
+		//
+		$pipeline = Array();
+		
+		//
+		// Add elevation.
+		//
+		$pipeline[ kAPI_DATA_ELEVATION ] = 1;
+		
+		//
+		// Add global environment stratification.
+		//
+		$pipeline[ 'clim.2000.'.kAPI_DATA_CLIMATE_GENS ] = 1;
+		
+		//
+		// Add bioclimatic variables.
+		//
+		$pipeline[ 'clim.2000.'.kAPI_DATA_CLIMATE_BIO ] = 1;
+		
+		//
+		// Add precipitation.
+		//
+		$pipeline[ 'clim.2000.'.kAPI_DATA_CLIMATE_PREC ] = 1;
+		
+		//
+		// Add temperature.
+		//
+		$pipeline[ 'clim.2000.'.kAPI_DATA_CLIMATE_TEMP ] = 1;
+		
+		//
+		// Add to pipeline.
+		//
+		$thePipeline[] = array( '$project' => $pipeline );
+	
+	} // _AggregateStart.
+
+	 
+	/*===================================================================================
+	 *	_AggregateGroup																	*
+	 *==================================================================================*/
+
+	/**
+	 * Add group to pipeline.
+	 *
+	 * This method will add the group to the provided pipeline.
+	 *
+	 * The method expects the provided pipeline to be an array.
+	 *
+	 * @param array				   &$thePipeline		Request pipeline.
+	 *
+	 * @access protected
+	 */
+	protected function _AggregateGroup( &$thePipeline )
+	{
+		//
+		// Init local storage.
+		//
+		$pipeline = Array();
+		$gens_struct = array( 'id', 'c', 'e' );
+		$range_struct = array( kAPI_AGGREGATE_MINIMUM=> '$min',
+							   kAPI_AGGREGATE_MEAN => '$avg',
+							   kAPI_AGGREGATE_MAXIMUM => '$max' );
+		
+		//
+		// Add identifier.
+		//
+		$pipeline[ kAPI_DATA_ID ] = 1;
+		
+		//
+		// Add count.
+		//
+		$pipeline[ kAPI_AGGREGATE_COUNT ] = array( '$sum' => 1 );
+		
+		//
+		// Add elevation.
+		//
+		foreach( $range_struct as $tag => $cmd )
+			$pipeline[ kAPI_DATA_ELEVATION.'_'.$tag ]
+				= array( $cmd => '$'.kAPI_DATA_ELEVATION );
+		
+		//
+		// Add global environment stratification.
+		//
+		foreach( $gens_struct as $tag )
+			$pipeline[ kAPI_DATA_CLIMATE_GENS.'_'.$tag ]
+				= array( '$addToSet' => '$clim.2000.'.kAPI_DATA_CLIMATE_GENS.'.'.$tag );
+		
+		//
+		// Add bioclimatic variables.
+		//
+		for( $idx = 1; $idx < 20; $idx++ )
+		{
+			foreach( $range_struct as $tag => $cmd )
+				$pipeline[ kAPI_DATA_CLIMATE_BIO.'_'.$idx.'_'.$tag ]
+					= array( $cmd => '$clim.2000.'.kAPI_DATA_CLIMATE_BIO.'.'.$idx );
+		}
+		
+		//
+		// Add precipitation.
+		//
+		for( $idx = 1; $idx < 13; $idx++ )
+		{
+			foreach( $range_struct as $tag => $cmd )
+				$pipeline[ kAPI_DATA_CLIMATE_PREC.'_'.$idx.'_'.$tag ]
+					= array( $cmd => '$clim.2000.'.kAPI_DATA_CLIMATE_PREC.'.'.$idx );
+		}
+		
+		//
+		// Add temperature.
+		//
+		foreach( $range_struct as $tag1 => $cmd1 )
+		{
+			for( $idx = 1; $idx < 13; $idx++ )
+			{
+				foreach( $range_struct as $tag2 => $cmd2 )
+				{
+					$pipeline[ kAPI_DATA_CLIMATE_TEMP.'_'.$tag1.'_'.$idx.'_'.$tag2 ]
+						= array( $cmd2 => '$clim.2000.'.kAPI_DATA_CLIMATE_TEMP.'.'.$tag1.'.'.$idx );
+				}
+			}
+		}
+		
+		//
+		// Add to pipeline.
+		//
+		$thePipeline[] = array( '$group' => $pipeline );
+	
+	} // _AggregateGroup.
+
+	 
+	/*===================================================================================
+	 *	_AggregateEnd																	*
+	 *==================================================================================*/
+
+	/**
+	 * Add final project to pipeline.
+	 *
+	 * This method will add the final project to the provided pipeline.
+	 *
+	 * The method expects the provided pipeline to be an array.
+	 *
+	 * @param array				   &$thePipeline		Request pipeline.
+	 *
+	 * @access protected
+	 */
+	protected function _AggregateEnd( &$thePipeline )
+	{
+		//
+		// Init local storage.
+		//
+		$pipeline = Array();
+		$gens_struct = array( 'id', 'c', 'e' );
+		$range_struct = array( kAPI_AGGREGATE_MINIMUM,
+							   kAPI_AGGREGATE_MEAN,
+							   kAPI_AGGREGATE_MAXIMUM );
+		
+		//
+		// Skip identifier.
+		//
+		$pipeline[ kAPI_DATA_ID ] = 0;
+		
+		//
+		// Add count.
+		//
+		$pipeline[ kAPI_AGGREGATE_COUNT ] = 1;
+		
+		//
+		// Add elevation.
+		//
+		$tmp = Array();
+		foreach( $range_struct as $tag )
+			$tmp[ $tag ] = '$'.kAPI_DATA_ELEVATION.'_'.$tag;
+		$pipeline[ kAPI_DATA_ELEVATION ] = $tmp;
+		
+		//
+		// Add global environment stratification.
+		//
+		$tmp = Array();
+		foreach( $gens_struct as $tag )
+			$tmp[ $tag ] = '$'.kAPI_DATA_CLIMATE_GENS.'_'.$tag;
+		$pipeline[ kAPI_DATA_CLIMATE ][ '2000' ][ kAPI_DATA_CLIMATE_GENS ] = $tmp;
+		
+		//
+		// Add bioclimatic variables.
+		//
+		$tmp = Array();
+		for( $idx = 1; $idx < 20; $idx++ )
+		{
+			$tmp_bis = Array();
+			foreach( $range_struct as $tag )
+				$tmp_bis[ $tag ] = '$'.kAPI_DATA_CLIMATE_BIO.'_'.$idx.'_'.$tag;
+			$tmp[ $idx ] = $tmp_bis;
+		}
+		$pipeline[ kAPI_DATA_CLIMATE ][ '2000' ][ kAPI_DATA_CLIMATE_BIO ] = $tmp;
+		
+		//
+		// Add precipitation.
+		//
+		$tmp = Array();
+		for( $idx = 1; $idx < 13; $idx++ )
+		{
+			$tmp_bis = Array();
+			foreach( $range_struct as $tag )
+				$tmp_bis[ $tag ] = '$'.kAPI_DATA_CLIMATE_PREC.'_'.$idx.'_'.$tag;
+			$tmp[ $idx ] = $tmp_bis;
+		}
+		$pipeline[ kAPI_DATA_CLIMATE ][ '2000' ][ kAPI_DATA_CLIMATE_PREC ] = $tmp;
+		
+		//
+		// Add temperature.
+		//
+		$tmp = Array();
+		foreach( $range_struct as $tag )
+		{
+			$tmp_bis = Array();
+			for( $idx = 1; $idx < 13; $idx++ )
+			{
+				$tmp_tris = Array();
+				foreach( $range_struct as $tag_bis )
+					$tmp_tris[ $tag_bis ]
+						= '$'.kAPI_DATA_CLIMATE_TEMP.'_'.$tag.'_'.$idx.'_'.$tag_bis;
+				$tmp_bis[ $idx ] = $tmp_tris;
+			}
+			$tmp[ $tag ] = $tmp_bis;
+		}
+		$pipeline[ kAPI_DATA_CLIMATE ][ '2000' ][ kAPI_DATA_CLIMATE_TEMP ] = $tmp;
+		
+		//
+		// Add to pipeline.
+		//
+		$thePipeline[] = array( '$project' => $pipeline );
+	
+	} // _AggregateEnd.
 
 		
 
@@ -2473,6 +2828,11 @@ class CGeoFeatureService extends ArrayObject
 			// Store geometry.
 			//
 			$this->_Request( kAPI_REQUEST_GEOMETRY, $this->_Geometry() );
+		
+			//
+			// Store distance.
+			//
+			$this->_Request( kAPI_GEOMETRY_DISTANCE, $this->_Distance() );
 		
 			//
 			// Store elevation.

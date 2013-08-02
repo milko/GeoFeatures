@@ -85,11 +85,27 @@ define( "kAPI_OP_NEAR",					'near' );
 /**
  * Count.
  *
- * Return only element count and altitude range.
+ * Return only element count and altitude range. This option prevails over the
+ * {@link kAPI_OP_RANGE} option.
  *
  * Type: no data.
  */
 define( "kAPI_OP_COUNT",				'count' );
+
+/**
+ * Range.
+ *
+ * Merge all results in a single document. This modifier will have the service group all
+ * results into a single document where all continuous values become an array of three
+ * elements: <tt>l</tt> holding the minimum value, <tt>m</tt> the average and <tt>h</tt> the
+ * maximum value; all categorical values, instead, will contain the distinct values.
+ *
+ * This modifiers is active for all operation options, except if you provide a point with
+ * {@link kAPI_OP_CONTAINS} or {@link kAPI_OP_INTERSECTS}.
+ *
+ * Type: no data.
+ */
+define( "kAPI_OP_RANGE",				'range' );
 
 /**
  * Request.
@@ -716,6 +732,50 @@ define( "kAPI_DATA_CLIMATE_PREC",		'prec' );
  * Type: array.
  */
 define( "kAPI_DATA_CLIMATE_TEMP",		'temp' );
+
+/*=======================================================================================
+ *	AGGREGATE OPERATION OFFSETS															*
+ *======================================================================================*/
+
+/**
+ * Aggregate count.
+ *
+ * This tag represents the offset of the record that will receive the aggregate count, this
+ * is only populated when the {@link kAPI_OP_RANGE} modifier has been provided to the
+ * service.
+ *
+ * Note that this offset will be stripped from the results and 
+ *
+ * Type: integer.
+ */
+define( "kAPI_AGGREGATE_COUNT",			'aggregate_count' );
+
+/**
+ * Aggregate minimum.
+ *
+ * This tag represents the sub-offset representing minimum values.
+ *
+ * Type: string.
+ */
+define( "kAPI_AGGREGATE_MINIMUM",		'l' );
+
+/**
+ * Aggregate mean.
+ *
+ * This tag represents the sub-offset representing mean values.
+ *
+ * Type: string.
+ */
+define( "kAPI_AGGREGATE_MEAN",			'm' );
+
+/**
+ * Aggregate maximum.
+ *
+ * This tag represents the sub-offset representing maximum values.
+ *
+ * Type: string.
+ */
+define( "kAPI_AGGREGATE_MAXIMUM",		'h' );
 
 
 ?>

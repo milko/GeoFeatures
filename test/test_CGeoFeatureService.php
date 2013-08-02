@@ -132,6 +132,23 @@ try
 	echo( '<hr />' );
 
 	//
+	// Test RANGE TILE.
+	//
+	echo( '<h4>Test RANGE TILE</h4>' );
+	$op = kAPI_OP_TILE;
+	$geo = kAPI_GEOMETRY_TILE.'=33065587,774896741';
+	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION, kAPI_OP_RANGE ) );
+	$request = "$url?$op&$mod&$geo";
+	echo( "Request: <code>$request</code><br />" );
+	echo( '<h5>$response = file_get_contents( $request );</h5>' );
+	$response = file_get_contents( $request );
+	echo( '<h5>$response = json_decode( $response );</h5>' );
+	$response = json_decode( $response );
+	echo( 'Response<pre>' ); print_r( $response ); echo( '</pre>' );
+	echo( '<hr />' );
+exit;
+
+	//
 	// Test CONTAINS point.
 	//
 	echo( '<h4>Test CONTAINS point</h4>' );
@@ -321,7 +338,24 @@ try
 	$response = json_decode( $response );
 	echo( 'Response<pre>' ); print_r( $response ); echo( '</pre>' );
 	echo( '<hr />' );
-exit;
+
+	//
+	// Test NEAR (max distance).
+	//
+	echo( '<h4>Test NEAR (max distance)</h4>' );
+	$op = kAPI_OP_NEAR;
+	$geo = kAPI_GEOMETRY_POINT.'='.implode( ',', array( -16.6463, 28.2768 ) );
+	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION ) );
+	$distance = kAPI_GEOMETRY_DISTANCE.'=2';
+	$limit = kAPI_PAGE_LIMIT.'=5';
+	$request = "$url?$op&$mod&$geo&$distance&$limit";
+	echo( "Request: <code>$request</code><br />" );
+	echo( '<h5>$response = file_get_contents( $request );</h5>' );
+	$response = file_get_contents( $request );
+	echo( '<h5>$response = json_decode( $response );</h5>' );
+	$response = json_decode( $response );
+	echo( 'Response<pre>' ); print_r( $response ); echo( '</pre>' );
+	echo( '<hr />' );
 
 	//
 	// Test NEAR (elevation range).
@@ -330,10 +364,9 @@ exit;
 	$op = kAPI_OP_NEAR;
 	$geo = kAPI_GEOMETRY_POINT.'='.implode( ',', array( -16.6463, 28.2768 ) );
 	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION ) );
-	$limit = kAPI_PAGE_LIMIT.'=5';
-	$elevation = kAPI_ENV_ELEVATION.'=3240,3250';
-	$distance = kAPI_GEOMETRY_DISTANCE.'=1000';
-	$request = "$url?$op&$mod&$geo&$limit&$elevation&$distance";
+	$distance = kAPI_GEOMETRY_DISTANCE.'=2';
+	$elevation = kAPI_ENV_ELEVATION.'=3300,4000';
+	$request = "$url?$op&$mod&$geo&$distance&$elevation";
 	echo( "Request: <code>$request</code><br />" );
 	echo( '<h5>$response = file_get_contents( $request );</h5>' );
 	$response = file_get_contents( $request );

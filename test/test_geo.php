@@ -57,6 +57,145 @@ try
 	$collection = $database->selectCollection( kDEFAULT_COLLECTION );
 	
 	//
+	// Test geoNear aggregated group.
+	//
+	echo( "\nGEONEAR (aggregated group)\n" );
+	$maxdist = 1000;
+	$command = array
+	(
+		array
+		(
+			'$geoNear' => array
+			(
+				'near' => array( -16.6422, 28.2727 ),
+				'distanceField' => 'distance',
+//				'limit' => 5,
+				'maxDistance' => ($maxdist / 6378100),
+//				'query' => array( 'alt' => array( '$gt' => 3200 ) ),
+				'spherical' => TRUE,
+				'distanceMultiplier' => 6378100,
+				'includeLocs' => 'pt'
+			)
+		),
+		array
+		(
+			'$group' => array
+			(
+				'_id' => 1,
+				'count' => array( '$sum' => 1 ),
+				'elev_min' => array( '$min' => '$elev' ),
+				'elev_avg' => array( '$avg' => '$elev' ),
+				'elev_max' => array( '$max' => '$elev' ),
+				'gens_id' => array( '$addToSet' => '$clim.2000.gens.id' ),
+				'gens_c' => array( '$addToSet' => '$clim.2000.gens.c' ),
+				'gens_e' => array( '$addToSet' => '$clim.2000.gens.e' )
+			)
+		),
+		array
+		(
+			'$project' => array
+			(
+				'_id' => 0,
+				'count' => 1,
+				'elev' => array( 'l' => '$elev_min',
+								 'm' => '$elev_avg',
+								 'h' => '$elev_max' ),
+				'gens' => array( 'id' => '$gens_id',
+								 'c' => '$gens_c',
+								 'e' => '$gens_e' ),
+				'clim' => array
+				(
+					'2000' => array
+					(
+						'bio' => array( '1' => '$elev_max' )
+					)
+				)
+			)
+		)
+	);
+	print_r( $command );
+	echo( "\n" );
+	$rs = $collection->aggregate( $command );
+	var_dump( $rs );
+	echo( "\n" );
+	
+	//
+	// Test GEOWITHIN aggregated group.
+	//
+	echo( "\GEOWITHIN (aggregated group)\n" );
+	$maxdist = 1000;
+	$command = array
+	(
+		array
+		(
+			'$match' => array
+			(
+				'pt' => array
+				(
+					'$geoWithin' => array
+					(
+						'$geometry' => array
+						(
+							'type' => 'Polygon',
+							'coordinates' => array
+							(
+								array
+								(
+									array( (-16.6422 - 0.0041666666667), (28.2727 + 0.0041666666667) ),
+									array( (-16.6422 + 0.0041666666667), (28.2727 + 0.0041666666667) ),
+									array( (-16.6422 + 0.0041666666667), (28.2727 - 0.0041666666667) ),
+									array( (-16.6422 - 0.0041666666667), (28.2727 - 0.0041666666667) ),
+									array( (-16.6422 - 0.0041666666667), (28.2727 + 0.0041666666667) )
+								)
+							)
+						)
+					)
+				)
+			)
+		),
+		array
+		(
+			'$group' => array
+			(
+				'_id' => 1,
+				'count' => array( '$sum' => 1 ),
+				'elev_min' => array( '$min' => '$elev' ),
+				'elev_avg' => array( '$avg' => '$elev' ),
+				'elev_max' => array( '$max' => '$elev' ),
+				'gens_id' => array( '$addToSet' => '$clim.2000.gens.id' ),
+				'gens_c' => array( '$addToSet' => '$clim.2000.gens.c' ),
+				'gens_e' => array( '$addToSet' => '$clim.2000.gens.e' )
+			)
+		),
+		array
+		(
+			'$project' => array
+			(
+				'_id' => 0,
+				'count' => 1,
+				'elev' => array( 'l' => '$elev_min',
+								 'm' => '$elev_avg',
+								 'h' => '$elev_max' ),
+				'gens' => array( 'id' => '$gens_id',
+								 'c' => '$gens_c',
+								 'e' => '$gens_e' ),
+				'clim' => array
+				(
+					'2000' => array
+					(
+						'bio' => array( '1' => '$elev_max' )
+					)
+				)
+			)
+		)
+	);
+	print_r( $command );
+	echo( "\n" );
+	$rs = $collection->aggregate( $command );
+	var_dump( $rs );
+	echo( "\n" );
+	
+	//
 	// Test proximity.
 	//
 	echo( "\nNEAR\n" );
