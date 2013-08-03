@@ -392,6 +392,24 @@ try
 	$response = json_decode( $response );
 	echo( 'Response<pre>' ); print_r( $response ); echo( '</pre>' );
 	echo( '<hr />' );
+
+	//
+	// Test RANGE NEAR (elevation range).
+	//
+	echo( '<h4>Test RANGE NEAR (elevation range)</h4>' );
+	$op = kAPI_OP_NEAR;
+	$geo = kAPI_GEOMETRY_POINT.'='.implode( ',', array( -16.6463, 28.2768 ) );
+	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION, kAPI_OP_RANGE ) );
+	$distance = kAPI_GEOMETRY_DISTANCE.'=4000';
+	$elevation = kAPI_ENV_ELEVATION.'=2000,4000';
+	$request = "$url?$op&$mod&$geo&$distance&$elevation";
+	echo( "Request: <code>$request</code><br />" );
+	echo( '<h5>$response = file_get_contents( $request );</h5>' );
+	$response = file_get_contents( $request );
+	echo( '<h5>$response = json_decode( $response );</h5>' );
+	$response = json_decode( $response );
+	echo( 'Response<pre>' ); print_r( $response ); echo( '</pre>' );
+	echo( '<hr />' );
 }
 
 //

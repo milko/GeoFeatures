@@ -191,7 +191,7 @@ class CGeoFeatureService extends ArrayObject
 	 */
 	const kKilometerDegs = 0.00898270828655;
 
-		
+
 
 /*=======================================================================================
  *																						*
@@ -200,7 +200,7 @@ class CGeoFeatureService extends ArrayObject
  *======================================================================================*/
 
 
-	 
+
 	/*===================================================================================
 	 *	__construct																		*
 	 *==================================================================================*/
@@ -223,12 +223,12 @@ class CGeoFeatureService extends ArrayObject
 		// Call parent constructor.
 		//
 		parent::__construct();
-		
+
 		//
 		// Initialise service.
 		//
 		$this->_InitService();
-		
+
 		//
 		// TRY BLOCK
 		//
@@ -251,13 +251,13 @@ class CGeoFeatureService extends ArrayObject
 			//
 			if( $theCollection !== NULL )
 				$this->Collection( $theCollection );
-		
+
 			//
 			// Parse request.
 			//
 			$this->_ParseRequest( $_REQUEST );
 		}
-		
+
 		//
 		// CATCH BLOCK
 		//
@@ -267,7 +267,7 @@ class CGeoFeatureService extends ArrayObject
 			// Load exception in status.
 			//
 			$this->_Exception2Status( $error );
-			
+
 			//
 			// Build response.
 			//
@@ -276,7 +276,7 @@ class CGeoFeatureService extends ArrayObject
 
 	} // Constructor.
 
-	 
+
 	/*===================================================================================
 	 *	__destruct																		*
 	 *==================================================================================*/
@@ -291,7 +291,7 @@ class CGeoFeatureService extends ArrayObject
 
 	} // Destructor.
 
-		
+
 
 /*=======================================================================================
  *																						*
@@ -300,7 +300,7 @@ class CGeoFeatureService extends ArrayObject
  *======================================================================================*/
 
 
-	 
+
 	/*===================================================================================
 	 *	Server																			*
 	 *==================================================================================*/
@@ -350,20 +350,20 @@ class CGeoFeatureService extends ArrayObject
 			//
 			if( ! ($theValue instanceof MongoClient) )
 				$theValue = new MongoClient( (string) $theValue );
-			
+
 			//
 			// Handle database.
 			//
 			if( ($tmp = $this->Database()) !== NULL )
 				$this->Database( $theValue->selectDB( (string) $tmp ) );
-		
+
 		} // New value.
-		
+
 		return $this->_ManageMember( $this->mServer, $theValue, $getOld );			// ==>
-	
+
 	} // Server.
 
-	 
+
 	/*===================================================================================
 	 *	Database																		*
 	 *==================================================================================*/
@@ -416,7 +416,7 @@ class CGeoFeatureService extends ArrayObject
 			// Save server.
 			//
 			$server = $this->Server();
-			
+
 			//
 			// Handle database reference.
 			//
@@ -427,9 +427,9 @@ class CGeoFeatureService extends ArrayObject
 				//
 				if( $server !== NULL )
 					$this->mServer = NULL;
-			
+
 			} // Provided object.
-		
+
 			//
 			// Instantiate database.
 			//
@@ -440,27 +440,27 @@ class CGeoFeatureService extends ArrayObject
 				//
 				if( $server !== NULL )
 					$theValue = $server->selectDB( (string) $theValue );
-				
+
 				else
 					throw new Exception
 						( "Unable to set database reference: "
 						 ."missing server reference." );						// !@! ==>
-			
+
 			} // Provided name.
-			
+
 			//
 			// Handle existing collection.
 			//
 			if( ($tmp = $this->Collection()) !== NULL )
 				$this->mCollection = $theValue->selectCollection( $tmp->getName() );
-			
+
 		} // New value.
-		
+
 		return $this->_ManageMember( $this->mDatabase, $theValue, $getOld );		// ==>
-	
+
 	} // Database.
 
-	 
+
 	/*===================================================================================
 	 *	Collection																		*
 	 *==================================================================================*/
@@ -517,9 +517,9 @@ class CGeoFeatureService extends ArrayObject
 				//
 				if( $this->Database() !== NULL )
 					$this->Database( $theValue->db );
-			
+
 			} // Provided object.
-		
+
 			//
 			// Instantiate collection.
 			//
@@ -530,21 +530,21 @@ class CGeoFeatureService extends ArrayObject
 				//
 				if( ($tmp = $this->Database()) !== NULL )
 					$theValue = $tmp->selectCollection( (string) $theValue );
-				
+
 				else
 					throw new Exception
 						( "Unable to set collection reference: "
 						 ."missing database reference." );						// !@! ==>
-			
+
 			} // Provided name.
-			
+
 		} // New value.
-		
+
 		return $this->_ManageMember( $this->mCollection, $theValue, $getOld );		// ==>
-	
+
 	} // Collection.
 
-	 
+
 	/*===================================================================================
 	 *	Operation																		*
 	 *==================================================================================*/
@@ -559,7 +559,7 @@ class CGeoFeatureService extends ArrayObject
 	 */
 	public function Operation()								{	return $this->_Operation();	}
 
-		
+
 
 /*=======================================================================================
  *																						*
@@ -568,7 +568,7 @@ class CGeoFeatureService extends ArrayObject
  *======================================================================================*/
 
 
-	 
+
 	/*===================================================================================
 	 *	HandleRequest																	*
 	 *==================================================================================*/
@@ -620,14 +620,14 @@ class CGeoFeatureService extends ArrayObject
 				case kAPI_OP_NEAR:
 					$this->_RequestNear();
 					break;
-	
+
 				default:
 					throw new Exception
 						( "Unable to handle request: "
 						 ."missing or unsupported operation." );				// !@! ==>
 			}
 		}
-		
+
 		//
 		// CATCH BLOCK
 		//
@@ -637,16 +637,16 @@ class CGeoFeatureService extends ArrayObject
 			// Load exception in status.
 			//
 			$this->_Exception2Status( $error );
-		
+
 			//
 			// Build response.
 			//
 			$this->_BuildResponse();
 		}
-	
+
 	} // HandleRequest.
 
-		
+
 
 /*=======================================================================================
  *																						*
@@ -655,7 +655,7 @@ class CGeoFeatureService extends ArrayObject
  *======================================================================================*/
 
 
-	 
+
 	/*===================================================================================
 	 *	Status																			*
 	 *==================================================================================*/
@@ -672,10 +672,10 @@ class CGeoFeatureService extends ArrayObject
 	public function Status()
 	{
 		return $this->_Status()[ kAPI_STATUS_STATE ];								// ==>
-	
+
 	} // Status.
 
-		
+
 
 /*=======================================================================================
  *																						*
@@ -684,7 +684,7 @@ class CGeoFeatureService extends ArrayObject
  *======================================================================================*/
 
 
-	 
+
 	/*===================================================================================
 	 *	_InitService																	*
 	 *==================================================================================*/
@@ -702,10 +702,10 @@ class CGeoFeatureService extends ArrayObject
 		// Set idle status.
 		//
 		$this->_Status( FALSE );
-	
+
 	} // _InitService.
 
-	 
+
 	/*===================================================================================
 	 *	_ParseRequest																	*
 	 *==================================================================================*/
@@ -725,46 +725,46 @@ class CGeoFeatureService extends ArrayObject
 		// Parse operation.
 		//
 		$this->_Operation( $theRequest );
-		
+
 		//
 		// Parse modifiers.
 		//
 		$this->_Modifiers( $theRequest );
-		
+
 		//
 		// Parse geometry.
 		//
 		$this->_Geometry( $theRequest );
-		
+
 		//
 		// Parse elevation.
 		//
 		$this->_Elevation( $theRequest );
-		
+
 		//
 		// Parse distance.
 		//
 		$this->_Distance( $theRequest );
-		
+
 		//
 		// Parse paging.
 		//
 		$this->_Start( $theRequest );
 		$this->_Limit( $theRequest );
-		
+
 		//
 		// Store request.
 		//
 		$this->_StoreRequest();
-		
+
 		//
 		// Assume successful operation.
 		//
 		$this->_Status( kAPI_STATUS_STATE, kAPI_STATE_OK );
-		
+
 	} // _ParseRequest.
 
-		
+
 
 /*=======================================================================================
  *																						*
@@ -773,7 +773,7 @@ class CGeoFeatureService extends ArrayObject
  *======================================================================================*/
 
 
-	 
+
 	/*===================================================================================
 	 *	_Status																			*
 	 *==================================================================================*/
@@ -824,22 +824,22 @@ class CGeoFeatureService extends ArrayObject
 		if( $theIndex !== FALSE )
 			return $this->_ManageArrayMember(
 					$this->mStatus, $theIndex, $theValue, $getOld );				// ==>
-			
+
 		//
 		// Reset status.
 		//
 		$this->_Status( NULL, FALSE );
-		
+
 		//
 		// Set to idle.
 		//
 		$this->_Status( kAPI_STATUS_STATE, kAPI_STATE_IDLE );
-		
+
 		return $this->_Status( NULL, NULL, $getOld );								// ==>
-	
+
 	} // _Status.
 
-	 
+
 	/*===================================================================================
 	 *	_Connection																		*
 	 *==================================================================================*/
@@ -890,13 +890,13 @@ class CGeoFeatureService extends ArrayObject
 		if( ($theValue !== NULL)
 		 && ($theValue !== FALSE) )
 			$theValue = (string) $theValue;
-		
+
 		return $this->_ManageArrayMember(
 				$this->mConnection, $theIndex, $theValue, $getOld );				// ==>
-	
+
 	} // _Connection.
 
-	 
+
 	/*===================================================================================
 	 *	_Request																		*
 	 *==================================================================================*/
@@ -942,10 +942,10 @@ class CGeoFeatureService extends ArrayObject
 	{
 		return $this->_ManageArrayMember(
 				$this->mRequest, $theIndex, $theValue, $getOld );					// ==>
-	
+
 	} // _Request.
 
-	 
+
 	/*===================================================================================
 	 *	_Operation																		*
 	 *==================================================================================*/
@@ -992,50 +992,50 @@ class CGeoFeatureService extends ArrayObject
 			//
 			if( array_key_exists( kAPI_OP_PING, $theValue ) )
 				$theValue = kAPI_OP_PING;
-		
+
 			//
 			// Check HELP.
 			//
 			elseif( array_key_exists( kAPI_OP_HELP, $theValue ) )
 				$theValue = kAPI_OP_HELP;
-		
+
 			//
 			// Check TILE.
 			//
 			elseif( array_key_exists( kAPI_OP_TILE, $theValue ) )
 				$theValue = kAPI_OP_TILE;
-		
+
 			//
 			// Check CONTAINS.
 			//
 			elseif( array_key_exists( kAPI_OP_CONTAINS, $theValue ) )
 				$theValue = kAPI_OP_CONTAINS;
-		
+
 			//
 			// Check INTERSECTS.
 			//
 			elseif( array_key_exists( kAPI_OP_INTERSECTS, $theValue ) )
 				$theValue = kAPI_OP_INTERSECTS;
-		
+
 			//
 			// Check NEAR.
 			//
 			elseif( array_key_exists( kAPI_OP_NEAR, $theValue ) )
 				$theValue = kAPI_OP_NEAR;
-		
+
 			//
 			// Ignore.
 			//
 			else
 				$theValue = NULL;
-		
+
 		} // Provided request.
-		
+
 		return $this->_ManageMember( $this->mOperation, $theValue, $getOld );		// ==>
-	
+
 	} // _Operation.
 
-	 
+
 	/*===================================================================================
 	 *	_Modifiers																		*
 	 *==================================================================================*/
@@ -1090,47 +1090,47 @@ class CGeoFeatureService extends ArrayObject
 		if( ! is_array( $theIndex ) )
 			return $this->_ManageArrayMember(
 					$this->mModifiers, $theIndex, $theValue, $getOld );				// ==>
-		
+
 		//
 		// Get old modifiers.
 		//
 		$old = $this->_Modifiers();
-	
+
 		//
 		// Check COUNT.
 		//
 		if( array_key_exists( kAPI_OP_COUNT, $theIndex ) )
 			$this->_Modifiers( kAPI_OP_COUNT, TRUE );
-	
+
 		//
 		// Check RANGE.
 		//
 		elseif( array_key_exists( kAPI_OP_RANGE, $theIndex ) )
 			$this->_Modifiers( kAPI_OP_RANGE, TRUE );
-	
+
 		//
 		// Check REQUEST.
 		//
 		if( array_key_exists( kAPI_OP_REQUEST, $theIndex ) )
 			$this->_Modifiers( kAPI_OP_REQUEST, TRUE );
-	
+
 		//
 		// Check CONNECTION.
 		//
 		if( array_key_exists( kAPI_OP_CONNECTION, $theIndex ) )
 			$this->_Modifiers( kAPI_OP_CONNECTION, TRUE );
-		
+
 		//
 		// Get current modifiers.
 		//
 		$new = $this->_Modifiers();
-		
+
 		return ( $getOld ) ? $old													// ==>
 						   : $new;													// ==>
-	
+
 	} // _Modifiers.
 
-	 
+
 	/*===================================================================================
 	 *	_Geometry																		*
 	 *==================================================================================*/
@@ -1179,7 +1179,7 @@ class CGeoFeatureService extends ArrayObject
 		//
 		if( $theType === NULL )
 			return $this->mGeometry;												// ==>
-		
+
 		//
 		// Parse request.
 		//
@@ -1192,7 +1192,7 @@ class CGeoFeatureService extends ArrayObject
 				return $this->_Geometry( kAPI_GEOMETRY_TILE,
 										 $theType[ kAPI_GEOMETRY_TILE ],
 										 $getOld );									// ==>
-			
+
 			//
 			// Check point.
 			//
@@ -1200,7 +1200,7 @@ class CGeoFeatureService extends ArrayObject
 				return $this->_Geometry( kAPI_GEOMETRY_POINT,
 										 $theType[ kAPI_GEOMETRY_POINT ],
 										 $getOld );									// ==>
-			
+
 			//
 			// Check rect.
 			//
@@ -1208,7 +1208,7 @@ class CGeoFeatureService extends ArrayObject
 				return $this->_Geometry( kAPI_GEOMETRY_RECT,
 										 $theType[ kAPI_GEOMETRY_RECT ],
 										 $getOld );									// ==>
-			
+
 			//
 			// Check polygon.
 			//
@@ -1216,16 +1216,16 @@ class CGeoFeatureService extends ArrayObject
 				return $this->_Geometry( kAPI_GEOMETRY_POLY,
 										 $theType[ kAPI_GEOMETRY_POLY ],
 										 $getOld );									// ==>
-			
+
 			return $this->mGeometry;												// ==>
-		
+
 		} // Parsed request.
-		
+
 		//
 		// Save geometry.
 		//
 		$save = $this->mGeometry;
-		
+
 		//
 		// Set geometry.
 		//
@@ -1234,33 +1234,33 @@ class CGeoFeatureService extends ArrayObject
 			case kAPI_GEOMETRY_TILE:
 				$this->mGeometry = $this->_Tile( $theValue );
 				break;
-			
+
 			case kAPI_GEOMETRY_POINT:
 				$this->mGeometry = $this->_Point( $theValue );
 				break;
-			
+
 			case kAPI_GEOMETRY_RECT:
 				$this->mGeometry = $this->_Rect( $theValue );
 				break;
-			
+
 			case kAPI_GEOMETRY_POLY:
 				$this->mGeometry = $this->_Polygon( $theValue );
 				break;
-			
+
 			default:
 				throw new Exception
 					( "Unable to handle request: "
 					 ."unsupported geometry type [$type]." );					// !@! ==>
-		
+
 		} // Parsing type.
-		
+
 		return ( $getOld )
 			 ? $save																// ==>
 			 : $this->mGeometry;													// ==>
-	
+
 	} // _Geometry.
 
-	 
+
 	/*===================================================================================
 	 *	_Elevation																		*
 	 *==================================================================================*/
@@ -1311,15 +1311,15 @@ class CGeoFeatureService extends ArrayObject
 			//
 			if( array_key_exists( kAPI_ENV_ELEVATION, $theValue ) )
 				$theValue = $theValue[ kAPI_ENV_ELEVATION ];
-		
+
 			//
 			// Ignore.
 			//
 			else
 				$theValue = NULL;
-		
+
 		} // Provided request.
-		
+
 		//
 		// Handle string.
 		//
@@ -1330,26 +1330,26 @@ class CGeoFeatureService extends ArrayObject
 			// Extract.
 			//
 			$theValue = $this->_List2Array( (string) $theValue );
-			
+
 			//
 			// Reduce.
 			//
 			if( count( $theValue ) > 2 )
 				array_splice( $theValue, 2 );
-			
+
 			//
 			// Complete.
 			//
 			elseif( count( $theValue ) == 1 )
 				$theValue = array( ((int) $theValue[ 0 ]) - 50,
 								   ((int) $theValue[ 0 ]) + 50 );
-			
+
 			//
 			// Cast.
 			//
 			$theValue[ 0 ] = (int) $theValue[ 0 ];
 			$theValue[ 1 ] = (int) $theValue[ 1 ];
-			
+
 			//
 			// Order.
 			//
@@ -1359,14 +1359,14 @@ class CGeoFeatureService extends ArrayObject
 				$theValue[ 0 ] = $theValue[ 1 ];
 				$theValue[ 1 ] = $tmp;
 			}
-		
+
 		} // Provided list.
-		
+
 		return $this->_ManageMember( $this->mElevation, $theValue, $getOld );		// ==>
-	
+
 	} // _Elevation.
 
-	 
+
 	/*===================================================================================
 	 *	_Distance																		*
 	 *==================================================================================*/
@@ -1416,15 +1416,15 @@ class CGeoFeatureService extends ArrayObject
 			//
 			if( array_key_exists( kAPI_GEOMETRY_DISTANCE, $theValue ) )
 				$theValue = $theValue[ kAPI_GEOMETRY_DISTANCE ];
-		
+
 			//
 			// Ignore.
 			//
 			else
 				$theValue = NULL;
-		
+
 		} // Provided request.
-		
+
 		//
 		// Handle value.
 		//
@@ -1437,14 +1437,14 @@ class CGeoFeatureService extends ArrayObject
 			if( (! is_int( $theValue ))
 			 && (! is_float( $theValue )) )
 				$theValue = (double) $theValue;
-		
+
 		} // Provided list.
-		
+
 		return $this->_ManageMember( $this->mDistance, $theValue, $getOld );		// ==>
-	
+
 	} // _Distance.
 
-	 
+
 	/*===================================================================================
 	 *	_Start																			*
 	 *==================================================================================*/
@@ -1491,20 +1491,20 @@ class CGeoFeatureService extends ArrayObject
 			//
 			if( array_key_exists( kAPI_PAGE_START, $theValue ) )
 				$theValue = (int) $theValue[ kAPI_PAGE_START ];
-			
+
 			//
 			// Ignore.
 			//
 			else
 				$theValue = NULL;
-		
+
 		} // Provided request.
-		
+
 		return $this->_ManageMember( $this->mStart, $theValue, $getOld );			// ==>
-	
+
 	} // _Start.
 
-	 
+
 	/*===================================================================================
 	 *	_Limit																			*
 	 *==================================================================================*/
@@ -1556,26 +1556,26 @@ class CGeoFeatureService extends ArrayObject
 			//
 			if( array_key_exists( kAPI_PAGE_LIMIT, $theValue ) )
 				$theValue = (int) $theValue[ kAPI_PAGE_LIMIT ];
-			
+
 			//
 			// Set default.
 			//
 			elseif( $this->_Start() !== NULL )
 				$theValue = kAPI_DEFAULT_LIMIT;
-			
+
 			//
 			// Ignore.
 			//
 			else
 				$theValue = NULL;
-		
+
 		} // Provided request.
-		
+
 		return $this->_ManageMember( $this->mLimit, $theValue, $getOld );			// ==>
-	
+
 	} // _Limit.
 
-		
+
 
 /*=======================================================================================
  *																						*
@@ -1584,7 +1584,7 @@ class CGeoFeatureService extends ArrayObject
  *======================================================================================*/
 
 
-	 
+
 	/*===================================================================================
 	 *	_RequestPing																	*
 	 *==================================================================================*/
@@ -1599,10 +1599,10 @@ class CGeoFeatureService extends ArrayObject
 	protected function _RequestPing()
 	{
 		$this->_BuildResponse( 'pong' );
-		
+
 	} // _RequestPing.
 
-	 
+
 	/*===================================================================================
 	 *	_RequestHelp																	*
 	 *==================================================================================*/
@@ -1617,10 +1617,10 @@ class CGeoFeatureService extends ArrayObject
 	protected function _RequestHelp()
 	{
 		$this->_BuildResponse( 'HELP!' );
-	
+
 	} // _RequestHelp.
 
-	 
+
 	/*===================================================================================
 	 *	_RequestTile																	*
 	 *==================================================================================*/
@@ -1647,19 +1647,19 @@ class CGeoFeatureService extends ArrayObject
 			{
 				case kAPI_GEOMETRY_TYPE_TILE:
 					break;
-				
+
 				default:
 					throw new Exception
 						( "Unable to handle request: "
 						 ."invalid geometry type [$type] for operation." );		// !@! ==>
-			
+
 			} // Checked geometry.
-			
+
 			//
 			// Init query.
 			//
 			$query = array( kAPI_DATA_ID => array( '$in' => $geometry[ 'coordinates' ] ) );
-			
+
 			//
 			// Add elevation.
 			//
@@ -1667,7 +1667,7 @@ class CGeoFeatureService extends ArrayObject
 				$query[ kAPI_DATA_ELEVATION ]
 					= array( '$gte' => $elevation[ 0 ],
 							 '$lte' => $elevation[ 1 ] );
-			
+
 			//
 			// Perform aggregate.
 			//
@@ -1677,27 +1677,27 @@ class CGeoFeatureService extends ArrayObject
 				// Init pipeline.
 				//
 				$pipeline = Array();
-				
+
 				//
 				// Add query.
 				//
 				$this->_AggregateMatch( $pipeline, $query );
-				
+
 				//
 				// Add initial project.
 				//
 				$this->_AggregateStart( $pipeline, $query );
-				
+
 				//
 				// Add group.
 				//
 				$this->_AggregateGroup( $pipeline );
-				
+
 				//
 				// Add output project.
 				//
 				$this->_AggregateEnd( $pipeline );
-				
+
 				//
 				// Perform aggregation.
 				//
@@ -1710,22 +1710,45 @@ class CGeoFeatureService extends ArrayObject
 					$results = ( array_key_exists( 'result', $results ) )
 							 ? $results[ 'result' ][ 0 ]
 							 : Array();
-			
+
 					//
 					// Set total.
 					//
 					$this->_Status( kAPI_STATUS_TOTAL, $results[ kAPI_AGGREGATE_COUNT ] );
 					unset( $results[ kAPI_AGGREGATE_COUNT ] );
-			
+
+					//
+					// Round values.
+					//
+					$values = array( kAPI_DATA_ELEVATION, kAPI_DATA_DISTANCE );
+					foreach( $values as $value )
+					{
+						//
+						// Check value.
+						//
+						if( array_key_exists( $value, $results ) )
+						{
+							//
+							// Round ranges.
+							//
+							$keys = array( kAPI_AGGREGATE_MINIMUM,
+								kAPI_AGGREGATE_MEAN,
+								kAPI_AGGREGATE_MAXIMUM );
+							foreach( $keys as $key )
+								$results[ $value ][ $key ]
+									= (int) round( $results[ $value ][ $key ] );
+						}
+					}
+
 					//
 					// Set results.
 					//
 					$this->_BuildResponse( $results );
-				
+
 				} // Successful.
-			
+
 			} // Aggregation.
-			
+
 			//
 			// Perform query.
 			//
@@ -1735,18 +1758,18 @@ class CGeoFeatureService extends ArrayObject
 				// Perform query.
 				//
 				$results = $this->Collection()->find( $query );
-			
+
 				//
 				// Set total.
 				//
 				$this->_Status( kAPI_STATUS_TOTAL, $results->count( FALSE ) );
-			
+
 				//
 				// Handle count.
 				//
 				if( $this->_Modifiers( kAPI_OP_COUNT ) !== NULL )
 					$this->_BuildResponse();
-			
+
 				//
 				// Load results.
 				//
@@ -1760,9 +1783,9 @@ class CGeoFeatureService extends ArrayObject
 						$this->_Status( kAPI_STATUS_START, $start );
 						if( $start )
 							$results->skip( $start );
-				
+
 					} // Provided start.
-				
+
 					//
 					// Set limit.
 					//
@@ -1770,34 +1793,34 @@ class CGeoFeatureService extends ArrayObject
 					{
 						$this->_Status( kAPI_STATUS_LIMIT, $limit );
 						$results->limit( $limit );
-				
+
 					} // Provided start.
-				
+
 					//
 					// Set count.
 					//
 					if( $start || $limit )
 						$this->_Status( kAPI_STATUS_COUNT, $results->count( TRUE ) );
-				
+
 					//
 					// Set results.
 					//
 					$this->_BuildResponse( iterator_to_array( $results ) );
-			
+
 				} // Not a count.
-			
+
 			} // Regular query
-		
+
 		} // Provided geometry.
-		
+
 		else
 			throw new Exception
 				( "Unable to handle request: "
 				 ."missing tiles list." );										// !@! ==>
-	
+
 	} // _RequestTile.
 
-	 
+
 	/*===================================================================================
 	 *	_RequestContains																*
 	 *==================================================================================*/
@@ -1824,7 +1847,7 @@ class CGeoFeatureService extends ArrayObject
 			// Init local storage.
 			//
 			$do_count = $this->_Modifiers( kAPI_OP_COUNT );
-			
+
 			//
 			// Parse by geometry.
 			//
@@ -1839,20 +1862,20 @@ class CGeoFeatureService extends ArrayObject
 						$geometry = $this->_Rect2Polygon( $geometry );
 					}
 					break;
-				
+
 				case kAPI_GEOMETRY_TYPE_RECT:
 					$geometry = $this->_Rect2Polygon( $geometry );
-				
+
 				case kAPI_GEOMETRY_TYPE_POLY:
 					break;
-				
+
 				default:
 					throw new Exception
 						( "Unable to handle request: "
 						 ."invalid geometry type [$type] for operation." );		// !@! ==>
-			
+
 			} // Checked geometry.
-			
+
 			//
 			// Enforce limits.
 			//
@@ -1863,7 +1886,7 @@ class CGeoFeatureService extends ArrayObject
 				//
 				$start = $this->_Start();
 				$limit = $this->_Limit();
-				
+
 				//
 				// Enforce limits.
 				//
@@ -1874,7 +1897,7 @@ class CGeoFeatureService extends ArrayObject
 					$this->_Status( kAPI_STATUS_MESSAGE, 'Enforced paging.' );
 					$limit = $this->_Limit( kAPI_DEFAULT_LIMIT );
 				}
-				
+
 				//
 				// Check limits.
 				//
@@ -1884,9 +1907,9 @@ class CGeoFeatureService extends ArrayObject
 					$limit = $this->_Limit( kAPI_DEFAULT_LIMIT );
 					$this->_Limit( $limit );
 				}
-			
+
 			} // Not counting.
-			
+
 			//
 			// Init query.
 			//
@@ -1897,7 +1920,7 @@ class CGeoFeatureService extends ArrayObject
 				   : array( kAPI_DATA_POINT =>
 						array( '$geoWithin' =>
 							array( '$geometry' => $geometry ) ) );
-			
+
 			//
 			// Add elevation.
 			//
@@ -1956,6 +1979,29 @@ class CGeoFeatureService extends ArrayObject
 					unset( $results[ kAPI_AGGREGATE_COUNT ] );
 
 					//
+					// Round values.
+					//
+					$values = array( kAPI_DATA_ELEVATION, kAPI_DATA_DISTANCE );
+					foreach( $values as $value )
+					{
+						//
+						// Check value.
+						//
+						if( array_key_exists( $value, $results ) )
+						{
+							//
+							// Round ranges.
+							//
+							$keys = array( kAPI_AGGREGATE_MINIMUM,
+								kAPI_AGGREGATE_MEAN,
+								kAPI_AGGREGATE_MAXIMUM );
+							foreach( $keys as $key )
+								$results[ $value ][ $key ]
+									= (int) round( $results[ $value ][ $key ] );
+						}
+					}
+
+					//
 					// Set results.
 					//
 					$this->_BuildResponse( $results );
@@ -1964,7 +2010,7 @@ class CGeoFeatureService extends ArrayObject
 
 			} // Aggregate.
 
- 			//
+			//
 			// Query.
 			//
 			else
@@ -2018,15 +2064,15 @@ class CGeoFeatureService extends ArrayObject
 			} // Query.
 
 		} // Provided geometry.
-		
+
 		else
 			throw new Exception
 				( "Unable to handle request: "
 				 ."missing geometry." );										// !@! ==>
-	
+
 	} // _RequestContains.
 
-	 
+
 	/*===================================================================================
 	 *	_RequestIntersects																*
 	 *==================================================================================*/
@@ -2053,7 +2099,7 @@ class CGeoFeatureService extends ArrayObject
 			// Init local storage.
 			//
 			$do_count = $this->_Modifiers( kAPI_OP_COUNT );
-			
+
 			//
 			// Parse by geometry.
 			//
@@ -2061,20 +2107,20 @@ class CGeoFeatureService extends ArrayObject
 			{
 				case kAPI_GEOMETRY_TYPE_POINT:
 					$geometry = $this->_Point2Rect( $geometry, $this->_Distance() );
-				
+
 				case kAPI_GEOMETRY_TYPE_RECT:
 					$geometry = $this->_Rect2Polygon( $geometry );
-				
+
 				case kAPI_GEOMETRY_TYPE_POLY:
 					break;
-				
+
 				default:
 					throw new Exception
 						( "Unable to handle request: "
 						 ."invalid geometry type [$type] for operation." );		// !@! ==>
-			
+
 			} // Checked geometry.
-			
+
 			//
 			// Enforce limits.
 			//
@@ -2085,7 +2131,7 @@ class CGeoFeatureService extends ArrayObject
 				//
 				$start = $this->_Start();
 				$limit = $this->_Limit();
-				
+
 				//
 				// Enforce limits.
 				//
@@ -2096,7 +2142,7 @@ class CGeoFeatureService extends ArrayObject
 					$this->_Status( kAPI_STATUS_MESSAGE, 'Enforced paging.' );
 					$limit = $this->_Limit( kAPI_DEFAULT_LIMIT );
 				}
-				
+
 				//
 				// Check limits.
 				//
@@ -2106,16 +2152,16 @@ class CGeoFeatureService extends ArrayObject
 					$limit = $this->_Limit( kAPI_DEFAULT_LIMIT );
 					$this->_Limit( $limit );
 				}
-			
+
 			} // Not counting.
-			
+
 			//
 			// Init query.
 			//
 			$query = array( kAPI_DATA_POINT =>
 						array( '$geoIntersects' =>
 							array( '$geometry' => $geometry ) ) );
-			
+
 			//
 			// Add elevation.
 			//
@@ -2123,23 +2169,23 @@ class CGeoFeatureService extends ArrayObject
 				$query[ kAPI_DATA_ELEVATION ]
 					= array( '$gte' => $elevation[ 0 ],
 							 '$lte' => $elevation[ 1 ] );
-			
+
 			//
 			// Perform query.
 			//
 			$results = $this->Collection()->find( $query );
-			
+
 			//
 			// Set total.
 			//
 			$this->_Status( kAPI_STATUS_TOTAL, $results->count( FALSE ) );
-			
+
 			//
 			// Handle count.
 			//
 			if( $this->_Modifiers( kAPI_OP_COUNT ) !== NULL )
 				$this->_BuildResponse();
-			
+
 			//
 			// Load results.
 			//
@@ -2151,35 +2197,35 @@ class CGeoFeatureService extends ArrayObject
 				$this->_Status( kAPI_STATUS_START, $start );
 				if( $start )
 					$results->skip( $start );
-				
+
 				//
 				// Set limit.
 				//
 				$this->_Status( kAPI_STATUS_LIMIT, $limit );
 				$results->limit( $limit );
-				
+
 				//
 				// Set count.
 				//
 				$this->_Status( kAPI_STATUS_COUNT, $results->count( TRUE ) );
-				
+
 				//
 				// Set results.
 				//
 				$this->_BuildResponse( iterator_to_array( $results ) );
-			
+
 			} // Not a count.
-		
+
 		} // Provided geometry.
-		
+
 		else
 			throw new Exception
 				( "Unable to handle request: "
 				 ."missing geometry." );										// !@! ==>
-	
+
 	} // _RequestIntersects.
 
-	 
+
 	/*===================================================================================
 	 *	_RequestNear																	*
 	 *==================================================================================*/
@@ -2203,7 +2249,7 @@ class CGeoFeatureService extends ArrayObject
 			// Init local storage.
 			//
 			$do_count = $this->_Modifiers( kAPI_OP_COUNT );
-			
+
 			//
 			// Parse by geometry.
 			//
@@ -2211,14 +2257,14 @@ class CGeoFeatureService extends ArrayObject
 			{
 				case kAPI_GEOMETRY_TYPE_POINT:
 					break;
-				
+
 				default:
 					throw new Exception
 						( "Unable to handle request: "
 						 ."invalid geometry type [$type] for operation." );		// !@! ==>
-			
+
 			} // Checked geometry.
-			
+
 			//
 			// Enforce limits.
 			//
@@ -2228,7 +2274,7 @@ class CGeoFeatureService extends ArrayObject
 				// Reset start.
 				//
 				$this->_Start( FALSE );
-				
+
 				//
 				// Get limits.
 				//
@@ -2238,7 +2284,7 @@ class CGeoFeatureService extends ArrayObject
 					$this->_Status( kAPI_STATUS_MESSAGE, 'Enforced paging.' );
 					$limit = $this->_Limit( kAPI_DEFAULT_LIMIT );
 				}
-				
+
 				//
 				// Check limits.
 				//
@@ -2248,106 +2294,192 @@ class CGeoFeatureService extends ArrayObject
 					$limit = $this->_Limit( kAPI_DEFAULT_LIMIT );
 					$this->_Limit( $limit );
 				}
-			
+
 			} // Not counting.
-			
+
 			//
 			// Init operation.
 			//
-			$op = array(
-				'$geoNear' => array(
-					'includeLocs' => kAPI_DATA_POINT,
-					'near' => $geometry[ 'coordinates' ],
-					'spherical' => TRUE,
-					'distanceMultiplier' => self::kDistMult,
-					'distanceField' => kAPI_DATA_DISTANCE,
-					'limit' => $limit ) );
-			$ref = & $op[ '$geoNear' ];
-			
+			$query = array(
+				'includeLocs' => kAPI_DATA_POINT,
+				'near' => $geometry[ 'coordinates' ],
+				'spherical' => TRUE,
+				'distanceMultiplier' => self::kDistMult,
+				'distanceField' => kAPI_DATA_DISTANCE,
+				'limit' => $limit );
+
 			//
 			// Add distance.
 			//
 			if( ($tmp = $this->_Distance()) !== NULL )
-				$ref[ 'maxDistance' ] = ($tmp / self::kDistMult);
-			
+				$query[ 'maxDistance' ] = ($tmp / self::kDistMult);
+
 			//
 			// Add elevation.
 			//
 			if( ($tmp = $this->_Elevation()) !== NULL )
 			{
-				if( ! array_key_exists( 'query', $ref ) )
-					$ref[ 'query' ] = Array();
-				$ref[ 'query' ][ kAPI_DATA_ELEVATION ]
+				if( ! array_key_exists( 'query', $query ) )
+					$query[ 'query' ] = Array();
+				$query[ 'query' ][ kAPI_DATA_ELEVATION ]
 					= array( '$gte' => $tmp[ 0 ],
 							 '$lte' => $tmp[ 1 ] );
 			}
-			
+
 			//
-			// Perform query.
+			// Init pipeline.
 			//
-			$results = $this->Collection()->aggregate( $op );
-			if( $results[ 'ok' ] )
+			$pipeline = Array();
+
+			//
+			// Add match block.
+			//
+			$this->_AggregateNear( $pipeline, $query );
+
+			//
+			// Aggregate results.
+			//
+			if( $this->_Modifiers( kAPI_OP_RANGE ) !== NULL )
 			{
 				//
-				// Set results.
+				// Add initial project.
 				//
-				$results = ( array_key_exists( 'result', $results ) )
-						 ? $results[ 'result' ]
-						 : Array();
-			
+				$this->_AggregateStart( $pipeline, TRUE );
+
 				//
-				// Set total.
+				// Add group.
 				//
-				$this->_Status( kAPI_STATUS_TOTAL, count( $results ) );
-			
+				$this->_AggregateGroup( $pipeline, TRUE );
+
 				//
-				// Handle count.
+				// Add output project.
 				//
-				if( $this->_Modifiers( kAPI_OP_COUNT ) !== NULL )
-					$this->_BuildResponse();
-			
+				$this->_AggregateEnd( $pipeline, TRUE );
+
 				//
-				// Load results.
+				// Perform query.
 				//
-				else
+				$results = $this->Collection()->aggregate( $pipeline );
+				if( $results[ 'ok' ] )
 				{
 					//
-					// Round distances.
+					// Set results.
 					//
-					$keys = array_keys( $results );
-					foreach( $keys as $key )
-						$results[ $key ][ kAPI_DATA_DISTANCE ]
-							= (int) round( $results[ $key ][ kAPI_DATA_DISTANCE ] );
+					$results = ( array_key_exists( 'result', $results ) )
+							 ? $results[ 'result' ][ 0 ]
+							 : Array();
 
 					//
-					// Set limit.
+					// Set total.
 					//
-					$this->_Status( kAPI_STATUS_LIMIT, $limit );
-				
+					$this->_Status( kAPI_STATUS_TOTAL, $results[ kAPI_AGGREGATE_COUNT ] );
+					unset( $results[ kAPI_AGGREGATE_COUNT ] );
+
 					//
-					// Set count.
+					// Round values.
 					//
-					$this->_Status( kAPI_STATUS_COUNT, count( $results ) );
-				
+					$values = array( kAPI_DATA_ELEVATION, kAPI_DATA_DISTANCE );
+					foreach( $values as $value )
+					{
+						//
+						// Check value.
+						//
+						if( array_key_exists( $value, $results ) )
+						{
+							//
+							// Round ranges.
+							//
+							$keys = array( kAPI_AGGREGATE_MINIMUM,
+										   kAPI_AGGREGATE_MEAN,
+										   kAPI_AGGREGATE_MAXIMUM );
+							foreach( $keys as $key )
+								$results[ $value ][ $key ]
+									= (int) round( $results[ $value ][ $key ] );
+						}
+					}
+
 					//
 					// Set results.
 					//
 					$this->_BuildResponse( $results );
-			
-				} // Not a count.
-				
-			} // Successful.
-			
+
+				} // Successful query.
+
+			} // Aggregate results.
+
+			//
+			// Regular query.
+			//
+			else
+			{
+				//
+				// Perform query.
+				//
+				$results = $this->Collection()->aggregate( $pipeline );
+				if( $results[ 'ok' ] )
+				{
+					//
+					// Set results.
+					//
+					$results = ( array_key_exists( 'result', $results ) )
+						? $results[ 'result' ]
+						: Array();
+
+					//
+					// Set total.
+					//
+					$this->_Status( kAPI_STATUS_TOTAL, count( $results ) );
+
+					//
+					// Handle count.
+					//
+					if( $this->_Modifiers( kAPI_OP_COUNT ) !== NULL )
+						$this->_BuildResponse();
+
+					//
+					// Load results.
+					//
+					else
+					{
+						//
+						// Round distances.
+						//
+						$keys = array_keys( $results );
+						foreach( $keys as $key )
+							$results[ $key ][ kAPI_DATA_DISTANCE ]
+								= (int) round( $results[ $key ][ kAPI_DATA_DISTANCE ] );
+
+						//
+						// Set limit.
+						//
+						$this->_Status( kAPI_STATUS_LIMIT, $limit );
+
+						//
+						// Set count.
+						//
+						$this->_Status( kAPI_STATUS_COUNT, count( $results ) );
+
+						//
+						// Set results.
+						//
+						$this->_BuildResponse( $results );
+
+					} // Not a count.
+
+				} // Successful query.
+
+			} // Regular query.
+
 		} // Provided geometry.
-		
+
 		else
 			throw new Exception
 				( "Unable to handle request: "
 				 ."missing geometry." );										// !@! ==>
-	
+
 	} // _RequestNear.
 
-		
+
 
 /*=======================================================================================
  *																						*
@@ -2356,7 +2488,7 @@ class CGeoFeatureService extends ArrayObject
  *======================================================================================*/
 
 
-	 
+
 	/*===================================================================================
 	 *	_AggregateMatch																	*
 	 *==================================================================================*/
@@ -2380,10 +2512,37 @@ class CGeoFeatureService extends ArrayObject
 		//
 		if( count( $theQuery ) )
 			$thePipeline[] = array( '$match' => $theQuery );
-	
+
 	} // _AggregateMatch.
 
-	 
+
+	/*===================================================================================
+	 *	_AggregateNear																	*
+	 *==================================================================================*/
+
+	/**
+	 * Add geoNear match to pipeline.
+	 *
+	 * This method will add the provided geoNear match query block to the provided pipeline.
+	 *
+	 * The method expects the provided pipeline to be an array.
+	 *
+	 * @param array				   &$thePipeline		Request pipeline.
+	 * @param array					$theQuery			Request query.
+	 *
+	 * @access protected
+	 */
+	protected function _AggregateNear( &$thePipeline, $theQuery = Array() )
+	{
+		//
+		// Add match to pipeline.
+		//
+		if( count( $theQuery ) )
+			$thePipeline[] = array( '$geoNear' => $theQuery );
+
+	} // _AggregateNear.
+
+
 	/*===================================================================================
 	 *	_AggregateStart																	*
 	 *==================================================================================*/
@@ -2396,6 +2555,8 @@ class CGeoFeatureService extends ArrayObject
 	 *
 	 * <ul>
 	 *	<li><tt>{@link kAPI_DATA_ELEVATION}</tt>: Elevation, values range.
+	 *	<li><tt>{@link kAPI_DATA_DISTANCE}</tt>: Distance, values range (this only if the
+	 *      second parameter is <tt>TRUE</tt>.
 	 *	<li><tt>{@link kAPI_DATA_CLIMATE_GENS}</tt>: Global environment stratification,
 	 *		distinct values.
 	 *	<li><tt>{@link kAPI_DATA_CLIMATE_BIO}</tt>: Bioclimatic variables, values range.
@@ -2406,49 +2567,56 @@ class CGeoFeatureService extends ArrayObject
 	 * The method expects the provided pipeline to be an array.
 	 *
 	 * @param array				   &$thePipeline		Request pipeline.
+	 * @param boolean		        $doDistance 		Add distance.
 	 *
 	 * @access protected
 	 */
-	protected function _AggregateStart( &$thePipeline )
+	protected function _AggregateStart( &$thePipeline, $doDistance = FALSE )
 	{
 		//
 		// Init local storage.
 		//
 		$pipeline = Array();
-		
+
 		//
 		// Add elevation.
 		//
 		$pipeline[ kAPI_DATA_ELEVATION ] = 1;
-		
+
+		//
+		// Add distance.
+		//
+		if( $doDistance )
+			$pipeline[ kAPI_DATA_DISTANCE ] = 1;
+
 		//
 		// Add global environment stratification.
 		//
 		$pipeline[ 'clim.2000.'.kAPI_DATA_CLIMATE_GENS ] = 1;
-		
+
 		//
 		// Add bioclimatic variables.
 		//
 		$pipeline[ 'clim.2000.'.kAPI_DATA_CLIMATE_BIO ] = 1;
-		
+
 		//
 		// Add precipitation.
 		//
 		$pipeline[ 'clim.2000.'.kAPI_DATA_CLIMATE_PREC ] = 1;
-		
+
 		//
 		// Add temperature.
 		//
 		$pipeline[ 'clim.2000.'.kAPI_DATA_CLIMATE_TEMP ] = 1;
-		
+
 		//
 		// Add to pipeline.
 		//
 		$thePipeline[] = array( '$project' => $pipeline );
-	
+
 	} // _AggregateStart.
 
-	 
+
 	/*===================================================================================
 	 *	_AggregateGroup																	*
 	 *==================================================================================*/
@@ -2461,10 +2629,11 @@ class CGeoFeatureService extends ArrayObject
 	 * The method expects the provided pipeline to be an array.
 	 *
 	 * @param array				   &$thePipeline		Request pipeline.
+	 * @param boolean		        $doDistance 		Add distance.
 	 *
 	 * @access protected
 	 */
-	protected function _AggregateGroup( &$thePipeline )
+	protected function _AggregateGroup( &$thePipeline, $doDistance = FALSE )
 	{
 		//
 		// Init local storage.
@@ -2474,31 +2643,41 @@ class CGeoFeatureService extends ArrayObject
 		$range_struct = array( kAPI_AGGREGATE_MINIMUM=> '$min',
 							   kAPI_AGGREGATE_MEAN => '$avg',
 							   kAPI_AGGREGATE_MAXIMUM => '$max' );
-		
+
 		//
 		// Add identifier.
 		//
 		$pipeline[ kAPI_DATA_ID ] = 1;
-		
+
 		//
 		// Add count.
 		//
 		$pipeline[ kAPI_AGGREGATE_COUNT ] = array( '$sum' => 1 );
-		
+
 		//
 		// Add elevation.
 		//
 		foreach( $range_struct as $tag => $cmd )
 			$pipeline[ kAPI_DATA_ELEVATION.'_'.$tag ]
 				= array( $cmd => '$'.kAPI_DATA_ELEVATION );
-		
+
+		//
+		// Add distance.
+		//
+		if( $doDistance )
+		{
+			foreach( $range_struct as $tag => $cmd )
+				$pipeline[ kAPI_DATA_DISTANCE.'_'.$tag ]
+					= array( $cmd => '$'.kAPI_DATA_DISTANCE );
+		}
+
 		//
 		// Add global environment stratification.
 		//
 		foreach( $gens_struct as $tag )
 			$pipeline[ kAPI_DATA_CLIMATE_GENS.'_'.$tag ]
 				= array( '$addToSet' => '$clim.2000.'.kAPI_DATA_CLIMATE_GENS.'.'.$tag );
-		
+
 		//
 		// Add bioclimatic variables.
 		//
@@ -2508,7 +2687,7 @@ class CGeoFeatureService extends ArrayObject
 				$pipeline[ kAPI_DATA_CLIMATE_BIO.'_'.$idx.'_'.$tag ]
 					= array( $cmd => '$clim.2000.'.kAPI_DATA_CLIMATE_BIO.'.'.$idx );
 		}
-		
+
 		//
 		// Add precipitation.
 		//
@@ -2518,7 +2697,7 @@ class CGeoFeatureService extends ArrayObject
 				$pipeline[ kAPI_DATA_CLIMATE_PREC.'_'.$idx.'_'.$tag ]
 					= array( $cmd => '$clim.2000.'.kAPI_DATA_CLIMATE_PREC.'.'.$idx );
 		}
-		
+
 		//
 		// Add temperature.
 		//
@@ -2533,15 +2712,15 @@ class CGeoFeatureService extends ArrayObject
 				}
 			}
 		}
-		
+
 		//
 		// Add to pipeline.
 		//
 		$thePipeline[] = array( '$group' => $pipeline );
-	
+
 	} // _AggregateGroup.
 
-	 
+
 	/*===================================================================================
 	 *	_AggregateEnd																	*
 	 *==================================================================================*/
@@ -2554,10 +2733,11 @@ class CGeoFeatureService extends ArrayObject
 	 * The method expects the provided pipeline to be an array.
 	 *
 	 * @param array				   &$thePipeline		Request pipeline.
+	 * @param boolean		        $doDistance 		Add distance.
 	 *
 	 * @access protected
 	 */
-	protected function _AggregateEnd( &$thePipeline )
+	protected function _AggregateEnd( &$thePipeline, $doDistance = FALSE )
 	{
 		//
 		// Init local storage.
@@ -2567,17 +2747,17 @@ class CGeoFeatureService extends ArrayObject
 		$range_struct = array( kAPI_AGGREGATE_MINIMUM,
 							   kAPI_AGGREGATE_MEAN,
 							   kAPI_AGGREGATE_MAXIMUM );
-		
+
 		//
 		// Skip identifier.
 		//
 		$pipeline[ kAPI_DATA_ID ] = 0;
-		
+
 		//
 		// Add count.
 		//
 		$pipeline[ kAPI_AGGREGATE_COUNT ] = 1;
-		
+
 		//
 		// Add elevation.
 		//
@@ -2585,7 +2765,18 @@ class CGeoFeatureService extends ArrayObject
 		foreach( $range_struct as $tag )
 			$tmp[ $tag ] = '$'.kAPI_DATA_ELEVATION.'_'.$tag;
 		$pipeline[ kAPI_DATA_ELEVATION ] = $tmp;
-		
+
+		//
+		// Add distance.
+		//
+		if( $doDistance )
+		{
+			$tmp = Array();
+			foreach( $range_struct as $tag )
+				$tmp[ $tag ] = '$'.kAPI_DATA_DISTANCE.'_'.$tag;
+			$pipeline[ kAPI_DATA_DISTANCE ] = $tmp;
+		}
+
 		//
 		// Add global environment stratification.
 		//
@@ -2593,7 +2784,7 @@ class CGeoFeatureService extends ArrayObject
 		foreach( $gens_struct as $tag )
 			$tmp[ $tag ] = '$'.kAPI_DATA_CLIMATE_GENS.'_'.$tag;
 		$pipeline[ kAPI_DATA_CLIMATE ][ '2000' ][ kAPI_DATA_CLIMATE_GENS ] = $tmp;
-		
+
 		//
 		// Add bioclimatic variables.
 		//
@@ -2606,7 +2797,7 @@ class CGeoFeatureService extends ArrayObject
 			$tmp[ $idx ] = $tmp_bis;
 		}
 		$pipeline[ kAPI_DATA_CLIMATE ][ '2000' ][ kAPI_DATA_CLIMATE_BIO ] = $tmp;
-		
+
 		//
 		// Add precipitation.
 		//
@@ -2619,7 +2810,7 @@ class CGeoFeatureService extends ArrayObject
 			$tmp[ $idx ] = $tmp_bis;
 		}
 		$pipeline[ kAPI_DATA_CLIMATE ][ '2000' ][ kAPI_DATA_CLIMATE_PREC ] = $tmp;
-		
+
 		//
 		// Add temperature.
 		//
@@ -2638,15 +2829,15 @@ class CGeoFeatureService extends ArrayObject
 			$tmp[ $tag ] = $tmp_bis;
 		}
 		$pipeline[ kAPI_DATA_CLIMATE ][ '2000' ][ kAPI_DATA_CLIMATE_TEMP ] = $tmp;
-		
+
 		//
 		// Add to pipeline.
 		//
 		$thePipeline[] = array( '$project' => $pipeline );
-	
+
 	} // _AggregateEnd.
 
-		
+
 
 /*=======================================================================================
  *																						*
@@ -2655,7 +2846,7 @@ class CGeoFeatureService extends ArrayObject
  *======================================================================================*/
 
 
-	 
+
 	/*===================================================================================
 	 *	_Tile																			*
 	 *==================================================================================*/
@@ -2689,16 +2880,16 @@ class CGeoFeatureService extends ArrayObject
 			//
 			foreach( $theCoordinates as $key => $value )
 				$theCoordinates[ $key ] = (int) $value;
-				
+
 			return array( 'type' => kAPI_GEOMETRY_TYPE_TILE,
 						  'coordinates' => $theCoordinates );						// ==>
 		}
-		
+
 		return $this->_Tile( $this->_List2Array( $theCoordinates ) );				// ==>
-	
+
 	} // _Tile.
 
-	 
+
 	/*===================================================================================
 	 *	_Point																			*
 	 *==================================================================================*/
@@ -2732,16 +2923,16 @@ class CGeoFeatureService extends ArrayObject
 			// Cast.
 			//
 			$this->_CastCoordinates( $theCoordinates );
-				
+
 			return array( 'type' => kAPI_GEOMETRY_TYPE_POINT,
 						  'coordinates' => $theCoordinates );						// ==>
 		}
-		
+
 		return $this->_Point( $this->_List2Array( $theCoordinates ) );				// ==>
-	
+
 	} // _Point.
 
-	 
+
 	/*===================================================================================
 	 *	_Rect																			*
 	 *==================================================================================*/
@@ -2778,16 +2969,16 @@ class CGeoFeatureService extends ArrayObject
 			// Cast.
 			//
 			$this->_CastCoordinates( $theCoordinates );
-				
+
 			return array( 'type' => kAPI_GEOMETRY_TYPE_RECT,
 						  'coordinates' => $theCoordinates );						// ==>
 		}
-		
+
 		return $this->_Rect( $this->_List2Array( $theCoordinates, ';,' ) );			// ==>
-	
+
 	} // _Rect.
 
-	 
+
 	/*===================================================================================
 	 *	_Polygon																		*
 	 *==================================================================================*/
@@ -2824,16 +3015,16 @@ class CGeoFeatureService extends ArrayObject
 			// Cast.
 			//
 			$this->_CastCoordinates( $theCoordinates );
-				
+
 			return array( 'type' => kAPI_GEOMETRY_TYPE_POLY,
 						  'coordinates' => $theCoordinates );						// ==>
 		}
-		
+
 		return $this->_Polygon( $this->_List2Array( $theCoordinates, ':;,' ) );		// ==>
-	
+
 	} // _Polygon.
 
-		
+
 
 /*=======================================================================================
  *																						*
@@ -2842,7 +3033,7 @@ class CGeoFeatureService extends ArrayObject
  *======================================================================================*/
 
 
-	 
+
 	/*===================================================================================
 	 *	_StoreRequest																	*
 	 *==================================================================================*/
@@ -2866,21 +3057,21 @@ class CGeoFeatureService extends ArrayObject
 			//
 			if( strlen( $tmp = (string) $this->Server() ) )
 				$this->_Connection( kAPI_CONNECTION_SERVER, $tmp );
-		
+
 			//
 			// Store database.
 			//
 			if( strlen( $tmp = (string) $this->Database() ) )
 				$this->_Connection( kAPI_CONNECTION_DATABASE, $tmp );
-		
+
 			//
 			// Store collection.
 			//
 			if( strlen( $tmp = (string) $this->Collection() ) )
 				$this->_Connection( kAPI_CONNECTION_COLLECTION, $tmp );
-		
+
 		} // Store connection.
-	
+
 		//
 		// Handle request.
 		//
@@ -2890,33 +3081,33 @@ class CGeoFeatureService extends ArrayObject
 			// Store operation.
 			//
 			$this->_Request( kAPI_REQUEST_OPERATION, $this->_Operation() );
-			
+
 			//
 			// Store modifiers.
 			//
 			if( count( $tmp = $this->_Modifiers() ) )
 				$this->_Request( kAPI_REQUEST_MODIFIERS, $tmp );
-		
+
 			//
 			// Store geometry.
 			//
 			$this->_Request( kAPI_REQUEST_GEOMETRY, $this->_Geometry() );
-		
+
 			//
 			// Store distance.
 			//
 			$this->_Request( kAPI_GEOMETRY_DISTANCE, $this->_Distance() );
-		
+
 			//
 			// Store elevation.
 			//
 			$this->_Request( kAPI_REQUEST_ELEVATION, $this->_Elevation() );
-			
+
 		} // Store request.
-	
+
 	} // _StoreRequest.
 
-	 
+
 	/*===================================================================================
 	 *	_BuildResponse																	*
 	 *==================================================================================*/
@@ -2936,24 +3127,24 @@ class CGeoFeatureService extends ArrayObject
 		// Init local storage.
 		//
 		$response = Array();
-		
+
 		//
 		// Add status.
 		//
 		$response[ kAPI_RESPONSE_STATUS ] = & $this->mStatus;
-		
+
 		//
 		// Add request.
 		//
 		if( count( $this->mRequest ) )
 			$response[ kAPI_RESPONSE_REQUEST ] = & $this->mRequest;
-	
+
 		//
 		// Add connection.
 		//
 		if( count( $this->mConnection ) )
 			$response[ kAPI_RESPONSE_CONNECTION ] = & $this->mConnection;
-	
+
 		//
 		// Add data.
 		//
@@ -2962,12 +3153,12 @@ class CGeoFeatureService extends ArrayObject
 			$this->mResponse = $theData;
 			$response[ kAPI_RESPONSE_DATA ] = & $this->mResponse;
 		}
-		
+
 		$this->exchangeArray( $response );
-	
+
 	} // _BuildResponse.
 
-		
+
 
 /*=======================================================================================
  *																						*
@@ -2976,7 +3167,7 @@ class CGeoFeatureService extends ArrayObject
  *======================================================================================*/
 
 
-	 
+
 	/*===================================================================================
 	 *	_Point2Rect																		*
 	 *==================================================================================*/
@@ -3015,50 +3206,50 @@ class CGeoFeatureService extends ArrayObject
 			$offset = ( $theRadius )
 					? self::kKilometerDegs
 					: self::kTileDegs;
-			
+
 			//
 			// Set left.
 			//
 			$left = $ptcoords[ 0 ] - $offset;
 			if( $left < -180 )
 				$left = 180 - ($left + 180);
-			
+
 			//
 			// Set right.
 			//
 			$right = $ptcoords[ 0 ] + $offset;
 			if( $right > 180 )
 				$right = -180 + ($right - 180);
-			
+
 			//
 			// Set top.
 			//
 			$top = $ptcoords[ 1 ] + $offset;
 			if( $top > 90 )
 				$top = -90 + ($top - 90);
-			
+
 			//
 			// Set bottom.
 			//
 			$bottom = $ptcoords[ 1 ] - $offset;
 			if( $bottom < -90 )
 				$bottom = 90 - ($bottom + 90);
-			
+
 			return array(
 				'type' => kAPI_GEOMETRY_TYPE_RECT,
 				'coordinates' => array(
 					array( $left, $top ),
 					array( $right, $bottom ) ) );									// ==>
-		
+
 		} // Provided a point.
-		
+
 		throw new Exception
 			( "Unable to handle request: "
 			 ."expecting a point, received [$tmp]." );							// !@! ==>
-	
+
 	} // _Point2Rect.
 
-	 
+
 	/*===================================================================================
 	 *	_Point2Sphere																	*
 	 *==================================================================================*/
@@ -3085,14 +3276,14 @@ class CGeoFeatureService extends ArrayObject
 		//
 		if( ($tmp = $theCoordinate[ 'type' ]) == kAPI_GEOMETRY_TYPE_POINT )
 			return array( $theCoordinate[ 'coordinates' ], $theRadius / 6371 );		// ==>
-		
+
 		throw new Exception
 			( "Unable to handle request: "
 			 ."expecting a point, received [$tmp]." );							// !@! ==>
-	
+
 	} // _Point2Sphere.
 
-	 
+
 	/*===================================================================================
 	 *	_Rect2Polygon																	*
 	 *==================================================================================*/
@@ -3120,7 +3311,7 @@ class CGeoFeatureService extends ArrayObject
 			// Init local storage.
 			//
 			$ptcoords = & $theCoordinate[ 'coordinates' ];
-			
+
 			return array(
 				'type' => kAPI_GEOMETRY_TYPE_POLY,
 				'coordinates' => array(
@@ -3130,16 +3321,16 @@ class CGeoFeatureService extends ArrayObject
 						$ptcoords[ 1 ],
 						array( $ptcoords[ 0 ][ 0 ], $ptcoords[ 1 ][ 1 ] ),
 						$ptcoords[ 0 ] ) ) );										// ==>
-		
+
 		} // Provided a point.
-		
+
 		throw new Exception
 			( "Unable to handle request: "
 			 ."expecting a rect, received [$tmp]." );							// !@! ==>
-	
+
 	} // _Rect2Polygon.
 
-	 
+
 	/*===================================================================================
 	 *	_Exception2Status																*
 	 *==================================================================================*/
@@ -3159,13 +3350,13 @@ class CGeoFeatureService extends ArrayObject
 		// Set state.
 		//
 		$this->_Status( kAPI_STATUS_STATE, kAPI_STATE_ERROR );
-		
+
 		//
 		// Set main exception elements.
 		//
 		$elements = array( kAPI_STATUS_CODE => $theException->getCode(),
 						   kAPI_STATUS_MESSAGE => $theException->getMessage() );
-		
+
 		//
 		// Set trace elements.
 		//
@@ -3176,7 +3367,7 @@ class CGeoFeatureService extends ArrayObject
 			$elements[ kAPI_STATUS_LINE ] = $theException->getLine();
 			$elements[ kAPI_STATUS_TRACE ] = $theException->getTrace();
 		}
-		
+
 		//
 		// Set status.
 		//
@@ -3185,10 +3376,10 @@ class CGeoFeatureService extends ArrayObject
 			if( ! empty( $value ) )
 				$this->_Status( $key, $value );
 		}
-	
+
 	} // _Exception2Status.
 
-	 
+
 	/*===================================================================================
 	 *	_List2Array																		*
 	 *==================================================================================*/
@@ -3227,12 +3418,12 @@ class CGeoFeatureService extends ArrayObject
 			$array = Array();
 			$divider = substr( (string) $theDivider, 0 , 1 );
 			$theDivider = substr( $theDivider, 1 );
-		
+
 			//
 			// Convert to list.
 			//
 			$list = explode( $divider, (string) $theList );
-			
+
 			//
 			// Handle matrix.
 			//
@@ -3245,11 +3436,11 @@ class CGeoFeatureService extends ArrayObject
 				{
 					if( strlen( $element = trim( $element ) ) )
 						$array[] = $this->_List2Array( $element, $theDivider );
-			
+
 				} // Iterating matrix.
-			
+
 			} // Matrix.
-			
+
 			//
 			// Handle array.
 			//
@@ -3262,20 +3453,20 @@ class CGeoFeatureService extends ArrayObject
 				{
 					if( strlen( $element = trim( $element ) ) )
 						$array[] = $element;
-			
+
 				} // Iterating list.
-			
+
 			} // Vector.
-			
+
 			return $array;															// ==>
-		
+
 		} // Not reached end.
-		
+
 		return NULL;																// ==>
-	
+
 	} // _List2Array.
 
-	 
+
 	/*===================================================================================
 	 *	_CastCoordinates																*
 	 *==================================================================================*/
@@ -3298,13 +3489,13 @@ class CGeoFeatureService extends ArrayObject
 			foreach( $keys as $key )
 				$this->_CastCoordinates( $theCoordinates[ $key ] );
 		}
-		
+
 		else
 			$theCoordinates = (double) $theCoordinates;
-	
+
 	} // _CastCoordinates.
 
-		
+
 
 /*=======================================================================================
  *																						*
@@ -3313,7 +3504,7 @@ class CGeoFeatureService extends ArrayObject
  *======================================================================================*/
 
 
-	 
+
 	/*===================================================================================
 	 *	_ManageMember																	*
 	 *==================================================================================*/
@@ -3360,25 +3551,25 @@ class CGeoFeatureService extends ArrayObject
 		// Save current value.
 		//
 		$save = $theMember;
-		
+
 		//
 		// Delete offset.
 		//
 		if( $theValue === FALSE )
 			$theMember = NULL;
-		
+
 		//
 		// Set offset.
 		//
 		else
 			$theMember = $theValue;
-		
+
 		return ( $getOld ) ? $save													// ==>
 						   : $theMember;											// ==>
-	
+
 	} // _ManageMember.
 
-	 
+
 	/*===================================================================================
 	 *	_ManageArrayMember																*
 	 *==================================================================================*/
@@ -3437,9 +3628,9 @@ class CGeoFeatureService extends ArrayObject
 		$save = ( $theIndex === NULL )
 			  ? $theMember
 			  : ( ( array_key_exists( (string) $theIndex, $theMember ) )
-			  	? $theMember[ (string) $theIndex ]
-			  	: NULL );
-		
+				? $theMember[ (string) $theIndex ]
+				: NULL );
+
 		//
 		// Delete offset.
 		//
@@ -3447,12 +3638,12 @@ class CGeoFeatureService extends ArrayObject
 		{
 			if( $theIndex === NULL )
 				$theMember = Array();
-			
+
 			elseif( array_key_exists( (string) $theIndex, $theMember ) )
 				unset( $theMember[ (string) $theIndex ] );
-		
+
 		} // Delete value.
-		
+
 		//
 		// Replace member.
 		//
@@ -3460,28 +3651,28 @@ class CGeoFeatureService extends ArrayObject
 		{
 			if( is_array( $theValue ) )
 				$theMember = $theValue;
-			
+
 			else
 				throw new Exception
 					( "Unable to set data member: "
 					 ."expecting an array value." );							// !@! ==>
-		
+
 		} // Replace member.
-		
+
 		//
 		// Replace element.
 		//
 		else
 			$theMember[ (string) $theIndex ] = $theValue;
-		
+
 		return ( $getOld ) ? $save													// ==>
 						   : ( ( $theIndex === NULL )
-						   	 ? $theMember											// ==>
-						   	 : $theMember[ (string) $theIndex ] );					// ==>
-	
+							 ? $theMember											// ==>
+							 : $theMember[ (string) $theIndex ] );					// ==>
+
 	} // _ManageArrayMember.
 
-	 
+
 
 } // class CGeoFeatureService.
 
