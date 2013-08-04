@@ -749,8 +749,12 @@ class CGeoFeatureService extends ArrayObject
 		//
 		// Parse paging.
 		//
-		$this->_Start( $theRequest );
-		$this->_Limit( $theRequest );
+		if( $this->_Modifiers( kAPI_OP_COUNT )
+		 || $this->_Modifiers( kAPI_OP_RANGE ) )
+		{
+			$this->_Start( $theRequest );
+			$this->_Limit( $theRequest );
+		}
 
 		//
 		// Store request.
@@ -1846,7 +1850,9 @@ class CGeoFeatureService extends ArrayObject
 			//
 			// Init local storage.
 			//
-			$do_count = $this->_Modifiers( kAPI_OP_COUNT );
+			$do_limits
+				= ! ( $this->_Modifiers( kAPI_OP_COUNT )
+				   || $this->_Modifiers( kAPI_OP_RANGE ) );
 
 			//
 			// Parse by geometry.
@@ -1878,8 +1884,10 @@ class CGeoFeatureService extends ArrayObject
 
 			//
 			// Enforce limits.
+			// Note that we do not enforce limits if the provided geometry is a point.
 			//
-			if( ! $do_count )
+			if( $do_limits
+			 && ($type != kAPI_GEOMETRY_TYPE_POINT) )
 			{
 				//
 				// Get limits.
@@ -2037,22 +2045,31 @@ class CGeoFeatureService extends ArrayObject
 				else
 				{
 					//
-					// Skip to start.
+					// Handle limits.
+					// Note that we do not enforce limits if the provided geometry is a point.
 					//
-					$this->_Status( kAPI_STATUS_START, $start );
-					if( $start )
-						$results->skip( $start );
+					if( $do_limits
+					 && ($type != kAPI_GEOMETRY_TYPE_POINT) )
+					{
+						//
+						// Skip to start.
+						//
+						$this->_Status( kAPI_STATUS_START, $start );
+						if( $start )
+							$results->skip( $start );
 
-					//
-					// Set limit.
-					//
-					$this->_Status( kAPI_STATUS_LIMIT, $limit );
-					$results->limit( $limit );
+						//
+						// Set limit.
+						//
+						$this->_Status( kAPI_STATUS_LIMIT, $limit );
+						$results->limit( $limit );
 
-					//
-					// Set count.
-					//
-					$this->_Status( kAPI_STATUS_COUNT, $results->count( TRUE ) );
+						//
+						// Set count.
+						//
+						$this->_Status( kAPI_STATUS_COUNT, $results->count( TRUE ) );
+
+					} // Not a count, aggregate or provided point.
 
 					//
 					// Set results.
@@ -2098,7 +2115,9 @@ class CGeoFeatureService extends ArrayObject
 			//
 			// Init local storage.
 			//
-			$do_count = $this->_Modifiers( kAPI_OP_COUNT );
+			$do_limits
+				= ! ( $this->_Modifiers( kAPI_OP_COUNT )
+				|| $this->_Modifiers( kAPI_OP_RANGE ) );
 
 			//
 			// Parse by geometry.
@@ -2123,8 +2142,10 @@ class CGeoFeatureService extends ArrayObject
 
 			//
 			// Enforce limits.
+			// Note that we do not enforce limits if the provided geometry is a point.
 			//
-			if( ! $do_count )
+			if( $do_limits
+			 && ($type != kAPI_GEOMETRY_TYPE_POINT) )
 			{
 				//
 				// Get limits.
@@ -2171,50 +2192,147 @@ class CGeoFeatureService extends ArrayObject
 							 '$lte' => $elevation[ 1 ] );
 
 			//
-			// Perform query.
+			// Aggregate.
 			//
-			$results = $this->Collection()->find( $query );
+			if( $this->_Modifiers( kAPI_OP_RANGE ) !== NULL )
+			{
+				//
+				// Init pipeline.
+				//
+				$pipeline = Array();
+
+				//
+				// Add query.
+				//
+				$this->_AggregateMatch( $pipeline, $query );
+
+				//
+				// Add initial project.
+				//
+				$this->_AggregateStart( $pipeline, $query );
+
+				//
+				// Add group.
+				//
+				$this->_AggregateGroup( $pipeline );
+
+				//
+				// Add output project.
+				//
+				$this->_AggregateEnd( $pipeline );
+
+				//
+				// Perform aggregation.
+				//
+				$results = $this->Collection()->aggregate( $pipeline );
+				if( $results[ 'ok' ] )
+				{
+					//
+					// Set results.
+					//
+					$results = ( array_key_exists( 'result', $results ) )
+						? $results[ 'result' ][ 0 ]
+						: Array();
+
+					//
+					// Set total.
+					//
+					$this->_Status( kAPI_STATUS_TOTAL, $results[ kAPI_AGGREGATE_COUNT ] );
+					unset( $results[ kAPI_AGGREGATE_COUNT ] );
+
+					//
+					// Round values.
+					//
+					$values = array( kAPI_DATA_ELEVATION, kAPI_DATA_DISTANCE );
+					foreach( $values as $value )
+					{
+						//
+						// Check value.
+						//
+						if( array_key_exists( $value, $results ) )
+						{
+							//
+							// Round ranges.
+							//
+							$keys = array( kAPI_AGGREGATE_MINIMUM,
+								kAPI_AGGREGATE_MEAN,
+								kAPI_AGGREGATE_MAXIMUM );
+							foreach( $keys as $key )
+								$results[ $value ][ $key ]
+									= (int) round( $results[ $value ][ $key ] );
+						}
+					}
+
+					//
+					// Set results.
+					//
+					$this->_BuildResponse( $results );
+
+				} // Successful.
+
+			} // Aggregate.
 
 			//
-			// Set total.
-			//
-			$this->_Status( kAPI_STATUS_TOTAL, $results->count( FALSE ) );
-
-			//
-			// Handle count.
-			//
-			if( $this->_Modifiers( kAPI_OP_COUNT ) !== NULL )
-				$this->_BuildResponse();
-
-			//
-			// Load results.
+			// Query.
 			//
 			else
 			{
 				//
-				// Skip to start.
+				// Perform query.
 				//
-				$this->_Status( kAPI_STATUS_START, $start );
-				if( $start )
-					$results->skip( $start );
+				$results = $this->Collection()->find( $query );
 
 				//
-				// Set limit.
+				// Set total.
 				//
-				$this->_Status( kAPI_STATUS_LIMIT, $limit );
-				$results->limit( $limit );
+				$this->_Status( kAPI_STATUS_TOTAL, $results->count( FALSE ) );
 
 				//
-				// Set count.
+				// Handle count.
 				//
-				$this->_Status( kAPI_STATUS_COUNT, $results->count( TRUE ) );
+				if( $this->_Modifiers( kAPI_OP_COUNT ) !== NULL )
+					$this->_BuildResponse();
 
 				//
-				// Set results.
+				// Load results.
 				//
-				$this->_BuildResponse( iterator_to_array( $results ) );
+				else
+				{
+					//
+					// Handle limits.
+					// Note that we do not enforce limits if the provided geometry is a point.
+					//
+					if( $do_limits
+					 && ($type != kAPI_GEOMETRY_TYPE_POINT) )
+					{
+						//
+						// Skip to start.
+						//
+						$this->_Status( kAPI_STATUS_START, $start );
+						if( $start )
+							$results->skip( $start );
 
-			} // Not a count.
+						//
+						// Set limit.
+						//
+						$this->_Status( kAPI_STATUS_LIMIT, $limit );
+						$results->limit( $limit );
+
+						//
+						// Set count.
+						//
+						$this->_Status( kAPI_STATUS_COUNT, $results->count( TRUE ) );
+
+					} // Not a count, aggregate or provided point.
+
+					//
+					// Set results.
+					//
+					$this->_BuildResponse( iterator_to_array( $results ) );
+
+				} // Not a count.
+
+			} // Query.
 
 		} // Provided geometry.
 
@@ -2248,7 +2366,9 @@ class CGeoFeatureService extends ArrayObject
 			//
 			// Init local storage.
 			//
-			$do_count = $this->_Modifiers( kAPI_OP_COUNT );
+			$do_limits
+				= ! ( $this->_Modifiers( kAPI_OP_COUNT )
+				|| $this->_Modifiers( kAPI_OP_RANGE ) );
 
 			//
 			// Parse by geometry.
@@ -2268,7 +2388,7 @@ class CGeoFeatureService extends ArrayObject
 			//
 			// Enforce limits.
 			//
-			if( ! $do_count )
+			if( $do_limits )
 			{
 				//
 				// Reset start.

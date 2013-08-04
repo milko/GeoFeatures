@@ -410,6 +410,159 @@ try
 	$response = json_decode( $response );
 	echo( 'Response<pre>' ); print_r( $response ); echo( '</pre>' );
 	echo( '<hr />' );
+
+	//
+	// Test INTERSECTS point.
+	//
+	echo( '<h4>Test INTERSECTS point</h4>' );
+	$op = kAPI_OP_INTERSECTS;
+	$geo = kAPI_GEOMETRY_POINT.'='.implode( ',', array( -16.6463, 28.2768 ) );
+	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION ) );
+	$request = "$url?$op&$mod&$geo";
+	echo( "Request: <code>$request</code><br />" );
+	echo( '<h5>$response = file_get_contents( $request );</h5>' );
+	$response = file_get_contents( $request );
+	echo( '<h5>$response = json_decode( $response );</h5>' );
+	$response = json_decode( $response );
+	echo( 'Response<pre>' ); print_r( $response ); echo( '</pre>' );
+	echo( '<hr />' );
+
+	//
+	// Test INTERSECTS rect.
+	//
+	echo( '<h4>Test INTERSECTS rect</h4>' );
+	$op = kAPI_OP_INTERSECTS;
+	$geo = kAPI_GEOMETRY_RECT.'='
+		.implode( ',', array( -16.6463,28.2768 ) )
+		.';'
+		.implode( ',', array( -16.6380,28.2685 ) );
+	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION ) );
+	$request = "$url?$op&$mod&$geo";
+	echo( "Request: <code>$request</code><br />" );
+	echo( '<h5>$response = file_get_contents( $request );</h5>' );
+	$response = file_get_contents( $request );
+	echo( '<h5>$response = json_decode( $response );</h5>' );
+	$response = json_decode( $response );
+	echo( 'Response<pre>' ); print_r( $response ); echo( '</pre>' );
+	echo( '<hr />' );
+
+	//
+	// Test AGGREGATE INTERSECTS rect.
+	//
+	echo( '<h4>Test AGGREGATE INTERSECTS rect</h4>' );
+	$op = kAPI_OP_INTERSECTS;
+	$geo = kAPI_GEOMETRY_RECT.'='
+		.implode( ',', array( -10,30 ) )
+		.';'
+		.implode( ',', array( -11,29 ) );
+	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION, kAPI_OP_RANGE ) );
+	$request = "$url?$op&$mod&$geo";
+	echo( "Request: <code>$request</code><br />" );
+	echo( '<h5>$response = file_get_contents( $request );</h5>' );
+	$response = file_get_contents( $request );
+	echo( '<h5>$response = json_decode( $response );</h5>' );
+	$response = json_decode( $response );
+	echo( 'Response<pre>' ); print_r( $response ); echo( '</pre>' );
+	echo( '<hr />' );
+
+	//
+	// Test INTERSECTS polygon.
+	//
+	echo( '<h4>Test INTERSECTS polygon</h4>' );
+	$op = kAPI_OP_INTERSECTS;
+	$geo = kAPI_GEOMETRY_POLY.'='
+		.implode( ',', array( 9.5387,46.2416 ) )
+		.';'
+		.implode( ',', array( 9.5448,46.2369 ) )
+		.';'
+		.implode( ',', array( 9.5536,46.2381 ) )
+		.';'
+		.implode( ',', array( 9.5571,46.2419 ) )
+		.';'
+		.implode( ',', array( 9.5507,46.2462 ) )
+		.';'
+		.implode( ',', array( 9.5439,46.2468 ) )
+		.';'
+		.implode( ',', array( 9.5387,46.2416 ) )
+		.':'
+		.implode( ',', array( 9.5445,46.2422 ) )
+		.';'
+		.implode( ',', array( 9.5481,46.2399 ) )
+		.';'
+		.implode( ',', array( 9.5517,46.2420 ) )
+		.';'
+		.implode( ',', array( 9.5463,46.2443 ) )
+		.';'
+		.implode( ',', array( 9.5445,46.2422 ) );
+	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION ) );
+	$request = "$url?$op&$mod&$geo";
+	echo( "Request: <code>$request</code><br />" );
+	echo( '<h5>$response = file_get_contents( $request );</h5>' );
+	$response = file_get_contents( $request );
+	echo( '<h5>$response = json_decode( $response );</h5>' );
+	$response = json_decode( $response );
+	echo( 'Response<pre>' ); print_r( $response ); echo( '</pre>' );
+	echo( '<hr />' );
+
+	//
+	// Test INTERSECTS (count).
+	//
+	echo( '<h4>Test INTERSECTS (count)</h4>' );
+	$op = kAPI_OP_INTERSECTS;
+	$geo = kAPI_GEOMETRY_RECT.'='
+		.implode( ',', array( -10,30 ) )
+		.';'
+		.implode( ',', array( -11,29 ) );
+	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION, kAPI_OP_COUNT ) );
+	$request = "$url?$op&$mod&$geo";
+	echo( "Request: <code>$request</code><br />" );
+	echo( '<h5>$response = file_get_contents( $request );</h5>' );
+	$response = file_get_contents( $request );
+	echo( '<h5>$response = json_decode( $response );</h5>' );
+	$response = json_decode( $response );
+	echo( 'Response<pre>' ); print_r( $response ); echo( '</pre>' );
+	echo( '<hr />' );
+
+	//
+	// Test INTERSECTS (elevation range).
+	//
+	echo( '<h4>Test INTERSECTS (elevation range)</h4>' );
+	$op = kAPI_OP_INTERSECTS;
+	$geo = kAPI_GEOMETRY_RECT.'='
+		.implode( ',', array( -10,30 ) )
+		.';'
+		.implode( ',', array( -11,29 ) );
+	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION ) );
+	$elevation = kAPI_ENV_ELEVATION.'=1000,1050';
+	$request = "$url?$op&$mod&$geo&$elevation";
+	echo( "Request: <code>$request</code><br />" );
+	echo( '<h5>$response = file_get_contents( $request );</h5>' );
+	$response = file_get_contents( $request );
+	echo( '<h5>$response = json_decode( $response );</h5>' );
+	$response = json_decode( $response );
+	echo( 'Response<pre>' ); print_r( $response ); echo( '</pre>' );
+	echo( '<hr />' );
+
+	//
+	// Test AGGREGATE INTERSECTS (elevation range).
+	//
+	echo( '<h4>Test AGGREGATE INTERSECTS (elevation range)</h4>' );
+	$op = kAPI_OP_INTERSECTS;
+	$geo = kAPI_GEOMETRY_RECT.'='
+		.implode( ',', array( -10,30 ) )
+		.';'
+		.implode( ',', array( -11,29 ) );
+	$mod = implode( '&', array( kAPI_OP_REQUEST, kAPI_OP_CONNECTION, kAPI_OP_RANGE ) );
+	$elevation = kAPI_ENV_ELEVATION.'=1000,1050';
+	$request = "$url?$op&$mod&$geo&$elevation";
+	echo( "Request: <code>$request</code><br />" );
+	echo( '<h5>$response = file_get_contents( $request );</h5>' );
+	$response = file_get_contents( $request );
+	echo( '<h5>$response = json_decode( $response );</h5>' );
+	$response = json_decode( $response );
+	echo( 'Response<pre>' ); print_r( $response ); echo( '</pre>' );
+	echo( '<hr />' );
+	echo( '<hr />' );
 }
 
 //
