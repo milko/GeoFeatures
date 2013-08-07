@@ -182,30 +182,6 @@ define( "kAPI_GEOMETRY_RECT",			'rect' );
  */
 define( "kAPI_GEOMETRY_POLY",			'polygon' );
 
-/**
- * Max distance.
- *
- * This parameter can be used for two purposes:
- *
- * <ul>
- *	<li><i>Convert a point</i>:: When a point is provided as a geometry and the distance is
- *		also provided, this means that we are looking at a sphere, where the distance is its
- *		radius. This is only valid when searching for tiles contained in the provided
- *		geometry, when searching for intersections, the point will be converted to a rect.
- *	<li><i>Maximum distance</i>: When requesting tiles by proximity, the distance can be
- *		used to limit the search to tiles within the provided value.
- * </ul>
- *
- * The value is expressed in meters.
- *
- * Examples:
- * <tt>1.250</tt>
- * <tt>5.60125</tt>
- *
- * Type: float.
- */
-define( "kAPI_GEOMETRY_DISTANCE",		'distance' );
-
 /*=======================================================================================
  *	GEOMETRY TYPES																		*
  *======================================================================================*/
@@ -247,6 +223,105 @@ define( "kAPI_GEOMETRY_TYPE_RECT",		'Rect' );
 define( "kAPI_GEOMETRY_TYPE_POLY",		'Polygon' );
 
 /*=======================================================================================
+ *	SELECTION PARAMETERS																*
+ *======================================================================================*/
+
+/**
+ * Selection.
+ *
+ * Properties selector, this tag can be used to include or exclude response properties,
+ * it is a string representing the list of properties and a boolean switch determining
+ * whether to include or exclude the property.
+ *
+ * The property and the selector are separated by a comma, while property blocks are
+ * separated by semicolon.
+ *
+ * <ul>
+ *  <li><i>Property</i>: The property to include or exclude:
+ *   <ul>
+ *      <li><tt>{@link kAPI_DATA_ID}</tt>: The tile identifier.
+ *      <li><tt>{@link kAPI_DATA_POINT}</tt>: The tile center decimal degrees coordinate.
+ *      <li><tt>{@link kAPI_DATA_DMS}</tt>: The tile center degrees, minutes and seconds
+ *          coordinate.
+ *      <li><tt>{@link kAPI_DATA_TILE}</tt>: The <tt>X</tt> and <tt>Y</tt> tile coordinate.
+ *      <li><tt>{@link kAPI_DATA_BOX_DEC}</tt>: The tile decimal degrees vertices.
+ *      <li><tt>{@link kAPI_DATA_BOX_DMS}</tt>: The tile degrees, minutes and seconds
+ *          vertices.
+ *      <li><tt>{@link kAPI_DATA_ELEVATION}</tt>: The tile elevation.
+ *      <li><tt>{@link kAPI_DATA_CLIMATE}</tt>: The tile climate block. To select individual
+ *          climate variables you must separate the structure elements with a period
+ *          (<tt>.</tt>):
+ *       <ul>
+ *          <li><tt>2000</tt>: Current climate conditions:
+ *           <ul>
+ *              <li><tt>{@link kAPI_DATA_CLIMATE_GENS}</tt>: Global environment
+ *                  stratification variables.
+ *               <ul>
+ *                  <li><tt>id</tt>: Global environment stratification index.
+ *                  <li><tt>c</tt>: Climatic zone code.
+ *                  <li><tt>e</tt>: Environmental zone code.
+ *               </ul>
+ *              <li><tt>{@link kAPI_DATA_CLIMATE_BIO}</tt>: Bioclimatic variables:
+ *               <ul>
+ *              	<li><tt>1</tt>: Annual Mean Temperature [<tt>C° * 10</tt>].
+ *              	<li><tt>2</tt>: Mean Diurnal Range (<tt>Mean of monthly
+ *                      (max temp - min temp)</tt>) [<tt>C° * 10</tt>].
+ *              	<li><tt>3</tt>: Isothermality (<tt>bio[2]/bio[7]) (* 100)</tt>.
+ *              	<li><tt>4</tt>: Temperature Seasonality
+ *                      (<tt>standard deviation *100</tt>).
+ *              	<li><tt>5</tt>: Max Temperature of Warmest Month [C° * 10].
+ *              	<li><tt>6</tt>: Min Temperature of Coldest Month [C° * 10].
+ *              	<li><tt>7</tt>: Temperature Annual Range (<tt>bio[5]-bio[6]</tt>).
+ *              	<li><tt>8</tt>: Mean Temperature of Wettest Quarter [C° * 10].
+ *              	<li><tt>9</tt>: Mean Temperature of Driest Quarter [C° * 10].
+ *              	<li><tt>10</tt>: Mean Temperature of Warmest Quarter [C° * 10].
+ *              	<li><tt>11</tt>: Mean Temperature of Coldest Quarter [C° * 10].
+ *              	<li><tt>12</tt>: Annual Precipitation.
+ *              	<li><tt>13</tt>: Precipitation of Wettest Month.
+ *              	<li><tt>14</tt>: Precipitation of Driest Month.
+ *              	<li><tt>15</tt>: Precipitation Seasonality (Coefficient of Variation).
+ *              	<li><tt>16</tt>: Precipitation of Wettest Quarter.
+ *              	<li><tt>17</tt>: Precipitation of Driest Quarter.
+ *              	<li><tt>18</tt>: Precipitation of Warmest Quarter.
+ *              	<li><tt>19</tt>: Precipitation of Coldest Quarter.
+ *               </ul>
+ *              <li><tt>{@link kAPI_DATA_CLIMATE_PREC}</tt>: Precipitation:
+ *               <ul>
+ *                  <li><tt>1</tt> to <tt>12</tt>: The reference month number.
+ *               </ul>
+ *              <li><tt>{@link kAPI_DATA_CLIMATE_TEMP}</tt>: Temperature:
+ *               <ul>
+ *                  <li><tt>l</tt>: Average monthly minimum temperature [<tt>C° * 10</tt>]:
+ *                   <ul>
+ *                     <li><tt>1</tt> to <tt>12</tt>: The reference month number.
+ *                   </ul>
+ *                  <li><tt>m</tt>: Average monthly mean temperature [<tt>C° * 10</tt>]:
+ *                   <ul>
+ *                     <li><tt>1</tt> to <tt>12</tt>: The reference month number.
+ *                   </ul>
+ *                  <li><tt>h</tt>: Average monthly maximum temperature [<tt>C° * 10</tt>]:
+ *                   <ul>
+ *                     <li><tt>1</tt> to <tt>12</tt>: The reference month number.
+ *                   </ul>
+ *               </ul>
+ *           </ul>
+ *       </ul>
+ *   </ul>
+ * </ul>
+ *
+ * Examples:
+ * <i>Return only elevation and climate</i>:
+ * <tt>elev,1;clim,1</tt>
+ * <i>Return only elevation and current environmental zone code</i>:
+ * <tt>elev,1;clim.2000.gens.e,1</tt>
+ * <i>Return everything except climate and elevation</i>:
+ * <tt>clim,0;elev,0</tt>
+ *
+ * Type: string.
+ */
+define( "kAPI_ENV_SELECTION",			'selection' );
+
+/*=======================================================================================
  *	ENVIRONMENT PARAMETERS																*
  *======================================================================================*/
 
@@ -261,6 +336,30 @@ define( "kAPI_GEOMETRY_TYPE_POLY",		'Polygon' );
  * Type: array.
  */
 define( "kAPI_ENV_ELEVATION",			'elevation' );
+
+/**
+ * Max distance.
+ *
+ * This parameter can be used for two purposes:
+ *
+ * <ul>
+ *	<li><i>Convert a point</i>:: When a point is provided as a geometry and the distance is
+ *		also provided, this means that we are looking at a sphere, where the distance is its
+ *		radius. This is only valid when searching for tiles contained in the provided
+ *		geometry, when searching for intersections, the point will be converted to a rect.
+ *	<li><i>Maximum distance</i>: When requesting tiles by proximity, the distance can be
+ *		used to limit the search to tiles within the provided value.
+ * </ul>
+ *
+ * The value is expressed in meters.
+ *
+ * Examples:
+ * <tt>1.250</tt>
+ * <tt>5.60125</tt>
+ *
+ * Type: float.
+ */
+define( "kAPI_GEOMETRY_DISTANCE",		'distance' );
 
 /*=======================================================================================
  *	PAGING PARAMETERS																	*
@@ -370,16 +469,6 @@ define( "kAPI_STATUS_LIMIT",			'limit' );
 define( "kAPI_STATUS_COUNT",			'count' );
 
 /**
- * Code.
- *
- * This tag identifies the status code, it will generally be omitted except if there is
- * an error.
- *
- * Type: int.
- */
-define( "kAPI_STATUS_CODE",				'code' );
-
-/**
  * Message.
  *
  * This tag identifies the status message, it will generally be omitted except if there is
@@ -388,6 +477,16 @@ define( "kAPI_STATUS_CODE",				'code' );
  * Type: string.
  */
 define( "kAPI_STATUS_MESSAGE",			'message' );
+
+/**
+ * Code.
+ *
+ * This tag identifies the status code, it will generally be omitted except if there is
+ * an error.
+ *
+ * Type: int.
+ */
+define( "kAPI_STATUS_CODE",				'code' );
 
 /**
  * File.
@@ -645,7 +744,7 @@ define( "kAPI_DATA_CLIMATE",			'clim' );
  *		<li><tt>6</tt>: Drylands.
  *		<li><tt>7</tt>: Tropical.
  *	 </ul>
- *	<li><tt>c</tt>: The environmental zone code:
+ *	<li><tt>e</tt>: The environmental zone code:
  *	 <ul>
  *		<li><tt>A</tt>: Arctic.
  *		<li><tt>B</tt>: Arctic.

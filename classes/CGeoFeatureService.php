@@ -55,14 +55,23 @@ class CGeoFeatureService extends ArrayObject
 	 */
 	 protected $mDatabase = NULL;
 
-	/**
-	 * <b>Collection</b>
-	 *
-	 * This data member will hold the collection reference.
-	 *
-	 * @var mixed
-	 */
-	 protected $mCollection = NULL;
+    /**
+     * <b>Collection</b>
+     *
+     * This data member will hold the collection reference.
+     *
+     * @var mixed
+     */
+    protected $mCollection = NULL;
+
+    /**
+     * <b>Grid size</b>
+     *
+     * This data member will hold the grid size in seconds.
+     *
+     * @var integer
+     */
+    protected $mGridSize = NULL;
 
 	/**
 	 * <b>Status</b>
@@ -154,23 +163,23 @@ class CGeoFeatureService extends ArrayObject
 	 */
 	 protected $mStart = NULL;
 
-	/**
-	 * <b>Limit</b>
-	 *
-	 * This data member will hold the service maximum record count.
-	 *
-	 * @var integer
-	 */
-	 protected $mLimit = NULL;
+    /**
+     * <b>Limit</b>
+     *
+     * This data member will hold the service maximum record count.
+     *
+     * @var integer
+     */
+    protected $mLimit = NULL;
 
-	/**
-	 * kTileDegs.
-	 *
-	 * This double value represents 15 seconds in decimal degrees.
-	 *
-	 * Type: double.
-	 */
-	const kTileDegs = 0.0041666666667;
+    /**
+     * <b>Selection</b>
+     *
+     * This data member will hold the service response parameters selection.
+     *
+     * @var array
+     */
+    protected $mSelection = Array();
 
 	/**
 	 * kDistMult.
@@ -213,11 +222,13 @@ class CGeoFeatureService extends ArrayObject
 	 *
 	 * @param mixed					$theServer			Server reference.
 	 * @param mixed					$theDatabase		Database reference.
-	 * @param mixed					$theCollection		Collection reference.
+     * @param mixed					$theCollection		Collection reference.
+     * @param integer				$theGrid    		Grid size in seconds.
 	 */
 	public function __construct( $theServer = NULL,
 								 $theDatabase = NULL,
-								 $theCollection = NULL )
+								 $theCollection = NULL,
+                                 $theGrid = 30 )
 	{
 		//
 		// Call parent constructor.
@@ -228,6 +239,11 @@ class CGeoFeatureService extends ArrayObject
 		// Initialise service.
 		//
 		$this->_InitService();
+
+        //
+        // Set grid size.
+        //
+        $this->mGridSize = $theGrid;
 
 		//
 		// TRY BLOCK
@@ -756,6 +772,11 @@ class CGeoFeatureService extends ArrayObject
 			$this->_Limit( $theRequest );
 		}
 
+        //
+        // Parse selection.
+        //
+        $this->_Selection( $theRequest );
+
 		//
 		// Store request.
 		//
@@ -765,6 +786,29 @@ class CGeoFeatureService extends ArrayObject
 		// Assume successful operation.
 		//
 		$this->_Status( kAPI_STATUS_STATE, kAPI_STATE_OK );
+		
+		//
+		// Check area.
+		//
+		$area = $this->_Area();
+		if( $area !== NULL )
+		{
+			//
+			// Convert.
+			//
+			$area /= self::kKilometerDegs;
+			
+			//
+			// Check.
+			//
+			if( $area > kAPI_DEFAULT_MAX_AREA )
+				throw new Exception(
+					"Unable to execute service: "
+				   ."the area of the geometry must be "
+				   ."less than 1000 square kilometers, "
+				   ."provided $area." );										// !@! ==>
+		
+		} // Has area.
 
 	} // _ParseRequest.
 
@@ -1266,6 +1310,88 @@ class CGeoFeatureService extends ArrayObject
 
 
 	/*===================================================================================
+	 *	_Area																			*
+	 *==================================================================================*/
+
+	/**
+	 * Return the area of the current geometry.
+	 *
+	 * This method can be used to retrieve the area of the current rect or polygon, other
+	 * geometry types will return <tt>NULL</tt>.
+	 *
+	 * This method assumes that the current geometry is set.
+	 *
+	 * The returned value is in square kilometers.
+	 *
+	 * @access protected
+	 * @return double
+	 */
+	protected function _Area()
+	{
+		//
+		// Get geometry.
+		//
+		$geom = $this->_Geometry();
+		if( is_array( $geom ) )
+		{
+			//
+			// Handle Rect.
+			//
+			if( $geom[ 'type' ] == kAPI_GEOMETRY_TYPE_RECT )
+				return abs( $geom[ 'coordinates' ][ 1 ][ 0 ]
+						  - $geom[ 'coordinates' ][ 0 ][ 0 ] )
+					 * abs( $geom[ 'coordinates' ][ 1 ][ 1 ]
+					 	  - $geom[ 'coordinates' ][ 0 ][ 1 ] );						// ==>
+		
+			//
+			// Handle polygons.
+			//
+			if( $geom[ 'type' ] == kAPI_GEOMETRY_TYPE_POLY )
+			{
+				//
+				// Calculate area.
+				//
+				$total = NULL;
+				foreach( $geom[ 'coordinates' ] as $ring )
+				{
+					//
+					// Calculate ring area.
+					//
+					for( $x = $y = $i = 0;
+						 $i < (count( $ring ) - 2);
+						 $i++ )
+					{
+						$x += ($ring[ $i ][ 0 ] * $ring[ $i + 1 ][ 1 ]);
+						$y += ($ring[ $i ][ 1 ] * $ring[ $i + 1 ][ 0 ]);
+				
+					} $area = ($x - $y) / 2;
+					
+					//
+					// Set outer ring area.
+					//
+					if( $total === NULL )
+						$total = $area;
+					
+					//
+					// Handle inner ring area.
+					//
+					else
+						$total -= $area;
+				
+				} // Iterating rings.
+				
+				return $total;														// ==>
+		
+			} // Polygon.
+		
+		} // Has geometry.
+		
+		return NULL;																// ==>
+
+	} // _Area.
+
+
+	/*===================================================================================
 	 *	_Elevation																		*
 	 *==================================================================================*/
 
@@ -1376,7 +1502,7 @@ class CGeoFeatureService extends ArrayObject
 	 *==================================================================================*/
 
 	/**
-	 * Get, set or rettrieve the maximum distance.
+	 * Get, set or retrieve the maximum distance.
 	 *
 	 * This method manages the maximum distance value, it accepts the following parameters:
 	 *
@@ -1580,6 +1706,116 @@ class CGeoFeatureService extends ArrayObject
 	} // _Limit.
 
 
+    /*===================================================================================
+     *	_Selection																		*
+     *==================================================================================*/
+
+    /**
+     * Set retrieve and delete properties selection.
+     *
+     * This method can be used to manage the service properties selection.
+     *
+     * The method accepts three parameters:
+     *
+     * <ul>
+     *	<li><b>$theIndex</b>: Element index:
+     *	 <ul>
+     *		<li><tt>NULL</tt>: Consider the whole property.
+     *		<li><tt>array</tt>: An array indicates that we provided the request and this
+     *			must be parsed to set the requested values; in this case the next parameter
+     *			is ignored.
+     *		<li><i>other</i>: Any other value will be cast to a string and used as the key
+     *			to the specific property element.
+     *	 </ul>
+     *	<li><b>$theValue</b>: Property element value or operation:
+     *	 <ul>
+     *		<li><tt>NULL</tt>: Return current element or property switch value.
+     *		<li><tt>FALSE</tt>: Delete current element or property.
+     *		<li><i>other</i>: Any other value means we want to set a new modifier: if the
+     *			index is <tt>NULL</tt>, the value must be an array; if the index is not
+     *			<tt>NULL</tt>, the value will be cast to a boolean value that will represent
+     *          the switch value.
+     *	 </ul>
+     *	<li><tt>$getOld</tt>: Which value to return:
+     *	 <ul>
+     *		<li><tt>TRUE</tt>: <i>Before</i> it was eventually modified.
+     *		<li><tt>FALSE</tt>: <i>After</i> it was eventually modified (DEFAULT).
+     *	 </ul>
+     * </ul>
+     *
+     * @param string				$theIndex			Property tag.
+     * @param mixed					$theValue			Property selection switch.
+     * @param boolean				$getOld				TRUE get old value.
+     *
+     * @access protected
+     * @return string
+     */
+    protected function _Selection( $theIndex = NULL, $theValue = NULL, $getOld = FALSE )
+    {
+		//
+	    // Parse request.
+	    //
+	    if( is_array( $theIndex ) )
+	    {
+		    //
+		    // Check for parameter.
+		    //
+		    if( array_key_exists( kAPI_ENV_SELECTION, $theIndex ) )
+		    {
+			    //
+			    // Init local storage.
+			    //
+			    $selection = Array();
+
+			    //
+			    // Parse parameter blocks.
+			    //
+			    $blocks = explode( ';', $theIndex[ kAPI_ENV_SELECTION ] );
+			    foreach( $blocks as $block )
+			    {
+				    //
+				    // Parse parameter.
+				    //
+				    $tmp = explode( ',', $block );
+				    if( count( $tmp ) == 2 )
+				    {
+					    //
+					    // Trim.
+					    //
+					    $tmp[ 0 ] = trim( $tmp[ 0 ] );
+					    $tmp[ 1 ] = trim( $tmp[ 1 ] );
+
+					    //
+					    // Check if not empty.
+					    //
+					    if( strlen( $tmp[ 0 ] )
+					     && strlen( $tmp[ 1 ] ) )
+							$selection[ $tmp[ 0 ] ] = (boolean) $tmp[ 1 ];
+
+				    } // At least a parameter/switch block.
+
+			    } // Iterating parameter blocks.
+
+			    //
+			    // Set member.
+			    //
+			    if( count( $selection ) )
+				    return $this->_ManageArrayMember(
+					    $this->mSelection, NULL, $selection, $getOld );     	// ==>
+
+		    } // Found parameter.
+
+		    return $this->_ManageArrayMember(
+				$this->mSelection, NULL, NULL, $getOld );                      // ==>
+
+	    } // Provided request.
+
+        return $this->_ManageArrayMember(
+            $this->mSelection, $theIndex, $theValue, $getOld );             	// ==>
+
+    } // _Selection.
+
+
 
 /*=======================================================================================
  *																						*
@@ -1620,7 +1856,8 @@ class CGeoFeatureService extends ArrayObject
 	 */
 	protected function _RequestHelp()
 	{
-		$this->_BuildResponse( 'HELP!' );
+		header( 'Location: help/help.html' ) ;
+//		$this->_BuildResponse( 'HELP!' );
 
 	} // _RequestHelp.
 
@@ -1761,7 +1998,7 @@ class CGeoFeatureService extends ArrayObject
 				//
 				// Perform query.
 				//
-				$results = $this->Collection()->find( $query );
+				$results = $this->Collection()->find( $query, $this->_Selection() );
 
 				//
 				// Set total.
@@ -2026,7 +2263,7 @@ class CGeoFeatureService extends ArrayObject
 				//
 				// Perform query.
 				//
-				$results = $this->Collection()->find( $query );
+				$results = $this->Collection()->find( $query, $this->_Selection() );
 
 				//
 				// Set total.
@@ -2280,7 +2517,7 @@ class CGeoFeatureService extends ArrayObject
 				//
 				// Perform query.
 				//
-				$results = $this->Collection()->find( $query );
+				$results = $this->Collection()->find( $query, $this->_Selection() );
 
 				//
 				// Set total.
@@ -2386,6 +2623,16 @@ class CGeoFeatureService extends ArrayObject
 			} // Checked geometry.
 
 			//
+			// Init operation.
+			//
+			$query = array(
+				'includeLocs' => kAPI_DATA_POINT,
+				'near' => $geometry[ 'coordinates' ],
+				'spherical' => TRUE,
+				'distanceMultiplier' => self::kDistMult,
+				'distanceField' => kAPI_DATA_DISTANCE );
+
+			//
 			// Enforce limits.
 			//
 			if( $do_limits )
@@ -2414,19 +2661,13 @@ class CGeoFeatureService extends ArrayObject
 					$limit = $this->_Limit( kAPI_DEFAULT_LIMIT );
 					$this->_Limit( $limit );
 				}
+				
+				//
+				// Set limit.
+				//
+				$query[ 'limit' ] = $limit;
 
 			} // Not counting.
-
-			//
-			// Init operation.
-			//
-			$query = array(
-				'includeLocs' => kAPI_DATA_POINT,
-				'near' => $geometry[ 'coordinates' ],
-				'spherical' => TRUE,
-				'distanceMultiplier' => self::kDistMult,
-				'distanceField' => kAPI_DATA_DISTANCE,
-				'limit' => $limit );
 
 			//
 			// Add distance.
@@ -3211,7 +3452,11 @@ class CGeoFeatureService extends ArrayObject
 			//
 			// Store geometry.
 			//
-			$this->_Request( kAPI_REQUEST_GEOMETRY, $this->_Geometry() );
+			$geom = $this->_Geometry();
+			$area = $this->_Area();
+			if( $area !== NULL )
+				$geom[ 'area' ] = $area / self::kKilometerDegs;
+			$this->_Request( kAPI_REQUEST_GEOMETRY, $geom );
 
 			//
 			// Store distance.
@@ -3222,6 +3467,12 @@ class CGeoFeatureService extends ArrayObject
 			// Store elevation.
 			//
 			$this->_Request( kAPI_REQUEST_ELEVATION, $this->_Elevation() );
+
+			//
+			// Store selection.
+			//
+			if( count( $tmp = $this->_Selection() ) )
+				$this->_Request( kAPI_ENV_SELECTION, $tmp );
 
 		} // Store request.
 
@@ -3325,7 +3576,7 @@ class CGeoFeatureService extends ArrayObject
 			$ptcoords = & $theCoordinate[ 'coordinates' ];
 			$offset = ( $theRadius )
 					? self::kKilometerDegs
-					: self::kTileDegs;
+					: (((1 / 3600) * $this->mGridSize) / 2);
 
 			//
 			// Set left.

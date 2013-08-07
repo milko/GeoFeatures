@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GeoFeatures documentation - Response data structure</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="css/bootstrap-glyphicons.css" rel="stylesheet" media="screen">
+    <link href="css/my.css" rel="stylesheet" media="screen">
+</head>
+<body>
+    <!-- HEADER -->
+    <div class="container">
+        <div class="page-header">
+            <h1>GeoFeatures<br/><small>web-service documentation</small></h1>
+        </div>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container bs-docs-container">
+        <div class="row">
+
+            <!-- NAVIGATION SIDE BAR CONTAINER -->
+            <div class="col-lg-3">
+                <div id="sidebar"
+                     data-spy="affix"
+                     class="bs-sidebar"
+                     data-offset-top="100">
+                    <ul class="nav bs-sidenav affix">
+                        <li>
+                            <a href="help.html">Introduction</a>
+                        </li>
+                        <li>
+                            <a href="response.html">Response data structure</a>
+                        </li>
+                        <li>
+                            <a class="current" href="request.html">Request data structure</a>
+                            <ul>
+                                <li><a href="#operation">Operation</a></li>
+                                <li><a href="#shape">Shape</a></li>
+                                <li><a href="#modifiers">Modifiers</a></li>
+                                <li><a href="#environment">Environment</a></li>
+                                <li><a href="#selection">Selection</a></li>
+                                <li><a href="#paging">Paging</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- CONTENTS CONTAINER -->
+            <div class="col-lg-9">
+
+                <!-- INTRODUCTION -->
+                <section id="intro">
+                    <h4>
+                        Reauest data structure
+                    </h4>
+                    <p>
+                        The service request is a GET
+                        <abbr title="Hyper Text Transfer Protocol">HTTP</abbr> call, such as in
+                        <code>http://service-url?param&amp;param=value&amp;...&amp;param=value</code>,<br />
+                        where some parameters require an associated value, while others not.
+                    </p>
+                    <p>
+                        These parameters can be divided into six categories:
+                    </p>
+                    <dl class="dl-horizontal">
+                        <dt><a href="#operation">Operation</a></dt>
+                        <dd>
+                            The requested <em>operation</em> or <em>command</em>.<br />
+                            This kind of parameter does not need to have a value, only one of the
+                            accepted tags should be provided and the parameter is <em>required</em>.
+                        </dd>
+                        <dt><a href="#shape">Shape</a></dt>
+                        <dd>
+                            The <em>geometric shape</em> used for selecting the grid tiles.<br />
+                            All operations, except ping and help, require this parameter.
+                        </dd>
+                        <dt><a href="#modifiers">Modifiers</a></dt>
+                        <dd>
+                            Optional operation <em>modifiers</em> or <em>options</em>.<br />
+                            This set of parameters can be used to <em>alter the result</em>
+                            or <em>request optional results</em>. This kind of parameter does
+                            not need to have a value and several of them may be combined as a
+                            set of flags.
+                        </dd>
+                        <dt><a href="#environment">Environment filters</a></dt>
+                        <dd>
+                            This set of parameters can be used to <em>provide a filter</em>
+                            based on variables other than the geometry.<br />
+                            This can be useful to retrieve data for a location where the coordinates
+                            are not precise, but where the elevation range is known.
+                            The service currently only allows filtering by <em>elevation range</em>,
+                            in the future other parameters may be added.
+                        </dd>
+                        <dt><a href="#selection">Selection filters</a></dt>
+                        <dd>
+                            This set of parameters can be used to <em>select which elements
+                            should be included or excluded from the response data</em>.
+                        </dd>
+                        <dt><a href="#paging">Paging directives</a></dt>
+                        <dd>
+                            This set of parameters can be used to <em>limit the number of
+                            returned records</em>.
+                            This can be useful and is <em>enforced</em> in cases where the service
+                            might return a large number of records.
+                        </dd>
+                    </dl>
+                </section>
+
+                <!-- OPERATIONS -->
+                <section id="operation">
+                    <h4>Operations</h4>
+                    <p>
+                        This set of parameters determines what the service is going to do,
+                        only one of the following tags must be provided and it does not
+                        require any value:
+                    </p>
+                    <div class="panel">
+                        <dl id="ping">
+                            <dt>Ping [<strong><code>ping</code></strong>]</dt>
+                            <dd>
+                                This operation can be used to check if the service is running,
+                                it does not require any other parameter and simply returns the
+                                <a href="response.html#status">status</a> and the string
+                                <code>pong</code> in the <a href="response.html#data">response</a>
+                                section.<br />
+                            </dd>
+                            <small>Example: <code>http://url?<strong>ping</strong></code></small>
+                        </dl>
+                        <dl id="help">
+                            <dt>Help [<strong><code>help</code></strong>]</dt>
+                            <dd>
+                                This operation can be used to get help in using this service,
+                                it does not require any other parameter and simply returns the
+                                help pages in <abbr title="HyperText Markup Language">HTML</abbr>.
+                            </dd>
+                            <small>Example: <code>http://url?<strong>help</strong></code></small>
+                        </dl>
+                        <dl id="tiles">
+                            <dt>Tiles [<strong><code>tiles</code></strong>]</dt>
+                            <dd>
+                                This operation can be used to retrieve a list of tiles by
+                                <a href="response.html#_id"><abbr title="_id">identifier</abbr></a>. The operation
+                                requires the <a href="#tile"><abbr title="tile">tile</abbr></a> shape parameter
+                                holding the list of requested tile identifiers.
+                            </dd>
+                            <small>Example: <code>http://url?<strong>tiles</strong>&amp;tile=33065587,774896741</code></small>
+                        </dl>
+                        <dl id="contains">
+                            <dt>Contains [<strong><code>contains</code></strong>]</dt>
+                            <dd>
+                                This operation can be used to retrieve the tile that contains
+                                the provided <a href="#point"><abbr title="point">point</abbr></a>, or all tiles whose center
+                                point is contained by the provided <a href="#rect"><abbr title="rect">rectangle</abbr></a> or
+                                <a href="#polygon"><abbr title="rect">polygon</abbr></a>. The operation requires the shape
+                                parameter and will enforce paging if the provided geometry is not a point.
+                            </dd>
+                            <small>Example: <code>http://url?<strong>contains</strong>&amp;point=-16.6463,28.2768</code></small>
+                        </dl>
+                        <dl id="intersects">
+                            <dt>Intersects [<strong><code>intersects</code></strong>]</dt>
+                            <dd>
+                                This operation can be used to retrieve the tiles that intersect
+                                with the provided <a href="#point"><abbr title="point">point</abbr></a>,
+                                <a href="#rect"><abbr title="rect">rectangle</abbr></a>
+                                or <a href="#polygon"><abbr title="rect">polygon</abbr></a>.
+                                The operation requires the shape parameter and will enforce paging if
+                                the provided geometry is not a point.
+                            </dd>
+                            <small>Example: <code>http://url?<strong>intersects</strong>&amp;rect=-16.6463,28.2768;-16.638,28.2685</code></small>
+                        </dl>
+                        <dl id="near">
+                            <dt>Near [<strong><code>near</code></strong>]</dt>
+                            <dd>
+                                This operation can be used to retrieve the tiles closest to the
+                                provided <a href="#point"><abbr title="point">point</abbr></a>, the service will return a list
+                                of tile records, 100 at most, sorted by distance, the closest first.
+                                The operation requires the shape parameter in the form of a point.
+                                This is the only operation that will add the
+                                <a href="response.html#dist"><abbr title="dist">distance</abbr></a>
+                                value to the results. The operatrion also accepts the
+                                <a href="#distance"><abbr title="distance">maximum distance</abbr></a>
+                                parameter to limit the selection to a maximum distance from the provided
+                                point in meters.
+                            </dd>
+                            <small>Example: <code>http://url?<strong>near</strong>&amp;point=-16.6463,28.2768</code></small>
+                        </dl>
+                    </div>
+                </section>
+
+                <!-- SHAPE -->
+                <section id="shape">
+                    <h4>Shapes</h4>
+                    <p>
+                        This set of parameters indicates the shape used to select the grid tiles,
+                        only one of the following should be provided:
+                    </p>
+                    <div class="panel">
+                        <dl id="tile">
+                            <dt>Tiles [<strong><code>tile</code></strong>]</dt>
+                            <dd>
+                                This shape represents a comma-delimited list of tile
+                                <a href="response.html#_id"><abbr title="_id">identifiers</abbr></a>, this geometry
+                                is only used by the <a href="#tiles"><abbr title="tiles">tiles</abbr></a>
+                                operation.
+                            </dd>
+                            <small>Example: <code>http://url?tiles&amp;<strong>tile=33065587,774896741</strong></code></small>
+                        </dl>
+                        <dl id="point">
+                            <dt>Point [<strong><code>point</code></strong>]</dt>
+                            <dd>
+                                This shape represents a point, the value represents a pair
+                                of decimal degrees comma delimited coordinates indicating
+                                respectively the longitude and latitude of the point.
+                            </dd>
+                            <small>Example: <code>http://url?contains&amp;<strong>point=-16.6463,28.2768</strong></code></small>
+                        </dl>
+                        <dl id="rect">
+                            <dt>Rectangle [<strong><code>rect</code></strong>]</dt>
+                            <dd>
+                                This shape represents a rectangle, the value represents the
+                                two vertices of the shape in decimal degrees. The parameter
+                                is expressed as two blocks separated by a semicolon, each
+                                block represents a vertex composed of the longitude and
+                                latitude separated by a comma.<br />
+                                <small>When requesting a
+                                <a href="#cpy-request"><abbr title="cpy-request">copy</abbr></a>
+                                of the request, an <abbr title="area">item</abbr> will be added
+                                to the shape structure holding the area of the geometry.</small>
+                            </dd>
+                            <small>Example: <code>http://url?contains&amp;<strong>rect=-16.6463,28.2768;-16.638,28.2685</strong></code></small>
+                        </dl>
+                        <dl id="polygon">
+                            <dt>Polygon [<strong><code>polygon</code></strong>]</dt>
+                            <dd>
+                                This shape represents a polygon in decimal degrees. The shape
+                                is provided as a string using three divider tokens: the
+                                <em>outer and inner rings</em> are divided by a colon, the
+                                <em>ring vertices</em> are divided by a semicolon and the
+                                <em>vertex coordinates</em> by a comma.<br />
+                                <small>When requesting a
+                                    <a href="#cpy-request"><abbr title="cpy-request">copy</abbr></a>
+                                    of the request, an <abbr title="area">item</abbr> will be added
+                                    to the shape structure holding the area of the geometry.</small>
+                            </dd>
+                            <small>Outer ring only: <code>http://url?contains&amp;<br />
+                                <strong>polygon=12.8199,42.8422;12.8207,42.8158;12.8699,42.8166;12.8678,42.8398;12.8199,42.8422</strong></code></small><br />
+                            <small>Outer and inner rings: <code>http://url?contains&amp;<br />
+                                <strong>polygon=12.8199,42.8422;12.8207,42.8158;12.8699,42.8166;12.8678,42.8398;12.8199,42.8422:<br />
+                                    12.8344,42.8347;12.8348,42.8225;12.8570,42.8223;12.8566,42.8332;12.8344,42.8347</strong></code></small>
+                        </dl>
+                    </div>
+                </section>
+
+                <!-- MODIFIERS -->
+                <section id="modifiers">
+                    <h4>Modifiers</h4>
+                    <p>
+                        This set of parameters modify the result of the service and are used
+                        to activate cusstom options. The parameters do not need a value and
+                        some may be concurrent:
+                    </p>
+                    <div class="panel">
+                        <dl id="count">
+                            <dt>Count [<strong><code>count</code></strong>]</dt>
+                            <dd>
+                                This option will disable the results pane and only return
+                                the <a href="response.html#total"><abbr title="total">affected count</abbr></a>
+                                in the <a href="response.html#status">status section</a>.<br />
+                                This option is incompatible with the
+                                <a href="#range"><abbr title="range">range</abbr></a> modifier,
+                                if both are provided, this one will be chosen.
+                                This options can be useful when a large set of results may be returned:
+                                by calling the service with this modifier, one may organise
+                                paged results retrieval.
+                            </dd>
+                            <small>Example: <code>http://url?contains&amp;<strong>count</strong>&amp;rect=-16.6463,28.2768;-16.638,28.2685</code></small>
+                        </dl>
+                        <dl id="range">
+                            <dt>Range [<strong><code>range</code></strong>]</dt>
+                            <dd>
+                                This option will aggregate the results of the service into a
+                                single record, where continuous values will be expanded into
+                                an set of three elements in which <strong><code>l</code></strong>
+                                will hold the <em>minimum</em> value,
+                                <strong><code>m</code></strong> the <em>average</em> value and
+                                <strong><code>h</code></strong> the <em>maximum</em> value; categorical
+                                variables will be expanded into an array containing all distinct
+                                values. Only the
+                                <a href="response.html#elev"><abbr title="elev">elevation</abbr></a>
+                                and the <a href="response.html#clim"><abbr title="clim">climate section</abbr></a>
+                                will be included in the result (including the
+                                <a href="response.html#dist"><abbr title="dist">distance</abbr></a>
+                                when requesting the
+                                <a href="#near"><abbr title="near">near</abbr></a> operation).<br />
+                                This option is incompatible with the
+                                <a href="#count"><abbr title="count">count</abbr></a> modifier,
+                                if both are provided, the latter will be chosen. This modifier
+                                is not active if you provide a
+                                <a href="#point"><abbr title="point">point</abbr></a> to the
+                                <a href="#contains"><abbr title="contains">contains</abbr></a>
+                                or <a href="#intersects"><abbr title="intersects">intersects</abbr></a>
+                                operations.<br />
+                                This option can be useful to explore the variation and range
+                                of a set of results.
+                            </dd>
+                            <small>Example: <code>http://url?contains&amp;<strong>range</strong>&amp;rect=-16.6463,28.2768;-16.638,28.2685</code></small>
+                        </dl>
+                        <dl id="cpy-request">
+                            <dt>Copy request [<strong><code>cpy-request</code></strong>]</dt>
+                            <dd>
+                                This option will return the request provided to the service
+                                in the <a href="response.html#request">request section</a> of
+                                the response. This option can be useful to debug service requests
+                                and can be cumulated with all other modifiers.
+                            </dd>
+                            <small>Example: <code>http://url?contains&amp;range&amp;<strong>cpy-request</strong>rect=-16.6463,28.2768;-16.638,28.2685</code></small>
+                        </dl>
+                        <dl id="cpy-connection">
+                            <dt>Copy connection [<strong><code>cpy-connection</code></strong>]</dt>
+                            <dd>
+                                This option will return the database connection parameters used by the service
+                                in the <a href="response.html#connection">connection section</a> of
+                                the response. This option can be useful to debug service requests
+                                and can be cumulated with all other modifiers.<br />
+                                <small><em>In the production environment this option is disabled</em></small>.
+                            </dd>
+                            <small>Example: <code>http://url?contains&amp;range&amp;cpy-request&amp;<strong>cpy-connection</strong>&amp;point=-16.6463,28.2768</code></small>
+                        </dl>
+                    </div>
+                </section>
+
+                <!-- ENVIRONMENT -->
+                <section id="environment">
+                    <h4>Environment filters</h4>
+                    <p>
+                        This set of parameters can be used to refine the results matching
+                        the provided shape using a set of variables other than thew geometry:
+                    </p>
+                    <div class="panel">
+                        <dl id="elevation">
+                            <dt>Elevation [<strong><code>elevation</code></strong>]</dt>
+                            <dd>
+                                The value of this parameter is a comma delimited set of two
+                                values that represent the elevation range in meters. Results
+                                of the operation will only include tiles belonging to that range.
+                            </dd>
+                            <small>Example: <code>http://url?contains&amp;rect=-10,30;-11,29&amp;<strong>elevation=1000,1050</strong></code></small>
+                        </dl>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

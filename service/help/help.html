@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GeoFeatures documentation - Introduction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="css/bootstrap-glyphicons.css" rel="stylesheet" media="screen">
+    <link href="css/my.css" rel="stylesheet" media="screen">
+</head>
+<body>
+    <!-- HEADER -->
+    <div class="container">
+        <div class="page-header">
+            <h1>GeoFeatures<br/><small>web-service documentation</small></h1>
+        </div>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container bs-docs-container">
+        <div class="row">
+
+            <!-- NAVIGATION SIDE BAR CONTAINER -->
+            <div class="col-lg-3">
+                <div id="sidebar"
+                     data-spy="affix"
+                     class="bs-sidebar"
+                     data-offset-top="100">
+                    <ul class="nav bs-sidenav affix">
+                        <li>
+                            <a class="current" href="help.html">Introduction</a>
+                        </li>
+                        <li>
+                            <a href="response.html">Response data structure</a>
+                        </li>
+                        <li>
+                            <a href="request.html">Request data structure</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- CONTENTS CONTAINER -->
+            <div class="col-lg-9">
+
+                <!-- INTRODUCTION -->
+                <section id="intro">
+                    <h4>
+                        Description
+                    </h4>
+                    <p>
+                        The main goal of this web-service is to provide climate and
+                        other environmental data that can be embedded into
+                        observation records. The service has been designed with a
+                        specific use-case in mind: the client provides a geometry
+                        and the service returns the data related to that geometry.
+                        This data should then be included in the record related to
+                        the provided geometry so that observations can be selected
+                        according to environmental variables.
+                    </p>
+                    <p>
+                        A typical usage would be to embed climate data in collecting
+                        site records, so that sites can be selected according to
+                        precipitation or temperature values.
+                    </p>
+                    <p>
+                        The service provides current climatic conditions from the
+                        <abbr title="Global Climate Data">WORLDCLIM</abbr>
+                        <a href="http://worldclim.org">site</a> and the
+                        <abbr title="Global Environment Stratification">GEnS</abbr>
+                        <a href="http://www.earthobservations.org/documents/cop/bi_geobon/outreach/201211_Metzger_GEB_inpress_1.pdf">indicators</a>
+                        in a 30-seconds grid. The idea is to add other layers, such
+                        as soil and other indicators, to provide in time a wider
+                        choice of data.
+                    </p>
+                    <p>
+                        The service is invoked as a typical <abbr title="Hyper Text Transfer Protocol">HTTP</abbr> call where all parameters
+                        are provided in a GET method call and returns all its
+                        responses as a
+                        <abbr title="JavaScript Object Notation">JSON</abbr> string.
+                    </p>
+                    <p>
+                        The full source code is available at
+                        <a href="https://github.com/milko/GeoFeatures">GIT</a> in
+                        case you want to implement or extend its functionality.
+                    </p>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript plugins (requires jQuery) -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>

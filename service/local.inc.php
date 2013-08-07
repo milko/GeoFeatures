@@ -136,4 +136,13 @@ define( "kENV_VERBOSE", TRUE );
  */
 define( "kAPI_DEFAULT_LIMIT", 100 );
 
+/**
+ * Maximum area.
+ *
+ * This tag identifies the default maximum area in square kilometers.
+ *
+ * Type: integer.
+ */
+define( "kAPI_DEFAULT_MAX_AREA", 1500 );
+
 ?>
