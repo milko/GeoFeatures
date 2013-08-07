@@ -319,7 +319,7 @@ define( "kAPI_GEOMETRY_TYPE_POLY",		'Polygon' );
  *
  * Type: string.
  */
-define( "kAPI_ENV_SELECTION",			'selection' );
+define( "kAPI_ENV_SELECTION",			'select' );
 
 /*=======================================================================================
  *	ENVIRONMENT PARAMETERS																*

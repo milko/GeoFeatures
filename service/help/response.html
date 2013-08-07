@@ -4,8 +4,7 @@
     <title>GeoFeatures documentation - Response data structure</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
-    <link href="css/bootstrap.css" rel="stylesheet" media="screen">
-    <link href="css/bootstrap-glyphicons.css" rel="stylesheet" media="screen">
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/my.css" rel="stylesheet" media="screen">
 </head>
 <body>
@@ -150,7 +149,8 @@
                                 This paging variable contains the <em>maximum number of elements</em>
                                 to be returned by the current request. If you were
                                 requesting at most 10 records, this element would be
-                                <code>10</code>.<br /><small>Note that this element does not
+                                <code>10</code>.<br />
+                                <small class="text-warning">Note that this element does not
                                 hold the actual number of returned elements</small>.
                             </dd>
                         </dl>
@@ -158,7 +158,8 @@
                             <dt>Actual count [<strong><code>count</code></strong>]</dt>
                             <dd>
                                 This paging variable contains the <em>actual number of elements</em>
-                                returned by the service.<br /><small>Note that this number may be
+                                returned by the service.<br />
+                                <small class="text-warning">Note that this number may be
                                 smaller than the maximum number of requested elements
                             </small>.
                             </dd>
@@ -178,7 +179,7 @@
                             <dd>
                                 This element holds the eventual error <em>code</em>, this
                                 will only occur if there was an error.<br />
-                                <small>Note that this is for debugging purposes and it is
+                                <small class="text-warning">Note that this is for debugging purposes and it is
                                     disabled in production</small>.
                             </dd>
                         </dl>
@@ -187,7 +188,7 @@
                             <dd>
                                 This element holds the eventual error <em>file path</em>, this
                                 will only occur if there was an error.<br />
-                                <small>Note that this is for debugging purposes and it is
+                                <small class="text-warning">Note that this is for debugging purposes and it is
                                     disabled in production</small>.
                             </dd>
                         </dl>
@@ -196,7 +197,7 @@
                             <dd>
                                 This element holds the eventual error <em>file line</em>, this
                                 will only occur if there was an error.<br />
-                                <small>Note that this is for debugging purposes and it is
+                                <small class="text-warning">Note that this is for debugging purposes and it is
                                     disabled in production</small>.
                             </dd>
                         </dl>
@@ -205,7 +206,7 @@
                             <dd>
                                 This element holds the eventual error <em>trace</em>, this
                                 will only occur if there was an error.<br />
-                                <small>Note that this is for debugging purposes and it is
+                                <small class="text-warning">Note that this is for debugging purposes and it is
                                     disabled in production</small>.
                             </dd>
                         </dl>
@@ -221,7 +222,7 @@
                         This section will return the request as <em>interpreted by the service</em>.
                         This means that you will only see the parameters that the service
                         recognised or handled, in the format used by the service.<br />
-                        <small>Note that this is generally used for debugging purposes and
+                        <small class="text-warning">Note that this is generally used for debugging purposes and
                             is only available if
                             <a href="request.html#cpy-request"><abbr title="cpy-request">requested</abbr></a>
                             to the service.</small>
@@ -235,7 +236,7 @@
                     </h4>
                     <p>
                         This section will return the <em>database connection</em> information.<br />
-                        <small>Note that this is generally used for debugging purposes and
+                        <small class="text-warning">Note that this is generally used for debugging purposes and
                             is only available if
                             <a href="request.html#cpy-connection"><abbr title="cpy-connection">requested</abbr></a>
                             to the service.<br />
