@@ -76,7 +76,7 @@ require_once( "includes.inc.php" );
 	        <!-- CONTENTS CONTAINER -->
 	        <div class="col-lg-7">
 
-		        <!-- INTRODUCTION -->
+		        <!-- PING -->
 		        <section id="ping">
 			        <h4>
 				        Ping request
@@ -86,18 +86,59 @@ require_once( "includes.inc.php" );
 				        so, the response <a href="response.php#data"><abbr title="data">data</abbr></a>
 				        section will contain the string <code>pong</code>.
 			        </p>
-			        <form class="form-inline" id="form-ping">
+			        <form class="form-inline" id="form-ping" data-bind="submit: pingCALL">
 				        <div class="input-group">
-					        <input type="text" class="form-control" id="ping-example" data-bind="value: pingURL" />
+					        <input type="text" class="form-control" id="ping-request" data-bind="value: pingRequest" />
 					        <span class="input-group-btn">
-								<button type="button" data-bind="click: $root.pingCALL" data-loading-text="Calling..." class="btn btn-primary">
+								<button type="submit" data-loading-text="Calling..." class="btn btn-primary">
 									Try
 								</button>
 						    </span>
-					    </div>
+				        </div>
 			        </form>
-			        <div class="panel" id="ping-response" data-bind="text: pingDATA">
-			        </div>
+			        <pre id="ping-response" class="pre-scrollable" data-bind="text: pingResponse"></pre>
+		        </section>
+
+		        <!-- HELP -->
+		        <section id="ping">
+			        <h4>
+				        Help request
+			        </h4>
+			        <p>
+				        If you are here you must have done it ;-) In any case you can try it again:
+			        </p>
+			        <form class="form-inline" id="form-help" data-bind="submit: helpCALL">
+				        <div class="input-group">
+					        <input type="text" class="form-control" id="help-request" data-bind="value: helpRequest" />
+					        <span class="input-group-btn">
+								<button type="submit" data-loading-text="Calling..." class="btn btn-primary">
+									Try
+								</button>
+						    </span>
+				        </div>
+			        </form>
+			        <pre id="help-response" class="pre-scrollable" data-bind="text: helpResponse"></pre>
+		        </section>
+
+		        <!-- TILES -->
+		        <section id="ping">
+			        <h4>
+				        Tiles request
+			        </h4>
+			        <p>
+				        This operation can be used to retrieve a list of tiles by identifier.
+			        </p>
+			        <form class="form-inline" id="form-tiles" data-bind="submit: tilesCALL">
+				        <div class="input-group">
+					        <input type="text" class="form-control" id="tiles-request" data-bind="value: tilesRequest" />
+					        <span class="input-group-btn">
+								<button type="submit" data-loading-text="Calling..." class="btn btn-primary">
+									Try
+								</button>
+						    </span>
+				        </div>
+			        </form>
+			        <pre id="tiles-response" class="pre-scrollable" data-bind="text: tilesResponse"></pre>
 		        </section>
 		    </div>
 		</div>
@@ -109,6 +150,10 @@ require_once( "includes.inc.php" );
     <script src="js/bootstrap.min.js"></script>
     <!-- Include knockout.js -->
     <script src="js/knockout.js"></script>
+    <!-- Set base URL. -->
+    <script type="text/javascript">
+	    var baseURL = "<?php echo( kURL ); ?>";
+    </script>
     <!-- Include my.js -->
     <script src="js/myViewModels.js"></script>
 </body>

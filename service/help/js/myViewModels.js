@@ -7,17 +7,49 @@
  */
 
 //
-// PING view model.
+// View model.
 //
-function MyiewModel() {
+function MyViewModel() {
+    //
+    // Reference this.
+    //
     var self = this;
 
-    self.pingURL = ko.observable("http://localhost/lib/GeoFeatures/service/GeoFeatures.php?ping");
-    self.pingDATA = "";
-    self.pingCALL = function() {
-        $.get(self.pingURL, {}, self.pingDATA);
-    }
+    //
+    // PING BLOCK.
+    //
+    self.pingRequest = ko.observable(baseURL + "?ping");    // Request.
+    self.pingResponse = ko.observable();                    // Response.
+    self.pingCALL = function() {                            // Call.
+        $.get( self.pingRequest(), function(theData){
+            self.pingResponse(theData);
+        });
+    };
+
+    //
+    // HELP BLOCK.
+    //
+    self.helpRequest = ko.observable(baseURL + "?help");    // Request.
+    self.helpResponse = ko.observable();                    // Response.
+    self.helpCALL = function() {                            // Call.
+        $.get( self.helpRequest(), function(theData){
+            self.helpResponse(theData);
+        });
+    };
+
+    //
+    // TILES BLOCK.
+    //
+    self.tilesRequest = ko.observable(baseURL + "?tiles&tile=33065587,774896741");
+    self.tilesResponse = ko.observable();                    // Response.
+    self.tilesCALL = function() {                            // Call.
+        $.get( self.tilesRequest(), function(theData){
+            self.tilesResponse(theData);
+        });
+    };
 }
 
-// Activates knockout.js
-ko.applyBindings(new MyiewModel());
+//
+// Apply bindings.
+//
+ko.applyBindings(new MyViewModel());

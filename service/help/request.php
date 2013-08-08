@@ -180,7 +180,7 @@ require_once( "includes.inc.php" );
                                 <code>pong</code> in the <a href="response.php#data">response</a>
                                 section.<br />
                             </dd>
-                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?><strong>ping</strong></pre>
+                            <pre class="pre-scrollable" style="white-space: nowrap"><?php echo( kURL.'?' ); ?><strong>ping</strong></pre>
                         </dl>
                         <dl id="help">
                             <dt>Help [<strong><code>help</code></strong>]</dt>
@@ -189,7 +189,7 @@ require_once( "includes.inc.php" );
                                 it does not require any other parameter and simply returns the
                                 help pages in <abbr title="HyperText Markup Language">HTML</abbr>.
                             </dd>
-                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?><strong>help</strong></pre>
+                            <pre class="pre-scrollable" style="white-space: nowrap"><?php echo( kURL.'?' ); ?><strong>help</strong></pre>
                         </dl>
                         <dl id="tiles">
                             <dt>Tiles [<strong><code>tiles</code></strong>]</dt>
@@ -199,7 +199,7 @@ require_once( "includes.inc.php" );
                                 requires the <a href="#tile"><abbr title="tile">tile</abbr></a> shape parameter
                                 holding the list of requested tile identifiers.
                             </dd>
-                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?><strong>tiles</strong>&amp;tile=33065587,774896741</pre>
+                            <pre class="pre-scrollable" style="white-space: nowrap"><?php echo( kURL.'?' ); ?><strong>tiles</strong>&amp;tile=33065587,774896741</pre>
                         </dl>
                         <dl id="contains">
                             <dt>Contains [<strong><code>contains</code></strong>]</dt>
@@ -210,7 +210,7 @@ require_once( "includes.inc.php" );
                                 <a href="#polygon"><abbr title="rect">polygon</abbr></a>. The operation requires the shape
                                 parameter and will enforce paging if the provided geometry is not a point.
                             </dd>
-                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?><strong>contains</strong>&amp;point=-16.6463,28.2768</pre>
+                            <pre class="pre-scrollable" style="white-space: nowrap"><?php echo( kURL.'?' ); ?><strong>contains</strong>&amp;point=-16.6463,28.2768</pre>
                         </dl>
                         <dl id="intersects">
                             <dt>Intersects [<strong><code>intersects</code></strong>]</dt>
@@ -222,7 +222,7 @@ require_once( "includes.inc.php" );
                                 The operation requires the shape parameter and will enforce paging if
                                 the provided geometry is not a point.
                             </dd>
-                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?><strong>intersects</strong>&amp;rect=-16.6463,28.2768;-16.638,28.2685</pre>
+                            <pre class="pre-scrollable" style="white-space: nowrap"><?php echo( kURL.'?' ); ?><strong>intersects</strong>&amp;rect=-16.6463,28.2768;-16.638,28.2685</pre>
                         </dl>
                         <dl id="near">
                             <dt>Near [<strong><code>near</code></strong>]</dt>
@@ -238,7 +238,7 @@ require_once( "includes.inc.php" );
                                 parameter to limit the selection to a maximum distance from the provided
                                 point in meters.
                             </dd>
-                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?><strong>near</strong>&amp;point=-16.6463,28.2768</pre>
+                            <pre class="pre-scrollable" style="white-space: nowrap"><?php echo( kURL.'?' ); ?><strong>near</strong>&amp;point=-16.6463,28.2768</pre>
                         </dl>
                     </div>
                 </section>
@@ -259,7 +259,7 @@ require_once( "includes.inc.php" );
                                 is only used by the <a href="#tiles"><abbr title="tiles">tiles</abbr></a>
                                 operation.
                             </dd>
-                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>tiles&amp;<strong>tile=33065587,774896741</strong></pre>
+                            <pre class="pre-scrollable" style="white-space: nowrap"><?php echo( kURL.'?' ); ?>tiles&amp;<strong>tile=33065587,774896741</strong></pre>
                         </dl>
                         <dl id="point">
                             <dt>Point [<strong><code>point</code></strong>]</dt>
@@ -268,7 +268,7 @@ require_once( "includes.inc.php" );
                                 of decimal degrees comma delimited coordinates indicating
                                 respectively the longitude and latitude of the point.
                             </dd>
-                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;<strong>point=-16.6463,28.2768</strong></pre>
+                            <pre class="pre-scrollable" style="white-space: nowrap"><?php echo( kURL.'?' ); ?>contains&amp;<strong>point=-16.6463,28.2768</strong></pre>
                         </dl>
                         <dl id="rect">
                             <dt>Rectangle [<strong><code>rect</code></strong>]</dt>
@@ -283,7 +283,7 @@ require_once( "includes.inc.php" );
                                 of the request, an <abbr title="area">item</abbr> will be added
                                 to the shape structure holding the area of the geometry.</small>
                             </dd>
-                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;<strong>rect=-16.6463,28.2768;-16.638,28.2685</strong></pre>
+                            <pre class="pre-scrollable" style="white-space: nowrap"><?php echo( kURL.'?' ); ?>contains&amp;<strong>rect=-16.6463,28.2768;-16.638,28.2685</strong></pre>
                         </dl>
                         <dl id="polygon">
                             <dt>Polygon [<strong><code>polygon</code></strong>]</dt>
@@ -298,7 +298,7 @@ require_once( "includes.inc.php" );
                                     of the request, an <abbr title="area">item</abbr> will be added
                                     to the shape structure holding the area of the geometry.</small>
                             </dd>
-                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;<strong>polygon=12.8199,42.8422;12.8207,42.8158;12.8699,42.8166;12.8678,42.8398;12.8199,42.8422</strong><br /><?php echo( kURL.'?' ); ?>contains&amp;<strong>polygon=12.8199,42.8422;12.8207,42.8158;12.8699,42.8166;12.8678,42.8398;12.8199,42.8422:12.8344,42.8347;12.8348,42.8225;12.8570,42.8223;12.8566,42.8332;12.8344,42.8347</strong></pre>
+                            <pre class="pre-scrollable" style="white-space: nowrap"><?php echo( kURL.'?' ); ?>contains&amp;<strong>polygon=12.8199,42.8422;12.8207,42.8158;12.8699,42.8166;12.8678,42.8398;12.8199,42.8422</strong><br /><?php echo( kURL.'?' ); ?>contains&amp;<strong>polygon=12.8199,42.8422;12.8207,42.8158;12.8699,42.8166;12.8678,42.8398;12.8199,42.8422:12.8344,42.8347;12.8348,42.8225;12.8570,42.8223;12.8566,42.8332;12.8344,42.8347</strong></pre>
                         </dl>
                     </div>
                 </section>
@@ -325,7 +325,7 @@ require_once( "includes.inc.php" );
                                 by calling the service with this modifier, one may organise
                                 paged results retrieval.
                             </dd>
-                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;<strong>count</strong>&amp;rect=-16.6463,28.2768;-16.638,28.2685</pre>
+                            <pre class="pre-scrollable" style="white-space: nowrap"><?php echo( kURL.'?' ); ?>contains&amp;<strong>count</strong>&amp;rect=-16.6463,28.2768;-16.638,28.2685</pre>
                         </dl>
                         <dl id="range">
                             <dt>Range [<strong><code>range</code></strong>]</dt>
@@ -355,7 +355,7 @@ require_once( "includes.inc.php" );
                                 This option can be useful to explore the variation and range
                                 of a set of results.
                             </dd>
-                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;<strong>range</strong>&amp;rect=-16.6463,28.2768;-16.638,28.2685</pre>
+                            <pre class="pre-scrollable" style="white-space: nowrap"><?php echo( kURL.'?' ); ?>contains&amp;<strong>range</strong>&amp;rect=-16.6463,28.2768;-16.638,28.2685</pre>
                         </dl>
                         <dl id="cpy-request">
                             <dt>Copy request [<strong><code>cpy-request</code></strong>]</dt>
@@ -365,7 +365,7 @@ require_once( "includes.inc.php" );
                                 the response. This option can be useful to debug service requests
                                 and can be cumulated with all other modifiers.
                             </dd>
-                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;range&amp;<strong>cpy-request</strong>rect=-16.6463,28.2768;-16.638,28.2685</pre>
+                            <pre class="pre-scrollable" style="white-space: nowrap"><?php echo( kURL.'?' ); ?>contains&amp;range&amp;<strong>cpy-request</strong>rect=-16.6463,28.2768;-16.638,28.2685</pre>
                         </dl>
                         <dl id="cpy-connection">
                             <dt>Copy connection [<strong><code>cpy-connection</code></strong>]</dt>
@@ -376,7 +376,7 @@ require_once( "includes.inc.php" );
                                 and can be cumulated with all other modifiers.<br />
                                 <small class="text-warning"><em>In the production environment this option is disabled</em></small>.
                             </dd>
-                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;range&amp;cpy-request&amp;<strong>cpy-connection</strong>&amp;point=-16.6463,28.2768</pre>
+                            <pre class="pre-scrollable" style="white-space: nowrap"><?php echo( kURL.'?' ); ?>contains&amp;range&amp;cpy-request&amp;<strong>cpy-connection</strong>&amp;point=-16.6463,28.2768</pre>
                         </dl>
                     </div>
                 </section>
@@ -396,7 +396,7 @@ require_once( "includes.inc.php" );
                                 values that represent the elevation range in meters. Results
                                 of the operation will only include tiles belonging to that range.
                             </dd>
-                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;rect=-10,30;-11,29&amp;<strong>elevation=1000,1050</strong></pre>
+                            <pre class="pre-scrollable" style="white-space: nowrap"><?php echo( kURL.'?' ); ?>contains&amp;rect=-10,30;-11,29&amp;<strong>elevation=1000,1050</strong></pre>
                         </dl>
                         <dl id="distance">
                             <dt>Distance [<strong><code>distance</code></strong>]</dt>
@@ -409,7 +409,7 @@ require_once( "includes.inc.php" );
                                 reduces the results to those tiles within that distance. The value
                                 is expressed in meters.
                             </dd>
-                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;point=-16.6463,28.2768&amp;<strong>distance=5000</strong><br /><?php echo( kURL.'?' ); ?>near&amp;point=-16.6463,28.2768&amp;<strong>distance=5000</strong></pre>
+                            <pre class="pre-scrollable" style="white-space: nowrap"><?php echo( kURL.'?' ); ?>contains&amp;point=-16.6463,28.2768&amp;<strong>distance=5000</strong><br /><?php echo( kURL.'?' ); ?>near&amp;point=-16.6463,28.2768&amp;<strong>distance=5000</strong></pre>
                         </dl>
                         <dl id="select">
                             <dt>Property [<strong><code>select</code></strong>]</dt>
@@ -428,7 +428,7 @@ require_once( "includes.inc.php" );
                                 minimum temperature in February, you would provide the
                                 following block: <em>clim.2000.temp.l.2</em>
                             </dd>
-                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;rect=-10,30;-11,29&amp;<strong>select=elev,1;clim,1</strong><br /><?php echo( kURL.'?' ); ?>contains&amp;rect=-10,30;-11,29&amp;<strong>select=elev,1;clim.2000.gens.e,1</strong><br /><?php echo( kURL.'?' ); ?>contains&amp;rect=-10,30;-11,29&amp;<strong>select=clim,0</strong></pre>
+                            <pre class="pre-scrollable" style="white-space: nowrap"><?php echo( kURL.'?' ); ?>contains&amp;rect=-10,30;-11,29&amp;<strong>select=elev,1;clim,1</strong><br /><?php echo( kURL.'?' ); ?>contains&amp;rect=-10,30;-11,29&amp;<strong>select=elev,1;clim.2000.gens.e,1</strong><br /><?php echo( kURL.'?' ); ?>contains&amp;rect=-10,30;-11,29&amp;<strong>select=clim,0</strong></pre>
                         </dl>
                     </div>
                 </section>
@@ -448,7 +448,7 @@ require_once( "includes.inc.php" );
                                 what record to start returning results; in other words, it
                                 indicates the number of records to skip before returning data.
                             </dd>
-                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;rect=-10,30;-11,29&amp;<strong>start=0</strong></pre>
+                            <pre class="pre-scrollable" style="white-space: nowrap"><?php echo( kURL.'?' ); ?>contains&amp;rect=-10,30;-11,29&amp;<strong>start=0</strong></pre>
                         </dl>
                         <dl id="limit">
                             <dt>Limit [<strong><code>limit</code></strong>]</dt>
@@ -458,7 +458,7 @@ require_once( "includes.inc.php" );
                                 actual number of records that the service will actually return
                                 will be smaller or equal to this value.
                             </dd>
-                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;rect=-10,30;-11,29&amp;start=0&amp;<strong>limit=10</strong></pre>
+                            <pre class="pre-scrollable" style="white-space: nowrap"><?php echo( kURL.'?' ); ?>contains&amp;rect=-10,30;-11,29&amp;start=0&amp;<strong>limit=10</strong></pre>
                         </dl>
                     </div>
                 </section>
