@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1052b59d-5290-48ad-9416-801f75d6bbd4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/service/help/includes.inc.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/service/help/js/knockout.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/service/help/js/myViewModels.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/service/help/request.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/service/help/request.html" afterPath="$PROJECT_DIR$/service/help/examples.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/service/help/response.html" afterPath="$PROJECT_DIR$/service/help/response.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/service/help/help.html" afterPath="$PROJECT_DIR$/service/help/help.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/service/help/css/my.css" afterPath="$PROJECT_DIR$/service/help/css/my.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="1052b59d-5290-48ad-9416-801f75d6bbd4" name="Default" comment="" />
     <ignored path="GeoFeatures.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1375953007388" ignored="false" />
+    <file path="/Dummy.txt" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1375963716025" ignored="false" />
     <file path="/CGeoFeatureService.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1375895359295" ignored="false" />
     <file path="/test_CGeoFeatureService.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1375784998181" ignored="false" />
     <file path="/a.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1375907630545" ignored="false" />
@@ -26,6 +16,7 @@
     <file path="/request.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1375957056035" ignored="false" />
     <file path="/my.css" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1375957569035" ignored="false" />
     <file path="/myViewModels.js" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1375963606661" ignored="false" />
+    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1375963827261" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +107,7 @@
       <file leaf-file-name="myViewModels.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/service/help/js/myViewModels.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="35" selection-start="501" selection-end="501" vertical-scroll-proportion="0.28070176">
+            <state line="22" column="29" selection-start="495" selection-end="495" vertical-scroll-proportion="0.2813599">
               <folding>
                 <element signature="n#!!doc;n#MyiewModel#0" expanded="false" />
               </folding>
@@ -436,18 +427,23 @@
       <created>1375914426679</created>
       <updated>1375914426679</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Working on the help pages.">
+      <created>1375963730443</created>
+      <updated>1375963730443</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1680" height="1024" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917467" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32955772" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2631579" sideWeight="0.67082536" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17747858" sideWeight="0.67082536" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17747858" sideWeight="0.67082536" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298077" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -457,7 +453,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917467" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917467" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -658,7 +653,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/service/help/js/myViewModels.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="35" selection-start="501" selection-end="501" vertical-scroll-proportion="0.28070176">
+        <state line="22" column="29" selection-start="495" selection-end="495" vertical-scroll-proportion="0.2813599">
           <folding>
             <element signature="n#!!doc;n#MyiewModel#0" expanded="false" />
           </folding>
