@@ -660,3 +660,17 @@ input.focused {
     }
 
 }
+
+/* My pre */
+pre {
+    background-color: #F5F5F5;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px 4px 4px 4px;
+    color: #333333;
+    display: block;
+    font-size: 13px;
+    line-height: 1.42857;
+    margin: 0 0 10px;
+    padding: 9.5px;
+    white-space: nowrap;
+}

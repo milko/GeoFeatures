@@ -1,7 +1,35 @@
+<?php
+
+/*=======================================================================================
+ *																						*
+ *								    response.php	           							*
+ *																						*
+ *======================================================================================*/
+
+/**
+ *	Response web-service help page.
+ *
+ *	This file contains the helo page for the response of the web-service.
+ *
+ *	@package	WORLDCLIM30
+ *	@subpackage	Services
+ *
+ *	@author		Milko A. Škofič <m.skofic@cgiar.org>
+ *	@version	1.00 08/08/2013
+ */
+
+/**
+ * URL.
+ *
+ * This include file contains the web-service URL.
+ */
+require_once( "includes.inc.php" );
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>GeoFeatures documentation - Response data structure</title>
+    <title>GeoFeatures documentation - Request data structure</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -20,7 +48,7 @@
         <div class="row">
 
             <!-- NAVIGATION SIDE BAR CONTAINER -->
-            <div class="col-lg-3">
+            <div class="col-lg-5">
                 <div id="sidebar"
                      data-spy="affix"
                      class="bs-sidebar"
@@ -30,29 +58,61 @@
                             <a href="help.html">Introduction</a>
                         </li>
                         <li>
-                            <a href="response.html">Response data structure</a>
+                            <a href="response.php">Response data structure</a>
                         </li>
                         <li>
-                            <a class="current" href="request.html">Request data structure</a>
+                            <a class="current" href="request.php">Request data structure</a>
                             <ul>
-                                <li><a href="#operation">Operation</a></li>
+                                <li><a href="#operation">Operations</a></li>
+                                <ul>
+                                    <li><a href="#ping"><abbr title="ping">Ping</abbr></a></li>
+                                    <li><a href="#help"><abbr title="help">Help</abbr></a></li>
+                                    <li><a href="#tiles"><abbr title="tiles">Tiles</abbr></a></li>
+                                    <li><a href="#contains"><abbr title="contains">Contains</abbr></a></li>
+                                    <li><a href="#intersects"><abbr title="intersects">Intersects</abbr></a></li>
+                                    <li><a href="#near"><abbr title="near">Near</abbr></a></li>
+                                </ul>
                                 <li><a href="#shape">Shapes</a></li>
+                                <ul>
+                                    <li><a href="#tile"><abbr title="tile">Tiles</abbr></a></li>
+                                    <li><a href="#point"><abbr title="point">Point</abbr></a></li>
+                                    <li><a href="#rect"><abbr title="rect">Rectangle</abbr></a></li>
+                                    <li><a href="#polygon"><abbr title="polygon">Polygon</abbr></a></li>
+                                </ul>
                                 <li><a href="#modifiers">Modifiers</a></li>
+                                <ul>
+                                    <li><a href="#count"><abbr title="count">Count</abbr></a></li>
+                                    <li><a href="#range"><abbr title="range">Range</abbr></a></li>
+                                    <li><a href="#cpy-request"><abbr title="cpy-request">Return request</abbr></a></li>
+                                    <li><a href="#cpy-connection"><abbr title="cpy-connection">Return connection</abbr></a></li>
+                                </ul>
                                 <li><a href="#filters">Filters</a></li>
+                                <ul>
+                                    <li><a href="#elevation"><abbr title="elevation">Elevation range</abbr></a></li>
+                                    <li><a href="#distance"><abbr title="distance">Maximum distance</abbr></a></li>
+                                    <li><a href="#select"><abbr title="select">Property selector</abbr></a></li>
+                                </ul>
                                 <li><a href="#paging">Paging</a></li>
+                                <ul>
+                                    <li><a href="#start"><abbr title="start">Start</abbr></a></li>
+                                    <li><a href="#limit"><abbr title="limit">Limit</abbr></a></li>
+                                </ul>
                             </ul>
+                        </li>
+                        <li>
+	                        <a href="examples.php">Examples <span class="label label-warning">under construction</span></a>
                         </li>
                     </ul>
                 </div>
             </div>
 
             <!-- CONTENTS CONTAINER -->
-            <div class="col-lg-9">
+            <div class="col-lg-7">
 
                 <!-- INTRODUCTION -->
                 <section id="intro">
                     <h4>
-                        Reauest data structure
+                        Request data structure
                     </h4>
                     <p>
                         The service request is a GET
@@ -116,11 +176,11 @@
                             <dd>
                                 This operation can be used to check if the service is running,
                                 it does not require any other parameter and simply returns the
-                                <a href="response.html#status">status</a> and the string
-                                <code>pong</code> in the <a href="response.html#data">response</a>
+                                <a href="response.php#status">status</a> and the string
+                                <code>pong</code> in the <a href="response.php#data">response</a>
                                 section.<br />
                             </dd>
-                            <pre class="pre-scrollable">http://url?<strong>ping</strong></pre>
+                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?><strong>ping</strong></pre>
                         </dl>
                         <dl id="help">
                             <dt>Help [<strong><code>help</code></strong>]</dt>
@@ -129,17 +189,17 @@
                                 it does not require any other parameter and simply returns the
                                 help pages in <abbr title="HyperText Markup Language">HTML</abbr>.
                             </dd>
-                            <pre class="pre-scrollable">http://url?<strong>help</strong></pre>
+                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?><strong>help</strong></pre>
                         </dl>
                         <dl id="tiles">
                             <dt>Tiles [<strong><code>tiles</code></strong>]</dt>
                             <dd>
                                 This operation can be used to retrieve a list of tiles by
-                                <a href="response.html#_id"><abbr title="_id">identifier</abbr></a>. The operation
+                                <a href="response.php#_id"><abbr title="_id">identifier</abbr></a>. The operation
                                 requires the <a href="#tile"><abbr title="tile">tile</abbr></a> shape parameter
                                 holding the list of requested tile identifiers.
                             </dd>
-                            <pre class="pre-scrollable">http://url?<strong>tiles</strong>&amp;tile=33065587,774896741</pre>
+                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?><strong>tiles</strong>&amp;tile=33065587,774896741</pre>
                         </dl>
                         <dl id="contains">
                             <dt>Contains [<strong><code>contains</code></strong>]</dt>
@@ -150,7 +210,7 @@
                                 <a href="#polygon"><abbr title="rect">polygon</abbr></a>. The operation requires the shape
                                 parameter and will enforce paging if the provided geometry is not a point.
                             </dd>
-                            <pre class="pre-scrollable">http://url?<strong>contains</strong>&amp;point=-16.6463,28.2768</pre>
+                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?><strong>contains</strong>&amp;point=-16.6463,28.2768</pre>
                         </dl>
                         <dl id="intersects">
                             <dt>Intersects [<strong><code>intersects</code></strong>]</dt>
@@ -162,7 +222,7 @@
                                 The operation requires the shape parameter and will enforce paging if
                                 the provided geometry is not a point.
                             </dd>
-                            <pre class="pre-scrollable">http://url?<strong>intersects</strong>&amp;rect=-16.6463,28.2768;-16.638,28.2685</pre>
+                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?><strong>intersects</strong>&amp;rect=-16.6463,28.2768;-16.638,28.2685</pre>
                         </dl>
                         <dl id="near">
                             <dt>Near [<strong><code>near</code></strong>]</dt>
@@ -172,13 +232,13 @@
                                 of tile records, 100 at most, sorted by distance, the closest first.
                                 The operation requires the shape parameter in the form of a point.
                                 This is the only operation that will add the
-                                <a href="response.html#dist"><abbr title="dist">distance</abbr></a>
+                                <a href="response.php#dist"><abbr title="dist">distance</abbr></a>
                                 value to the results. The operatrion also accepts the
                                 <a href="#distance"><abbr title="distance">maximum distance</abbr></a>
                                 parameter to limit the selection to a maximum distance from the provided
                                 point in meters.
                             </dd>
-                            <pre class="pre-scrollable">http://url?<strong>near</strong>&amp;point=-16.6463,28.2768</pre>
+                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?><strong>near</strong>&amp;point=-16.6463,28.2768</pre>
                         </dl>
                     </div>
                 </section>
@@ -195,11 +255,11 @@
                             <dt>Tiles [<strong><code>tile</code></strong>]</dt>
                             <dd>
                                 This shape represents a comma-delimited list of tile
-                                <a href="response.html#_id"><abbr title="_id">identifiers</abbr></a>, this geometry
+                                <a href="response.php#_id"><abbr title="_id">identifiers</abbr></a>, this geometry
                                 is only used by the <a href="#tiles"><abbr title="tiles">tiles</abbr></a>
                                 operation.
                             </dd>
-                            <pre class="pre-scrollable">http://url?tiles&amp;<strong>tile=33065587,774896741</strong></pre>
+                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>tiles&amp;<strong>tile=33065587,774896741</strong></pre>
                         </dl>
                         <dl id="point">
                             <dt>Point [<strong><code>point</code></strong>]</dt>
@@ -208,7 +268,7 @@
                                 of decimal degrees comma delimited coordinates indicating
                                 respectively the longitude and latitude of the point.
                             </dd>
-                            <pre class="pre-scrollable">http://url?contains&amp;<strong>point=-16.6463,28.2768</strong></pre>
+                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;<strong>point=-16.6463,28.2768</strong></pre>
                         </dl>
                         <dl id="rect">
                             <dt>Rectangle [<strong><code>rect</code></strong>]</dt>
@@ -223,7 +283,7 @@
                                 of the request, an <abbr title="area">item</abbr> will be added
                                 to the shape structure holding the area of the geometry.</small>
                             </dd>
-                            <pre class="pre-scrollable">http://url?contains&amp;<strong>rect=-16.6463,28.2768;-16.638,28.2685</strong></pre>
+                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;<strong>rect=-16.6463,28.2768;-16.638,28.2685</strong></pre>
                         </dl>
                         <dl id="polygon">
                             <dt>Polygon [<strong><code>polygon</code></strong>]</dt>
@@ -238,7 +298,7 @@
                                     of the request, an <abbr title="area">item</abbr> will be added
                                     to the shape structure holding the area of the geometry.</small>
                             </dd>
-                            <pre class="pre-scrollable">http://url?contains&amp;<strong>polygon=12.8199,42.8422;12.8207,42.8158;12.8699,42.8166;12.8678,42.8398;12.8199,42.8422</strong><br />http://url?contains&amp;<strong>polygon=12.8199,42.8422;12.8207,42.8158;12.8699,42.8166;12.8678,42.8398;12.8199,42.8422:12.8344,42.8347;12.8348,42.8225;12.8570,42.8223;12.8566,42.8332;12.8344,42.8347</strong></pre>
+                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;<strong>polygon=12.8199,42.8422;12.8207,42.8158;12.8699,42.8166;12.8678,42.8398;12.8199,42.8422</strong><br /><?php echo( kURL.'?' ); ?>contains&amp;<strong>polygon=12.8199,42.8422;12.8207,42.8158;12.8699,42.8166;12.8678,42.8398;12.8199,42.8422:12.8344,42.8347;12.8348,42.8225;12.8570,42.8223;12.8566,42.8332;12.8344,42.8347</strong></pre>
                         </dl>
                     </div>
                 </section>
@@ -256,8 +316,8 @@
                             <dt>Count [<strong><code>count</code></strong>]</dt>
                             <dd>
                                 This option will disable the results pane and only return
-                                the <a href="response.html#total"><abbr title="total">affected count</abbr></a>
-                                in the <a href="response.html#status">status section</a>.<br />
+                                the <a href="response.php#total"><abbr title="total">affected count</abbr></a>
+                                in the <a href="response.php#status">status section</a>.<br />
                                 This option is incompatible with the
                                 <a href="#range"><abbr title="range">range</abbr></a> modifier,
                                 if both are provided, this one will be chosen.
@@ -265,7 +325,7 @@
                                 by calling the service with this modifier, one may organise
                                 paged results retrieval.
                             </dd>
-                            <pre class="pre-scrollable">http://url?contains&amp;<strong>count</strong>&amp;rect=-16.6463,28.2768;-16.638,28.2685</pre>
+                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;<strong>count</strong>&amp;rect=-16.6463,28.2768;-16.638,28.2685</pre>
                         </dl>
                         <dl id="range">
                             <dt>Range [<strong><code>range</code></strong>]</dt>
@@ -278,10 +338,10 @@
                                 <strong><code>h</code></strong> the <em>maximum</em> value; categorical
                                 variables will be expanded into an array containing all distinct
                                 values. Only the
-                                <a href="response.html#elev"><abbr title="elev">elevation</abbr></a>
-                                and the <a href="response.html#clim"><abbr title="clim">climate section</abbr></a>
+                                <a href="response.php#elev"><abbr title="elev">elevation</abbr></a>
+                                and the <a href="response.php#clim"><abbr title="clim">climate section</abbr></a>
                                 will be included in the result (including the
-                                <a href="response.html#dist"><abbr title="dist">distance</abbr></a>
+                                <a href="response.php#dist"><abbr title="dist">distance</abbr></a>
                                 when requesting the
                                 <a href="#near"><abbr title="near">near</abbr></a> operation).<br />
                                 This option is incompatible with the
@@ -295,28 +355,28 @@
                                 This option can be useful to explore the variation and range
                                 of a set of results.
                             </dd>
-                            <pre class="pre-scrollable">http://url?contains&amp;<strong>range</strong>&amp;rect=-16.6463,28.2768;-16.638,28.2685</pre>
+                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;<strong>range</strong>&amp;rect=-16.6463,28.2768;-16.638,28.2685</pre>
                         </dl>
                         <dl id="cpy-request">
                             <dt>Copy request [<strong><code>cpy-request</code></strong>]</dt>
                             <dd>
                                 This option will return the request provided to the service
-                                in the <a href="response.html#request">request section</a> of
+                                in the <a href="response.php#request">request section</a> of
                                 the response. This option can be useful to debug service requests
                                 and can be cumulated with all other modifiers.
                             </dd>
-                            <pre class="pre-scrollable">http://url?contains&amp;range&amp;<strong>cpy-request</strong>rect=-16.6463,28.2768;-16.638,28.2685</pre>
+                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;range&amp;<strong>cpy-request</strong>rect=-16.6463,28.2768;-16.638,28.2685</pre>
                         </dl>
                         <dl id="cpy-connection">
                             <dt>Copy connection [<strong><code>cpy-connection</code></strong>]</dt>
                             <dd>
                                 This option will return the database connection parameters used by the service
-                                in the <a href="response.html#connection">connection section</a> of
+                                in the <a href="response.php#connection">connection section</a> of
                                 the response. This option can be useful to debug service requests
                                 and can be cumulated with all other modifiers.<br />
                                 <small class="text-warning"><em>In the production environment this option is disabled</em></small>.
                             </dd>
-                            <pre class="pre-scrollable">http://url?contains&amp;range&amp;cpy-request&amp;<strong>cpy-connection</strong>&amp;point=-16.6463,28.2768</pre>
+                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;range&amp;cpy-request&amp;<strong>cpy-connection</strong>&amp;point=-16.6463,28.2768</pre>
                         </dl>
                     </div>
                 </section>
@@ -336,7 +396,7 @@
                                 values that represent the elevation range in meters. Results
                                 of the operation will only include tiles belonging to that range.
                             </dd>
-                            <pre class="pre-scrollable">http://url?contains&amp;rect=-10,30;-11,29&amp;<strong>elevation=1000,1050</strong></pre>
+                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;rect=-10,30;-11,29&amp;<strong>elevation=1000,1050</strong></pre>
                         </dl>
                         <dl id="distance">
                             <dt>Distance [<strong><code>distance</code></strong>]</dt>
@@ -349,7 +409,7 @@
                                 reduces the results to those tiles within that distance. The value
                                 is expressed in meters.
                             </dd>
-                            <pre class="pre-scrollable">http://url?contains&amp;point=-16.6463,28.2768&amp;<strong>distance=5000</strong><br />http://url?near&amp;point=-16.6463,28.2768&amp;<strong>distance=5000</strong></pre>
+                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;point=-16.6463,28.2768&amp;<strong>distance=5000</strong><br /><?php echo( kURL.'?' ); ?>near&amp;point=-16.6463,28.2768&amp;<strong>distance=5000</strong></pre>
                         </dl>
                         <dl id="select">
                             <dt>Property [<strong><code>select</code></strong>]</dt>
@@ -362,13 +422,13 @@
                                 should be <em>included</em> in the result, if the value is
                                 <code>0</code> the property should be <em>excluded</em>.
                                 The property is represented by the label used in the
-                                <a href="response.html#data">response data section</a>. To
+                                <a href="response.php#data">response data section</a>. To
                                 select properties that are part of a subsection, separate
                                 each level by a period: for instance, to select the average
                                 minimum temperature in February, you would provide the
                                 following block: <em>clim.2000.temp.l.2</em>
                             </dd>
-                            <pre class="pre-scrollable">http://url?contains&amp;rect=-10,30;-11,29&amp;<strong>select=elev,1;clim,1</strong><br />http://url?contains&amp;rect=-10,30;-11,29&amp;<strong>select=elev,1;clim.2000.gens.e,1</strong><br />http://url?contains&amp;rect=-10,30;-11,29&amp;<strong>select=clim,0</strong></pre>
+                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;rect=-10,30;-11,29&amp;<strong>select=elev,1;clim,1</strong><br /><?php echo( kURL.'?' ); ?>contains&amp;rect=-10,30;-11,29&amp;<strong>select=elev,1;clim.2000.gens.e,1</strong><br /><?php echo( kURL.'?' ); ?>contains&amp;rect=-10,30;-11,29&amp;<strong>select=clim,0</strong></pre>
                         </dl>
                     </div>
                 </section>
@@ -388,7 +448,7 @@
                                 what record to start returning results; in other words, it
                                 indicates the number of records to skip before returning data.
                             </dd>
-                            <pre class="pre-scrollable">http://url?contains&amp;rect=-10,30;-11,29&amp;<strong>start=0</strong></pre>
+                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;rect=-10,30;-11,29&amp;<strong>start=0</strong></pre>
                         </dl>
                         <dl id="limit">
                             <dt>Limit [<strong><code>limit</code></strong>]</dt>
@@ -398,13 +458,18 @@
                                 actual number of records that the service will actually return
                                 will be smaller or equal to this value.
                             </dd>
-                            <pre class="pre-scrollable">http://url?contains&amp;rect=-10,30;-11,29&amp;start=0&amp;<strong>limit=10</strong></pre>
+                            <pre class="pre-scrollable"><?php echo( kURL.'?' ); ?>contains&amp;rect=-10,30;-11,29&amp;start=0&amp;<strong>limit=10</strong></pre>
                         </dl>
                     </div>
                 </section>
             </div>
         </div>
     </div>
+
+    <!-- JavaScript plugins (requires jQuery) -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
 

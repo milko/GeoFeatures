@@ -1,3 +1,31 @@
+<?php
+
+/*=======================================================================================
+ *																						*
+ *								    response.php	           							*
+ *																						*
+ *======================================================================================*/
+
+/**
+ *	Response web-service help page.
+ *
+ *	This file contains the helo page for the response of the web-service.
+ *
+ *	@package	WORLDCLIM30
+ *	@subpackage	Services
+ *
+ *	@author		Milko A. Škofič <m.skofic@cgiar.org>
+ *	@version	1.00 08/08/2013
+ */
+
+/**
+ * URL.
+ *
+ * This include file contains the web-service URL.
+ */
+require_once( "includes.inc.php" );
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +48,7 @@
         <div class="row">
 
             <!-- NAVIGATION SIDE BAR CONTAINER -->
-            <div class="col-lg-3">
+            <div class="col-lg-5">
                 <div id="sidebar"
                      data-spy="affix"
                      class="bs-sidebar"
@@ -30,23 +58,60 @@
                             <a href="help.html">Introduction</a>
                         </li>
                         <li>
-                            <a class="current" href="response.html">Response data structure</a>
+                            <a class="current" href="response.php">Response data structure</a>
                             <ul>
                                 <li><a href="#status">Status</a></li>
+                                <ul>
+                                    <li><a href="#state"><abbr title="state">Operation state</abbr></a></li>
+                                    <li><a href="#total"><abbr title="total">Affected count</abbr></a></li>
+                                    <li><a href="#start"><abbr title="start">Starting record</abbr></a></li>
+                                    <li><a href="#limit"><abbr title="limit">Page limit</abbr></a></li>
+                                    <li><a href="#count"><abbr title="count">Actual count</abbr></a></li>
+                                    <li><a href="#message"><abbr title="message">Status message</abbr></a></li>
+                                    <li><a href="#code"><abbr title="code">Error code</abbr></a></li>
+                                    <li><a href="#file"><abbr title="file">Error file</abbr></a></li>
+                                    <li><a href="#line"><abbr title="line">Error file line</abbr></a></li>
+                                    <li><a href="#trace"><abbr title="trace">Error trace</abbr></a></li>
+                                </ul>
                                 <li><a href="#request">Request</a></li>
                                 <li><a href="#connection">Connection</a></li>
+                                <ul>
+                                    <li><a href="#server"><abbr title="server">Database server</abbr></a></li>
+                                    <li><a href="#database"><abbr title="database">Database name</abbr></a></li>
+                                    <li><a href="#collection"><abbr title="collection">Collection name</abbr></a></li>
+                                </ul>
                                 <li><a href="#data">Response</a></li>
+                                <ul>
+                                    <li><a href="#_id"><abbr title="_id">Tile index</abbr></a></li>
+                                    <li><a href="#pt"><abbr title="pt">Tile center point (deg)</abbr></a></li>
+                                    <li><a href="#dms"><abbr title="dms">Tile center point (dms)</abbr></a></li>
+                                    <li><a href="#tile"><abbr title="tile">Tile X and Y</abbr></a></li>
+                                    <li><a href="#bdec"><abbr title="bdec">Tile vertices (deg)</abbr></a></li>
+                                    <li><a href="#bdms"><abbr title="bdms">Tile vertices (dms)</abbr></a></li>
+                                    <li><a href="#elev"><abbr title="elev">Tile elevation</abbr></a></li>
+                                    <li><a href="#dist"><abbr title="dist">Distance</abbr></a></li>
+                                    <li><a href="#clim"><abbr title="clim">Tile climate</abbr></a></li>
+                                    <ul>
+                                        <li><a href="#gens"><abbr title="gens">Global environment stratification</abbr></a></li>
+                                        <li><a href="#bio"><abbr title="bio">Bioclimatic variables</abbr></a></li>
+                                        <li><a href="#prec"><abbr title="prec">Monthly precipitation</abbr></a></li>
+                                        <li><a href="#temp"><abbr title="temp">Monthly temperature</abbr></a></li>
+                                    </ul>
+                                </ul>
                             </ul>
                         </li>
                         <li>
-                            <a href="request.html">Request data structure</a>
+                            <a href="request.php">Request data structure</a>
+                        </li>
+                        <li>
+	                        <a href="examples.php">Examples <span class="label label-warning">under construction</span></a>
                         </li>
                     </ul>
                 </div>
             </div>
 
             <!-- CONTENTS CONTAINER -->
-            <div class="col-lg-9">
+            <div class="col-lg-7">
 
                 <!-- INTRODUCTION -->
                 <section id="intro">
@@ -54,7 +119,7 @@
                         Response data structure
                     </h4>
                     <p>
-                        As stated before, the response of the service is a
+                        The response of the service is a
                         <abbr title="JavaScript Object Notation">JSON</abbr> object divided
                         into four sections:
                     </p>
@@ -224,7 +289,7 @@
                         recognised or handled, in the format used by the service.<br />
                         <small class="text-warning">Note that this is generally used for debugging purposes and
                             is only available if
-                            <a href="request.html#cpy-request"><abbr title="cpy-request">requested</abbr></a>
+                            <a href="request.php#cpy-request"><abbr title="cpy-request">requested</abbr></a>
                             to the service.</small>
                     </p>
                 </section>
@@ -238,7 +303,7 @@
                         This section will return the <em>database connection</em> information.<br />
                         <small class="text-warning">Note that this is generally used for debugging purposes and
                             is only available if
-                            <a href="request.html#cpy-connection"><abbr title="cpy-connection">requested</abbr></a>
+                            <a href="request.php#cpy-connection"><abbr title="cpy-connection">requested</abbr></a>
                             to the service.<br />
                             <strong>This option is disabled in production.</strong></small>
                     </p>
