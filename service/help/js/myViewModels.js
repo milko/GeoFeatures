@@ -18,10 +18,15 @@ function MyViewModel() {
     //
     // MODIFIERS BLOCK.
     //
-    self.requestModCopyRequest = ko.observable();
-    self.requestModCopyConnection = ko.observable();
-    self.requestModCount = ko.observable();
-    self.requestModRange = ko.observable();
+    self.requestModCopyRequest = ko.observable(false);
+    self.requestModCopyConnection = ko.observable(false);
+    self.requestModCount = ko.observable(false);
+    self.requestModRange = ko.observable(false);
+
+    //
+    // GEOMETRIES BLOCK.
+    //
+    self.geomTiles = ko.observable(( typeof( baseTiles ) != "undefined" ) ? baseTiles : "");
 
     //
     // REQUEST URL.
@@ -42,6 +47,10 @@ function MyViewModel() {
             url += ("&" + "count");
         if( self.requestModRange() )
             url += ("&" + "range");
+
+        // Add geometry.
+        if( self.geomTiles().length )
+            url += ("&" + "tile=" + self.geomTiles());
 
         return url;
     });
@@ -78,6 +87,9 @@ function MyViewModel() {
     self.requestOperation = ko.observable();
     self.hasRequestModifiers = ko.observable(false);
     self.requestModifiers = ko.observableArray([]);
+    self.hasRequestGeometry = ko.observable(false);
+    self.requestGeometryType = ko.observable();
+    self.requestGeometryCoordinates = ko.observableArray([]);
 
     //
     // CONNECTION BLOCK.
@@ -94,6 +106,7 @@ function MyViewModel() {
     // DATA BLOCK.
     //
     self.hasData = ko.observable(false);
+    self.data = ko.observable();
 
     //
     // RESPONSE FORMAT.
@@ -180,17 +193,34 @@ function MyViewModel() {
     // Handle request block.
     //
     function HandleRequestBlock() {
+        // Toggle section.
         self.hasRequest( typeof( self.responseOBJECT().request ) == "object" );
+        // Toggle operation.
         self.hasRequestOperation( self.hasRequest()
             && (typeof( self.responseOBJECT().request.operation ) != "undefined") );
         self.requestOperation( ( self.hasRequestOperation() ) ? self.responseOBJECT().request.operation : "" );
+        // Toggle modifiers.
         self.hasRequestModifiers( self.hasRequest()
             && (typeof( self.responseOBJECT().request.modifiers ) != "undefined") );
         self.requestModifiers([]);
-        if( self.hasRequestModifiers )
+        if( self.hasRequestModifiers() )
         {
             for( var tag in self.responseOBJECT().request.modifiers )
-                self.requestModifiers().push(tag);
+                self.requestModifiers.push(tag);
+        }
+        // Toggle geometry.
+        self.hasRequestGeometry( self.hasRequest()
+            && (typeof( self.responseOBJECT().request.geometry ) != "undefined") );
+        self.requestGeometryType( ( self.hasRequestGeometry() ) ? self.responseOBJECT().request.geometry.type : "" );
+        switch( self.requestGeometryType() )
+        {
+            case 'Tiles':
+                self.requestGeometryCoordinates( self.responseOBJECT().request.geometry.coordinates );
+                break;
+
+            default:
+                self.requestGeometryCoordinates([]);
+                break;
         }
     }
 
@@ -214,7 +244,8 @@ function MyViewModel() {
     // Handle data block.
     //
     function HandleDataBlock() {
-        self.hasData( typeof( self.responseOBJECT().data ) == "object" );
+        self.hasData( typeof( self.responseOBJECT().data ) != "undefined" );
+        self.data( ( self.hasData() ) ? self.responseOBJECT().data : "" );
     }
 }
 

@@ -33,6 +33,11 @@ require_once( "includes.inc.php" );
 </head>
 <body>
 
+	<form class="form-inline" data-bind="submit: call">
+		<button type="submit" class="btn btn-primary">
+			Try
+		</button>
+	</form>
 	<ul data-bind="foreach: testArray">
 		<li>
 			<span data-bind="text: $data"> </span>
@@ -52,7 +57,11 @@ require_once( "includes.inc.php" );
 			var self = this;
 
 			self.testArray = ko.observableArray([ "uno", "due", "tre"]);
-		}
+
+			self.call = function process() {
+				self.testArray.push("pippo");
+			}
+		};
 
 		var myModel = new TaskListViewModel()
 

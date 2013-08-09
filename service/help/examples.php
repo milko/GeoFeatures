@@ -66,7 +66,9 @@ require_once( "includes.inc.php" );
 				        <li>
 					        <a class="current" href="examples.php">Examples <span class="label label-warning">under construction</span></a>
 					        <ul>
-						        <li><a href="#ping">Ping</a></li>
+						        <li><a href="ping.php">Ping</a></li>
+						        <li><a href="help.php">Help</a></li>
+						        <li><a href="tiles.php">Tiles</a></li>
 					        </ul>
 				        </li>
 			        </ul>
@@ -77,68 +79,14 @@ require_once( "includes.inc.php" );
 	        <div class="col-lg-8">
 
 		        <!-- PING -->
-		        <section id="ping">
+		        <section id="intro">
 			        <h4>
-				        Ping request
+				        Interactive examples
 			        </h4>
 			        <p>
-				        This operation can be used to check if the service is working, if
-				        so, the response <a href="response.php#data"><abbr title="data">data</abbr></a>
-				        section will contain the string <code>pong</code>.
+				        From the list on the left you can choose some interactive examples
+				        that will allow you to test the service.
 			        </p>
-			        <form class="form-inline" id="form-ping" data-bind="submit: pingCALL">
-				        <div class="input-group">
-					        <input type="text" class="form-control" id="ping-request" data-bind="value: pingRequest" />
-					        <span class="input-group-btn">
-								<button type="submit" data-loading-text="Calling..." class="btn btn-primary">
-									Try
-								</button>
-						    </span>
-				        </div>
-			        </form>
-			        <pre id="ping-response" class="pre-scrollable" data-bind="text: pingResponse"></pre>
-		        </section>
-
-		        <!-- HELP -->
-		        <section id="ping">
-			        <h4>
-				        Help request
-			        </h4>
-			        <p>
-				        If you are here you must have done it ;-) In any case you can try it again:
-			        </p>
-			        <form class="form-inline" id="form-help" data-bind="submit: helpCALL">
-				        <div class="input-group">
-					        <input type="text" class="form-control" id="help-request" data-bind="value: helpRequest" />
-					        <span class="input-group-btn">
-								<button type="submit" data-loading-text="Calling..." class="btn btn-primary">
-									Try
-								</button>
-						    </span>
-				        </div>
-			        </form>
-			        <pre id="help-response" class="pre-scrollable" data-bind="text: helpResponse"></pre>
-		        </section>
-
-		        <!-- TILES -->
-		        <section id="ping">
-			        <h4>
-				        Tiles request
-			        </h4>
-			        <p>
-				        This operation can be used to retrieve a list of tiles by identifier.
-			        </p>
-			        <form class="form-inline" id="form-tiles" data-bind="submit: tilesCALL">
-				        <div class="input-group">
-					        <input type="text" class="form-control" id="tiles-request" data-bind="value: tilesRequest" />
-					        <span class="input-group-btn">
-								<button type="submit" data-loading-text="Calling..." class="btn btn-primary">
-									Try
-								</button>
-						    </span>
-				        </div>
-			        </form>
-			        <pre id="tiles-response" class="pre-scrollable" data-bind="text: tilesResponse"></pre>
 		        </section>
 		    </div>
 		</div>

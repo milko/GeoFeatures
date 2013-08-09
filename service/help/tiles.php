@@ -1,29 +1,29 @@
 <?php
 
-/*=======================================================================================
- *																						*
- *								    examples.php	           							*
- *																						*
- *======================================================================================*/
+	/*=======================================================================================
+	 *																						*
+	 *								    examples.php	           							*
+	 *																						*
+	 *======================================================================================*/
 
-/**
- *	Response web-service examples page.
- *
- *	This file contains the examples page for the response of the web-service.
- *
- *	@package	WORLDCLIM30
- *	@subpackage	Services
- *
- *	@author		Milko A. Škofič <m.skofic@cgiar.org>
- *	@version	1.00 08/08/2013
- */
+	/**
+	 *	Response web-service examples page.
+	 *
+	 *	This file contains the examples page for the response of the web-service.
+	 *
+	 *	@package	WORLDCLIM30
+	 *	@subpackage	Services
+	 *
+	 *	@author		Milko A. Škofič <m.skofic@cgiar.org>
+	 *	@version	1.00 08/08/2013
+	 */
 
-/**
- * URL.
- *
- * This include file contains the web-service URL.
- */
-require_once( "includes.inc.php" );
+	/**
+	 * URL.
+	 *
+	 * This include file contains the web-service URL.
+	 */
+	require_once( "includes.inc.php" );
 
 ?>
 <!DOCTYPE html>
@@ -91,11 +91,18 @@ require_once( "includes.inc.php" );
 				<!-- Form panel. -->
 				<div class="panel">
 					<form class="form-inline" data-bind="submit: call">
-						<input type="checkbox" data-bind="checked: requestModCopyRequest"> Copy request </input>
-						<input type="checkbox" data-bind="checked: requestModCopyConnection"> Copy connection </input>
-						<button type="submit" class="btn btn-primary">
-							Try
-						</button>
+						<input type="checkbox" data-bind="checked: requestModCopyRequest"> Copy request</input>
+						<input type="checkbox" data-bind="checked: requestModCopyConnection"> Copy connection</input>
+						<input type="checkbox" data-bind="checked: requestModCount"> Results count</input>
+						<input type="checkbox" data-bind="checked: requestModRange"> Results ranges</input>
+						<div class="input-group">
+							<input type="text" class="form-control" data-bind="value: geomTiles" />
+							<span class="input-group-btn">
+								<button type="submit" class="btn btn-primary">
+									Try
+								</button>
+							</span>
+						</div>
 					</form>
 				</div>
 
@@ -104,8 +111,8 @@ require_once( "includes.inc.php" );
 
 				<!-- Response. -->
 				<div class="btn-group btn-group">
-					<input type="radio" value="JSON" data-bind="checked: responseFormat" name="format"> JSON </input>
-					<input type="radio" value="Object" data-bind="checked: responseFormat" name="format"> Object </input>
+					<input type="radio" value="JSON" data-bind="checked: responseFormat" name="format"> JSON</input>
+					<input type="radio" value="Object" data-bind="checked: responseFormat" name="format"> Object</input>
 				</div>
 
 				<!-- JSON. -->
@@ -151,6 +158,16 @@ require_once( "includes.inc.php" );
 									</li>
 								</ul>
 							</dd>
+							<dt data-bind="visible: hasRequestGeometry">Geometry type:</dt>
+							<dd data-bind="text: requestGeometryType, visible: hasRequestGeometry"></dd>
+							<dt data-bind="visible: hasRequestGeometry">Geometry coordinates:</dt>
+							<dd data-bind="visible: hasRequestGeometry">
+								<ul  data-bind="foreach: requestGeometryCoordinates">
+									<li>
+										<span data-bind="text: $data"></span>
+									</li>
+								</ul>
+							</dd>
 						</dl>
 					</div>
 
@@ -174,7 +191,24 @@ require_once( "includes.inc.php" );
 						<div class="panel-heading">
 							<b>Response</b>
 						</div>
-						<span data-bind="text: data, visible: hasData"></span>
+						<div data_bound="visible: requestModRange">
+							<table class="table">
+								<thead>
+								<tr>
+									<th>Month</th>
+									<th>Precipitation</th>
+									<th>Temperature</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>January</td>
+									<td>120</td>
+									<td>35</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</section>
@@ -191,7 +225,8 @@ require_once( "includes.inc.php" );
 <!-- Set base URL. -->
 <script type="text/javascript">
 	var baseURL = "<?php echo( kURL ); ?>";
-	var baseCMD = "ping";
+	var baseCMD = "tiles";
+	var baseTiles = "33065587,774896741";
 </script>
 <!-- Include my.js -->
 <script src="js/myViewModels.js"></script>
