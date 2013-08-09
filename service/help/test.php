@@ -33,40 +33,30 @@ require_once( "includes.inc.php" );
 </head>
 <body>
 
-	<form data-bind="submit: addTask">
-		URL: <input data-bind="value: request" />
-		<button type="submit">Try</button>
-	</form>
-
-	<p data-bind="text: response"></p>
+	<ul data-bind="foreach: testArray">
+		<li>
+			<span data-bind="text: $data"> </span>
+		</li>
+	</ul>
 
 	<!-- JavaScript plugins (requires jQuery) -->
     <script src="http://code.jquery.com/jquery.js"></script>
     <!-- Include knockout.js -->
     <script src="js/knockout.js"></script>
-    <!-- Set base URL. -->
-    <script type="text/javascript">
-        var baseURL = "<?php echo( kURL ); ?>";
-    </script>
-	
+
     <!-- My javascript -->
 	<script type="text/javascript">
 		// This is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
 		function TaskListViewModel() {
-			// Data
+			// Reference.
 			var self = this;
-			self.request = ko.observable(baseURL + "?ping");
-			self.response = ko.observable();
 
-			// Operations
-			self.addTask = function() {
-				$.get( self.request(), function(theData){
-					self.response(theData);
-				});
-			};
+			self.testArray = ko.observableArray([ "uno", "due", "tre"]);
 		}
 
-		ko.applyBindings(new TaskListViewModel());
+		var myModel = new TaskListViewModel()
+
+		ko.applyBindings(myModel);
 	</script>
 </body>
 </html>

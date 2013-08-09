@@ -48,7 +48,7 @@ require_once( "includes.inc.php" );
         <div class="row">
 
             <!-- NAVIGATION SIDE BAR CONTAINER -->
-            <div class="col-lg-5">
+            <div class="col-lg-4">
                 <div id="sidebar"
                      data-spy="affix"
                      class="bs-sidebar"
@@ -111,7 +111,7 @@ require_once( "includes.inc.php" );
             </div>
 
             <!-- CONTENTS CONTAINER -->
-            <div class="col-lg-7">
+            <div class="col-lg-8">
 
                 <!-- INTRODUCTION -->
                 <section id="intro">
