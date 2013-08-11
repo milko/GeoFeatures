@@ -186,29 +186,50 @@
 						</dl>
 					</div>
 
-					<!-- Data. -->
-					<div data-bind="visible: hasData">
+					<!-- Data (no ranges). -->
+					<div data-bind="visible: hasData && (! hasRequestModRange)">
 						<div class="panel-heading">
-							<b>Response</b>
+							<b>Response (no ranges)</b>
 						</div>
-						<div data_bound="visible: requestModRange">
-							<table class="table">
-								<thead>
-								<tr>
-									<th>Month</th>
-									<th>Precipitation</th>
-									<th>Temperature</th>
-								</tr>
-								</thead>
-								<tbody>
-								<tr>
-									<td>January</td>
-									<td>120</td>
-									<td>35</td>
-								</tr>
-								</tbody>
-							</table>
+						<table class="table">
+							<thead>
+							<tr>
+								<th>Month</th>
+								<th>Precipitation</th>
+								<th>Temperature</th>
+							</tr>
+							</thead>
+							<tbody data-bind="foreach: data">
+							<tr>
+								<td>January</td>
+								<td>120</td>
+								<td>35</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<!-- Data (ranges). -->
+					<div data-bind="visible: hasData && hasRequestModRange">
+						<div class="panel-heading">
+							<b>Response (ranges)</b>
 						</div>
+						<table class="table">
+							<thead>
+							<tr>
+								<th>Month</th>
+								<th>Precipitation</th>
+								<th>Temperature</th>
+							</tr>
+							</thead>
+							<tbody data-bind="foreach: data">
+							<tr>
+								<td>January</td>
+								<td>120</td>
+								<td>35</td>
+							</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</section>

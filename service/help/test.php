@@ -34,6 +34,10 @@ require_once( "includes.inc.php" );
 <body>
 
 	<form class="form-inline" data-bind="submit: call">
+		<input type="checkbox" data-bind="checked: modifiers().checkbox.request.checked"> Copy request</input>
+		<input type="checkbox" data-bind="checked: modifiers().checkbox.connection.checked"> Copy connection</input>
+		<input type="checkbox" data-bind="checked: modifiers().checkbox.range.checked"> Results ranges</input>
+		<input type="checkbox" data-bind="checked: modifiers().checkbox.count.checked"> Results count</input>
 		<button type="submit" class="btn btn-primary">
 			Try
 		</button>
@@ -61,6 +65,31 @@ require_once( "includes.inc.php" );
 			self.call = function process() {
 				self.testArray.push("pippo");
 			}
+
+			//
+			// Modifiers.
+			//
+			self.modifiers = ko.observable( {
+				"checkbox" : {
+					"request" : {
+						"visible" : false,
+						"checked" : false
+					},
+					"connection" : {
+						"visible" : false,
+						"checked" : false
+					},
+					"range" : {
+						"visible" : false,
+						"checked" : false
+					},
+					"count" : {
+						"visible" : false,
+						"checked" : false
+					}
+				}
+			});
+
 		};
 
 		var myModel = new TaskListViewModel()

@@ -87,6 +87,7 @@ function MyViewModel() {
     self.requestOperation = ko.observable();
     self.hasRequestModifiers = ko.observable(false);
     self.requestModifiers = ko.observableArray([]);
+    self.hasRequestModRange = ko.observable(false);
     self.hasRequestGeometry = ko.observable(false);
     self.requestGeometryType = ko.observable();
     self.requestGeometryCoordinates = ko.observableArray([]);
@@ -205,8 +206,14 @@ function MyViewModel() {
         self.requestModifiers([]);
         if( self.hasRequestModifiers() )
         {
+            var hasMod = false;
             for( var tag in self.responseOBJECT().request.modifiers )
+            {
                 self.requestModifiers.push(tag);
+                if( tag == "range" )
+                    hasMod = true;
+            }
+            self.hasRequestModRange( hasMod );
         }
         // Toggle geometry.
         self.hasRequestGeometry( self.hasRequest()
