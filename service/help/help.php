@@ -90,7 +90,7 @@
 				</p>
 
 				<!-- Request. -->
-				<pre class="pre-scrollable" style="white-space: nowrap" data-bind="text: request"></pre>
+				<pre style="white-space: nowrap" data-bind="text: url"></pre>
 			</section>
 		</div>
 	</div>
@@ -108,6 +108,13 @@
 	var baseCMD = "help";
 </script>
 <!-- Include my.js -->
-<script src="js/myViewModels.js"></script>
+<script src="js/ViewModel.js"></script>
+<!-- Set defaults. -->
+<script type="text/javascript">
+	myModel.modifiers.request.visible(false);
+	myModel.modifiers.connection.visible(false);
+	myModel.modifiers.range.visible(false);
+	myModel.modifiers.count.visible(false);
+</script>
 </body>
 </html>

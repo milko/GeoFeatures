@@ -1946,40 +1946,63 @@ class CGeoFeatureService extends ArrayObject
 				if( $results[ 'ok' ] )
 				{
 					//
-					// Set results.
+					// Handle results.
 					//
-					$results = ( array_key_exists( 'result', $results ) )
-							 ? $results[ 'result' ][ 0 ]
-							 : Array();
-
-					//
-					// Set total.
-					//
-					$this->_Status( kAPI_STATUS_TOTAL, $results[ kAPI_AGGREGATE_COUNT ] );
-					unset( $results[ kAPI_AGGREGATE_COUNT ] );
-
-					//
-					// Round values.
-					//
-					$values = array( kAPI_DATA_ELEVATION, kAPI_DATA_DISTANCE );
-					foreach( $values as $value )
+					if( array_key_exists( 'result', $results ) )
 					{
 						//
-						// Check value.
+						// Set results.
 						//
-						if( array_key_exists( $value, $results ) )
+						$results = $results[ 'result' ];
+
+						//
+						// Found results.
+						//
+						if( count( $results ) )
 						{
 							//
-							// Round ranges.
+							// Use first element.
 							//
-							$keys = array( kAPI_AGGREGATE_MINIMUM,
-								kAPI_AGGREGATE_MEAN,
-								kAPI_AGGREGATE_MAXIMUM );
-							foreach( $keys as $key )
-								$results[ $value ][ $key ]
-									= (int) round( $results[ $value ][ $key ] );
-						}
-					}
+							$results = $results[ 0 ];
+
+							//
+							// Set total.
+							//
+							$this->_Status( kAPI_STATUS_TOTAL, $results[ kAPI_AGGREGATE_COUNT ] );
+							unset( $results[ kAPI_AGGREGATE_COUNT ] );
+
+							//
+							// Round values.
+							//
+							$values = array( kAPI_DATA_ELEVATION, kAPI_DATA_DISTANCE );
+							foreach( $values as $value )
+							{
+								//
+								// Check value.
+								//
+								if( array_key_exists( $value, $results ) )
+								{
+									//
+									// Round ranges.
+									//
+									$keys = array( kAPI_AGGREGATE_MINIMUM,
+										kAPI_AGGREGATE_MEAN,
+										kAPI_AGGREGATE_MAXIMUM );
+									foreach( $keys as $key )
+										$results[ $value ][ $key ]
+											= (int) round( $results[ $value ][ $key ] );
+								}
+							}
+
+						} // Found results.
+
+						else
+							$this->_Status( kAPI_STATUS_TOTAL, 0 );
+
+					} // Received results.
+
+					else
+						$this->_Status( kAPI_STATUS_TOTAL, 0 );
 
 					//
 					// Set results.

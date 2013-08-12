@@ -1,29 +1,29 @@
 <?php
 
-	/*=======================================================================================
-	 *																						*
-	 *								    examples.php	           							*
-	 *																						*
-	 *======================================================================================*/
+/*=======================================================================================
+ *																						*
+ *								    examples.php	           							*
+ *																						*
+ *======================================================================================*/
 
-	/**
-	 *	Response web-service examples page.
-	 *
-	 *	This file contains the examples page for the response of the web-service.
-	 *
-	 *	@package	WORLDCLIM30
-	 *	@subpackage	Services
-	 *
-	 *	@author		Milko A. Škofič <m.skofic@cgiar.org>
-	 *	@version	1.00 08/08/2013
-	 */
+/**
+ *	Response web-service examples page.
+ *
+ *	This file contains the examples page for the response of the web-service.
+ *
+ *	@package	WORLDCLIM30
+ *	@subpackage	Services
+ *
+ *	@author		Milko A. Škofič <m.skofic@cgiar.org>
+ *	@version	1.00 08/08/2013
+ */
 
-	/**
-	 * URL.
-	 *
-	 * This include file contains the web-service URL.
-	 */
-	require_once( "includes.inc.php" );
+/**
+ * URL.
+ *
+ * This include file contains the web-service URL.
+ */
+require_once( "includes.inc.php" );
 
 ?>
 <!DOCTYPE html>
@@ -80,25 +80,44 @@
 			<!-- PING -->
 			<section id="ping">
 				<h4>
-					Ping request
+					Tiles list
 				</h4>
 				<p>
-					This operation can be used to check if the service is working, if
-					so, the response <a href="response.php#data"><abbr title="data">data</abbr></a>
-					section will contain the string <code>pong</code>.
+					This operation can be used to retrieve a list of tiles by tile
+					<a href="response.php#_id"><abbr title="_id">identifier</abbr></a>.
 				</p>
 
 				<!-- Form panel. -->
 				<div class="panel">
 					<form class="form-inline" data-bind="submit: call">
-						<input type="checkbox" data-bind="checked: requestModCopyRequest"> Copy request</input>
-						<input type="checkbox" data-bind="checked: requestModCopyConnection"> Copy connection</input>
-						<input type="checkbox" data-bind="checked: requestModCount"> Results count</input>
-						<input type="checkbox" data-bind="checked: requestModRange"> Results ranges</input>
-						<div class="input-group">
-							<input type="text" class="form-control" data-bind="value: geomTiles" />
+						<div class="checkbox" data-bind="visible: modifiers.request.visible">
+							<label>
+								<input type="checkbox" data-bind="checked: modifiers.request.checked"> Copy request&nbsp;
+							</label>
+						</div>
+						<div class="checkbox" data-bind="visible: modifiers.connection.visible">
+							<label>
+								<input type="checkbox" data-bind="checked: modifiers.connection.checked"> Copy connection&nbsp;
+							</label>
+						</div>
+						<div class="checkbox" data-bind="visible: modifiers.range.visible">
+							<label>
+								<input type="checkbox" data-bind="checked: modifiers.range.checked"> Results range&nbsp;
+							</label>
+						</div>
+						<div class="checkbox" data-bind="visible: modifiers.count.visible">
+							<label>
+								<input type="checkbox" data-bind="checked: modifiers.count.checked"> Results count&nbsp;
+							</label>
+						</div>
+						<button type="submit" class="btn btn-primary" data-bind="visible: operation() == 'ping', disable: button.disabled()">
+							Try
+						</button>
+						<div class="input-group" data-bind="visible: geometry.type() == 'tile'">
+							<span class="input-group-addon">Tiles:</span>
+							<input type="text" class="form-control" data-bind="value: geometry.coordinates" />
 							<span class="input-group-btn">
-								<button type="submit" class="btn btn-primary">
+								<button type="submit" class="btn btn-primary" data-bind="disable: button.disabled()">
 									Try
 								</button>
 							</span>
@@ -107,127 +126,120 @@
 				</div>
 
 				<!-- Request. -->
-				<pre class="pre-scrollable" style="white-space: nowrap" data-bind="text: request"></pre>
+				<pre class="pre-scrollable" style="white-space: nowrap" data-bind="text: url"></pre>
 
 				<!-- Response. -->
-				<div class="btn-group btn-group">
-					<input type="radio" value="JSON" data-bind="checked: responseFormat" name="format"> JSON</input>
-					<input type="radio" value="Object" data-bind="checked: responseFormat" name="format"> Object</input>
-				</div>
+				<label class="radio-inline">
+					<input type="radio" name="format" value="json" data-bind="checked: response.format">JSON
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="format" value="object" data-bind="checked: response.format">Object
+				</label>
 
 				<!-- JSON. -->
-				<pre class="pre-scrollable" data-bind="text: responseJSON, visible: responseAsJSON"></pre>
+				<pre class="pre-scrollable" data-bind="text: response.string(), visible: asJson"></pre>
 
 				<!-- Object. -->
-				<div class="panel" data-bind="visible: responseAsObject">
+				<div class="panel" data-bind="visible: asObject">
 
 					<!-- Status. -->
-					<div data-bind="visible: hasStatus">
-						<div class="panel-heading">
-							<b>Status</b>
-						</div>
-						<dl class="dl-horizontal">
-							<dt>State:</dt>
-							<dd data-bind="text: statusState"></dd>
-							<dt data-bind="visible: hasStatusMessage">Message:</dt>
-							<dd data-bind="text: statusMessage, visible: hasStatusMessage"></dd>
-							<dt data-bind="visible: hasStatusTotal">Affected count:</dt>
-							<dd data-bind="text: statusTotal, visible: hasStatusTotal"></dd>
-							<dt data-bind="visible: hasStatusCount">Actual count:</dt>
-							<dd data-bind="text: statusCount, visible: hasStatusCount"></dd>
-							<dt data-bind="visible: hasStatusStart">Start:</dt>
-							<dd data-bind="text: statusStart, visible: hasStatusStart"></dd>
-							<dt data-bind="visible: hasStatusLimit">Limit:</dt>
-							<dd data-bind="text: statusLimit, visible: hasStatusLimit"></dd>
-						</dl>
-					</div>
-
-					<!-- Request. -->
-					<div data-bind="visible: hasRequest">
-						<div class="panel-heading">
-							<b>Request</b>
-						</div>
-						<dl class="dl-horizontal">
-							<dt data-bind="visible: hasRequestOperation">Operation:</dt>
-							<dd data-bind="text: requestOperation, visible: hasRequestOperation"></dd>
-							<dt data-bind="visible: hasRequestModifiers">Modifiers:</dt>
-							<dd data-bind="visible: hasRequestModifiers">
-								<ul  data-bind="foreach: requestModifiers">
-									<li>
-										<span data-bind="text: $data"></span>
-									</li>
-								</ul>
-							</dd>
-							<dt data-bind="visible: hasRequestGeometry">Geometry type:</dt>
-							<dd data-bind="text: requestGeometryType, visible: hasRequestGeometry"></dd>
-							<dt data-bind="visible: hasRequestGeometry">Geometry coordinates:</dt>
-							<dd data-bind="visible: hasRequestGeometry">
-								<ul  data-bind="foreach: requestGeometryCoordinates">
-									<li>
-										<span data-bind="text: $data"></span>
-									</li>
-								</ul>
-							</dd>
-						</dl>
-					</div>
-
-					<!-- Connection. -->
-					<div data-bind="visible: hasConnection">
-						<div class="panel-heading">
-							<b>Connection</b>
-						</div>
-						<dl class="dl-horizontal">
-							<dt data-bind="visible: hasConnectionServer">Server:</dt>
-							<dd data-bind="text: connectionServer, visible: hasConnectionServer"></dd>
-							<dt data-bind="visible: hasConnectionDatabase">Database:</dt>
-							<dd data-bind="text: connectionDatabase, visible: hasConnectionDatabase"></dd>
-							<dt data-bind="visible: hasConnectionCollection">Collection:</dt>
-							<dd data-bind="text: connectionCollection, visible: hasConnectionCollection"></dd>
-						</dl>
-					</div>
-
-					<!-- Data (no ranges). -->
-					<div data-bind="visible: hasData && (! hasRequestModRange)">
-						<div class="panel-heading">
-							<b>Response (no ranges)</b>
-						</div>
-						<table class="table">
-							<thead>
-							<tr>
-								<th>Month</th>
-								<th>Precipitation</th>
-								<th>Temperature</th>
+					<div data-bind="visible: response.status.received">
+						<h4 class="text-info">Status</h4>
+						<table class="table table-condensed">
+							<tr data-bind="visible: response.status.state.error" class="danger">
+								<th>State:</th>
+								<td data-bind="text: response.status.state.data"></td>
 							</tr>
-							</thead>
-							<tbody data-bind="foreach: data">
-							<tr>
-								<td>January</td>
-								<td>120</td>
-								<td>35</td>
+							<tr data-bind="visible: (! response.status.state.error())" class="success">
+								<th>State:</th>
+								<td data-bind="text: response.status.state.data"></td>
 							</tr>
-							</tbody>
+							<tr data-bind="visible: response.status.message.received">
+								<th>Message:</th>
+								<td data-bind="text: response.status.message.data"></td>
+							</tr>
+							<tr data-bind="visible: response.status.total.received">
+								<th>Affected count:</th>
+								<td data-bind="text: response.status.total.data"></td>
+							</tr>
 						</table>
 					</div>
 
-					<!-- Data (ranges). -->
-					<div data-bind="visible: hasData && hasRequestModRange">
-						<div class="panel-heading">
-							<b>Response (ranges)</b>
-						</div>
-						<table class="table">
-							<thead>
-							<tr>
-								<th>Month</th>
-								<th>Precipitation</th>
-								<th>Temperature</th>
+					<!-- Request. -->
+					<div data-bind="visible: response.request.received">
+						<h4 class="text-info">Request</h4>
+						<table class="table table-condensed">
+							<tr data-bind="visible: response.request.operation.received">
+								<th>Operation:</th>
+								<td data-bind="text: response.request.operation.data"></td>
 							</tr>
-							</thead>
-							<tbody data-bind="foreach: data">
-							<tr>
-								<td>January</td>
-								<td>120</td>
-								<td>35</td>
+							<tr data-bind="visible: response.request.modifiers.received">
+								<th>Modifiers:</th>
+								<td data-bind="text: response.request.modifiers.data"></td>
 							</tr>
+							<tr data-bind="visible: response.request.geometry.received">
+								<th>Geometry:</th>
+								<td>
+									<table class="table table-condensed">
+										<tr data-bind="visible: response.request.geometry.type().length > 0">
+											<th>Type:</th>
+											<td data-bind="text: response.request.geometry.type"></td>
+										</tr>
+										<tr data-bind="visible: response.request.geometry.coordinates().length > 0">
+											<th>Coordinates:</th>
+											<td data-bind="text: response.request.geometry.coordinates"></td>
+										</tr>
+										<tr data-bind="visible: response.request.geometry.area().length > 0">
+											<th>Area:</th>
+											<td data-bind="text: response.request.geometry.area"></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</div>
+
+					<!-- Connection. -->
+					<div data-bind="visible: response.connection.received">
+						<h4 class="text-info">Connection</h4>
+						<table class="table table-condensed">
+							<tr data-bind="visible: response.connection.server.received">
+								<th>Server:</th>
+								<td data-bind="text: response.connection.server.data"></td>
+							</tr>
+							<tr data-bind="visible: response.connection.database.received">
+								<th>Database:</th>
+								<td data-bind="text: response.connection.database.data"></td>
+							</tr>
+							<tr data-bind="visible: response.connection.collection.received">
+								<th>Collection:</th>
+								<td data-bind="text: response.connection.collection.data"></td>
+							</tr>
+						</table>
+					</div>
+
+					<!-- Data. -->
+					<div data-bind="visible: response.data.received">
+						<h4 class="text-info">Response</h4>
+						<table class="table table-condensed" data-bind="visible: modifiers.range.sent() == false" width="100%">
+							<tbody data-bind="foreach: response.data.array">
+								<tr>
+									<td>
+										<div class="accordion" id="records">
+											<div class="accordion-group">
+												<div class="accordion-heading">
+													<a class="accordion-toggle" data-toggle="collapse" data-parent="#records" data-bind="attr: {href: href}">
+														<span data-bind="text: $data.data._id"></span>
+													</a>
+												</div>
+												<div class="accordion-body collapse" data-bind="attr: {id: id}">
+													<div class="accordion-inner">
+													</div>
+												</div>
+											</div>
+										</div>
+									</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -243,13 +255,22 @@
 <script src="js/bootstrap.min.js"></script>
 <!-- Include knockout.js -->
 <script src="js/knockout.js"></script>
-<!-- Set base URL. -->
+<!-- Set base stuff. -->
 <script type="text/javascript">
 	var baseURL = "<?php echo( kURL ); ?>";
 	var baseCMD = "tiles";
-	var baseTiles = "33065587,774896741";
 </script>
 <!-- Include my.js -->
-<script src="js/myViewModels.js"></script>
+<script src="js/ViewModel.js"></script>
+<!-- Set defaults. -->
+<script type="text/javascript">
+	myModel.modifiers.request.visible(true);
+	myModel.modifiers.connection.visible(true);
+	myModel.modifiers.range.visible(true);
+	myModel.modifiers.count.visible(true);
+
+	myModel.geometry.type("tile");
+	myModel.geometry.coordinates("33065587,774896741");
+</script>
 </body>
 </html>

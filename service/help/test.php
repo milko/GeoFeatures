@@ -60,7 +60,7 @@ require_once( "includes.inc.php" );
 			// Reference.
 			var self = this;
 
-			self.testArray = ko.observableArray([ "uno", "due", "tre"]);
+			self.testArray = ko.observableArray([]);
 
 			self.call = function process() {
 				self.testArray.push("pippo");
@@ -89,7 +89,6 @@ require_once( "includes.inc.php" );
 					}
 				}
 			});
-
 		};
 
 		var myModel = new TaskListViewModel()

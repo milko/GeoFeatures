@@ -658,5 +658,9 @@ input.focused {
     .bs-sidebar.affix {
         width: 270px;
     }
+}
 
+/* Response tables. */
+.table-condensed th {
+    width : 30%;
 }

@@ -103,7 +103,7 @@ require_once( "includes.inc.php" );
 	    var baseURL = "<?php echo( kURL ); ?>";
     </script>
     <!-- Include my.js -->
-    <script src="js/myViewModels.js"></script>
+    <script src="js/ViewModel.js"></script>
 </body>
 </html>
 

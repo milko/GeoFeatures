@@ -91,90 +91,131 @@ require_once( "includes.inc.php" );
 				<!-- Form panel. -->
 				<div class="panel">
 					<form class="form-inline" data-bind="submit: call">
-						<input type="checkbox" data-bind="checked: requestModCopyRequest"> Copy request </input>
-						<input type="checkbox" data-bind="checked: requestModCopyConnection"> Copy connection </input>
-						<button type="submit" class="btn btn-primary">
+						<div class="checkbox" data-bind="visible: modifiers.request.visible">
+							<label>
+								<input type="checkbox" data-bind="checked: modifiers.request.checked"> Copy request&nbsp;
+							</label>
+						</div>
+						<div class="checkbox" data-bind="visible: modifiers.connection.visible">
+							<label>
+								<input type="checkbox" data-bind="checked: modifiers.connection.checked"> Copy connection&nbsp;
+							</label>
+						</div>
+						<div class="checkbox" data-bind="visible: modifiers.range.visible">
+							<label>
+								<input type="checkbox" data-bind="checked: modifiers.range.checked"> Results range&nbsp;
+							</label>
+						</div>
+						<div class="checkbox" data-bind="visible: modifiers.count.visible">
+							<label>
+								<input type="checkbox" data-bind="checked: modifiers.count.checked"> Results count&nbsp;
+							</label>
+						</div>
+						<button type="submit" class="btn btn-primary" data-bind="disable: button.disabled()">
 							Try
 						</button>
 					</form>
 				</div>
 
 				<!-- Request. -->
-				<pre class="pre-scrollable" style="white-space: nowrap" data-bind="text: request"></pre>
+				<pre class="pre-scrollable" style="white-space: nowrap" data-bind="text: url"></pre>
 
 				<!-- Response. -->
-				<div class="btn-group btn-group">
-					<input type="radio" value="JSON" data-bind="checked: responseFormat" name="format"> JSON </input>
-					<input type="radio" value="Object" data-bind="checked: responseFormat" name="format"> Object </input>
-				</div>
+				<label class="radio-inline">
+					<input type="radio" name="format" value="json" data-bind="checked: response.format">JSON
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="format" value="object" data-bind="checked: response.format">Object
+				</label>
 
 				<!-- JSON. -->
-				<pre class="pre-scrollable" data-bind="text: responseJSON, visible: responseAsJSON"></pre>
+				<pre class="pre-scrollable" data-bind="text: response.string(), visible: asJson"></pre>
 
 				<!-- Object. -->
-				<div class="panel" data-bind="visible: responseAsObject">
+				<div class="panel" data-bind="visible: asObject">
 
 					<!-- Status. -->
-					<div data-bind="visible: hasStatus">
-						<div class="panel-heading">
-							<b>Status</b>
-						</div>
-						<dl class="dl-horizontal">
-							<dt>State:</dt>
-							<dd data-bind="text: statusState"></dd>
-							<dt data-bind="visible: hasStatusMessage">Message:</dt>
-							<dd data-bind="text: statusMessage, visible: hasStatusMessage"></dd>
-							<dt data-bind="visible: hasStatusTotal">Affected count:</dt>
-							<dd data-bind="text: statusTotal, visible: hasStatusTotal"></dd>
-							<dt data-bind="visible: hasStatusCount">Actual count:</dt>
-							<dd data-bind="text: statusCount, visible: hasStatusCount"></dd>
-							<dt data-bind="visible: hasStatusStart">Start:</dt>
-							<dd data-bind="text: statusStart, visible: hasStatusStart"></dd>
-							<dt data-bind="visible: hasStatusLimit">Limit:</dt>
-							<dd data-bind="text: statusLimit, visible: hasStatusLimit"></dd>
-						</dl>
+					<div data-bind="visible: response.status.received">
+						<h4 class="text-info">Status</h4>
+						<table class="table table-condensed">
+							<tr data-bind="visible: response.status.state.error" class="danger">
+								<th>State:</th>
+								<td data-bind="text: response.status.state.data"></td>
+							</tr>
+							<tr data-bind="visible: (! response.status.state.error())" class="success">
+								<th>State:</th>
+								<td data-bind="text: response.status.state.data"></td>
+							</tr>
+							<tr data-bind="visible: response.status.message.received">
+								<th>Message:</th>
+								<td data-bind="text: response.status.message.data"></td>
+							</tr>
+							<tr data-bind="visible: response.status.total.received">
+								<th>Affected count:</th>
+								<td data-bind="text: response.status.total.data"></td>
+							</tr>
+						</table>
 					</div>
 
 					<!-- Request. -->
-					<div data-bind="visible: hasRequest">
-						<div class="panel-heading">
-							<b>Request</b>
-						</div>
-						<dl class="dl-horizontal">
-							<dt data-bind="visible: hasRequestOperation">Operation:</dt>
-							<dd data-bind="text: requestOperation, visible: hasRequestOperation"></dd>
-							<dt data-bind="visible: hasRequestModifiers">Modifiers:</dt>
-							<dd data-bind="visible: hasRequestModifiers">
-								<ul  data-bind="foreach: requestModifiers">
-									<li>
-										<span data-bind="text: $data"></span>
-									</li>
-								</ul>
-							</dd>
-						</dl>
+					<div data-bind="visible: response.request.received">
+						<h4 class="text-info">Request</h4>
+						<table class="table table-condensed">
+							<tr data-bind="visible: response.request.operation.received">
+								<th>Operation:</th>
+								<td data-bind="text: response.request.operation.data"></td>
+							</tr>
+							<tr data-bind="visible: response.request.modifiers.received">
+								<th>Modifiers:</th>
+								<td data-bind="text: response.request.modifiers.data"></td>
+							</tr>
+							<tr data-bind="visible: response.request.geometry.received">
+								<th>Geometry:</th>
+								<td>
+									<table class="table table-condensed">
+										<tr data-bind="visible: response.request.geometry.type().length > 0">
+											<th>Type:</th>
+											<td data-bind="text: response.request.geometry.type"></td>
+										</tr>
+										<tr data-bind="visible: response.request.geometry.coordinates().length > 0">
+											<th>Coordinates:</th>
+											<td data-bind="text: response.request.geometry.coordinates"></td>
+										</tr>
+										<tr data-bind="visible: response.request.geometry.area().length > 0">
+											<th>Area:</th>
+											<td data-bind="text: response.request.geometry.area"></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
 					</div>
 
 					<!-- Connection. -->
-					<div data-bind="visible: hasConnection">
-						<div class="panel-heading">
-							<b>Connection</b>
-						</div>
-						<dl class="dl-horizontal">
-							<dt data-bind="visible: hasConnectionServer">Server:</dt>
-							<dd data-bind="text: connectionServer, visible: hasConnectionServer"></dd>
-							<dt data-bind="visible: hasConnectionDatabase">Database:</dt>
-							<dd data-bind="text: connectionDatabase, visible: hasConnectionDatabase"></dd>
-							<dt data-bind="visible: hasConnectionCollection">Collection:</dt>
-							<dd data-bind="text: connectionCollection, visible: hasConnectionCollection"></dd>
-						</dl>
+					<div data-bind="visible: response.connection.received">
+						<h4 class="text-info">Connection</h4>
+						<table class="table table-condensed">
+							<tr data-bind="visible: response.connection.server.received">
+								<th>Server:</th>
+								<td data-bind="text: response.connection.server.data"></td>
+							</tr>
+							<tr data-bind="visible: response.connection.database.received">
+								<th>Database:</th>
+								<td data-bind="text: response.connection.database.data"></td>
+							</tr>
+							<tr data-bind="visible: response.connection.collection.received">
+								<th>Collection:</th>
+								<td data-bind="text: response.connection.collection.data"></td>
+							</tr>
+						</table>
 					</div>
 
 					<!-- Data. -->
-					<div data-bind="visible: hasData">
-						<div class="panel-heading">
-							<b>Response</b>
+					<div data-bind="visible: response.data.received">
+						<h4 class="text-info">Response</h4>
+						<div data-bind="visible: response.data.string().length > 0">
+							<span data-bind="text: response.data.string"></span>
 						</div>
-						<span data-bind="text: data, visible: hasData"></span>
 					</div>
 				</div>
 			</section>
@@ -188,12 +229,19 @@ require_once( "includes.inc.php" );
 <script src="js/bootstrap.min.js"></script>
 <!-- Include knockout.js -->
 <script src="js/knockout.js"></script>
-<!-- Set base URL. -->
+<!-- Set base stuff. -->
 <script type="text/javascript">
 	var baseURL = "<?php echo( kURL ); ?>";
 	var baseCMD = "ping";
 </script>
 <!-- Include my.js -->
-<script src="js/myViewModels.js"></script>
+<script src="js/ViewModel.js"></script>
+<!-- Set defaults. -->
+<script type="text/javascript">
+	myModel.modifiers.request.visible(true);
+	myModel.modifiers.connection.visible(true);
+	myModel.modifiers.range.visible(false);
+	myModel.modifiers.count.visible(false);
+</script>
 </body>
 </html>
