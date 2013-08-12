@@ -82,8 +82,8 @@ function MyViewModel() {
             "received" : ko.observable(false),          // Received status.
             "state" : {                                 // State block.
                 "received" : ko.observable(false),          // Received state.
-                "error" : ko.observable(false),             // Received error.
-                "data" : ko.observable("")                  // State data.
+                "data" : ko.observable(""),                 // State data.
+                "style" : ko.observable("")                 // State style.
             },
             "message" : {                                 // Message block.
                 "received" : ko.observable(false),          // Received message.
@@ -269,8 +269,8 @@ function MyViewModel() {
             if( self.response.status.state.received() )
             {
                 self.response.status.state.data( self.response.object().status.state );
-                self.response.status.state.error
-                    ( self.response.object().status.state == 'ERROR' );
+                self.response.status.state.style
+                    ( ( self.response.object().status.state == 'OK' ) ? "success" : "danger" );
             }
 
             // Handle message.

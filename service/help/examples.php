@@ -99,11 +99,6 @@ require_once( "includes.inc.php" );
     <!-- Include knockout.js -->
     <script src="js/knockout.js"></script>
     <!-- Set base URL. -->
-    <script type="text/javascript">
-	    var baseURL = "<?php echo( kURL ); ?>";
-    </script>
-    <!-- Include my.js -->
-    <script src="js/ViewModel.js"></script>
 </body>
 </html>
 

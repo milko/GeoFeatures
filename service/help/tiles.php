@@ -146,11 +146,7 @@ require_once( "includes.inc.php" );
 					<div data-bind="visible: response.status.received">
 						<h4 class="text-info">Status</h4>
 						<table class="table table-condensed">
-							<tr data-bind="visible: response.status.state.error" class="danger">
-								<th>State:</th>
-								<td data-bind="text: response.status.state.data"></td>
-							</tr>
-							<tr data-bind="visible: (! response.status.state.error())" class="success">
+							<tr data-bind="visible: response.status.state.received, css: response.status.state.style">
 								<th>State:</th>
 								<td data-bind="text: response.status.state.data"></td>
 							</tr>
@@ -221,7 +217,7 @@ require_once( "includes.inc.php" );
 					<!-- Data. -->
 					<div data-bind="visible: response.data.received">
 						<h4 class="text-info">Response</h4>
-						<table class="table table-condensed" data-bind="visible: modifiers.range.sent() == false" width="100%">
+						<table data-bind="visible: modifiers.range.sent() == false" width="100%">
 							<tbody data-bind="foreach: response.data.array">
 								<tr>
 									<td>
@@ -229,7 +225,7 @@ require_once( "includes.inc.php" );
 											<div class="accordion-group">
 												<div class="accordion-heading">
 													<a class="accordion-toggle" data-toggle="collapse" data-parent="#records" data-bind="attr: {href: href}">
-														<span data-bind="text: $data.data._id"></span>
+														<span data-bind="text: 'Tile # ' + $data.data._id"></span>
 													</a>
 												</div>
 												<div class="accordion-body collapse" data-bind="attr: {id: id}">

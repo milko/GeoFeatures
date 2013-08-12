@@ -138,11 +138,7 @@ require_once( "includes.inc.php" );
 					<div data-bind="visible: response.status.received">
 						<h4 class="text-info">Status</h4>
 						<table class="table table-condensed">
-							<tr data-bind="visible: response.status.state.error" class="danger">
-								<th>State:</th>
-								<td data-bind="text: response.status.state.data"></td>
-							</tr>
-							<tr data-bind="visible: (! response.status.state.error())" class="success">
+							<tr data-bind="visible: response.status.state.received, css: response.status.state.style">
 								<th>State:</th>
 								<td data-bind="text: response.status.state.data"></td>
 							</tr>
