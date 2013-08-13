@@ -225,7 +225,7 @@ require_once( "includes.inc.php" );
 											<div class="accordion-group">
 												<div class="accordion-heading">
 													<a class="accordion-toggle" data-toggle="collapse" data-parent="#records" data-bind="attr: {href: href}">
-														<span data-bind="text: 'Tile # ' + $data.data._id"></span>
+														<span data-bind="text: name"></span>
 													</a>
 												</div>
 												<div class="accordion-body collapse" data-bind="attr: {id: id}">

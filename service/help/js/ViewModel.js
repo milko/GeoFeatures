@@ -415,14 +415,100 @@ function MyViewModel() {
                 {
                     var i = 0;
                     for( var tag in self.response.object().data )
+                    {
+                        // Init local storage.
+                        var name = "";                  // Element name.
+                        var data = baseDataElement();   // Elelent data.
+
+                        // Handle identifier.
+                        if( typeof( self.response.object().data[tag]._id ) != "undefined" )
+                        {
+                            data._id.received = true;
+                            data._id.data = self.response.object().data[tag]._id;
+                            if( name.length )
+                                name += " ";
+                            name += ("#" + data._id.data)
+                        }
+
+                        // Handle point (deg).
+                        if( typeof( self.response.object().data[tag].pt ) != "undefined" )
+                        {
+                            data.pt.received = true;
+                            data.pt.data = self.response.object().data[tag]._id;
+                        }
+
+                        // Handle point (dms).
+                        if( typeof( self.response.object().data[tag].dms ) != "undefined" )
+                        {
+                            data.dms.received = true;
+                            data.dms.data = self.response.object().data[tag].dms;
+                            if( name.length )
+                                name += " ";
+                            name += ("Lon: " + data.dms.data[0] + " Lat: " + data.dms.data[1])
+                        }
+
+                        // Handle tile.
+                        if( typeof( self.response.object().data[tag].tile ) != "undefined" )
+                        {
+                            data.tile.received = true;
+                            data.tile.data = self.response.object().data[tag].tile;
+                        }
+
+                        // Handle bounding box (deg).
+                        if( typeof( self.response.object().data[tag].bdec ) != "undefined" )
+                        {
+                            data.bdec.received = true;
+                            data.bdec.data = self.response.object().data[tag].bdec;
+                        }
+
+                        // Set accordeon ids and hrefs.
                         self.response.data.array.push( {
                             "id" : ("section" + i),
                             "href" : ("#" + "section" + i++),
-                            "data" : self.response.object().data[tag]
+                            "name" : name,
+                            "data" : data
                         } );
+                    }
                 }
             }
         }
+    }
+
+    //
+    // Initialise response data element.
+    //
+    function baseDataElement() {
+        // Identifier.
+        var theData = {
+            "_id"   : { "received" : false, "data" : "" },
+            "pt"    : { "received" : false, "data" : ["", ""] },
+            "dms"   : { "received" : false, "data" : ["", ""] },
+            "tile"  : { "received" : false, "data" : ["", ""] },
+            "bdec"  : { "received" : false, "data" : [ ["", ""], ["", ""] ] },
+            "bdms"  : { "received" : false, "data" : [ ["", ""], ["", ""] ] },
+            "elev"  : { "received" : false, "data" : "" },
+            "gens"  : { "received" : false, "data" : { "id" : "", "c" : "", "e" : "" } },
+            "bio"   : { "received" : false, "data" : [] },
+            "prec"  : { "received" : false, "data" : [] },
+            "temp"  : { "received" : false, "data" : { "l" : [], "m" : [], "h" : [] } } };
+
+        // Initialise bioclimatic variables.
+        for( i=1; i<=19; i++ )
+            theData.bio[ i ] = "";
+
+        // Initialise precipitation variables.
+        for( i=1; i<=12; i++ )
+            theData.prec[ i ] = "";
+
+        // Initialise temperature variables.
+        for( i=1; i<=12; i++ )
+        {
+            theData.temp.l[ i ] = "";
+            theData.temp.m[ i ] = "";
+            theData.temp.h[ i ] = "";
+        }
+
+        return theData;                                                             // ==>
     }
 }
 
