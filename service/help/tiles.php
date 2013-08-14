@@ -230,6 +230,60 @@ require_once( "includes.inc.php" );
 												</div>
 												<div class="accordion-body collapse" data-bind="attr: {id: id}">
 													<div class="accordion-inner">
+														<table>
+															<tr data-bind="visible: data._id.received">
+																<th>Identifier: </th>
+																<td data-bind="text: data._id.data"></td>
+															</tr>
+															<tr data-bind="visible: data.pt.received">
+																<th>Tile center (dec): </th>
+																<td data-bind="text: data.pt.data"></td>
+															</tr>
+															<tr data-bind="visible: data.dms.received">
+																<th>Tile center (dms): </th>
+																<td data-bind="text: data.dms.data"></td>
+															</tr>
+															<tr data-bind="visible: data.tile.received">
+																<th>Tile coordinates: </th>
+																<td data-bind="text: data.tile.data"></td>
+															</tr>
+															<tr data-bind="visible: data.bdec.received">
+																<th>Bounding box (dec): </th>
+																<td data-bind="text: data.bdec.data"></td>
+															</tr>
+															<tr data-bind="visible: data.bdms.received">
+																<th>Bounding box (dms): </th>
+																<td data-bind="text: data.bdms.data"></td>
+															</tr>
+															<tr data-bind="visible: data.elev.received">
+																<th>Elevation: </th>
+																<td data-bind="text: data.elev.data"></td>
+															</tr>
+															<tr data-bind="visible: data.gens.received">
+																<th>Global environment stratification: </th>
+																<td data-bind="text: data.gens.data.id"></td>
+															</tr>
+															<tr data-bind="visible: data.gens.received">
+																<th>Climatic zone: </th>
+																<td data-bind="text: data.gens.data.c"></td>
+															</tr>
+															<tr data-bind="visible: data.gens.received">
+																<th>Environmental zone: </th>
+																<td data-bind="text: data.gens.data.e"></td>
+															</tr>
+															<tr data-bind="visible: data.bio.received">
+																<th>Annual Mean Temperature: </th>
+																<td data-bind="text: data.bio.data[1] / 10"></td>
+															</tr>
+															<tr data-bind="visible: data.bio.received">
+																<th>Mean Diurnal Range: </th>
+																<td data-bind="text: data.bio.data[2] / 10"></td>
+															</tr>
+															<tr data-bind="visible: data.bio.received">
+																<th>Isothermality: </th>
+																<td data-bind="text: data.bio.data[3]"></td>
+															</tr>
+														</table>
 													</div>
 												</div>
 											</div>

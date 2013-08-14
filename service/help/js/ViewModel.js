@@ -260,6 +260,7 @@ function MyViewModel() {
     // Parse response status.
     //
     function parseStatus() {
+
         // Check if status is there.
         self.response.status.received( typeof(self.response.object().status) != "undefined" );
         if( self.response.status.received() )
@@ -423,42 +424,111 @@ function MyViewModel() {
                         // Handle identifier.
                         if( typeof( self.response.object().data[tag]._id ) != "undefined" )
                         {
-                            data._id.received = true;
+                            data._id.received(true);
                             data._id.data = self.response.object().data[tag]._id;
                             if( name.length )
                                 name += " ";
-                            name += ("#" + data._id.data)
+                            name += ("#" + data._id.data);
                         }
 
                         // Handle point (deg).
                         if( typeof( self.response.object().data[tag].pt ) != "undefined" )
                         {
-                            data.pt.received = true;
-                            data.pt.data = self.response.object().data[tag]._id;
+                            data.pt.received(true);
+                            data.pt.data = "lon: "
+                                         + self.response.object().data[tag].pt.coordinates[ 0 ]
+                                         + " lat: "
+                                         + self.response.object().data[tag].pt.coordinates[ 1 ];
                         }
 
                         // Handle point (dms).
                         if( typeof( self.response.object().data[tag].dms ) != "undefined" )
                         {
-                            data.dms.received = true;
-                            data.dms.data = self.response.object().data[tag].dms;
+                            data.dms.received(true);
+                            data.dms.data = "lon: "
+                                + self.response.object().data[tag].dms[ 0 ]
+                                + " lat: "
+                                + self.response.object().data[tag].dms[ 1 ];
                             if( name.length )
                                 name += " ";
-                            name += ("Lon: " + data.dms.data[0] + " Lat: " + data.dms.data[1])
+                            name += data.dms.data;
                         }
 
                         // Handle tile.
                         if( typeof( self.response.object().data[tag].tile ) != "undefined" )
                         {
-                            data.tile.received = true;
-                            data.tile.data = self.response.object().data[tag].tile;
+                            data.tile.received(true);
+                            data.tile.data = "X: "
+                                + self.response.object().data[tag].tile[ 0 ]
+                                + " Y: "
+                                + self.response.object().data[tag].tile[ 1 ];
                         }
 
                         // Handle bounding box (deg).
                         if( typeof( self.response.object().data[tag].bdec ) != "undefined" )
                         {
-                            data.bdec.received = true;
-                            data.bdec.data = self.response.object().data[tag].bdec;
+                            data.bdec.received(true);
+                            data.bdec.data = "[ lon: "
+                                           + self.response.object().data[tag].bdec[0][0]
+                                           + " lat: "
+                                           + self.response.object().data[tag].bdec[0][1]
+                                           + " ], [ lon: "
+                                           + self.response.object().data[tag].bdec[1][0]
+                                           + " lat: "
+                                           + self.response.object().data[tag].bdec[1][1]
+                                           + " ]";
+                        }
+
+                        // Handle bounding box (dms).
+                        if( typeof( self.response.object().data[tag].bdms ) != "undefined" )
+                        {
+                            data.bdms.received(true);
+                            data.bdms.data = "[ lon: "
+                                + self.response.object().data[tag].bdms[0][0]
+                                + " lat: "
+                                + self.response.object().data[tag].bdms[0][1]
+                                + " ], [ lon: "
+                                + self.response.object().data[tag].bdms[1][0]
+                                + " lat: "
+                                + self.response.object().data[tag].bdms[1][1]
+                                + " ]";
+                        }
+
+                        // Handle elevation.
+                        if( typeof( self.response.object().data[tag].elev ) != "undefined" )
+                        {
+                            data.elev.received = true;
+                            data.elev.data = self.response.object().data[tag].elev;
+                        }
+
+                        // Handle global environment stratification.
+                        if( typeof( self.response.object().data[tag].clim['2000'].gens ) != "undefined" )
+                        {
+                            data.gens.received(true);
+                            data.gens.data = self.response.object().data[tag].clim['2000'].gens;
+                        }
+
+                        // Handle bioclimatic variables.
+                        if( typeof( self.response.object().data[tag].clim['2000'].bio ) != "undefined" )
+                        {
+                            data.bio.received(true);
+                            data.bio.data = self.response.object().data[tag].clim['2000'].bio;
+                        }
+
+                        // Handle precipitation.
+                        if( typeof( self.response.object().data[tag].clim['2000'].prec ) != "undefined" )
+                        {
+                            data.prec.received(true);
+                            data.prec.data = self.response.object().data[tag].clim['2000'].prec;
+                        }
+
+                        // Handle temperature.
+                        if( typeof( self.response.object().data[tag].clim['2000'].temp ) != "undefined" )
+                        {
+                            data.temp.received(true);
+                            data.temp.data.l = self.response.object().data[tag].clim['2000'].temp.l;
+                            data.temp.data.m = self.response.object().data[tag].clim['2000'].temp.m;
+                            data.temp.data.h = self.response.object().data[tag].clim['2000'].temp.h;
                         }
 
                         // Set accordeon ids and hrefs.
@@ -480,32 +550,32 @@ function MyViewModel() {
     function baseDataElement() {
         // Identifier.
         var theData = {
-            "_id"   : { "received" : false, "data" : "" },
-            "pt"    : { "received" : false, "data" : ["", ""] },
-            "dms"   : { "received" : false, "data" : ["", ""] },
-            "tile"  : { "received" : false, "data" : ["", ""] },
-            "bdec"  : { "received" : false, "data" : [ ["", ""], ["", ""] ] },
-            "bdms"  : { "received" : false, "data" : [ ["", ""], ["", ""] ] },
-            "elev"  : { "received" : false, "data" : "" },
-            "gens"  : { "received" : false, "data" : { "id" : "", "c" : "", "e" : "" } },
-            "bio"   : { "received" : false, "data" : [] },
-            "prec"  : { "received" : false, "data" : [] },
-            "temp"  : { "received" : false, "data" : { "l" : [], "m" : [], "h" : [] } } };
+            "_id"   : { "received" : ko.observable(false), "data" : "" },
+            "pt"    : { "received" : ko.observable(false), "data" : "" },
+            "dms"   : { "received" : ko.observable(false), "data" : "" },
+            "tile"  : { "received" : ko.observable(false), "data" : "" },
+            "bdec"  : { "received" : ko.observable(false), "data" : "" },
+            "bdms"  : { "received" : ko.observable(false), "data" : "" },
+            "elev"  : { "received" : ko.observable(false), "data" : "" },
+            "gens"  : { "received" : ko.observable(false), "data" : { "id" : "", "c" : "", "e" : "" } },
+            "bio"   : { "received" : ko.observable(false), "data" : [] },
+            "prec"  : { "received" : ko.observable(false), "data" : [] },
+            "temp"  : { "received" : ko.observable(false), "data" : { "l" : [], "m" : [], "h" : [] } } };
 
         // Initialise bioclimatic variables.
         for( i=1; i<=19; i++ )
-            theData.bio[ i ] = "";
+            theData.bio.data[ i ] = "";
 
         // Initialise precipitation variables.
         for( i=1; i<=12; i++ )
-            theData.prec[ i ] = "";
+            theData.prec.data[ i ] = "";
 
         // Initialise temperature variables.
         for( i=1; i<=12; i++ )
         {
-            theData.temp.l[ i ] = "";
-            theData.temp.m[ i ] = "";
-            theData.temp.h[ i ] = "";
+            theData.temp.data.l[i] = "";
+            theData.temp.data.m[i] = "";
+            theData.temp.data.h[i] = "";
         }
 
         return theData;                                                             // ==>
