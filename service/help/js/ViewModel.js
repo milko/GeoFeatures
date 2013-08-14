@@ -68,7 +68,7 @@ function MyViewModel() {
     self.geometry = {
         "type" : ko.observable(""),             // Geometry type for request.
         "coordinates" : ko.observable("")       // Geometry coordinates for request.
-    }
+    };
 
     //
     // Response.
@@ -580,6 +580,31 @@ function MyViewModel() {
 
         return theData;                                                             // ==>
     }
+
+    //
+    // Month indexes.
+    //
+    self.months = ko.observableArray([]);
+    for( i=1; i<13; i++ )
+        self.months.push(i);
+
+    //
+    // Months.
+    //
+    self.monthNames = {
+        "1" : "January",
+        "2" : "February",
+        "3" : "March",
+        "4" : "April",
+        "5" : "May",
+        "6" : "June",
+        "7" : "July",
+        "8" : "August",
+        "9" : "September",
+        "10" : "October",
+        "11" : "November",
+        "12" : "December"
+    };
 }
 
 //

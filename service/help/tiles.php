@@ -217,7 +217,7 @@ require_once( "includes.inc.php" );
 					<!-- Data. -->
 					<div data-bind="visible: response.data.received">
 						<h4 class="text-info">Response</h4>
-						<table data-bind="visible: modifiers.range.sent() == false" width="100%">
+						<table data-bind="visible: modifiers.range.sent() == false">
 							<tbody data-bind="foreach: response.data.array">
 								<tr>
 									<td>
@@ -283,6 +283,79 @@ require_once( "includes.inc.php" );
 																<th>Isothermality: </th>
 																<td data-bind="text: data.bio.data[3]"></td>
 															</tr>
+															<tr data-bind="visible: data.bio.received">
+																<th>Temperature Seasonality: </th>
+																<td data-bind="text: data.bio.data[4]"></td>
+															</tr>
+															<tr data-bind="visible: data.bio.received">
+																<th>Max Temperature of Warmest Month: </th>
+																<td data-bind="text: data.bio.data[5] / 10"></td>
+															</tr>
+															<tr data-bind="visible: data.bio.received">
+																<th>Min Temperature of Coldest Month: </th>
+																<td data-bind="text: data.bio.data[6] / 10"></td>
+															</tr>
+															<tr data-bind="visible: data.bio.received">
+																<th>Temperature Annual Range: </th>
+																<td data-bind="text: data.bio.data[7] / 10"></td>
+															</tr>
+															<tr data-bind="visible: data.bio.received">
+																<th>Mean Temperature of Wettest Quarter: </th>
+																<td data-bind="text: data.bio.data[8] / 10"></td>
+															</tr>
+															<tr data-bind="visible: data.bio.received">
+																<th>Mean Temperature of Driest Quarter: </th>
+																<td data-bind="text: data.bio.data[9] / 10"></td>
+															</tr>
+															<tr data-bind="visible: data.bio.received">
+																<th>Mean Temperature of Warmest Quarter: </th>
+																<td data-bind="text: data.bio.data[10] / 10"></td>
+															</tr>
+															<tr data-bind="visible: data.bio.received">
+																<th>Mean Temperature of Coldest Quarter: </th>
+																<td data-bind="text: data.bio.data[11] / 10"></td>
+															</tr>
+															<tr data-bind="visible: data.bio.received">
+																<th>Annual Precipitation: </th>
+																<td data-bind="text: data.bio.data[12]"></td>
+															</tr>
+															<tr data-bind="visible: data.bio.received">
+																<th>Precipitation of Wettest Month: </th>
+																<td data-bind="text: data.bio.data[13]"></td>
+															</tr>
+															<tr data-bind="visible: data.bio.received">
+																<th>Precipitation of Driest Month: </th>
+																<td data-bind="text: data.bio.data[14]"></td>
+															</tr>
+															<tr data-bind="visible: data.bio.received">
+																<th>Precipitation Seasonality: </th>
+																<td data-bind="text: data.bio.data[15]"></td>
+															</tr>
+															<tr data-bind="visible: data.bio.received">
+																<th>Precipitation of Wettest Quarter: </th>
+																<td data-bind="text: data.bio.data[16]"></td>
+															</tr>
+															<tr data-bind="visible: data.bio.received">
+																<th>Precipitation of Driest Quarter: </th>
+																<td data-bind="text: data.bio.data[17]"></td>
+															</tr>
+															<tr data-bind="visible: data.bio.received">
+																<th>Precipitation of Warmest Quarter: </th>
+																<td data-bind="text: data.bio.data[18]"></td>
+															</tr>
+															<tr data-bind="visible: data.bio.received">
+																<th>Precipitation of Coldest Quarter: </th>
+																<td data-bind="text: data.bio.data[19]"></td>
+															</tr>
+														</table>
+														<hr />
+														<table>
+															<tbody data-bind="foreach: months">
+																<tr>
+																	<th data-bind="text: $index"></th>
+																	<td data-bind="text: $data"></td>
+																</tr>
+															</tbody>
 														</table>
 													</div>
 												</div>
