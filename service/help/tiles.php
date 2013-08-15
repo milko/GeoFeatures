@@ -349,11 +349,23 @@ require_once( "includes.inc.php" );
 															</tr>
 														</table>
 														<hr />
-														<table>
-															<tbody data-bind="foreach: months">
+														<table width=100%>
+															<thead>
 																<tr>
-																	<th data-bind="text: $index"></th>
-																	<td data-bind="text: $data"></td>
+																	<th></th>
+																	<th>Precipitation</th>
+																	<th>Min. temp</th>
+																	<th>Mean temp.</th>
+																	<th>Max temp.</th>
+																</tr>
+															</thead>
+															<tbody data-bind="foreach: $root.monthIndexes">
+																<tr>
+																	<th data-bind="text: $root.monthNames[$data]"></th>
+																	<td data-bind="text: $parent.data.prec.data[$data]"></td>
+																	<td data-bind="text: $parent.data.temp.data.l[$data] / 10"></td>
+																	<td data-bind="text: $parent.data.temp.data.m[$data] / 10"></td>
+																	<td data-bind="text: $parent.data.temp.data.h[$data] / 10"></td>
 																</tr>
 															</tbody>
 														</table>

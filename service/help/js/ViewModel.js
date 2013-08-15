@@ -147,6 +147,29 @@ function MyViewModel() {
     };
 
     //
+    // Month indexes.
+    //
+    self.monthIndexes = ko.observableArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+
+    //
+    // Months.
+    //
+    self.monthNames = {
+        "1" : "January",
+        "2" : "February",
+        "3" : "March",
+        "4" : "April",
+        "5" : "May",
+        "6" : "June",
+        "7" : "July",
+        "8" : "August",
+        "9" : "September",
+        "10" : "October",
+        "11" : "November",
+        "12" : "December"
+    };
+
+    //
     // Format panes.
     //
     self.asJson = ko.computed(function() {
@@ -580,31 +603,6 @@ function MyViewModel() {
 
         return theData;                                                             // ==>
     }
-
-    //
-    // Month indexes.
-    //
-    self.months = ko.observableArray([]);
-    for( i=1; i<13; i++ )
-        self.months.push(i);
-
-    //
-    // Months.
-    //
-    self.monthNames = {
-        "1" : "January",
-        "2" : "February",
-        "3" : "March",
-        "4" : "April",
-        "5" : "May",
-        "6" : "June",
-        "7" : "July",
-        "8" : "August",
-        "9" : "September",
-        "10" : "October",
-        "11" : "November",
-        "12" : "December"
-    };
 }
 
 //
