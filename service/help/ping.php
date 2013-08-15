@@ -66,8 +66,10 @@ require_once( "includes.inc.php" );
 					<li>
 						<a href="examples.php">Examples <span class="label label-warning">under construction</span></a>
 						<ul>
-							<li><a class="current" href="ping.php">Ping</a></li>
+							<li><a href="ping.php" class="current">Ping</a></li>
 							<li><a href="help.php">Help</a></li>
+							<li><a href="tiles.php">Tiles</a></li>
+							<li><a href="contains.php">Contains</a></li>
 						</ul>
 					</li>
 				</ul>

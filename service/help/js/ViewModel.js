@@ -524,34 +524,38 @@ function MyViewModel() {
                             data.elev.data = self.response.object().data[tag].elev;
                         }
 
-                        // Handle global environment stratification.
-                        if( typeof( self.response.object().data[tag].clim['2000'].gens ) != "undefined" )
+                        // Handle climate.
+                        if( typeof( self.response.object().data[tag].clim ) != "undefined" )
                         {
-                            data.gens.received(true);
-                            data.gens.data = self.response.object().data[tag].clim['2000'].gens;
-                        }
+                            // Handle global environment stratification.
+                            if( typeof( self.response.object().data[tag].clim['2000'].gens ) != "undefined" )
+                            {
+                                data.gens.received(true);
+                                data.gens.data = self.response.object().data[tag].clim['2000'].gens;
+                            }
 
-                        // Handle bioclimatic variables.
-                        if( typeof( self.response.object().data[tag].clim['2000'].bio ) != "undefined" )
-                        {
-                            data.bio.received(true);
-                            data.bio.data = self.response.object().data[tag].clim['2000'].bio;
-                        }
+                            // Handle bioclimatic variables.
+                            if( typeof( self.response.object().data[tag].clim['2000'].bio ) != "undefined" )
+                            {
+                                data.bio.received(true);
+                                data.bio.data = self.response.object().data[tag].clim['2000'].bio;
+                            }
 
-                        // Handle precipitation.
-                        if( typeof( self.response.object().data[tag].clim['2000'].prec ) != "undefined" )
-                        {
-                            data.prec.received(true);
-                            data.prec.data = self.response.object().data[tag].clim['2000'].prec;
-                        }
+                            // Handle precipitation.
+                            if( typeof( self.response.object().data[tag].clim['2000'].prec ) != "undefined" )
+                            {
+                                data.prec.received(true);
+                                data.prec.data = self.response.object().data[tag].clim['2000'].prec;
+                            }
 
-                        // Handle temperature.
-                        if( typeof( self.response.object().data[tag].clim['2000'].temp ) != "undefined" )
-                        {
-                            data.temp.received(true);
-                            data.temp.data.l = self.response.object().data[tag].clim['2000'].temp.l;
-                            data.temp.data.m = self.response.object().data[tag].clim['2000'].temp.m;
-                            data.temp.data.h = self.response.object().data[tag].clim['2000'].temp.h;
+                            // Handle temperature.
+                            if( typeof( self.response.object().data[tag].clim['2000'].temp ) != "undefined" )
+                            {
+                                data.temp.received(true);
+                                data.temp.data.l = self.response.object().data[tag].clim['2000'].temp.l;
+                                data.temp.data.m = self.response.object().data[tag].clim['2000'].temp.m;
+                                data.temp.data.h = self.response.object().data[tag].clim['2000'].temp.h;
+                            }
                         }
 
                         // Set accordeon ids and hrefs.

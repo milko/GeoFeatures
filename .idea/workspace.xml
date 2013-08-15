@@ -2,21 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1052b59d-5290-48ad-9416-801f75d6bbd4" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/service/help/contains.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/service/help/css/my.old.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/service/help/js/ViewModel.js" afterPath="$PROJECT_DIR$/service/help/js/ViewModel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/service/help/examples.php" afterPath="$PROJECT_DIR$/service/help/examples.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/service/help/help.php" afterPath="$PROJECT_DIR$/service/help/help.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/service/help/css/my.css" afterPath="$PROJECT_DIR$/service/help/css/my.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/service/help/ping.php" afterPath="$PROJECT_DIR$/service/help/ping.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/service/help/tiles.php" afterPath="$PROJECT_DIR$/service/help/tiles.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="GeoFeatures.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376566081519" ignored="false" />
+    <file path="/Dummy.txt" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376590987831" ignored="false" />
     <file path="/CGeoFeatureService.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376314839380" ignored="false" />
     <file path="/test_CGeoFeatureService.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1375784998181" ignored="false" />
     <file path="/a.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376145672789" ignored="false" />
     <file path="/help.html" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1375960323819" ignored="false" />
     <file path="/request.html" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1375955151932" ignored="false" />
     <file path="/response.html" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1375954527071" ignored="false" />
-    <file path="/examples.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376312416792" ignored="false" />
-    <file path="/response.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1375956826717" ignored="false" />
+    <file path="/examples.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376590489114" ignored="false" />
+    <file path="/response.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376580101511" ignored="false" />
     <file path="/request.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1375992581683" ignored="false" />
     <file path="/my.css" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376308354427" ignored="false" />
     <file path="/myViewModels.js" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376141312298" ignored="false" />
@@ -24,10 +30,11 @@
     <file path="/test.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376144084411" ignored="false" />
     <file path="/ping.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376325777587" ignored="false" />
     <file path="/help.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376312547975" ignored="false" />
-    <file path="/tiles.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376568513129" ignored="false" />
+    <file path="/tiles.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376582399348" ignored="false" />
     <file path="/myBindings.js" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376310799039" ignored="false" />
     <file path="/testPing.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376311771903" ignored="false" />
-    <file path="/ViewModel.js" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376566908037" ignored="false" />
+    <file path="/ViewModel.js" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376577881278" ignored="false" />
+    <file path="/contains.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376590760714" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,19 +62,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="test.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/service/help/test.php">
+      <file leaf-file-name="my.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/help/css/my.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="29" selection-start="1929" selection-end="1929" vertical-scroll-proportion="0.0">
+            <state line="29" column="30" selection-start="597" selection-end="597" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="my.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/service/help/css/my.css">
+      <file leaf-file-name="my.old.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/help/css/my.old.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="665" column="1" selection-start="14108" selection-end="14108" vertical-scroll-proportion="0.0">
+            <state line="23" column="0" selection-start="115" selection-end="425" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -76,17 +83,41 @@
       <file leaf-file-name="ping.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/service/help/ping.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="187" column="0" selection-start="6086" selection-end="6086" vertical-scroll-proportion="0.0">
+            <state line="88" column="44" selection-start="2263" selection-end="2263" vertical-scroll-proportion="-8.625">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tiles.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="help.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/help/help.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="71" column="0" selection-start="1789" selection-end="1939" vertical-scroll-proportion="-29.375">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tiles.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/service/help/tiles.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="367" column="113" selection-start="14411" selection-end="14411" vertical-scroll-proportion="0.9213836">
-              <folding />
+            <state line="354" column="24" selection-start="13791" selection-end="13791" vertical-scroll-proportion="-8.458333">
+              <folding>
+                <element signature="e#7#286#0" expanded="true" />
+                <element signature="n#style#0;n#pre#0;n#section#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="contains.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/help/contains.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="592" column="14" selection-start="27191" selection-end="27191" vertical-scroll-proportion="-8.458333">
+              <folding>
+                <element signature="e#8#291#0" expanded="true" />
+                <element signature="n#style#0;n#pre#0;n#section#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -94,34 +125,34 @@
       <file leaf-file-name="response.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/service/help/response.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="345" column="35" selection-start="18933" selection-end="18936" vertical-scroll-proportion="0.0">
+            <state line="50" column="19" selection-start="1354" selection-end="1354" vertical-scroll-proportion="-28.125">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CGeoFeatureService.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/classes/CGeoFeatureService.php">
+      <file leaf-file-name="examples.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/help/examples.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2028" column="0" selection-start="50619" selection-end="50619" vertical-scroll-proportion="0.0">
+            <state line="71" column="0" selection-start="2130" selection-end="2189" vertical-scroll-proportion="-16.291666">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CGeoFeatureService.inc.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/classes/CGeoFeatureService.inc.php">
+      <file leaf-file-name="help.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/help/help.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="800" column="53" selection-start="23353" selection-end="23385" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ViewModel.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ViewModel.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/service/help/js/ViewModel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="605" column="0" selection-start="25287" selection-end="25287" vertical-scroll-proportion="0.0">
+            <state line="376" column="65" selection-start="14912" selection-end="14912" vertical-scroll-proportion="0.2173913">
               <folding />
             </state>
           </provider>
@@ -145,22 +176,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/service/help/test.html" />
-        <option value="$PROJECT_DIR$/service/help/help.html" />
         <option value="$PROJECT_DIR$/service/help/request.php" />
-        <option value="$PROJECT_DIR$/service/help/response.php" />
         <option value="$PROJECT_DIR$/service/help/js/myViewModels.js" />
-        <option value="$PROJECT_DIR$/service/help/css/my.css" />
         <option value="$PROJECT_DIR$/service/help/js/myBindings.js" />
         <option value="$PROJECT_DIR$/service/help/testPing.php" />
-        <option value="$PROJECT_DIR$/service/help/help.php" />
         <option value="$PROJECT_DIR$/classes/CGeoFeatureService.php" />
         <option value="$PROJECT_DIR$/test/test_CGeoFeatureService.php" />
         <option value="$PROJECT_DIR$/service/help/test.php" />
-        <option value="$PROJECT_DIR$/service/help/ping.php" />
-        <option value="$PROJECT_DIR$/service/help/examples.php" />
         <option value="$PROJECT_DIR$/service/help/js/ViewModel.js" />
+        <option value="$PROJECT_DIR$/service/help/css/my.old.css" />
+        <option value="$PROJECT_DIR$/service/help/css/my.css" />
+        <option value="$PROJECT_DIR$/service/help/response.php" />
+        <option value="$PROJECT_DIR$/service/help/help.php" />
+        <option value="$PROJECT_DIR$/service/help/examples.php" />
+        <option value="$PROJECT_DIR$/service/help/ping.php" />
         <option value="$PROJECT_DIR$/service/help/tiles.php" />
+        <option value="$PROJECT_DIR$/service/help/contains.php" />
       </list>
     </option>
   </component>
@@ -451,18 +482,24 @@
       <created>1376492149117</created>
       <updated>1376492149118</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Finalised the tiles page.&#10;Need to transfer the logic to the other pages and eventually beautify the layout.">
+      <created>1376568633529</created>
+      <updated>1376568633529</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="2" y="22" width="1900" height="1160" extended-state="0" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32884616" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32884616" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32955772" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27400216" sideWeight="0.67082536" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19147788" sideWeight="0.67082536" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27400216" sideWeight="0.67115384" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19039914" sideWeight="0.67115384" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298077" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -471,8 +508,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917467" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -520,7 +555,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finalising array data model." />
+    <option name="LAST_COMMIT_MESSAGE" value="Finalised tiles page (forgot to make the range elements).&#10;Working on the CONTAINS page." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -541,6 +576,8 @@
     <MESSAGE value="Still working on the help example pages." />
     <MESSAGE value="Knockout foreach blues." />
     <MESSAGE value="Finalising array data model." />
+    <MESSAGE value="Finalised the tiles page.&#10;Need to transfer the logic to the other pages and eventually beautify the layout." />
+    <MESSAGE value="Finalised tiles page (forgot to make the range elements).&#10;Working on the CONTAINS page." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -560,29 +597,9 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/service/help/request.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="126" column="67" selection-start="5895" selection-end="5939" vertical-scroll-proportion="-0.625" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/service/help/js/knockout.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavascriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript5.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="7" selection-start="423" selection-end="423" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavascriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/ECMAScript.js2">
       <provider selected="true" editor-type-id="text-editor">
         <state line="19" column="29" selection-start="914" selection-end="914" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/service/help/help.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="32" selection-start="2186" selection-end="2186" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/classes/CBilFilesReader.php">
@@ -595,35 +612,9 @@
         <state line="118" column="66" selection-start="5119" selection-end="5119" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service/help/examples.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="22" selection-start="2031" selection-end="2031" vertical-scroll-proportion="-40.625" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/service/help/css/my.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="665" column="1" selection-start="14108" selection-end="14108" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/service/help/ping.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="187" column="0" selection-start="6086" selection-end="6086" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/service/help/test.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="72" column="29" selection-start="1929" selection-end="1929" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/classes/CGeoFeatureService.inc.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="800" column="53" selection-start="23353" selection-end="23385" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -635,23 +626,85 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/classes/CGeoFeatureService.inc.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="800" column="53" selection-start="23353" selection-end="23385" vertical-scroll-proportion="-20.625">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/help/css/my.old.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="0" selection-start="115" selection-end="425" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/help/css/my.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="30" selection-start="597" selection-end="597" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/service/help/response.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="345" column="35" selection-start="18933" selection-end="18936" vertical-scroll-proportion="0.0">
+        <state line="50" column="19" selection-start="1354" selection-end="1354" vertical-scroll-proportion="-28.125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/help/help.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="71" column="0" selection-start="1789" selection-end="1939" vertical-scroll-proportion="-29.375">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/help/examples.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="71" column="0" selection-start="2130" selection-end="2189" vertical-scroll-proportion="-16.291666">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/help/help.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/help/contains.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="592" column="14" selection-start="27191" selection-end="27191" vertical-scroll-proportion="-8.458333">
+          <folding>
+            <element signature="e#8#291#0" expanded="true" />
+            <element signature="n#style#0;n#pre#0;n#section#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/help/tiles.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="354" column="24" selection-start="13791" selection-end="13791" vertical-scroll-proportion="-8.458333">
+          <folding>
+            <element signature="e#7#286#0" expanded="true" />
+            <element signature="n#style#0;n#pre#0;n#section#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/help/ping.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="88" column="44" selection-start="2263" selection-end="2263" vertical-scroll-proportion="-8.625">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/service/help/js/ViewModel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="605" column="0" selection-start="25287" selection-end="25287" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/service/help/tiles.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="367" column="113" selection-start="14411" selection-end="14411" vertical-scroll-proportion="0.9213836">
+        <state line="376" column="65" selection-start="14912" selection-end="14912" vertical-scroll-proportion="0.2173913">
           <folding />
         </state>
       </provider>

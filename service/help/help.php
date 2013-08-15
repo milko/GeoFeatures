@@ -67,7 +67,8 @@
 						<a href="examples.php">Examples <span class="label label-warning">under construction</span></a>
 						<ul>
 							<li><a href="ping.php">Ping</a></li>
-							<li><a class="current" href="help.php">Help</a></li>
+							<li><a href="help.php" class="current">Help</a></li>
+							<li><a href="tiles.php">Tiles</a></li>
 						</ul>
 					</li>
 				</ul>

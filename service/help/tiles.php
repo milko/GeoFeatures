@@ -66,8 +66,10 @@ require_once( "includes.inc.php" );
 					<li>
 						<a href="examples.php">Examples <span class="label label-warning">under construction</span></a>
 						<ul>
-							<li><a class="current" href="ping.php">Ping</a></li>
+							<li><a href="ping.php">Ping</a></li>
 							<li><a href="help.php">Help</a></li>
+							<li><a href="tiles.php" class="current">Tiles</a></li>
+							<li><a href="contains.php">Contains</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -77,8 +79,8 @@ require_once( "includes.inc.php" );
 		<!-- CONTENTS CONTAINER -->
 		<div class="col-lg-8">
 
-			<!-- PING -->
-			<section id="ping">
+			<!-- TILES -->
+			<section id="tiles">
 				<h4>
 					Tiles list
 				</h4>
@@ -217,6 +219,7 @@ require_once( "includes.inc.php" );
 					<!-- Data. -->
 					<div data-bind="visible: response.data.received">
 						<h4 class="text-info">Response</h4>
+						<!-- Tiles list. -->
 						<table data-bind="visible: modifiers.range.sent() == false">
 							<tbody data-bind="foreach: response.data.array">
 								<tr>
@@ -377,6 +380,211 @@ require_once( "includes.inc.php" );
 								</tr>
 							</tbody>
 						</table>
+						<!-- Tiles ranges. -->
+						<div data-bind="if: modifiers.range.sent() == true">
+							<table data-bind="if: typeof(response.data.range().elev) != 'undefined'" width=100%>
+								<tr>
+									<th width=40%></th>
+									<th width=20%>Minimum</th>
+									<th width=20%>Mean</th>
+									<th width=20%>Maximum</th>
+								</tr>
+								<tr>
+									<th>Elevation: </th>
+									<td data-bind="text: response.data.range().elev.l"></td>
+									<td data-bind="text: response.data.range().elev.m"></td>
+									<td data-bind="text: response.data.range().elev.h"></td>
+								</tr>
+							</table>
+							<div data-bind="if: typeof(response.data.range().clim) != 'undefined'">
+								<table data-bind="if: typeof(response.data.range().clim['2000'].gens) != 'undefined'" width=100%>
+									<tr>
+										<th width=40%></th>
+										<th width=20%>Identifiers</th>
+										<th width=20%>Climatic zones</th>
+										<th width=20%>Environmental zones</th>
+									</tr>
+									<tr>
+										<th>Global environment stratification: </th>
+										<td data-bind="text: response.data.range().clim['2000'].gens.id"></td>
+										<td data-bind="text: response.data.range().clim['2000'].gens.c"></td>
+										<td data-bind="text: response.data.range().clim['2000'].gens.e"></td>
+									</tr>
+								</table>
+								<table data-bind="if: typeof(response.data.range().clim['2000'].bio) != 'undefined'" width=100%>
+									<tr>
+										<th width=40%></th>
+										<th width=20%>Minimum</th>
+										<th width=20%>Mean</th>
+										<th width=20%>Maximum</th>
+									</tr>
+									<tr data-bind="if: typeof(response.data.range().clim['2000'].bio['1']) != 'undefined'">
+										<th>Annual Mean Temperature: </th>
+										<td data-bind="text: response.data.range().clim['2000'].bio['1'].l / 10"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['1'].m / 10"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['1'].h / 10"></td>
+									</tr>
+									<tr data-bind="if: typeof(response.data.range().clim['2000'].bio['2']) != 'undefined'">
+										<th>Mean Diurnal Range: </th>
+										<td data-bind="text: response.data.range().clim['2000'].bio['2'].l / 10"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['2'].m / 10"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['2'].h / 10"></td>
+									</tr>
+									<tr data-bind="if: typeof(response.data.range().clim['2000'].bio['3']) != 'undefined'">
+										<th>Isothermality: </th>
+										<td data-bind="text: response.data.range().clim['2000'].bio['3'].l / 100"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['3'].m / 100"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['3'].h / 100"></td>
+									</tr>
+									<tr data-bind="if: typeof(response.data.range().clim['2000'].bio['4']) != 'undefined'">
+										<th>Temperature Seasonality: </th>
+										<td data-bind="text: response.data.range().clim['2000'].bio['4'].l / 100"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['4'].m / 100"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['4'].h / 100"></td>
+									</tr>
+									<tr data-bind="if: typeof(response.data.range().clim['2000'].bio['5']) != 'undefined'">
+										<th>Max Temperature of Warmest Month: </th>
+										<td data-bind="text: response.data.range().clim['2000'].bio['5'].l / 10"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['5'].m / 10"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['5'].h / 10"></td>
+									</tr>
+									<tr data-bind="if: typeof(response.data.range().clim['2000'].bio['6']) != 'undefined'">
+										<th>Min Temperature of Coldest Month: </th>
+										<td data-bind="text: response.data.range().clim['2000'].bio['6'].l / 10"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['6'].m / 10"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['6'].h / 10"></td>
+									</tr>
+									<tr data-bind="if: typeof(response.data.range().clim['2000'].bio['7']) != 'undefined'">
+										<th>Min Temperature Annual Range: </th>
+										<td data-bind="text: response.data.range().clim['2000'].bio['7'].l / 10"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['7'].m / 10"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['7'].h / 10"></td>
+									</tr>
+									<tr data-bind="if: typeof(response.data.range().clim['2000'].bio['7']) != 'undefined'">
+										<th>Min Temperature Annual Range: </th>
+										<td data-bind="text: response.data.range().clim['2000'].bio['7'].l / 10"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['7'].m / 10"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['7'].h / 10"></td>
+									</tr>
+									<tr data-bind="if: typeof(response.data.range().clim['2000'].bio['8']) != 'undefined'">
+										<th>Mean Temperature of Wettest Quarter: </th>
+										<td data-bind="text: response.data.range().clim['2000'].bio['8'].l / 10"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['8'].m / 10"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['8'].h / 10"></td>
+									</tr>
+									<tr data-bind="if: typeof(response.data.range().clim['2000'].bio['9']) != 'undefined'">
+										<th>Mean Temperature of Driest Quarter: </th>
+										<td data-bind="text: response.data.range().clim['2000'].bio['9'].l / 10"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['9'].m / 10"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['9'].h / 10"></td>
+									</tr>
+									<tr data-bind="if: typeof(response.data.range().clim['2000'].bio['10']) != 'undefined'">
+										<th>Mean Temperature of Warmest Quarter: </th>
+										<td data-bind="text: response.data.range().clim['2000'].bio['10'].l / 10"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['10'].m / 10"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['10'].h / 10"></td>
+									</tr>
+									<tr data-bind="if: typeof(response.data.range().clim['2000'].bio['11']) != 'undefined'">
+										<th>Mean Mean Temperature of Coldest Quarter: </th>
+										<td data-bind="text: response.data.range().clim['2000'].bio['11'].l / 10"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['11'].m / 10"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['11'].h / 10"></td>
+									</tr>
+									<tr data-bind="if: typeof(response.data.range().clim['2000'].bio['12']) != 'undefined'">
+										<th>Annual Precipitation: </th>
+										<td data-bind="text: response.data.range().clim['2000'].bio['12'].l"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['12'].m"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['12'].h"></td>
+									</tr>
+									<tr data-bind="if: typeof(response.data.range().clim['2000'].bio['13']) != 'undefined'">
+										<th>Precipitation of Wettest Month: </th>
+										<td data-bind="text: response.data.range().clim['2000'].bio['13'].l"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['13'].m"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['13'].h"></td>
+									</tr>
+									<tr data-bind="if: typeof(response.data.range().clim['2000'].bio['14']) != 'undefined'">
+										<th>Precipitation of Driest Month: </th>
+										<td data-bind="text: response.data.range().clim['2000'].bio['14'].l"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['14'].m"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['14'].h"></td>
+									</tr>
+									<tr data-bind="if: typeof(response.data.range().clim['2000'].bio['15']) != 'undefined'">
+										<th>Precipitation Seasonality: </th>
+										<td data-bind="text: response.data.range().clim['2000'].bio['15'].l"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['15'].m"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['15'].h"></td>
+									</tr>
+									<tr data-bind="if: typeof(response.data.range().clim['2000'].bio['16']) != 'undefined'">
+										<th>Precipitation of Wettest Quarter: </th>
+										<td data-bind="text: response.data.range().clim['2000'].bio['16'].l"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['16'].m"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['16'].h"></td>
+									</tr>
+									<tr data-bind="if: typeof(response.data.range().clim['2000'].bio['17']) != 'undefined'">
+										<th>Precipitation of Driest Quarter: </th>
+										<td data-bind="text: response.data.range().clim['2000'].bio['17'].l"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['17'].m"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['17'].h"></td>
+									</tr>
+									<tr data-bind="if: typeof(response.data.range().clim['2000'].bio['18']) != 'undefined'">
+										<th>Precipitation of Warmest Quarter: </th>
+										<td data-bind="text: response.data.range().clim['2000'].bio['18'].l"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['18'].m"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['18'].h"></td>
+									</tr>
+									<tr data-bind="if: typeof(response.data.range().clim['2000'].bio['19']) != 'undefined'">
+										<th>Precipitation of Coldest Quarter: </th>
+										<td data-bind="text: response.data.range().clim['2000'].bio['19'].l"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['19'].m"></td>
+										<td data-bind="text: response.data.range().clim['2000'].bio['19'].h"></td>
+									</tr>
+								</table>
+								<hr />
+								<table data-bind="if: typeof(response.data.range().clim['2000'].prec) != 'undefined' || typeof(response.data.range().clim['2000'].temp) != 'undefined'" width=100%>
+									<thead>
+										<tr>
+											<th></th>
+											<th data-bind="if: typeof(response.data.range().clim['2000'].prec) != 'undefined'" colspan="3">Precipitation</th>
+											<th data-bind="if: typeof(response.data.range().clim['2000'].temp) != 'undefined'" colspan="3">Min. temp</th>
+											<th data-bind="if: typeof(response.data.range().clim['2000'].temp) != 'undefined'" colspan="3">Mean temp.</th>
+											<th data-bind="if: typeof(response.data.range().clim['2000'].temp) != 'undefined'" colspan="3">Max temp.</th>
+										</tr>
+										<tr>
+											<th></th>
+											<th data-bind="if: typeof(response.data.range().clim['2000'].prec) != 'undefined'">Min.</th>
+											<th data-bind="if: typeof(response.data.range().clim['2000'].prec) != 'undefined'">Mean</th>
+											<th data-bind="if: typeof(response.data.range().clim['2000'].prec) != 'undefined'">Max.</th>
+											<th data-bind="if: typeof(response.data.range().clim['2000'].temp) != 'undefined'">Min.</th>
+											<th data-bind="if: typeof(response.data.range().clim['2000'].temp) != 'undefined'">Mean</th>
+											<th data-bind="if: typeof(response.data.range().clim['2000'].temp) != 'undefined'">Max.</th>
+											<th data-bind="if: typeof(response.data.range().clim['2000'].temp) != 'undefined'">Min.</th>
+											<th data-bind="if: typeof(response.data.range().clim['2000'].temp) != 'undefined'">Mean</th>
+											<th data-bind="if: typeof(response.data.range().clim['2000'].temp) != 'undefined'">Max.</th>
+											<th data-bind="if: typeof(response.data.range().clim['2000'].temp) != 'undefined'">Min.</th>
+											<th data-bind="if: typeof(response.data.range().clim['2000'].temp) != 'undefined'">Mean</th>
+											<th data-bind="if: typeof(response.data.range().clim['2000'].temp) != 'undefined'">Max.</th>
+										</tr>
+									</thead>
+									<tbody data-bind="foreach: $root.monthIndexes">
+										<tr>
+											<th data-bind="text: $root.monthNames[$data]"></th>
+											<td data-bind="text: $root.response.data.range().clim['2000'].prec[$data].l"></td>
+											<td data-bind="text: $root.response.data.range().clim['2000'].prec[$data].m"></td>
+											<td data-bind="text: $root.response.data.range().clim['2000'].prec[$data].h"></td>
+											<td data-bind="text: $root.response.data.range().clim['2000'].temp.l[$data].l / 10"></td>
+											<td data-bind="text: $root.response.data.range().clim['2000'].temp.l[$data].m / 10"></td>
+											<td data-bind="text: $root.response.data.range().clim['2000'].temp.l[$data].h / 10"></td>
+											<td data-bind="text: $root.response.data.range().clim['2000'].temp.m[$data].l / 10"></td>
+											<td data-bind="text: $root.response.data.range().clim['2000'].temp.m[$data].m / 10"></td>
+											<td data-bind="text: $root.response.data.range().clim['2000'].temp.m[$data].h / 10"></td>
+											<td data-bind="text: $root.response.data.range().clim['2000'].temp.h[$data].l / 10"></td>
+											<td data-bind="text: $root.response.data.range().clim['2000'].temp.h[$data].m / 10"></td>
+											<td data-bind="text: $root.response.data.range().clim['2000'].temp.h[$data].h / 10"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
 					</div>
 				</div>
 			</section>
