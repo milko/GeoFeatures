@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1052b59d-5290-48ad-9416-801f75d6bbd4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/service/help/css/my.css" afterPath="$PROJECT_DIR$/service/help/css/my.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/service/help/request.php" afterPath="$PROJECT_DIR$/service/help/request.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/service/help/response.php" afterPath="$PROJECT_DIR$/service/help/response.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="GeoFeatures.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376692858403" ignored="false" />
+    <file path="/Dummy.txt" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376694151847" ignored="false" />
     <file path="/CGeoFeatureService.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376661466045" ignored="false" />
     <file path="/test_CGeoFeatureService.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1375784998181" ignored="false" />
     <file path="/a.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376145672789" ignored="false" />
@@ -17,8 +16,8 @@
     <file path="/request.html" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1375955151932" ignored="false" />
     <file path="/response.html" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1375954527071" ignored="false" />
     <file path="/examples.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376683742258" ignored="false" />
-    <file path="/response.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376693377982" ignored="false" />
-    <file path="/request.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376693819476" ignored="false" />
+    <file path="/response.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376694623756" ignored="false" />
+    <file path="/request.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376694735250" ignored="false" />
     <file path="/my.css" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376693029871" ignored="false" />
     <file path="/myViewModels.js" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376141312298" ignored="false" />
     <file path="/test.html" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376682694630" ignored="false" />
@@ -70,42 +69,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="response.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="response.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/service/help/response.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="453" column="42" selection-start="24654" selection-end="24654" vertical-scroll-proportion="-27.25">
-              <folding>
-                <element signature="e#7#286#0" expanded="true" />
-              </folding>
+            <state line="41" column="37" selection-start="1111" selection-end="1111" vertical-scroll-proportion="0.34591195">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="request.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="request.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/service/help/request.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="470" column="0" selection-start="29331" selection-end="29331" vertical-scroll-proportion="0.67672414">
+            <state line="41" column="37" selection-start="1086" selection-end="1097" vertical-scroll-proportion="-25.625">
               <folding>
                 <element signature="e#7#287#0" expanded="true" />
                 <element signature="n#style#0;n#pre#0;n#dl#0;n#div#0;n#div#0;n#section#1;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#pre#0;n#dl#1;n#div#0;n#div#0;n#section#1;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#pre#0;n#dl#2;n#div#0;n#div#0;n#section#1;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#pre#0;n#dl#3;n#div#0;n#div#0;n#section#1;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#pre#0;n#dl#4;n#div#0;n#div#0;n#section#1;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#pre#0;n#dl#5;n#div#0;n#div#0;n#section#1;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#pre#0;n#dl#0;n#div#0;n#div#0;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#pre#0;n#dl#1;n#div#0;n#div#0;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#pre#0;n#dl#2;n#div#0;n#div#0;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#pre#0;n#dl#3;n#div#0;n#div#0;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#pre#0;n#dl#0;n#div#0;n#div#0;n#section#3;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#pre#0;n#dl#1;n#div#0;n#div#0;n#section#3;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#pre#0;n#dl#2;n#div#0;n#div#0;n#section#3;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#pre#0;n#dl#3;n#div#0;n#div#0;n#section#3;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#pre#0;n#dl#0;n#div#0;n#div#0;n#section#4;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#pre#0;n#dl#1;n#div#0;n#div#0;n#section#4;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#pre#0;n#dl#2;n#div#0;n#div#0;n#section#4;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#pre#0;n#dl#0;n#div#0;n#div#0;n#section#5;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#pre#0;n#dl#1;n#div#0;n#div#0;n#section#5;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -168,7 +147,7 @@
       <file leaf-file-name="help.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/service/help/help.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="23" selection-start="2707" selection-end="2707" vertical-scroll-proportion="-25.625">
+            <state line="66" column="23" selection-start="2707" selection-end="2707" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -206,8 +185,8 @@
         <option value="$PROJECT_DIR$/service/help/ping.php" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/service/help/css/my.css" />
-        <option value="$PROJECT_DIR$/service/help/response.php" />
         <option value="$PROJECT_DIR$/service/help/request.php" />
+        <option value="$PROJECT_DIR$/service/help/response.php" />
       </list>
     </option>
   </component>
@@ -394,8 +373,8 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Sites/development" />
     <property name="FullScreen" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -522,7 +501,11 @@
       <created>1376688001801</created>
       <updated>1376688001801</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Version 1.0">
+      <created>1376693905604</created>
+      <updated>1376693905604</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -552,8 +535,8 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32964602" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32964602" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32955772" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2777778" sideWeight="0.67274475" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19902913" sideWeight="0.67274475" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2777778" sideWeight="0.67274475" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20118663" sideWeight="0.67274475" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32964602" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -659,9 +642,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/service/help/examples.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="7" selection-end="7" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="2" column="0" selection-start="7" selection-end="7" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/service/help/help.html">
@@ -704,9 +685,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/service/help/examples.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="7" selection-end="7" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="2" column="0" selection-start="7" selection-end="7" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/service/help/contains.php">
@@ -737,7 +716,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/service/help/help.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="23" selection-start="2707" selection-end="2707" vertical-scroll-proportion="-25.625">
+        <state line="66" column="23" selection-start="2707" selection-end="2707" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -749,40 +728,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service/help/response.php">
+    <entry file="file://$PROJECT_DIR$/service/help/request.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="453" column="42" selection-start="24654" selection-end="24654" vertical-scroll-proportion="-27.25">
+        <state line="41" column="37" selection-start="1086" selection-end="1097" vertical-scroll-proportion="-25.625">
           <folding>
-            <element signature="e#7#286#0" expanded="true" />
+            <element signature="e#7#287#0" expanded="true" />
+            <element signature="n#style#0;n#pre#0;n#dl#0;n#div#0;n#div#0;n#section#1;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service/help/request.php">
+    <entry file="file://$PROJECT_DIR$/service/help/response.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="470" column="0" selection-start="29331" selection-end="29331" vertical-scroll-proportion="0.67672414">
-          <folding>
-            <element signature="e#7#287#0" expanded="true" />
-            <element signature="n#style#0;n#pre#0;n#dl#0;n#div#0;n#div#0;n#section#1;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#pre#0;n#dl#1;n#div#0;n#div#0;n#section#1;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#pre#0;n#dl#2;n#div#0;n#div#0;n#section#1;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#pre#0;n#dl#3;n#div#0;n#div#0;n#section#1;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#pre#0;n#dl#4;n#div#0;n#div#0;n#section#1;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#pre#0;n#dl#5;n#div#0;n#div#0;n#section#1;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#pre#0;n#dl#0;n#div#0;n#div#0;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#pre#0;n#dl#1;n#div#0;n#div#0;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#pre#0;n#dl#2;n#div#0;n#div#0;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#pre#0;n#dl#3;n#div#0;n#div#0;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#pre#0;n#dl#0;n#div#0;n#div#0;n#section#3;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#pre#0;n#dl#1;n#div#0;n#div#0;n#section#3;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#pre#0;n#dl#2;n#div#0;n#div#0;n#section#3;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#pre#0;n#dl#3;n#div#0;n#div#0;n#section#3;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#pre#0;n#dl#0;n#div#0;n#div#0;n#section#4;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#pre#0;n#dl#1;n#div#0;n#div#0;n#section#4;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#pre#0;n#dl#2;n#div#0;n#div#0;n#section#4;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#pre#0;n#dl#0;n#div#0;n#div#0;n#section#5;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#pre#0;n#dl#1;n#div#0;n#div#0;n#section#5;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state line="41" column="37" selection-start="1111" selection-end="1111" vertical-scroll-proportion="0.34591195">
+          <folding />
         </state>
       </provider>
     </entry>

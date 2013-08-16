@@ -39,7 +39,7 @@ require_once( "includes.inc.php" );
 </head>
 <body data-spy="scroll" data-target="#sidebar">
     <!-- HEADER -->
-    <div class="container">
+    <div class="container" id="intro">
         <div class="page-header">
             <h1>GeoFeatures<br/><small>web-service documentation</small></h1>
         </div>
@@ -57,7 +57,7 @@ require_once( "includes.inc.php" );
                             <a href="help.html">Introduction</a>
                         </li>
                         <li>
-                            <a href="response.php">Response data structure</a>
+                            <a href="#intro">Response data structure</a>
                             <ul class="nav">
                                 <li><a href="#status">Status</a></li>
                                 <ul class="nav">
@@ -113,7 +113,7 @@ require_once( "includes.inc.php" );
             <div class="col-lg-8">
 
                 <!-- INTRODUCTION -->
-                <section id="intro">
+                <section>
                     <h4>
                         Response data structure
                     </h4>
