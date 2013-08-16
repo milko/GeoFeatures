@@ -2,14 +2,14 @@
 
 /*=======================================================================================
  *																						*
- *								    response.php	           							*
+ *								    request.php	             							*
  *																						*
  *======================================================================================*/
 
 /**
- *	Response web-service help page.
+ *	Request web-service help page.
  *
- *	This file contains the helo page for the response of the web-service.
+ *	This file contains the helo page for the request to the web-service.
  *
  *	@package	WORLDCLIM30
  *	@subpackage	Services
@@ -30,12 +30,14 @@ require_once( "includes.inc.php" );
 <html>
 <head>
     <title>GeoFeatures documentation - Request data structure</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="css/my.css" rel="stylesheet" media="screen">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap -->
+	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<!-- Local -->
+	<link href="css/my.css" rel="stylesheet" media="screen">
 </head>
-<body>
+<body data-spy="scroll" data-target="#sidebar">
     <!-- HEADER -->
     <div class="container">
         <div class="page-header">
@@ -44,16 +46,13 @@ require_once( "includes.inc.php" );
     </div>
 
     <!-- MAIN CONTAINER -->
-    <div class="container bs-docs-container">
+    <div class="container">
         <div class="row">
 
             <!-- NAVIGATION SIDE BAR CONTAINER -->
             <div class="col-lg-4">
-                <div id="sidebar"
-                     data-spy="affix"
-                     class="bs-sidebar"
-                     data-offset-top="100">
-                    <ul class="nav bs-sidenav affix">
+	            <div id="sidebar" class="side-bar affix-top" data-spy="affix" data-offset-top="100">
+		            <ul class="nav side-nav">
                         <li>
                             <a href="help.html">Introduction</a>
                         </li>
@@ -62,9 +61,9 @@ require_once( "includes.inc.php" );
                         </li>
                         <li>
                             <a class="current" href="request.php">Request data structure</a>
-                            <ul>
+                            <ul class="nav">
                                 <li><a href="#operation">Operations</a></li>
-                                <ul>
+	                            <ul class="nav">
                                     <li><a href="#ping"><abbr title="ping">Ping</abbr></a></li>
                                     <li><a href="#help"><abbr title="help">Help</abbr></a></li>
                                     <li><a href="#tiles"><abbr title="tiles">Tiles</abbr></a></li>
@@ -73,34 +72,34 @@ require_once( "includes.inc.php" );
                                     <li><a href="#near"><abbr title="near">Near</abbr></a></li>
                                 </ul>
                                 <li><a href="#shape">Shapes</a></li>
-                                <ul>
+	                            <ul class="nav">
                                     <li><a href="#tile"><abbr title="tile">Tiles</abbr></a></li>
                                     <li><a href="#point"><abbr title="point">Point</abbr></a></li>
                                     <li><a href="#rect"><abbr title="rect">Rectangle</abbr></a></li>
                                     <li><a href="#polygon"><abbr title="polygon">Polygon</abbr></a></li>
                                 </ul>
                                 <li><a href="#modifiers">Modifiers</a></li>
-                                <ul>
+	                            <ul class="nav">
                                     <li><a href="#count"><abbr title="count">Count</abbr></a></li>
                                     <li><a href="#range"><abbr title="range">Range</abbr></a></li>
                                     <li><a href="#cpy-request"><abbr title="cpy-request">Return request</abbr></a></li>
                                     <li><a href="#cpy-connection"><abbr title="cpy-connection">Return connection</abbr></a></li>
                                 </ul>
                                 <li><a href="#filters">Filters</a></li>
-                                <ul>
+	                            <ul class="nav">
                                     <li><a href="#elevation"><abbr title="elevation">Elevation range</abbr></a></li>
                                     <li><a href="#distance"><abbr title="distance">Maximum distance</abbr></a></li>
                                     <li><a href="#select"><abbr title="select">Property selector</abbr></a></li>
                                 </ul>
                                 <li><a href="#paging">Paging</a></li>
-                                <ul>
+	                            <ul class="nav">
                                     <li><a href="#start"><abbr title="start">Start</abbr></a></li>
                                     <li><a href="#limit"><abbr title="limit">Limit</abbr></a></li>
                                 </ul>
                             </ul>
                         </li>
                         <li>
-	                        <a href="examples.php">Examples <span class="label label-warning">under construction</span></a>
+	                        <a href="examples.php">Examples</a>
                         </li>
                     </ul>
                 </div>

@@ -30,12 +30,14 @@ require_once( "includes.inc.php" );
 <html>
 <head>
     <title>GeoFeatures documentation - Response data structure</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<!-- Local -->
     <link href="css/my.css" rel="stylesheet" media="screen">
 </head>
-<body>
+<body data-spy="scroll" data-target="#sidebar">
     <!-- HEADER -->
     <div class="container">
         <div class="page-header">
@@ -44,21 +46,21 @@ require_once( "includes.inc.php" );
     </div>
 
     <!-- MAIN CONTAINER -->
-    <div class="container bs-docs-container">
+    <div class="container">
         <div class="row">
 
             <!-- NAVIGATION SIDE BAR CONTAINER -->
             <div class="col-lg-4">
-                <div id="sidebar" data-spy="affix" class="bs-sidebar affix-top" data-offset-top="100">
-                    <ul class="nav bs-sidenav affix">
+                <div id="sidebar" class="side-bar affix-top" data-spy="affix" data-offset-top="100">
+                    <ul class="nav side-nav">
                         <li>
                             <a href="help.html">Introduction</a>
                         </li>
                         <li>
-                            <a class="current" href="response.php">Response data structure</a>
-                            <ul>
+                            <a href="response.php">Response data structure</a>
+                            <ul class="nav">
                                 <li><a href="#status">Status</a></li>
-                                <ul>
+                                <ul class="nav">
                                     <li><a href="#state"><abbr title="state">Operation state</abbr></a></li>
                                     <li><a href="#total"><abbr title="total">Affected count</abbr></a></li>
                                     <li><a href="#start"><abbr title="start">Starting record</abbr></a></li>
@@ -72,13 +74,13 @@ require_once( "includes.inc.php" );
                                 </ul>
                                 <li><a href="#request">Request</a></li>
                                 <li><a href="#connection">Connection</a></li>
-                                <ul>
+                                <ul class="nav">
                                     <li><a href="#server"><abbr title="server">Database server</abbr></a></li>
                                     <li><a href="#database"><abbr title="database">Database name</abbr></a></li>
                                     <li><a href="#collection"><abbr title="collection">Collection name</abbr></a></li>
                                 </ul>
                                 <li><a href="#data">Response</a></li>
-                                <ul>
+                                <ul class="nav">
                                     <li><a href="#_id"><abbr title="_id">Tile index</abbr></a></li>
                                     <li><a href="#pt"><abbr title="pt">Tile center point (deg)</abbr></a></li>
                                     <li><a href="#dms"><abbr title="dms">Tile center point (dms)</abbr></a></li>
@@ -88,7 +90,7 @@ require_once( "includes.inc.php" );
                                     <li><a href="#elev"><abbr title="elev">Tile elevation</abbr></a></li>
                                     <li><a href="#dist"><abbr title="dist">Distance</abbr></a></li>
                                     <li><a href="#clim"><abbr title="clim">Tile climate</abbr></a></li>
-                                    <ul>
+                                    <ul class="nav">
                                         <li><a href="#gens"><abbr title="gens">Global environment stratification</abbr></a></li>
                                         <li><a href="#bio"><abbr title="bio">Bioclimatic variables</abbr></a></li>
                                         <li><a href="#prec"><abbr title="prec">Monthly precipitation</abbr></a></li>
@@ -101,7 +103,7 @@ require_once( "includes.inc.php" );
                             <a href="request.php">Request data structure</a>
                         </li>
                         <li>
-	                        <a href="examples.php">Examples <span class="label label-warning">under construction</span></a>
+	                        <a href="examples.php">Examples</a>
                         </li>
                     </ul>
                 </div>

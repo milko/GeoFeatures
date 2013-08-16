@@ -1,15 +1,10 @@
-/*
- * Bootstrap Documentation
- * Special styles for presenting Bootstrap's documentation and code examples.
- */
-
-
-
-/* Key scaffolding
+/* Misc ellaneous customisations
 -------------------------------------------------- */
 
-body {
-    position: relative; /* For scrollyspy */
+/* By default it's not affixed in mobile views, so undo that */
+h1 {
+    margin-top: 10px;
+    line-height: 1;
 }
 
 
@@ -17,36 +12,110 @@ body {
 -------------------------------------------------- */
 
 /* By default it's not affixed in mobile views, so undo that */
-.bs-sidebar.affix {
+.side-bar.affix {
     position: static;
 }
 
 /* First level of nav */
-.bs-sidenav {
-    /*    margin-top: 30px;
-        margin-bottom: 30px;
-    */    padding-top:    10px;
+.side-nav {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    padding-top:    10px;
     padding-bottom: 10px;
     text-shadow: 0 1px 0 #fff;
     background-color: #f7f5fa;
     border-radius: 5px;
+    width: 360px;
 }
 
 /* All levels of nav */
-.bs-sidebar .nav > li > a {
+.side-bar .nav > li > a {
     display: block;
-    /*    color: #716b7a;*/
+    color: #716b7a;
     padding: 5px 20px;
 }
-
-.current{
+.side-bar .nav > li > a:hover,
+.side-bar .nav > li > a:focus {
+    text-decoration: none;
+    background-color: #e5e3e9;
+    border-right: 1px solid #dbd8e0;
+}
+.side-bar .nav > .active > a,
+.side-bar .nav > .active:hover > a,
+.side-bar .nav > .active:focus > a {
     font-weight: bold;
     color: #563d7c;
     background-color: transparent;
     border-right: 1px solid #563d7c;
 }
 
-/* Response tables. */
-.table-condensed th {
-    width : 30%;
+/* Nav: second level (shown on .active) */
+.side-bar .nav .nav {
+/*    display: none; /* Hide by default, but at >768px, show it */
+    margin-bottom: 8px;
+}
+.side-bar .nav .nav > li > a {
+    padding-top:    3px;
+    padding-bottom: 3px;
+    padding-left: 30px;
+    font-size: 90%;
+}
+
+/* Nav: third level (shown on .active) */
+.side-bar .nav .nav .nav {
+/*    display: none; /* Hide by default, but at >768px, show it */
+    margin-bottom: 5px;
+}
+.side-bar .nav .nav .nav > li > a {
+    padding-top:    2px;
+    padding-bottom: 2px;
+    padding-left: 45px;
+    font-size: 75%;
+}
+
+/* Tablets and up */
+@media screen and (min-width: 768px) {
+
+    /* Show the docs nav */
+    .side-bar {
+        display: block;
+    }
+
+}
+
+/* Tablets/desktops and up */
+@media screen and (min-width: 992px) {
+
+    /* Show the hidden subnavs when space allows it */
+    .side-bar .nav > .active > ul {
+        display: block;
+    }
+    /* Widen the fixed sidebar */
+    .side-bar.affix,
+    .side-bar.affix-bottom {
+        width: 213px;
+    }
+    .side-bar.affix {
+        position: fixed; /* Undo the static from mobile-first approach */
+        top: 40px;
+    }
+    .side-bar.affix-bottom {
+        position: absolute; /* Undo the static from mobile-first approach */
+    }
+    .side-bar.affix-bottom .side-nav,
+    .side-bar.affix .side-nav {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+
+/* Large desktops and up */
+@media screen and (min-width: 1200px) {
+
+    /* Widen the fixed sidebar again */
+    .side-bar.affix-bottom,
+    .side-bar.affix {
+        width: 263px;
+    }
+
 }

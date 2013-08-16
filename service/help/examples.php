@@ -30,12 +30,14 @@ require_once( "includes.inc.php" );
 <html>
 <head>
     <title>GeoFeatures documentation - Examples</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="css/my.css" rel="stylesheet" media="screen">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap -->
+	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<!-- Local -->
+	<link href="css/my.css" rel="stylesheet" media="screen">
 </head>
-<body>
+<body data-spy="scroll" data-target="#sidebar">
     <!-- HEADER -->
     <div class="container">
         <div class="page-header">
@@ -44,16 +46,13 @@ require_once( "includes.inc.php" );
     </div>
 
     <!-- MAIN CONTAINER -->
-    <div class="container bs-docs-container">
+    <div class="container">
         <div class="row">
 
 	        <!-- NAVIGATION SIDE BAR CONTAINER -->
 	        <div class="col-lg-4">
-		        <div id="sidebar"
-		             data-spy="affix"
-		             class="bs-sidebar"
-		             data-offset-top="100">
-			        <ul class="nav bs-sidenav affix">
+		        <div id="sidebar" class="side-bar affix-top" data-spy="affix" data-offset-top="100">
+			        <ul class="nav side-nav">
 				        <li>
 					        <a href="help.html">Introduction</a>
 				        </li>
@@ -64,8 +63,8 @@ require_once( "includes.inc.php" );
 					        <a href="request.php">Request data structure</a>
 				        </li>
 				        <li>
-					        <a class="current" href="examples.php">Examples <span class="label label-warning">under construction</span></a>
-					        <ul>
+					        <a href="#intro">Examples</a>
+					        <ul class="nav">
 						        <li><a href="ping.php">Ping</a></li>
 						        <li><a href="help.php">Help</a></li>
 						        <li><a href="tiles.php">Tiles</a></li>
