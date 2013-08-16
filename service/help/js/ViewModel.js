@@ -67,7 +67,34 @@ function MyViewModel() {
     //
     self.geometry = {
         "type" : ko.observable(""),             // Geometry type for request.
-        "coordinates" : ko.observable("")       // Geometry coordinates for request.
+        "tile" : {
+            "coordinates" : ko.observable("33065587,774896741")
+        },
+        "point" : {
+            "coordinates" : ko.observable("-27.16,-59.47")
+        },
+        "rect" : {
+            "coordinates" : ko.observable("-10,30;-11,29")
+        },
+        "polygon" : {
+            "coordinates" : ko.observable("12.8199,42.8422;12.8207,42.8158;12.8699,42.8166;12.8678,42.8398;12.8199,42.8422:12.8344,42.8347;12.8348,42.8225;12.857,42.8223;12.8566,42.8332;12.8344,42.8347")
+        }
+    };
+
+    //
+    // Paging.
+    //
+    self.paging = {
+        "start" : ko.observable(""),
+        "limit" : ko.observable("")
+    };
+
+    //
+    // Elevation.
+    //
+    self.elevation = {
+        "min" : ko.observable(""),
+        "max" : ko.observable("")
     };
 
     //
@@ -136,6 +163,10 @@ function MyViewModel() {
                 "type" : ko.observable(""),                 // Geometry type.
                 "coordinates" : ko.observable(""),          // Geometry coordinates.
                 "area" : ko.observable("")                  // Geometry area.
+            },
+            "elevation" : {                             // Elevation range.
+                "received" : ko.observable(false),          // Received elevation.
+                "range" : ko.observable("")                 // Elevation range.
             }
         },
         "data" : {                                  // Service data.
@@ -235,7 +266,34 @@ function MyViewModel() {
 
         // Add geometries.
         if( self.geometry.type().length )
-            theURL += ("&" + self.geometry.type() + "=" + self.geometry.coordinates());
+        {
+            switch( self.geometry.type() )
+            {
+                case "tile":
+                    theURL += ("&" + self.geometry.type() + "=" + self.geometry.tile.coordinates());
+                    break;
+                case "point":
+                    theURL += ("&" + self.geometry.type() + "=" + self.geometry.point.coordinates());
+                    break;
+                case "rect":
+                    theURL += ("&" + self.geometry.type() + "=" + self.geometry.rect.coordinates());
+                    break;
+                case "polygon":
+                    theURL += ("&" + self.geometry.type() + "=" + self.geometry.polygon.coordinates());
+                    break;
+            }
+        }
+
+        // Add elevation.
+        if( self.elevation.min().length
+         && self.elevation.max().length )
+            theURL += ("&" + "elevation=" + self.elevation.min() + "," +self.elevation.max());
+
+        // Add paging.
+        if( self.paging.start().length )
+            theURL += ("&" + "start=" + self.paging.start());
+        if( self.paging.limit().length )
+            theURL += ("&" + "limit=" + self.paging.limit());
 
         return theURL;                                                              // ==>
     });
@@ -356,6 +414,8 @@ function MyViewModel() {
     // Parse response request.
     //
     function parseRequest() {
+        // Init local storage.
+        var tmp;
         // Check if request is there.
         self.response.request.received( typeof(self.response.object().request) != "undefined" );
         if( self.response.request.received() )
@@ -396,7 +456,7 @@ function MyViewModel() {
                 switch( self.response.request.geometry.type() )
                 {
                     case "Tiles":
-                        var tmp = "";
+                        tmp = "";
                         for( i=0; i<self.response.object().request.geometry.coordinates.length; i++ )
                         {
                             if( tmp.length )
@@ -405,7 +465,62 @@ function MyViewModel() {
                         }
                         self.response.request.geometry.coordinates(tmp);
                         break;
+
+                    case "Point":
+                        tmp = "Lon: ";
+                        tmp += self.response.object().request.geometry.coordinates[0];
+                        tmp += " Lat: ";
+                        tmp += self.response.object().request.geometry.coordinates[1];
+                        self.response.request.geometry.coordinates(tmp);
+                        break;
+
+                    case "Rect":
+                        tmp = "[";
+                        tmp += self.response.object().request.geometry.coordinates[0][0];
+                        tmp += ", ";
+                        tmp += self.response.object().request.geometry.coordinates[0][1];
+                        tmp += "] ; ["
+                        tmp += self.response.object().request.geometry.coordinates[1][0];
+                        tmp += ", ";
+                        tmp += self.response.object().request.geometry.coordinates[1][1];
+                        tmp += "]";
+                        self.response.request.geometry.coordinates(tmp);
+                        break;
+
+                    case "Polygon":
+                        tmp = "";
+                        for( var outer = 0; outer < self.response.object().request.geometry.coordinates.length; outer++ )
+                        {
+                            if( outer )
+                                tmp += "; ";
+                            tmp += "[ ";
+                            for( var inner = 0; inner < self.response.object().request.geometry.coordinates[outer].length; inner++ )
+                            {
+                                if( inner )
+                                    tmp += ", ";
+                                tmp += "[";
+                                tmp += self.response.object().request.geometry.coordinates[outer][inner][0];
+                                tmp += " ";
+                                tmp += self.response.object().request.geometry.coordinates[outer][inner][1];
+                                tmp += "]";
+                            }
+                            tmp += " ]";
+                        }
+                        self.response.request.geometry.coordinates(tmp);
+                        break;
                 }
+            }
+
+            // Handle elevation.
+            self.response.request.elevation.received
+                ( typeof(self.response.object().request.elevation) != "undefined" );
+            if( self.response.request.elevation.received() )
+            {
+                tmp = "Min: ";
+                tmp += self.response.object().request.elevation[0];
+                tmp += " Max: ";
+                tmp += self.response.object().request.elevation[1];
+                self.response.request.elevation.range(tmp);
             }
         }
     }

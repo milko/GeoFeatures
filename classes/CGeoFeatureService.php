@@ -765,8 +765,8 @@ class CGeoFeatureService extends ArrayObject
 		//
 		// Parse paging.
 		//
-		if( $this->_Modifiers( kAPI_OP_COUNT )
-		 || $this->_Modifiers( kAPI_OP_RANGE ) )
+		if( (! $this->_Modifiers( kAPI_OP_COUNT ))
+		 || (! $this->_Modifiers( kAPI_OP_RANGE )) )
 		{
 			$this->_Start( $theRequest );
 			$this->_Limit( $theRequest );
@@ -2121,7 +2121,7 @@ class CGeoFeatureService extends ArrayObject
 			{
 				case kAPI_GEOMETRY_TYPE_POINT:
 					if( ($dist = $this->_Distance()) !== NULL )
-						$geometry = _Point2Sphere( $geometry, $dist );
+						$geometry = $this->_Point2Sphere( $geometry, $dist );
 					else
 					{
 						$geometry = $this->_Point2Rect( $geometry );

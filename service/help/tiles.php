@@ -81,9 +81,7 @@ require_once( "includes.inc.php" );
 
 			<!-- TILES -->
 			<section id="tiles">
-				<h4>
-					Tiles list
-				</h4>
+			<h4>Tiles list <small>[<strong><code>tiles</code></strong>]</small></h4>
 				<p>
 					This operation can be used to retrieve a list of tiles by tile
 					<a href="response.php#_id"><abbr title="_id">identifier</abbr></a>.
@@ -115,14 +113,26 @@ require_once( "includes.inc.php" );
 						<button type="submit" class="btn btn-primary" data-bind="visible: operation() == 'ping', disable: button.disabled()">
 							Try
 						</button>
-						<div class="input-group" data-bind="visible: geometry.type() == 'tile'">
+						<div class="input-group" data-bind="if: geometry.type() == 'tile'">
 							<span class="input-group-addon">Tiles:</span>
-							<input type="text" class="form-control" data-bind="value: geometry.coordinates" />
+							<input type="text" class="form-control" data-bind="value: geometry.tile.coordinates" />
 							<span class="input-group-btn">
 								<button type="submit" class="btn btn-primary" data-bind="disable: button.disabled()">
 									Try
 								</button>
 							</span>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">Min elevation::</span>
+							<input type="text" class="form-control" data-bind="value: elevation.min" />
+							<span class="input-group-addon">Max elevation:</span>
+							<input type="text" class="form-control" data-bind="value: elevation.max" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">Start:</span>
+							<input type="text" class="form-control" data-bind="value: paging.start" />
+							<span class="input-group-addon">Limit:</span>
+							<input type="text" class="form-control" data-bind="value: paging.limit" />
 						</div>
 					</form>
 				</div>
@@ -160,6 +170,18 @@ require_once( "includes.inc.php" );
 								<th>Affected count:</th>
 								<td data-bind="text: response.status.total.data"></td>
 							</tr>
+							<tr data-bind="visible: response.status.count.received">
+								<th>Actual count:</th>
+								<td data-bind="text: response.status.count.data"></td>
+							</tr>
+							<tr data-bind="visible: response.status.start.received">
+								<th>Page start:</th>
+								<td data-bind="text: response.status.start.data"></td>
+							</tr>
+							<tr data-bind="visible: response.status.limit.received">
+								<th>Page limit:</th>
+								<td data-bind="text: response.status.limit.data"></td>
+							</tr>
 						</table>
 					</div>
 
@@ -193,6 +215,10 @@ require_once( "includes.inc.php" );
 										</tr>
 									</table>
 								</td>
+							</tr>
+							<tr data-bind="visible: response.request.elevation.received">
+								<th>Elevation:</th>
+								<td data-bind="text: response.request.elevation.range"></td>
 							</tr>
 						</table>
 					</div>
@@ -613,7 +639,6 @@ require_once( "includes.inc.php" );
 	myModel.modifiers.count.visible(true);
 
 	myModel.geometry.type("tile");
-	myModel.geometry.coordinates("33065587,774896741");
 </script>
 </body>
 </html>

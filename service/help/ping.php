@@ -81,9 +81,7 @@ require_once( "includes.inc.php" );
 
 			<!-- PING -->
 			<section id="ping">
-				<h4>
-					Ping request
-				</h4>
+				<h4>Ping request <small>[<strong><code>ping</code></strong>]</small></h4>
 				<p>
 					This operation can be used to check if the service is working, if
 					so, the response <a href="response.php#data"><abbr title="data">data</abbr></a>

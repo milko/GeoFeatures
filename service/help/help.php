@@ -80,9 +80,7 @@
 
 			<!-- PING -->
 			<section id="ping">
-				<h4>
-					Help request
-				</h4>
+				<h4>Help request <small>[<strong><code>help</code></strong>]</small></h4>
 				<p>
 					If you got to this page you must have already tested it ;-)
 				</p>

@@ -50,3 +50,8 @@ body {
 .table-condensed th {
     width : 30%;
 }
+
+/* Accordion. */
+.accordion {
+    margin-bottom : 4px;
+}

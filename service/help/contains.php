@@ -81,9 +81,7 @@
 
 				<!-- CONTAINS -->
 				<section id="contains">
-				<h4>
-					Contasins
-				</h4>
+				<h4>Contains <small>[<strong><code>contains</code></strong>]</small></h4>
 				<p>
 					This operation can be used to retrieve tiles that contain the provided
 					point, or the tiles contained by the provided geometry.
@@ -112,14 +110,53 @@
 								<input type="checkbox" data-bind="checked: modifiers.count.checked"> Results count&nbsp;
 							</label>
 						</div>
-						<div class="input-group" data-bind="visible: geometry.type() == 'point'">
+						<div class="input-group" data-bind="if: geometry.type() == 'point'">
 							<span class="input-group-addon">Point:</span>
-							<input type="text" class="form-control" data-bind="value: geometry.coordinates" />
+							<input type="text" class="form-control" data-bind="value: geometry.point.coordinates" />
 							<span class="input-group-btn">
-								<button type="submit" class="btn btn-primary" data-bind="disable: button.disabled()">
+								<button type="submit" class="btn btn-primary" data-bind="disable: button.disabled">
 									Try
 								</button>
 							</span>
+						</div>
+						<div class="input-group" data-bind="if: geometry.type() == 'rect'">
+							<span class="input-group-addon">Rect:</span>
+							<input type="text" class="form-control" data-bind="value: geometry.rect.coordinates" />
+							<span class="input-group-btn">
+								<button type="submit" class="btn btn-primary" data-bind="disable: button.disabled">
+									Try
+								</button>
+							</span>
+						</div>
+						<div class="input-group" data-bind="if: geometry.type() == 'polygon'">
+							<span class="input-group-addon">Polygon:</span>
+							<input type="text" class="form-control" data-bind="value: geometry.polygon.coordinates" />
+							<span class="input-group-btn">
+								<button type="submit" class="btn btn-primary" data-bind="disable: button.disabled">
+									Try
+								</button>
+							</span>
+						</div>
+						<label class="radio-inline">
+							<input type="radio" name="geometry" value="point" data-bind="checked: geometry.type">Point
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="geometry" value="rect" data-bind="checked: geometry.type">Rect
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="geometry" value="polygon" data-bind="checked: geometry.type">Polygon
+						</label>
+						<div class="input-group">
+							<span class="input-group-addon">Min elevation::</span>
+							<input type="text" class="form-control" data-bind="value: elevation.min" />
+							<span class="input-group-addon">Max elevation:</span>
+							<input type="text" class="form-control" data-bind="value: elevation.max" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">Start:</span>
+							<input type="text" class="form-control" data-bind="value: paging.start" />
+							<span class="input-group-addon">Limit:</span>
+							<input type="text" class="form-control" data-bind="value: paging.limit" />
 						</div>
 					</form>
 				</div>
@@ -157,6 +194,18 @@
 							<th>Affected count:</th>
 							<td data-bind="text: response.status.total.data"></td>
 						</tr>
+						<tr data-bind="visible: response.status.count.received">
+							<th>Actual count:</th>
+							<td data-bind="text: response.status.count.data"></td>
+						</tr>
+						<tr data-bind="visible: response.status.start.received">
+							<th>Page start:</th>
+							<td data-bind="text: response.status.start.data"></td>
+						</tr>
+						<tr data-bind="visible: response.status.limit.received">
+							<th>Page limit:</th>
+							<td data-bind="text: response.status.limit.data"></td>
+						</tr>
 					</table>
 				</div>
 
@@ -190,6 +239,10 @@
 									</tr>
 								</table>
 							</td>
+						</tr>
+						<tr data-bind="visible: response.request.elevation.received">
+							<th>Elevation:</th>
+							<td data-bind="text: response.request.elevation.range"></td>
 						</tr>
 					</table>
 				</div>
@@ -610,7 +663,6 @@
 		myModel.modifiers.count.visible(true);
 
 		myModel.geometry.type("point");
-		myModel.geometry.coordinates("-27.16,-59.47");
 	</script>
 </body>
 </html>
