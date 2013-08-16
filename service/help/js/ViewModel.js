@@ -98,6 +98,11 @@ function MyViewModel() {
     };
 
     //
+    // Distance.
+    //
+    self.distance = ko.observable("");
+
+    //
     // Response.
     //
     self.response = {
@@ -167,6 +172,10 @@ function MyViewModel() {
             "elevation" : {                             // Elevation range.
                 "received" : ko.observable(false),          // Received elevation.
                 "range" : ko.observable("")                 // Elevation range.
+            },
+            "distance" : {                             // Elevation range.
+                "received" : ko.observable(false),          // Received distance.
+                "value" : ko.observable("")                 // Maximum distance.
             }
         },
         "data" : {                                  // Service data.
@@ -286,8 +295,12 @@ function MyViewModel() {
 
         // Add elevation.
         if( self.elevation.min().length
-         && self.elevation.max().length )
+            && self.elevation.max().length )
             theURL += ("&" + "elevation=" + self.elevation.min() + "," +self.elevation.max());
+
+        // Add distance.
+        if( self.distance().length )
+            theURL += ("&" + "distance=" + self.distance());
 
         // Add paging.
         if( self.paging.start().length )
@@ -479,7 +492,7 @@ function MyViewModel() {
                         tmp += self.response.object().request.geometry.coordinates[0][0];
                         tmp += ", ";
                         tmp += self.response.object().request.geometry.coordinates[0][1];
-                        tmp += "] ; ["
+                        tmp += "] ; [";
                         tmp += self.response.object().request.geometry.coordinates[1][0];
                         tmp += ", ";
                         tmp += self.response.object().request.geometry.coordinates[1][1];
@@ -522,6 +535,12 @@ function MyViewModel() {
                 tmp += self.response.object().request.elevation[1];
                 self.response.request.elevation.range(tmp);
             }
+
+            // Handle distance.
+            self.response.request.distance.received
+                ( typeof(self.response.object().request.distance) != "undefined" );
+            if( self.response.request.distance.received() )
+                self.response.request.distance.value(self.response.object().request.distance);
         }
     }
 
@@ -639,6 +658,13 @@ function MyViewModel() {
                             data.elev.data = self.response.object().data[tag].elev;
                         }
 
+                        // Handle distance.
+                        if( typeof( self.response.object().data[tag].dist ) != "undefined" )
+                        {
+                            data.dist.received = true;
+                            data.dist.data = self.response.object().data[tag].dist;
+                        }
+
                         // Handle climate.
                         if( typeof( self.response.object().data[tag].clim ) != "undefined" )
                         {
@@ -699,6 +725,7 @@ function MyViewModel() {
             "bdec"  : { "received" : ko.observable(false), "data" : "" },
             "bdms"  : { "received" : ko.observable(false), "data" : "" },
             "elev"  : { "received" : ko.observable(false), "data" : "" },
+            "dist"  : { "received" : ko.observable(false), "data" : "" },
             "gens"  : { "received" : ko.observable(false), "data" : { "id" : "", "c" : "", "e" : "" } },
             "bio"   : { "received" : ko.observable(false), "data" : [] },
             "prec"  : { "received" : ko.observable(false), "data" : [] },

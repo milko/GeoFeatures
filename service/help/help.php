@@ -69,6 +69,9 @@
 							<li><a href="ping.php">Ping</a></li>
 							<li><a href="help.php" class="current">Help</a></li>
 							<li><a href="tiles.php">Tiles</a></li>
+							<li><a href="contains.php">Contains</a></li>
+							<li><a href="intersects.php">Intersects</a></li>
+							<li><a href="near.php">Near</a></li>
 						</ul>
 					</li>
 				</ul>

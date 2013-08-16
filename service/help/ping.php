@@ -70,6 +70,8 @@ require_once( "includes.inc.php" );
 							<li><a href="help.php">Help</a></li>
 							<li><a href="tiles.php">Tiles</a></li>
 							<li><a href="contains.php">Contains</a></li>
+							<li><a href="intersects.php">Intersects</a></li>
+							<li><a href="near.php">Near</a></li>
 						</ul>
 					</li>
 				</ul>
