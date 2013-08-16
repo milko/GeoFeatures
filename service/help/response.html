@@ -1,31 +1,3 @@
-<?php
-
-/*=======================================================================================
- *																						*
- *								    response.php	           							*
- *																						*
- *======================================================================================*/
-
-/**
- *	Response web-service help page.
- *
- *	This file contains the helo page for the response of the web-service.
- *
- *	@package	WORLDCLIM30
- *	@subpackage	Services
- *
- *	@author		Milko A. Škofič <m.skofic@cgiar.org>
- *	@version	1.00 08/08/2013
- */
-
-/**
- * URL.
- *
- * This include file contains the web-service URL.
- */
-require_once( "includes.inc.php" );
-
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,7 +26,7 @@ require_once( "includes.inc.php" );
                 <div id="sidebar" class="side-bar affix-top" data-spy="affix" data-offset-top="100">
                     <ul class="nav side-nav">
                         <li>
-                            <a href="help.html">Introduction</a>
+                            <a href="index.html">Introduction</a>
                         </li>
                         <li>
                             <a href="#intro">Response data structure</a>
@@ -100,10 +72,10 @@ require_once( "includes.inc.php" );
                             </ul>
                         </li>
                         <li>
-                            <a href="request.php">Request data structure</a>
+                            <a href="request.html">Request data structure</a>
                         </li>
                         <li>
-	                        <a href="examples.php">Examples</a>
+	                        <a href="examples.html">Examples</a>
                         </li>
                     </ul>
                 </div>
@@ -290,7 +262,7 @@ require_once( "includes.inc.php" );
                         recognised or handled, in the format used by the service.<br />
                         <small class="text-warning">Note that this is generally used for debugging purposes and
                             is only available if
-                            <a href="request.php#cpy-request"><abbr title="cpy-request">requested</abbr></a>
+                            <a href="request.html#cpy-request"><abbr title="cpy-request">requested</abbr></a>
                             to the service.</small>
                     </p>
                 </section>
@@ -304,7 +276,7 @@ require_once( "includes.inc.php" );
                         This section will return the <em>database connection</em> information.<br />
                         <small class="text-warning">Note that this is generally used for debugging purposes and
                             is only available if
-                            <a href="request.php#cpy-connection"><abbr title="cpy-connection">requested</abbr></a>
+                            <a href="request.html#cpy-connection"><abbr title="cpy-connection">requested</abbr></a>
                             to the service.<br />
                             <strong>This option is disabled in production.</strong></small>
                     </p>

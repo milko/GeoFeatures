@@ -1,31 +1,3 @@
-<?php
-
-/*=======================================================================================
- *																						*
- *								    request.php	             							*
- *																						*
- *======================================================================================*/
-
-/**
- *	Request web-service help page.
- *
- *	This file contains the helo page for the request to the web-service.
- *
- *	@package	WORLDCLIM30
- *	@subpackage	Services
- *
- *	@author		Milko A. Škofič <m.skofic@cgiar.org>
- *	@version	1.00 08/08/2013
- */
-
-/**
- * URL.
- *
- * This include file contains the web-service URL.
- */
-require_once( "includes.inc.php" );
-
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,10 +26,10 @@ require_once( "includes.inc.php" );
 	            <div id="sidebar" class="side-bar affix-top" data-spy="affix" data-offset-top="100">
 		            <ul class="nav side-nav">
                         <li>
-                            <a href="help.html">Introduction</a>
+                            <a href="index.html">Introduction</a>
                         </li>
                         <li>
-                            <a href="response.php">Response data structure</a>
+                            <a href="response.html">Response data structure</a>
                         </li>
                         <li>
                             <a href="#intro">Request data structure</a>
@@ -99,7 +71,7 @@ require_once( "includes.inc.php" );
                             </ul>
                         </li>
                         <li>
-	                        <a href="examples.php">Examples</a>
+	                        <a href="examples.html">Examples</a>
                         </li>
                     </ul>
                 </div>
@@ -176,8 +148,8 @@ require_once( "includes.inc.php" );
 			                    <dd>
 				                    This operation can be used to check if the service is running,
 				                    it does not require any other parameter and simply returns the
-				                    <a href="response.php#status">status</a> and the string
-				                    <code>pong</code> in the <a href="response.php#data">response</a>
+				                    <a href="response.html#status">status</a> and the string
+				                    <code>pong</code> in the <a href="response.html#data">response</a>
 				                    section.<br />
 			                    </dd>
 			                    <pre class="pre-scrollable" style="white-space: nowrap"><?php echo( kURL.'?' ); ?><strong>ping</strong></pre>
@@ -195,7 +167,7 @@ require_once( "includes.inc.php" );
 			                    <dt>Tiles [<strong><code>tiles</code></strong>]</dt>
 			                    <dd>
 				                    This operation can be used to retrieve a list of tiles by
-				                    <a href="response.php#_id"><abbr title="_id">identifier</abbr></a>. The operation
+				                    <a href="response.html#_id"><abbr title="_id">identifier</abbr></a>. The operation
 				                    requires the <a href="#tile"><abbr title="tile">tile</abbr></a> shape parameter
 				                    holding the list of requested tile identifiers.
 			                    </dd>
@@ -232,7 +204,7 @@ require_once( "includes.inc.php" );
 				                    of tile records, 100 at most, sorted by distance, the closest first.
 				                    The operation requires the shape parameter in the form of a point.
 				                    This is the only operation that will add the
-				                    <a href="response.php#dist"><abbr title="dist">distance</abbr></a>
+				                    <a href="response.html#dist"><abbr title="dist">distance</abbr></a>
 				                    value to the results. The operatrion also accepts the
 				                    <a href="#distance"><abbr title="distance">maximum distance</abbr></a>
 				                    parameter to limit the selection to a maximum distance from the provided
@@ -257,7 +229,7 @@ require_once( "includes.inc.php" );
 			                    <dt>Tiles [<strong><code>tile</code></strong>]</dt>
 			                    <dd>
 				                    This shape represents a comma-delimited list of tile
-				                    <a href="response.php#_id"><abbr title="_id">identifiers</abbr></a>, this geometry
+				                    <a href="response.html#_id"><abbr title="_id">identifiers</abbr></a>, this geometry
 				                    is only used by the <a href="#tiles"><abbr title="tiles">tiles</abbr></a>
 				                    operation.
 			                    </dd>
@@ -320,8 +292,8 @@ require_once( "includes.inc.php" );
 			                    <dt>Count [<strong><code>count</code></strong>]</dt>
 			                    <dd>
 				                    This option will disable the results pane and only return
-				                    the <a href="response.php#total"><abbr title="total">affected count</abbr></a>
-				                    in the <a href="response.php#status">status section</a>.<br />
+				                    the <a href="response.html#total"><abbr title="total">affected count</abbr></a>
+				                    in the <a href="response.html#status">status section</a>.<br />
 				                    This option is incompatible with the
 				                    <a href="#range"><abbr title="range">range</abbr></a> modifier,
 				                    if both are provided, this one will be chosen.
@@ -342,10 +314,10 @@ require_once( "includes.inc.php" );
 				                    <strong><code>h</code></strong> the <em>maximum</em> value; categorical
 				                    variables will be expanded into an array containing all distinct
 				                    values. Only the
-				                    <a href="response.php#elev"><abbr title="elev">elevation</abbr></a>
-				                    and the <a href="response.php#clim"><abbr title="clim">climate section</abbr></a>
+				                    <a href="response.html#elev"><abbr title="elev">elevation</abbr></a>
+				                    and the <a href="response.html#clim"><abbr title="clim">climate section</abbr></a>
 				                    will be included in the result (including the
-				                    <a href="response.php#dist"><abbr title="dist">distance</abbr></a>
+				                    <a href="response.html#dist"><abbr title="dist">distance</abbr></a>
 				                    when requesting the
 				                    <a href="#near"><abbr title="near">near</abbr></a> operation).<br />
 				                    This option is incompatible with the
@@ -365,7 +337,7 @@ require_once( "includes.inc.php" );
 			                    <dt>Copy request [<strong><code>cpy-request</code></strong>]</dt>
 			                    <dd>
 				                    This option will return the request provided to the service
-				                    in the <a href="response.php#request">request section</a> of
+				                    in the <a href="response.html#request">request section</a> of
 				                    the response. This option can be useful to debug service requests
 				                    and can be cumulated with all other modifiers.
 			                    </dd>
@@ -375,7 +347,7 @@ require_once( "includes.inc.php" );
 			                    <dt>Copy connection [<strong><code>cpy-connection</code></strong>]</dt>
 			                    <dd>
 				                    This option will return the database connection parameters used by the service
-				                    in the <a href="response.php#connection">connection section</a> of
+				                    in the <a href="response.html#connection">connection section</a> of
 				                    the response. This option can be useful to debug service requests
 				                    and can be cumulated with all other modifiers.<br />
 				                    <small class="text-warning"><em>In the production environment this option is disabled</em></small>.
@@ -428,7 +400,7 @@ require_once( "includes.inc.php" );
 				                    should be <em>included</em> in the result, if the value is
 				                    <code>0</code> the property should be <em>excluded</em>.
 				                    The property is represented by the label used in the
-				                    <a href="response.php#data">response data section</a>. To
+				                    <a href="response.html#data">response data section</a>. To
 				                    select properties that are part of a subsection, separate
 				                    each level by a period: for instance, to select the average
 				                    minimum temperature in February, you would provide the

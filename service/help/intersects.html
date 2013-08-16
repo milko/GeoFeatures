@@ -1,31 +1,3 @@
-<?php
-
-/*=======================================================================================
- *																						*
- *								    intersects.php	           							*
- *																						*
- *======================================================================================*/
-
-/**
- *	Response web-service intersects examples page.
- *
- *	This file contains the examples page for the response of the web-service.
- *
- *	@package	WORLDCLIM30
- *	@subpackage	Services
- *
- *	@author		Milko A. Škofič <m.skofic@cgiar.org>
- *	@version	1.00 08/08/2013
- */
-
-/**
- * URL.
- *
- * This include file contains the web-service URL.
- */
-require_once( "includes.inc.php" );
-
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,23 +26,23 @@ require_once( "includes.inc.php" );
 	<div id="sidebar" class="side-bar affix-top" data-spy="affix" data-offset-top="100">
 		<ul class="nav side-nav">
 			<li>
-				<a href="help.html">Introduction</a>
+				<a href="index.html">Introduction</a>
 			</li>
 			<li>
-				<a href="response.php">Response data structure</a>
+				<a href="response.html">Response data structure</a>
 			</li>
 			<li>
-				<a href="request.php">Request data structure</a>
+				<a href="request.html">Request data structure</a>
 			</li>
 			<li>
-				<a href="examples.php">Examples</a>
+				<a href="examples.html">Examples</a>
 				<ul class="nav">
-					<li><a href="ping.php">Ping</a></li>
-					<li><a href="help.php">Help</a></li>
-					<li><a href="tiles.php">Tiles</a></li>
-					<li><a href="contains.php">Contains</a></li>
+					<li><a href="ping.html">Ping</a></li>
+					<li><a href="help.html">Help</a></li>
+					<li><a href="tiles.html">Tiles</a></li>
+					<li><a href="contains.html">Contains</a></li>
 					<li><a href="#intersects" class="current">Intersects</a></li>
-					<li><a href="near.php">Near</a></li>
+					<li><a href="near.html">Near</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -648,9 +620,10 @@ require_once( "includes.inc.php" );
 <script src="js/bootstrap.min.js"></script>
 <!-- Include knockout.js -->
 <script src="js/knockout.js"></script>
+<!-- Base URL -->
+<script src="js/includes.inc.js"></script>
 <!-- Set base stuff. -->
 <script type="text/javascript">
-	var baseURL = "<?php echo( kURL ); ?>";
 	var baseCMD = "intersects";
 </script>
 <!-- Include my.js -->
