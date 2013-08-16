@@ -49,10 +49,7 @@ require_once( "includes.inc.php" );
 
             <!-- NAVIGATION SIDE BAR CONTAINER -->
             <div class="col-lg-4">
-                <div id="sidebar"
-                     data-spy="affix"
-                     class="bs-sidebar"
-                     data-offset-top="100">
+                <div id="sidebar" data-spy="affix" class="bs-sidebar affix-top" data-offset-top="100">
                     <ul class="nav bs-sidenav affix">
                         <li>
                             <a href="help.html">Introduction</a>

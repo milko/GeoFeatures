@@ -448,15 +448,15 @@ require_once( "includes.inc.php" );
 									</tr>
 									<tr data-bind="if: typeof(response.data.range().clim['2000'].bio['1']) != 'undefined'">
 										<th>Annual Mean Temperature: </th>
-										<td data-bind="text: response.data.range().clim['2000'].bio['1'].l / 10"></td>
-										<td data-bind="text: Math.round((response.data.range().clim['2000'].bio['1'].m / 10)*100)/100"></td>
-										<td data-bind="text: response.data.range().clim['2000'].bio['1'].h / 10"></td>
+										<td data-bind="text: (response.data.range().clim['2000'].bio['1'].l / 10).toFixed(2)"></td>
+										<td data-bind="text: (response.data.range().clim['2000'].bio['1'].m / 10).toFixed(2)"></td>
+										<td data-bind="text: (response.data.range().clim['2000'].bio['1'].h / 10).toFixed(2)"></td>
 									</tr>
 									<tr data-bind="if: typeof(response.data.range().clim['2000'].bio['2']) != 'undefined'">
 										<th>Mean Diurnal Range: </th>
-										<td data-bind="text: response.data.range().clim['2000'].bio['2'].l / 10"></td>
-										<td data-bind="text: Math.round((response.data.range().clim['2000'].bio['2'].m / 10)*100)/100"></td>
-										<td data-bind="text: response.data.range().clim['2000'].bio['2'].h / 10"></td>
+										<td data-bind="text: (response.data.range().clim['2000'].bio['2'].l / 10).toFixed(2)"></td>
+										<td data-bind="text: (response.data.range().clim['2000'].bio['2'].m / 10).toFixed(2)"></td>
+										<td data-bind="text: (response.data.range().clim['2000'].bio['2'].h / 10).toFixed(2)"></td>
 									</tr>
 									<tr data-bind="if: typeof(response.data.range().clim['2000'].bio['3']) != 'undefined'">
 										<th>Isothermality: </th>

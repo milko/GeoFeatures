@@ -576,7 +576,7 @@ function MyViewModel() {
                     {
                         // Init local storage.
                         var name = "";                  // Element name.
-                        var data = baseDataElement();   // Elelent data.
+                        var data = baseDataElement();   // Element data.
 
                         // Handle identifier.
                         if( typeof( self.response.object().data[tag]._id ) != "undefined" )
@@ -656,6 +656,9 @@ function MyViewModel() {
                         {
                             data.elev.received = true;
                             data.elev.data = self.response.object().data[tag].elev;
+                            if( name.length )
+                                name += " elevation: ";
+                            name += data.elev.data;
                         }
 
                         // Handle distance.
@@ -663,6 +666,9 @@ function MyViewModel() {
                         {
                             data.dist.received = true;
                             data.dist.data = self.response.object().data[tag].dist;
+                            if( name.length )
+                                name += " distance: ";
+                            name += data.dist.data;
                         }
 
                         // Handle climate.
