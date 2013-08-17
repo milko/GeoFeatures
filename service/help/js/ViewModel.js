@@ -27,6 +27,11 @@ function MyViewModel() {
     var self = this;
 
     //
+    // URL.
+    //
+    self.baseURL = ko.observable( baseURL );
+
+    //
     // Operation.
     // Note that this property requires the baseCMD global.
     //
