@@ -1857,7 +1857,7 @@ class CGeoFeatureService extends ArrayObject
 	protected function _RequestHelp()
 	{
 		header( 'Location: help/index.html' ) ;
-//		$this->_BuildResponse( 'HELP!' );
+		exit;
 
 	} // _RequestHelp.
 
