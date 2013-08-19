@@ -106,7 +106,7 @@ try
 	//
 	// Iterate batches.
 	//
-	while( $rs->count( FALSE ) )
+	while( $rs->count( TRUE ) )
 	{
 		//
 		// Iterate records.
