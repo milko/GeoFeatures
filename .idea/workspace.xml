@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1052b59d-5290-48ad-9416-801f75d6bbd4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/batch/AddPoly.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/CGeoFeatureService.inc.php" afterPath="$PROJECT_DIR$/classes/CGeoFeatureService.inc.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="GeoFeatures.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376924466450" ignored="false" />
+    <file path="/Dummy.txt" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376924510884" ignored="false" />
     <file path="/CGeoFeatureService.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376753835179" ignored="false" />
     <file path="/test_CGeoFeatureService.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1375784998181" ignored="false" />
     <file path="/a.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376911140507" ignored="false" />
@@ -102,7 +100,7 @@
       <file leaf-file-name="AddPoly.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/batch/AddPoly.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="8" selection-start="1374" selection-end="1374" vertical-scroll-proportion="0.29602888">
+            <state line="51" column="8" selection-start="1374" selection-end="1374" vertical-scroll-proportion="0.29674307">
               <folding>
                 <element signature="e#7#406#0" expanded="true" />
               </folding>
@@ -548,7 +546,11 @@
       <created>1376910810845</created>
       <updated>1376910810845</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Added polygon to new GRID-30 collection.">
+      <created>1376924515749</created>
+      <updated>1376924515749</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -794,7 +796,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/batch/AddPoly.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="8" selection-start="1374" selection-end="1374" vertical-scroll-proportion="0.29602888">
+        <state line="51" column="8" selection-start="1374" selection-end="1374" vertical-scroll-proportion="0.29674307">
           <folding>
             <element signature="e#7#406#0" expanded="true" />
           </folding>
