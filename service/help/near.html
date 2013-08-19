@@ -22,7 +22,7 @@
 	<div class="row">
 
 	<!-- NAVIGATION SIDE BAR CONTAINER -->
-	<div class="col-lg-4">
+	<div class="col-lg-3">
 		<div id="sidebar" class="side-bar affix-top" data-spy="affix" data-offset-top="100">
 			<ul class="nav side-nav">
 				<li>
@@ -50,7 +50,7 @@
 	</div>
 
 	<!-- CONTENTS CONTAINER -->
-	<div class="col-lg-8">
+	<div class="col-lg-9">
 
 	<!-- NEAR -->
 	<section id="near">
@@ -59,6 +59,12 @@
 		This operation can be used to retrieve tiles by proximity, the service will return
 		at most 100 tiles sorted by distance from the provided point.
 	</p>
+    <p class="text-warning">
+        Note that the service will timeout after 30 seconds, so be reasonable with your
+        requests: if you use a point in the US and ask for the closest tiles with an
+        elevation in the range of 8000 meters it will have to go in the Himalayas and you
+        will not get a response.
+    </p>
 
 	<!-- Form panel. -->
 	<div class="panel">

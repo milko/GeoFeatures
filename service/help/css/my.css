@@ -25,7 +25,7 @@ h1 {
     text-shadow: 0 1px 0 #fff;
     background-color: #f7f5fa;
     border-radius: 5px;
-    width: 360px;
+    width: 240px;
 }
 
 /* All levels of nav */
@@ -51,7 +51,7 @@ h1 {
 
 /* Nav: second level (shown on .active) */
 .side-bar .nav .nav {
-/*    display: none; /* Hide by default, but at >768px, show it */
+    /*    display: none; /* Hide by default, but at >768px, show it */
     margin-bottom: 8px;
 }
 .side-bar .nav .nav > li > a {
@@ -63,7 +63,7 @@ h1 {
 
 /* Nav: third level (shown on .active) */
 .side-bar .nav .nav .nav {
-/*    display: none; /* Hide by default, but at >768px, show it */
+    /*    display: none; /* Hide by default, but at >768px, show it */
     margin-bottom: 5px;
 }
 .side-bar .nav .nav .nav > li > a {
@@ -74,7 +74,8 @@ h1 {
 }
 
 /* Tablets and up */
-@media screen and (min-width: 768px) {
+/*@media screen and (min-width: 768px) {*/
+@media screen and (min-width: 480px) {
 
     /* Show the docs nav */
     .side-bar {
@@ -84,7 +85,8 @@ h1 {
 }
 
 /* Tablets/desktops and up */
-@media screen and (min-width: 992px) {
+/*@media screen and (min-width: 992px) {*/
+    @media screen and (min-width: 720px) {
 
     /* Show the hidden subnavs when space allows it */
     .side-bar .nav > .active > ul {
@@ -110,12 +112,13 @@ h1 {
 }
 
 /* Large desktops and up */
-@media screen and (min-width: 1200px) {
+/*@media screen and (min-width: 1200px) {*/
+@media screen and (min-width: 940px) {
 
-    /* Widen the fixed sidebar again */
+        /* Widen the fixed sidebar again */
     .side-bar.affix-bottom,
     .side-bar.affix {
-        width: 263px;
+        width: 240px;
     }
 
 }
