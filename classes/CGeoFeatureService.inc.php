@@ -642,6 +642,21 @@ define( "kAPI_DATA_ID",					'_id' );
 define( "kAPI_DATA_POINT",				'pt' );
 
 /**
+ * Tile polygon.
+ *
+ * This tag represents the tyle polygon, it is an array structured as a GeoJson polygon:
+ *
+ * <ul>
+ *	<li><tt>type</tt>: The constant <tt>Polygon</tt>.
+ *	<li><tt>coordinates</tt>: An array of 5 elements representing the vertices of the
+ *      bounding box with the closing vertex.
+ * </ul>
+ *
+ * Type: array.
+ */
+define( "kAPI_DATA_POLY",				'py' );
+
+/**
  * Tile center coordinates.
  *
  * This tag represents the center point of the tile in degrees, minutes and seconds
