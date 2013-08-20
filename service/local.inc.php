@@ -145,4 +145,17 @@ define( "kAPI_DEFAULT_LIMIT", 100 );
  */
 define( "kAPI_DEFAULT_MAX_AREA", 1500 );
 
+/*=======================================================================================
+ *	SERVICE STATUS																		*
+ *======================================================================================*/
+
+/**
+ * Maintenance.
+ *
+ * If this flag is on, it means that the database is unavailable due to maintenance.
+ *
+ * Type: boolean.
+ */
+define( "kAPI_SERVICE_STATUS_MAINTENANCE", FALSE );
+
 ?>

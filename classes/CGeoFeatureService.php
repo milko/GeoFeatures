@@ -232,6 +232,7 @@ class CGeoFeatureService extends ArrayObject
 	{
 		//
 		// Catch help request.
+		// Copied here to prevent errors if database is busy.
 		//
 		if( isset( $_REQUEST )
 			&& array_key_exists( kAPI_OP_HELP, $_REQUEST ) )
@@ -257,6 +258,13 @@ class CGeoFeatureService extends ArrayObject
 		//
 		try
 		{
+			//
+			// Catch service maintenance.
+			//
+			if( kAPI_SERVICE_STATUS_MAINTENANCE )
+				throw new Exception(
+					"The service is under maintenance, please try later." );    // !@! ==>
+
 			//
 			// Set server.
 			//
