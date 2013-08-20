@@ -231,6 +231,13 @@ class CGeoFeatureService extends ArrayObject
                                  $theGrid = 30 )
 	{
 		//
+		// Catch help request.
+		//
+		if( isset( $_REQUEST )
+			&& array_key_exists( kAPI_OP_HELP, $_REQUEST ) )
+			$this->_RequestHelp();
+
+		//
 		// Call parent constructor.
 		//
 		parent::__construct();
@@ -291,21 +298,6 @@ class CGeoFeatureService extends ArrayObject
 		}
 
 	} // Constructor.
-
-
-	/*===================================================================================
-	 *	__destruct																		*
-	 *==================================================================================*/
-
-	/**
-	 * Release object.
-	 *
-	 * The destructor will clean up and release the object.
-	 */
-	public function __destruct()
-	{
-
-	} // Destructor.
 
 
 
