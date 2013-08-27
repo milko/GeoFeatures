@@ -324,7 +324,10 @@ function MyViewModel() {
         self.button.disabled(true);
 
         // Call service.
-        $.get( self.url(), function(theData){
+        $.ajax({
+            type: "POST",
+            url: self.url()
+        }).done( function(theData) {
 
             // Set received flag.
             self.response.received(true);
@@ -334,25 +337,32 @@ function MyViewModel() {
 
             // Set response object.
             self.response.object(JSON.parse(theData));
-        });
 
-        // Handle range.
-        self.modifiers.range.sent( self.modifiers.range.checked() );
+            // Handle range.
+            self.modifiers.range.sent( self.modifiers.range.checked() );
 
-        // Parse status.
-        parseStatus();
+            // Parse status.
+            parseStatus();
 
-        // Parse connection.
-        parseConnection();
+            // Parse connection.
+            parseConnection();
 
-        // Parse request.
-        parseRequest();
+            // Parse request.
+            parseRequest();
 
-        // Parse response.
-        parseResponse();
+            // Parse response.
+            parseResponse();
 
-        // enable button.
-        self.button.disabled(false);
+            // enable button.
+            self.button.disabled(false);
+
+        }).fail( function(theData) {
+            alert( "Service failed." );
+
+            // enable button.
+            self.button.disabled(false);
+        })
+
     };
 
     //
