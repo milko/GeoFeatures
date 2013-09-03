@@ -2,12 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1052b59d-5290-48ad-9416-801f75d6bbd4" name="Default" comment="Modified service call to handle butto enable and disable">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/service/help/js/ViewModel.js" afterPath="$PROJECT_DIR$/service/help/js/ViewModel.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/service/help/fonts/glyphicons-halflings-regular.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/service/help/fonts/glyphicons-halflings-regular.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/service/help/fonts/glyphicons-halflings-regular.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/service/help/fonts/glyphicons-halflings-regular.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/service/help/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/service/help/css/bootstrap.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/service/help/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/service/help/js/bootstrap.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="GeoFeatures.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1377604183296" ignored="false" />
+    <file path="/Dummy.txt" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1378221337022" ignored="false" />
     <file path="/CGeoFeatureService.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1377008632529" ignored="false" />
     <file path="/test_CGeoFeatureService.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1375784998181" ignored="false" />
     <file path="/a.php" changelist="1052b59d-5290-48ad-9416-801f75d6bbd4" time="1376911140507" ignored="false" />
@@ -66,7 +71,7 @@
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/service/help/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="42" selection-start="3468" selection-end="3468" vertical-scroll-proportion="0.0">
+            <state line="80" column="42" selection-start="3726" selection-end="3726" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -76,15 +81,6 @@
         <entry file="file://$PROJECT_DIR$/batch/LoadLayers.php">
           <provider selected="true" editor-type-id="text-editor">
             <state line="8" column="56" selection-start="227" selection-end="227" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AddPoly.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/batch/AddPoly.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="195" column="6" selection-start="4212" selection-end="4212" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -102,7 +98,7 @@
       <file leaf-file-name="CGeoFeatureService.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/classes/CGeoFeatureService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="263" column="31" selection-start="5434" selection-end="5434" vertical-scroll-proportion="0.0">
+            <state line="263" column="0" selection-start="5412" selection-end="5412" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -111,7 +107,7 @@
       <file leaf-file-name="local.inc.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/service/local.inc.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="142" column="2" selection-start="3987" selection-end="3987" vertical-scroll-proportion="-20.916666">
+            <state line="155" column="2" selection-start="4381" selection-end="4381" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -120,7 +116,7 @@
       <file leaf-file-name="ping.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/service/help/ping.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="28" selection-start="1475" selection-end="1475" vertical-scroll-proportion="23.125">
+            <state line="52" column="28" selection-start="1475" selection-end="1475" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -129,7 +125,7 @@
       <file leaf-file-name="ViewModel.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/service/help/js/ViewModel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="363" column="10" selection-start="13140" selection-end="13140" vertical-scroll-proportion="0.8574822">
+            <state line="381" column="13" selection-start="13723" selection-end="13723" vertical-scroll-proportion="0.017814728">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -140,7 +136,7 @@
       <file leaf-file-name="CGeoFeatureService.inc.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/classes/CGeoFeatureService.inc.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="21" selection-start="1133" selection-end="1145" vertical-scroll-proportion="0.0">
+            <state line="57" column="2" selection-start="1133" selection-end="1145" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -149,7 +145,7 @@
       <file leaf-file-name="my.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/service/help/css/my.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="83" column="0" selection-start="1886" selection-end="1886" vertical-scroll-proportion="0.0">
+            <state line="85" column="0" selection-start="1889" selection-end="1889" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -240,7 +236,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -345,6 +340,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="fonts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GeoFeatures" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GeoFeatures" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="help" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -379,19 +396,23 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="options.lastSelected" value="web-ide.project.structure" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../PHPWrapper" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Sites/projects" />
     <property name="FullScreen" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="OPEN_URL_DIALOG">
+      <recent name="https://github.com/bioversity/TIP.git" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/service/help" />
     </key>
@@ -568,7 +589,11 @@
       <created>1377010008674</created>
       <updated>1377010008674</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Modified service call to handle butto enable and disable">
+      <created>1377604205670</created>
+      <updated>1377604205670</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -598,8 +623,8 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32964602" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32964602" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32955772" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27723378" sideWeight="0.6732892" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23133415" sideWeight="0.6732892" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2766218" sideWeight="0.6732892" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23684211" sideWeight="0.6732892" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32964602" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -657,7 +682,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added maintenance flag" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modified service call to handle butto enable and disable" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -690,6 +715,7 @@
     <MESSAGE value="Added polygon to new GRID-30 collection." />
     <MESSAGE value="Moved help to top of workflow: prevents errors if indexing or database is down." />
     <MESSAGE value="Added maintenance flag" />
+    <MESSAGE value="Modified service call to handle butto enable and disable" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -745,16 +771,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service/help/css/my.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="0" selection-start="1886" selection-end="1886" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/service/help/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="42" selection-start="3468" selection-end="3468" vertical-scroll-proportion="0.0">
+        <state line="80" column="42" selection-start="3726" selection-end="3726" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -766,23 +785,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/batch/AddPoly.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="195" column="6" selection-start="4212" selection-end="4212" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/classes/CGeoFeatureService.inc.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="21" selection-start="1133" selection-end="1145" vertical-scroll-proportion="0.0">
+        <state line="57" column="2" selection-start="1133" selection-end="1145" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/classes/CGeoFeatureService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="263" column="31" selection-start="5434" selection-end="5434" vertical-scroll-proportion="0.0">
+        <state line="263" column="0" selection-start="5412" selection-end="5412" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -796,21 +808,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/service/local.inc.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="142" column="2" selection-start="3987" selection-end="3987" vertical-scroll-proportion="-20.916666">
+        <state line="155" column="2" selection-start="4381" selection-end="4381" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/service/help/ping.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="28" selection-start="1475" selection-end="1475" vertical-scroll-proportion="23.125">
+        <state line="52" column="28" selection-start="1475" selection-end="1475" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/service/help/css/my.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="0" selection-start="1889" selection-end="1889" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="https://github.com/bioversity/TIP.git">
+      <provider selected="true" editor-type-id="httpFileEditor">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/service/help/js/ViewModel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="363" column="10" selection-start="13140" selection-end="13140" vertical-scroll-proportion="0.8574822">
+        <state line="381" column="13" selection-start="13723" selection-end="13723" vertical-scroll-proportion="0.017814728">
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
