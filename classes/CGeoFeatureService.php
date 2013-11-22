@@ -263,7 +263,8 @@ class CGeoFeatureService extends ArrayObject
 			//
 			if( kAPI_SERVICE_STATUS_MAINTENANCE )
 				throw new Exception(
-					"The service is under maintenance, please try later." );    // !@! ==>
+					"The service is under maintenance, "
+				   ."please try later." );				  						// !@! ==>
 
 			//
 			// Set server.
@@ -2236,15 +2237,23 @@ class CGeoFeatureService extends ArrayObject
 					//
 					// Set results.
 					//
-					$results = ( array_key_exists( 'result', $results ) )
-						? $results[ 'result' ][ 0 ]
-						: Array();
+					if( array_key_exists( 'result', $results )
+					 && count( $results[ 'result' ] ) )
+						$results = $results[ 'result' ][ 0 ];
+					else
+						$results = Array();
 
 					//
 					// Set total.
 					//
-					$this->_Status( kAPI_STATUS_TOTAL, $results[ kAPI_AGGREGATE_COUNT ] );
-					unset( $results[ kAPI_AGGREGATE_COUNT ] );
+					if( count( $results ) )
+					{
+						$this->_Status( kAPI_STATUS_TOTAL,
+										$results[ kAPI_AGGREGATE_COUNT ] );
+						unset( $results[ kAPI_AGGREGATE_COUNT ] );
+					}
+					else
+						$this->_Status( kAPI_STATUS_TOTAL, 0 );
 
 					//
 					// Round values.
