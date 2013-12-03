@@ -2758,36 +2758,46 @@ class CGeoFeatureService extends ArrayObject
 					//
 					// Set results.
 					//
-					$results = ( array_key_exists( 'result', $results ) )
-							 ? $results[ 'result' ][ 0 ]
-							 : Array();
-
+					if( array_key_exists( 'result', $results ) )
+						$results = ( count( $results[ 'result' ] ) )
+								 ? $results[ 'result' ][ 0 ]
+								 : Array();
+					else
+						$results = Array();
+					
 					//
-					// Set total.
+					// Handle results.
 					//
-					$this->_Status( kAPI_STATUS_TOTAL, $results[ kAPI_AGGREGATE_COUNT ] );
-					unset( $results[ kAPI_AGGREGATE_COUNT ] );
-
-					//
-					// Round values.
-					//
-					$values = array( kAPI_DATA_ELEVATION, kAPI_DATA_DISTANCE );
-					foreach( $values as $value )
+					if( count( $results ) )
 					{
 						//
-						// Check value.
+						// Set total.
 						//
-						if( array_key_exists( $value, $results ) )
+						$this->_Status( kAPI_STATUS_TOTAL,
+										$results[ kAPI_AGGREGATE_COUNT ] );
+						unset( $results[ kAPI_AGGREGATE_COUNT ] );
+
+						//
+						// Round values.
+						//
+						$values = array( kAPI_DATA_ELEVATION, kAPI_DATA_DISTANCE );
+						foreach( $values as $value )
 						{
 							//
-							// Round ranges.
+							// Check value.
 							//
-							$keys = array( kAPI_AGGREGATE_MINIMUM,
-										   kAPI_AGGREGATE_MEAN,
-										   kAPI_AGGREGATE_MAXIMUM );
-							foreach( $keys as $key )
-								$results[ $value ][ $key ]
-									= (int) round( $results[ $value ][ $key ] );
+							if( array_key_exists( $value, $results ) )
+							{
+								//
+								// Round ranges.
+								//
+								$keys = array( kAPI_AGGREGATE_MINIMUM,
+											   kAPI_AGGREGATE_MEAN,
+											   kAPI_AGGREGATE_MAXIMUM );
+								foreach( $keys as $key )
+									$results[ $value ][ $key ]
+										= (int) round( $results[ $value ][ $key ] );
+							}
 						}
 					}
 
