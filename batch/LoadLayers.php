@@ -63,7 +63,7 @@ $resources = array
 (
 	'alt' => array
 	(
-		kFILE_PATH => kPATH_FILES.'/alt/alt.bil',
+		kFILE_PATH => kPATH_FILES.'/WORLDCLIM30/alt/alt.bil',
 		kFILE_BANDS => 1,
 		kFILE_BPACK => 's',
 		kFILE_NODATA => -9999,
@@ -71,7 +71,7 @@ $resources = array
 	),
 	'gens' => array
 	(
-		kFILE_PATH => kPATH_FILES.'/gens/gens.bil',
+		kFILE_PATH => kPATH_FILES.'/GENS/gens.bil',
 		kFILE_BANDS => 1,
 		kFILE_BPACK => 'C',
 		kFILE_NODATA => 0,
@@ -576,8 +576,40 @@ $resources = array
 				'id' => 'Q6',
 				'c' => '6',
 				'e' => 'Q' ) )
+	),
+	'hwsd' => array
+	(
+		kFILE_PATH => kPATH_FILES.'/HWSD/hwsd.bil',
+		kFILE_BANDS => 1,
+		kFILE_BPACK => 's',
+		kFILE_NODATA => -32768,
+		kFILE_TRANS => NULL
+	),
+	'ghf' => array
+	(
+		kFILE_PATH => kPATH_FILES.'/GHF/ghf.bil',
+		kFILE_BANDS => 1,
+		kFILE_BPACK => 'C',
+		kFILE_NODATA => 255,
+		kFILE_TRANS => NULL
+	),
+	'gcov' => array
+	(
+		kFILE_PATH => kPATH_FILES.'/GLOBAL_COVER_2009/GlobCover2009.bil',
+		kFILE_BANDS => 1,
+		kFILE_BPACK => 'C',
+		kFILE_NODATA => 255,
+		kFILE_TRANS => NULL
 	)
 );
+
+//
+// Load soil mappings.
+//
+$resources[ 'hwsd' ][ kFILE_TRANS ]
+	= unserialize(
+		file_get_contents(
+			kPATH_FILES.'/HWSD/'.kPATH_SOIL_MAP ) );
 
 //
 // Load precipitation.
@@ -586,7 +618,7 @@ for( $i = 1; $i < 13; $i++ )
 {
 	$resources[ "prec$i" ] = array
 	(
-		kFILE_PATH => kPATH_FILES."/prec/prec$i.bil",
+		kFILE_PATH => kPATH_FILES."/WORLDCLIM30/prec/prec_$i.bil",
 		kFILE_BANDS => 1,
 		kFILE_BPACK => 's',
 		kFILE_NODATA => -9999,
@@ -601,7 +633,7 @@ for( $i = 1; $i < 13; $i++ )
 {
 	$resources[ "tmin$i" ] = array
 	(
-		kFILE_PATH => kPATH_FILES."/tmin/tmin$i.bil",
+		kFILE_PATH => kPATH_FILES."/WORLDCLIM30/tmin/tmin_$i.bil",
 		kFILE_BANDS => 1,
 		kFILE_BPACK => 's',
 		kFILE_NODATA => -9999,
@@ -616,7 +648,7 @@ for( $i = 1; $i < 13; $i++ )
 {
 	$resources[ "tmean$i" ] = array
 	(
-		kFILE_PATH => kPATH_FILES."/tmean/tmean$i.bil",
+		kFILE_PATH => kPATH_FILES."/WORLDCLIM30/tmean/tmean_$i.bil",
 		kFILE_BANDS => 1,
 		kFILE_BPACK => 's',
 		kFILE_NODATA => -9999,
@@ -631,7 +663,7 @@ for( $i = 1; $i < 13; $i++ )
 {
 	$resources[ "tmax$i" ] = array
 	(
-		kFILE_PATH => kPATH_FILES."/tmax/tmax$i.bil",
+		kFILE_PATH => kPATH_FILES."/WORLDCLIM30/tmax/tmax_$i.bil",
 		kFILE_BANDS => 1,
 		kFILE_BPACK => 's',
 		kFILE_NODATA => -9999,
@@ -646,7 +678,7 @@ for( $i = 1; $i < 20; $i++ )
 {
 	$resources[ "bio$i" ] = array
 	(
-		kFILE_PATH => kPATH_FILES."/bio$i/bio$i.bil",
+		kFILE_PATH => kPATH_FILES."/WORLDCLIM30/bio$i/bio$i.bil",
 		kFILE_BANDS => 1,
 		kFILE_BPACK => 's',
 		kFILE_NODATA => -9999,
@@ -764,6 +796,25 @@ try
 		//
 		if( array_key_exists( 'gens', $value ) )
 			$cur[ kAPI_DATA_CLIMATE_GENS ] = $value[ 'gens' ];
+		
+		//
+		// Load Harmonized World Soil Database.
+		//
+		if( array_key_exists( 'hwsd', $value ) )
+			$cur[ kAPI_DATA_CLIMATE_HWSD ] = $value[ 'hwsd' ];
+		
+		//
+		// Load Global Human Footprint.
+		//
+		if( array_key_exists( 'ghf', $value ) )
+			$cur[ kAPI_DATA_CLIMATE_GHF ] = $value[ 'ghf' ];
+		
+		//
+		// Load Global Cover 2009.
+		//
+		if( array_key_exists( 'gcov', $value ) )
+			$cur[ kAPI_DATA_CLIMATE_GCOV ]
+				= sprintf( '%1$03u', abs( (int) $value[ 'gcov' ] ) );
 		
 		//
 		// Load bioclimatic data.

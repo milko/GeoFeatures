@@ -39,7 +39,7 @@ define( "kPATH_GEOFEATURES_LIBRARY_ROOT",	"/Library/WebServer/Library/GeoFeature
  *
  * This tag indicates the default MongoDB server connection string.
  */
-define( "kDEFAULT_SERVER",					"mongodb://192.168.181.101:27017" );
+define( "kDEFAULT_SERVER",					"mongodb://localhost:27017" );
 
 /**
  * Default database name.
@@ -65,7 +65,14 @@ define( "kDEFAULT_COLLECTION",				"LAYERS-30" );
  * This represents the base path to all the .bil files; the script expects to find a
  * directory and within it a file names as the file key.
  */
-define( "kPATH_FILES", '/Library/WebServer/Data/GeographicFeatures' );
+define( "kPATH_FILES", '~/Documents/Data/GeographicFeatures' );
+
+/**
+ * Soil map.
+ *
+ * This represents the PHP-encoded file name containing the soil mappings.
+ */
+define( "kPATH_SOIL_MAP", 'SOIL_MAP.txt' );
 
 /*=======================================================================================
  *	BUFFER SIZES																		*

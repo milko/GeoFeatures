@@ -736,7 +736,7 @@ define( "kAPI_DATA_DISTANCE",			'dist' );
 define( "kAPI_DATA_CLIMATE",			'clim' );
 
 /*=======================================================================================
- *	CLIMATE BLOCK PARAMETERS															*
+ *	ENVIRONMENT BLOCK PARAMETERS														*
  *======================================================================================*/
 
 /**
@@ -785,6 +785,37 @@ define( "kAPI_DATA_CLIMATE",			'clim' );
  * Type: array.
  */
 define( "kAPI_DATA_CLIMATE_GENS",		'gens' );
+
+/**
+ * Harmonized World Soil Database.
+ *
+ * This tag represents the Harmonized World Soil Database for the current tile.
+ *
+ * Type: enum.
+ */
+define( "kAPI_DATA_CLIMATE_HWSD",		'hwsd' );
+
+/**
+ * Global Human Footprint.
+ *
+ * This tag represents the Global Human Footprint for the current tile.
+ *
+ * Type: enum.
+ */
+define( "kAPI_DATA_CLIMATE_GHF",		'ghf' );
+
+/**
+ * Global Cover 2009.
+ *
+ * This tag represents the Global Cover 2009 for the current tile.
+ *
+ * Type: enum.
+ */
+define( "kAPI_DATA_CLIMATE_GCOV",		'gcov' );
+
+/*=======================================================================================
+ *	CLIMATE BLOCK PARAMETERS															*
+ *======================================================================================*/
 
 /**
  * Bioclimatic variables.
