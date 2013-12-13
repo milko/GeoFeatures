@@ -32,6 +32,24 @@
 define( "kFILE_PATH",					'path' );
 
 /**
+ * Size.
+ *
+ * This tag identifies the file size.
+ *
+ * Type: int.
+ */
+define( "kFILE_SIZE",					'size' );
+
+/**
+ * EOF.
+ *
+ * This tag identifies the end of file flag.
+ *
+ * Type: boolean.
+ */
+define( "kFILE_EOF",					'eof' );
+
+/**
  * Bands.
  *
  * This tag identifies the number of bands per tile.

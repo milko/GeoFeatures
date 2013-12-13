@@ -513,11 +513,14 @@ class CBilFilesIterator implements Iterator
 				//
 				$file = Array();
 				$thePath = realpath( (string) $thePath );
+				$stat = stat( $thePath );
 				
 				//
 				// Load reference.
 				//
 				$file[ kFILE_PATH ] = (string) $thePath;
+				$file[ kFILE_SIZE ] = (int) $stat[ 7 ];
+				$file[ kFILE_EOF ] = FALSE;
 				$file[ kFILE_BANDS ] = (int) $theBands;
 				$file[ kFILE_BPACK ] = (string) $theKind;
 				$file[ kFILE_BSIZE ] = $bytes;
@@ -767,8 +770,8 @@ class CBilFilesIterator implements Iterator
 		//
 		// Reset position.
 		//
-		$this->mRow = floor( $this->mSkip / $this->mCols );
-		$this->mCol = $this->mSkip - ( $this->mRow * $this->mCols );
+		$this->mRow = (int) floor( $this->mSkip / $this->mCols );
+		$this->mCol = (int) $this->mSkip - ( $this->mRow * $this->mCols );
 
 		//
 		// Reset position.
@@ -797,7 +800,12 @@ class CBilFilesIterator implements Iterator
 			//
 			$this->mTileIndex
 				= $this->mSkip - ( floor( $this->mSkip / $this->mBufTiles )
-								 * $this->mBufTiles );
+							   * $this->mBufTiles );
+			
+			//
+			// Cast index.
+			//
+			$this->mTileIndex = (int) $this->mTileIndex;
 		
 		} // Provided skip value.
 	
@@ -861,7 +869,9 @@ class CBilFilesIterator implements Iterator
 			//
 			$file = & $this->mFiles[ $key ];
 			$buffer = & $file[ kFILE_BUFFER ];
-			$tile = $buffer[ $this->mTileIndex ];
+			$tile = ( array_key_exists( $this->mTileIndex, $buffer ) )
+				  ? $buffer[ $this->mTileIndex ]
+				  : NULL;
 			
 			//
 			// Handle multiband.
@@ -903,7 +913,7 @@ class CBilFilesIterator implements Iterator
 			//
 			// Handle single band.
 			//
-			else
+			elseif( $tile !== NULL )
 			{
 				//
 				// Check for no-data.
@@ -1069,11 +1079,33 @@ class CBilFilesIterator implements Iterator
 				// Calculate skip offset.
 				//
 				$offset = floor( $this->mSkip / $this->mBufTiles );
-				if( $offset )
-					fseek( $file[ kFILE_POINTER ], $offset
-												 * $this->mBufTiles
-												 * $file[ kFILE_BANDS ]
-												 * $file[ kFILE_BSIZE ] );
+				
+				//
+				// Handle valid offset.
+				//
+				if( $offset < $file[ kFILE_SIZE ] )
+				{
+					//
+					// If needed.
+					//
+					if( $offset )
+						fseek( $file[ kFILE_POINTER ], $offset
+													 * $this->mBufTiles
+													 * $file[ kFILE_BANDS ]
+													 * $file[ kFILE_BSIZE ] );
+					
+					//
+					// Reset EOF.
+					//
+					$file[ kFILE_EOF ] = FALSE;
+				
+				} // Seek in file.
+				
+				//
+				// Handle beyond end of file.
+				//
+				else
+					$file[ kFILE_EOF ] = TRUE;
 			
 			} // SKip tiles.
 		
@@ -1105,7 +1137,7 @@ class CBilFilesIterator implements Iterator
 			//
 			// Set current tile indexes.
 			//
-			$this->mTileIndex = $this->mTilesCount = 0;
+			$this->mTileIndex = $this->mTilesCount = (int) 0;
 			
 			//
 			// Iterate all files.
@@ -1122,48 +1154,62 @@ class CBilFilesIterator implements Iterator
 				// Init local storage.
 				//
 				$file[ kFILE_BUFFER ] = Array();
-				$bytes = $this->mBufTiles * $file[ kFILE_BANDS ] * $file[ kFILE_BSIZE ];
-			
-				//
-				// Read data.
-				//
-				$data = fread( $file[ kFILE_POINTER ], $bytes );
 				
 				//
-				// Unpack single band to buffer.
+				// Skip end of file.
 				//
-				if( $file[ kFILE_BANDS ] == 1 )
-					$file[ kFILE_BUFFER ]
-						= array_values(
-							unpack( $file[ kFILE_BPACK ].'*', $data ) );
-				
-				//
-				// Unpack multiple band tiles.
-				//
-				else
+				if( ! $file[ kFILE_EOF ] )
 				{
 					//
-					// Iterate tiles.
+					// Calculate read size.
 					//
-					for( $pos = 0,
-						 $chunk = $file[ kFILE_BANDS ] * $file[ kFILE_BSIZE ];
-							$pos < strlen( $data );
-								$pos += $chunk )
+					$bytes = $this->mBufTiles
+						   * $file[ kFILE_BANDS ]
+						   * $file[ kFILE_BSIZE ];
+
+					//
+					// Read data.
+					//
+					$data = fread( $file[ kFILE_POINTER ], $bytes );
+				
+					//
+					// Unpack single band to buffer.
+					//
+					if( $file[ kFILE_BANDS ] == 1 )
+						$file[ kFILE_BUFFER ]
+							= array_values(
+								unpack( $file[ kFILE_BPACK ].'*', $data ) );
+				
+					//
+					// Unpack multiple band tiles.
+					//
+					else
 					{
 						//
-						// Get band.
+						// Iterate tiles.
 						//
-						$band = substr( $data, $pos, $chunk );
+						for( $pos = 0,
+							 $chunk = $file[ kFILE_BANDS ] * $file[ kFILE_BSIZE ];
+								$pos < strlen( $data );
+									$pos += $chunk )
+						{
+							//
+							// Get band.
+							//
+							$band = substr( $data, $pos, $chunk );
 					
-						//
-						// Pack band.
-						//
-						$file[ kFILE_BUFFER ][] = unpack( $file[ kFILE_BPACK ].'*', $band );
+							//
+							// Pack band.
+							//
+							$file[ kFILE_BUFFER ][]
+								= unpack( $file[ kFILE_BPACK ].'*', $band );
 				
-					} // Iterating tiles.
+						} // Iterating tiles.
 				
-				} // Multiband tile.
+					} // Multiband tile.
 				
+				} // Not past end of file.
+			
 				//
 				// Set tiles count.
 				//
