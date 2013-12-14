@@ -749,6 +749,10 @@ try
 	// Instantiate and iterate reader.
 	//
 	$reader = new CBilFilesReader( $iter );
+	
+	//
+	// Iterate reader..
+	//
 	foreach( $reader as $key => $value )
 	{
 		//

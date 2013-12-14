@@ -146,6 +146,24 @@ class CBilFilesIterator implements Iterator
 	 */
 	private $mTilesCount = 0;
 
+	/**
+	 * <b>Progress</b>
+	 *
+	 * Progress (0-1000).
+	 *
+	 * @var integer
+	 */
+	private $mProgress = 0;
+
+	/**
+	 * <b>Current</b>
+	 *
+	 * Current progress (0-1000).
+	 *
+	 * @var integer
+	 */
+	private $mCurrent = 0;
+
 		
 
 /*=======================================================================================
@@ -389,6 +407,52 @@ class CBilFilesIterator implements Iterator
 	 * @return integer
 	 */
 	public function Rows()										{	return $this->mRows;	}
+
+	 
+	/*===================================================================================
+	 *	Tile																			*
+	 *==================================================================================*/
+
+	/**
+	 * Tile.
+	 *
+	 * This method can be used to retrieve the current tile in the map.
+	 *
+	 * @access public
+	 * @return integer
+	 */
+	public function Tile()									{	return $this->mTileIndex;	}
+
+	 
+	/*===================================================================================
+	 *	Tiles																			*
+	 *==================================================================================*/
+
+	/**
+	 * Tiles.
+	 *
+	 * This method can be used to retrieve the number of tiles in the map, this value is set
+	 * at instantiation time and is immutable.
+	 *
+	 * @access public
+	 * @return integer
+	 */
+	public function Tiles()									{	return $this->mTilesCount;	}
+
+	 
+	/*===================================================================================
+	 *	Progress																		*
+	 *==================================================================================*/
+
+	/**
+	 * Progress.
+	 *
+	 * This method can be used to retrieve the scan progress in percentage (0-100).
+	 *
+	 * @access public
+	 * @return integer
+	 */
+	public function Progress()								{	return $this->mProgress;	}
 
 	 
 	/*===================================================================================
@@ -808,6 +872,15 @@ class CBilFilesIterator implements Iterator
 			$this->mTileIndex = (int) $this->mTileIndex;
 		
 		} // Provided skip value.
+		
+		//
+		// Set current progress.
+		//
+		$this->mProgress
+			= (int) round(
+				( (($this->mRow * $this->mCols) + $this->mCol) /
+				  ($this->mRows * $this->mCols) ) *
+				1000 );
 	
 	} // rewind.
 
@@ -827,11 +900,20 @@ class CBilFilesIterator implements Iterator
 	public function valid()
 	{
 		//
-		// Load buffer.
+		// Check tiles index.
 		//
-		$this->_LoadBuffers();
+		if( (($this->mRow * $this->mCols) + $this->mCol) < ($this->mCols * $this->mRows) )
+		{
+			//
+			// Load buffer.
+			//
+			$this->_LoadBuffers();
+			
+			return TRUE;															// ==>
 		
-		return ( $this->mTilesCount > 0 );											// ==>
+		} // Not past end of tiles.
+		
+		return FALSE;																// ==>
 	
 	} // valid.
 
@@ -1006,6 +1088,18 @@ class CBilFilesIterator implements Iterator
 			$this->mCol = 0;
 			$this->mRow++;
 		}
+		
+		//
+		// Set current progress.
+		//
+		$this->mProgress
+			= (int) round(
+				( (($this->mRow * $this->mCols) + $this->mCol) /
+				  ($this->mRows * $this->mCols) ) *
+				1000 );
+		if( kENV_VERBOSE
+		 && ($this->mCurrent != $this->mProgress) )
+			echo( "==> ".($this->mCurrent = $this->mProgress)."\n" );
 	
 	} // next.
 
@@ -1171,42 +1265,51 @@ class CBilFilesIterator implements Iterator
 					// Read data.
 					//
 					$data = fread( $file[ kFILE_POINTER ], $bytes );
-				
-					//
-					// Unpack single band to buffer.
-					//
-					if( $file[ kFILE_BANDS ] == 1 )
-						$file[ kFILE_BUFFER ]
-							= array_values(
-								unpack( $file[ kFILE_BPACK ].'*', $data ) );
-				
-					//
-					// Unpack multiple band tiles.
-					//
-					else
+					if( strlen( $data ) )
 					{
 						//
-						// Iterate tiles.
+						// Unpack single band to buffer.
 						//
-						for( $pos = 0,
-							 $chunk = $file[ kFILE_BANDS ] * $file[ kFILE_BSIZE ];
-								$pos < strlen( $data );
-									$pos += $chunk )
+						if( $file[ kFILE_BANDS ] == 1 )
+							$file[ kFILE_BUFFER ]
+								= array_values(
+									unpack( $file[ kFILE_BPACK ].'*', $data ) );
+				
+						//
+						// Unpack multiple band tiles.
+						//
+						else
 						{
 							//
-							// Get band.
+							// Iterate tiles.
 							//
-							$band = substr( $data, $pos, $chunk );
+							for( $pos = 0,
+								 $chunk = $file[ kFILE_BANDS ] * $file[ kFILE_BSIZE ];
+									$pos < strlen( $data );
+										$pos += $chunk )
+							{
+								//
+								// Get band.
+								//
+								$band = substr( $data, $pos, $chunk );
 					
-							//
-							// Pack band.
-							//
-							$file[ kFILE_BUFFER ][]
-								= unpack( $file[ kFILE_BPACK ].'*', $band );
+								//
+								// Pack band.
+								//
+								$file[ kFILE_BUFFER ][]
+									= unpack( $file[ kFILE_BPACK ].'*', $band );
 				
-						} // Iterating tiles.
+							} // Iterating tiles.
 				
-					} // Multiband tile.
+						} // Multiband tile.
+					
+					} // Read something.
+					
+					//
+					// Handle end of file.
+					//
+					elseif( feof( $file[ kFILE_POINTER ] ) )
+						$file[ kFILE_EOF ] = TRUE;
 				
 				} // Not past end of file.
 			
