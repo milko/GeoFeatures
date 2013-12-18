@@ -261,6 +261,10 @@ define( "kAPI_GEOMETRY_TYPE_POLY",		'Polygon' );
  *                  <li><tt>c</tt>: Climatic zone code.
  *                  <li><tt>e</tt>: Environmental zone code.
  *               </ul>
+ *              <li><tt>{@link kAPI_DATA_CLIMATE_HWSD}</tt>: Harmonized World Soil
+ *					Database.
+ *              <li><tt>{@link kAPI_DATA_CLIMATE_GHF}</tt>: Global Human Footprint.
+ *              <li><tt>{@link kAPI_DATA_CLIMATE_GCOV}</tt>: Global Cover 2009.
  *              <li><tt>{@link kAPI_DATA_CLIMATE_BIO}</tt>: Bioclimatic variables:
  *               <ul>
  *              	<li><tt>1</tt>: Annual Mean Temperature [<tt>C° * 10</tt>].

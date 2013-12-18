@@ -2962,6 +2962,8 @@ class CGeoFeatureService extends ArrayObject
 	 *      second parameter is <tt>TRUE</tt>.
 	 *	<li><tt>{@link kAPI_DATA_CLIMATE_GENS}</tt>: Global environment stratification,
 	 *		distinct values.
+	 *	<li><tt>{@link kAPI_DATA_CLIMATE_GENS}</tt>: Global environment stratification,
+	 *		distinct values.
 	 *	<li><tt>{@link kAPI_DATA_CLIMATE_BIO}</tt>: Bioclimatic variables, values range.
 	 *	<li><tt>{@link kAPI_DATA_CLIMATE_PREC}</tt>: Precipitation, values range.
 	 *	<li><tt>{@link kAPI_DATA_CLIMATE_TEMP}</tt>: Temperature, values range.
@@ -2996,6 +2998,21 @@ class CGeoFeatureService extends ArrayObject
 		// Add global environment stratification.
 		//
 		$pipeline[ 'clim.2000.'.kAPI_DATA_CLIMATE_GENS ] = 1;
+
+		//
+		// Add harmonized world soil database.
+		//
+		$pipeline[ 'clim.2000.'.kAPI_DATA_CLIMATE_HWSD ] = 1;
+
+		//
+		// Add global human footprint.
+		//
+		$pipeline[ 'clim.2000.'.kAPI_DATA_CLIMATE_GHF ] = 1;
+
+		//
+		// Add cover 2009.
+		//
+		$pipeline[ 'clim.2000.'.kAPI_DATA_CLIMATE_GCOV ] = 1;
 
 		//
 		// Add bioclimatic variables.
@@ -3080,6 +3097,24 @@ class CGeoFeatureService extends ArrayObject
 		foreach( $gens_struct as $tag )
 			$pipeline[ kAPI_DATA_CLIMATE_GENS.'_'.$tag ]
 				= array( '$addToSet' => '$clim.2000.'.kAPI_DATA_CLIMATE_GENS.'.'.$tag );
+
+		//
+		// Add harmonized world soil database.
+		//
+		$pipeline[ kAPI_DATA_CLIMATE_HWSD ]
+			= array( '$addToSet' => '$clim.2000.'.kAPI_DATA_CLIMATE_HWSD );
+
+		//
+		// Add global human footprint.
+		//
+		$pipeline[ kAPI_DATA_CLIMATE_GHF ]
+			= array( '$addToSet' => '$clim.2000.'.kAPI_DATA_CLIMATE_GHF );
+
+		//
+		// Add global cover 2009.
+		//
+		$pipeline[ kAPI_DATA_CLIMATE_GCOV ]
+			= array( '$addToSet' => '$clim.2000.'.kAPI_DATA_CLIMATE_GCOV );
 
 		//
 		// Add bioclimatic variables.
@@ -3187,6 +3222,24 @@ class CGeoFeatureService extends ArrayObject
 		foreach( $gens_struct as $tag )
 			$tmp[ $tag ] = '$'.kAPI_DATA_CLIMATE_GENS.'_'.$tag;
 		$pipeline[ kAPI_DATA_CLIMATE ][ '2000' ][ kAPI_DATA_CLIMATE_GENS ] = $tmp;
+
+		//
+		// Add harmonized world soil database.
+		//
+		$pipeline[ kAPI_DATA_CLIMATE ][ '2000' ][ kAPI_DATA_CLIMATE_HWSD ]
+			= array( kAPI_DATA_CLIMATE_HWSD => '$'.kAPI_DATA_CLIMATE_HWSD;
+
+		//
+		// Add global human footprint.
+		//
+		$pipeline[ kAPI_DATA_CLIMATE ][ '2000' ][ kAPI_DATA_CLIMATE_GHF ]
+			= array( kAPI_DATA_CLIMATE_GHF => '$'.kAPI_DATA_CLIMATE_GHF;
+
+		//
+		// Add global cover 2009.
+		//
+		$pipeline[ kAPI_DATA_CLIMATE ][ '2000' ][ kAPI_DATA_CLIMATE_GCOV ]
+			= array( kAPI_DATA_CLIMATE_GCOV => '$'.kAPI_DATA_CLIMATE_GCOV;
 
 		//
 		// Add bioclimatic variables.
