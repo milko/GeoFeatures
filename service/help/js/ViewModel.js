@@ -696,6 +696,27 @@ function MyViewModel() {
                                 data.gens.data = self.response.object().data[tag].clim['2000'].gens;
                             }
 
+                            // Handle harmonized world soil.
+                            if( typeof( self.response.object().data[tag].clim['2000'].hwsd ) != "undefined" )
+                            {
+                                data.hwsd.received(true);
+                                data.hwsd.data = self.response.object().data[tag].clim['2000'].hwsd;
+                            }
+
+                            // Handle global human footprint.
+                            if( typeof( self.response.object().data[tag].clim['2000'].ghf ) != "undefined" )
+                            {
+                                data.ghf.received(true);
+                                data.ghf.data = self.response.object().data[tag].clim['2000'].ghf;
+                            }
+
+                            // Handle global cover.
+                            if( typeof( self.response.object().data[tag].clim['2000'].gcov ) != "undefined" )
+                            {
+                                data.gcov.received(true);
+                                data.gcov.data = self.response.object().data[tag].clim['2000'].gcov;
+                            }
+
                             // Handle bioclimatic variables.
                             if( typeof( self.response.object().data[tag].clim['2000'].bio ) != "undefined" )
                             {
@@ -748,6 +769,9 @@ function MyViewModel() {
             "elev"  : { "received" : ko.observable(false), "data" : "" },
             "dist"  : { "received" : ko.observable(false), "data" : "" },
             "gens"  : { "received" : ko.observable(false), "data" : { "id" : "", "c" : "", "e" : "" } },
+            "hwsd"  : { "received" : ko.observable(false), "data" : "" },
+            "ghf"   : { "received" : ko.observable(false), "data" : "" },
+            "gcov"  : { "received" : ko.observable(false), "data" : "" },
             "bio"   : { "received" : ko.observable(false), "data" : [] },
             "prec"  : { "received" : ko.observable(false), "data" : [] },
             "temp"  : { "received" : ko.observable(false), "data" : { "l" : [], "m" : [], "h" : [] } } };

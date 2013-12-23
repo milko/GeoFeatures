@@ -273,6 +273,18 @@
 																<th>Environmental zone: </th>
 																<td data-bind="text: data.gens.data.e"></td>
 															</tr>
+															<tr data-bind="visible: data.hwsd.received">
+																<th>Harmonized World Soil: </th>
+																<td data-bind="text: data.hwsd.data"></td>
+															</tr>
+															<tr data-bind="visible: data.ghf.received">
+																<th>Global Human Footprint: </th>
+																<td data-bind="text: data.ghf.data"></td>
+															</tr>
+															<tr data-bind="visible: data.gcov.received">
+																<th>Global Cover 2009: </th>
+																<td data-bind="text: data.gcov.data"></td>
+															</tr>
 															<tr data-bind="visible: data.bio.received">
 																<th>Annual Mean Temperature: </th>
 																<td data-bind="text: data.bio.data[1] / 10"></td>
@@ -408,6 +420,24 @@
 										<td data-bind="text: response.data.range().clim['2000'].gens.id"></td>
 										<td data-bind="text: response.data.range().clim['2000'].gens.c"></td>
 										<td data-bind="text: response.data.range().clim['2000'].gens.e"></td>
+									</tr>
+								</table>
+								<table data-bind="if: typeof(response.data.range().clim['2000'].hwsd) != 'undefined'" width=100%>
+									<tr>
+										<th width=40%>Harmonized World Soil: </th>
+										<td width=60% data-bind="text: response.data.range().clim['2000'].hwsd"></td>
+									</tr>
+								</table>
+								<table data-bind="if: typeof(response.data.range().clim['2000'].ghf) != 'undefined'" width=100%>
+									<tr>
+										<th width=40%>Global Human Footprint: </th>
+										<td width=60% data-bind="text: response.data.range().clim['2000'].ghf"></td>
+									</tr>
+								</table>
+								<table data-bind="if: typeof(response.data.range().clim['2000'].gcov) != 'undefined'" width=100%>
+									<tr>
+										<th width=40%>Global Cover 2009: </th>
+										<td width=60% data-bind="text: response.data.range().clim['2000'].gcov"></td>
 									</tr>
 								</table>
 								<table data-bind="if: typeof(response.data.range().clim['2000'].bio) != 'undefined'" width=100%>

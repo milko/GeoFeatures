@@ -64,6 +64,9 @@
                                     <li><a href="#clim"><abbr title="clim">Tile climate</abbr></a></li>
                                     <ul class="nav">
                                         <li><a href="#gens"><abbr title="gens">Global environment stratification</abbr></a></li>
+                                        <li><a href="#hwsd"><abbr title="hwsd">Harmonized World Soil</abbr></a></li>
+                                        <li><a href="#ghf"><abbr title="ghf">Global Human Footprint</abbr></a></li>
+                                        <li><a href="#gcov"><abbr title="gcov">Global Land Cover</abbr></a></li>
                                         <li><a href="#bio"><abbr title="bio">Bioclimatic variables</abbr></a></li>
                                         <li><a href="#prec"><abbr title="prec">Monthly precipitation</abbr></a></li>
                                         <li><a href="#temp"><abbr title="temp">Monthly temperature</abbr></a></li>
@@ -425,7 +428,7 @@
 	                        <div class="panel">
 		                        <div class="panel-body">
 			                        <dl id="gens">
-				                        <dt>Global Environment Stratification [<strong><code>gens</code></strong>]</dt>
+				                        <dt>Global Environment Stratification [<strong><code>gens</code></strong>]&nbsp;<span class="label label-info">NEW</span></dt>
 				                        <dd>
 					                        This element represents the global environment
 					                        stratification for the current tile, it is an array of
@@ -475,6 +478,274 @@
 							                        <li><code>R</code>: Extremely hot and moist.</li>
 						                        </ul>
 					                        </li>
+				                        </ul>
+			                        </dl>
+			                        <dl id="hwsd">
+				                        <dt>Harmonized World Soil [<strong><code>hwsd</code></strong>]&nbsp;<span class="label label-info">NEW</span></dt>
+				                        <dd>
+					                        This element represents the the harmonized world soil database,
+					                        this attribute provides soil information in the 30 seconds grid,
+					                        reference information can be found <a href="docs/HWSD.pdf">here</a>.
+					                        This information is coded as follows:
+				                        </dd>
+				                        <ul>
+							                <li><code>001</code>: Ferric Acrisols</li>
+							                <li><code>002</code>: Dunes/Sand</li>
+							                <li><code>003</code>: Orthic Ferralsols</li>
+							                <li><code>004</code>: Plinthic Ferralsols</li>
+							                <li><code>005</code>: Rhodic Ferralsols</li>
+							                <li><code>006</code>: Dystric Gleysols</li>
+							                <li><code>007</code>: Eutric Gleysols</li>
+							                <li><code>008</code>: Humic Gleysols</li>
+							                <li><code>009</code>: Lithosols</li>
+							                <li><code>010</code>: Eutric Fluvisols</li>
+							                <li><code>011</code>: Dystric Fluvisols</li>
+							                <li><code>012</code>: Ferric Luvisols</li>
+							                <li><code>013</code>: Gleyic Luvisols</li>
+							                <li><code>014</code>: Dystric Nitosols</li>
+							                <li><code>015</code>: Eutric Nitosols</li>
+							                <li><code>016</code>: Cambic Arenosols</li>
+							                <li><code>017</code>: Ferralic Arenosols</li>
+							                <li><code>018</code>: Luvic Arenosols</li>
+							                <li><code>019</code>: Rock Outcrops</li>
+							                <li><code>020</code>: Calcaric Regosols</li>
+							                <li><code>021</code>: Dystric Regosols</li>
+							                <li><code>022</code>: Eutric Regosols</li>
+							                <li><code>023</code>: Salt flats</li>
+							                <li><code>024</code>: Orthic Solonetz</li>
+							                <li><code>025</code>: Chromic Vertisols</li>
+							                <li><code>026</code>: Pellic Vertisols</li>
+							                <li><code>027</code>: Haplic Xerosols</li>
+							                <li><code>028</code>: Calcic Xerosols</li>
+							                <li><code>029</code>: Gypsic Xerosols</li>
+							                <li><code>030</code>: Yermosols</li>
+							                <li><code>031</code>: Haplic Yermosols</li>
+							                <li><code>032</code>: Calcic Yermosols</li>
+							                <li><code>033</code>: Solonchaks</li>
+							                <li><code>034</code>: Gleyic Solonchaks</li>
+							                <li><code>035</code>: Orthic Solonchaks</li>
+							                <li><code>036</code>: Orthic Acrisols</li>
+							                <li><code>037</code>: Chromic Cambisols</li>
+							                <li><code>038</code>: Ferralic Cambisols</li>
+							                <li><code>039</code>: Humic Ferralsols</li>
+							                <li><code>040</code>: Xanthic Ferralsols</li>
+							                <li><code>041</code>: Gleysols</li>
+							                <li><code>042</code>: Fluvisols</li>
+							                <li><code>043</code>: Calcaric Fluvisols</li>
+							                <li><code>044</code>: Chromic Luvisols</li>
+							                <li><code>045</code>: Unknown</li>
+							                <li><code>046</code>: Humic Nitosols</li>
+							                <li><code>047</code>: Dystric Histosols</li>
+							                <li><code>048</code>: Eutric Histosols</li>
+							                <li><code>049</code>: Humic Podzols</li>
+							                <li><code>050</code>: Vertisols</li>
+							                <li><code>051</code>: Eutric Planosols</li>
+							                <li><code>052</code>: Sodic Planosols</li>
+							                <li><code>053</code>: Plinthic Acrisols</li>
+							                <li><code>054</code>: Eutric Cambisols</li>
+							                <li><code>055</code>: Gleyic Cambisols</li>
+							                <li><code>056</code>: Humic Cambisols</li>
+							                <li><code>057</code>: Calcic Cambisols</li>
+							                <li><code>058</code>: Vertic Cambisols</li>
+							                <li><code>059</code>: Rendzinas</li>
+							                <li><code>060</code>: Haplic Phaeozems</li>
+							                <li><code>061</code>: Luvic Phaeozems</li>
+							                <li><code>062</code>: Thionic Fluvisols</li>
+							                <li><code>063</code>: Kastanozems</li>
+							                <li><code>064</code>: Calcic Kastanozems</li>
+							                <li><code>065</code>: Luvic Kastanozems</li>
+							                <li><code>066</code>: Luvisols</li>
+							                <li><code>067</code>: Albic Luvisols</li>
+							                <li><code>068</code>: Orthic Luvisols</li>
+							                <li><code>069</code>: Plinthic Luvisols</li>
+							                <li><code>070</code>: Regosols</li>
+							                <li><code>071</code>: Humic Andosols</li>
+							                <li><code>072</code>: Mollic Andosols</li>
+							                <li><code>073</code>: Ochric Andosols</li>
+							                <li><code>074</code>: Vitric Andosols</li>
+							                <li><code>075</code>: Planosols</li>
+							                <li><code>076</code>: Dystric Planosols</li>
+							                <li><code>077</code>: Xerosols</li>
+							                <li><code>078</code>: Takyric Yermosols</li>
+							                <li><code>079</code>: Gypsic Yermosols</li>
+							                <li><code>080</code>: Takyric Solonchaks</li>
+							                <li><code>081</code>: Dystric Cambisols</li>
+							                <li><code>082</code>: Water bodies</li>
+							                <li><code>083</code>: Luvic Chernozems</li>
+							                <li><code>084</code>: Mollic Gleysols</li>
+							                <li><code>085</code>: Haplic Kastanozems</li>
+							                <li><code>086</code>: Luvic Xerosols</li>
+							                <li><code>087</code>: Gelic Cambisols</li>
+							                <li><code>088</code>: Haplic Chernozems</li>
+							                <li><code>089</code>: Gelic Gleysols</li>
+							                <li><code>090</code>: Orthic Greyzems</li>
+							                <li><code>091</code>: Gelic Histosols</li>
+							                <li><code>092</code>: Orthic Podzols</li>
+							                <li><code>093</code>: Gelic Regosols</li>
+							                <li><code>094</code>: Mollic Solonetz</li>
+							                <li><code>095</code>: Calcic Luvisols</li>
+							                <li><code>096</code>: Vertic Luvisols</li>
+							                <li><code>097</code>: Albic Arenosols</li>
+							                <li><code>098</code>: Luvic Yermosols</li>
+							                <li><code>099</code>: Humic Acrisols</li>
+							                <li><code>100</code>: Calcaric Gleysols</li>
+							                <li><code>101</code>: Gleyic Acrisols</li>
+							                <li><code>102</code>: Dystric Podzoluvisol</li>
+							                <li><code>103</code>: Gleyic Phaeozems</li>
+							                <li><code>104</code>: Acric Ferralsols</li>
+							                <li><code>105</code>: Gleyic Podzols</li>
+							                <li><code>106</code>: Calcic Chernozems</li>
+							                <li><code>107</code>: Eutric Podzoluvisols</li>
+							                <li><code>108</code>: Histosols</li>
+							                <li><code>109</code>: Leptic Podzols</li>
+							                <li><code>110</code>: Humic Planosols</li>
+							                <li><code>111</code>: Placic Podzols</li>
+							                <li><code>112</code>: Glaciers</li>
+							                <li><code>113</code>: No Data</li>
+							                <li><code>114</code>: Urban, mining, etc.</li>
+							                <li><code>115</code>: Humanly disturbed</li>
+							                <li><code>116</code>: Fibric Histosols</li>
+							                <li><code>117</code>: Calcaric Cambisols</li>
+							                <li><code>118</code>: Umbric Gleysols</li>
+							                <li><code>119</code>: Folic Histosols</li>
+							                <li><code>120</code>: Dystric Leptosols</li>
+							                <li><code>121</code>: Haplic Podzols</li>
+							                <li><code>122</code>: Haplic Solonetz</li>
+							                <li><code>123</code>: Ferric Podzols</li>
+							                <li><code>124</code>: Dystric Podzoluvisols</li>
+							                <li><code>125</code>: Rendzic Leptosols</li>
+							                <li><code>126</code>: Gleyic Podzoluvisols</li>
+							                <li><code>127</code>: Stagnic Podzoluvisols</li>
+							                <li><code>128</code>: Calcic Gleysols</li>
+							                <li><code>129</code>: Haplic Greyzems</li>
+							                <li><code>130</code>: Calcaric Phaeozems</li>
+							                <li><code>131</code>: Lithic Leptosols</li>
+							                <li><code>132</code>: Mollic Fluvisols</li>
+							                <li><code>133</code>: Albic Luvsiols</li>
+							                <li><code>134</code>: Terric Histosols</li>
+							                <li><code>135</code>: Gleyic Solonetz</li>
+							                <li><code>136</code>: Haplic Andosols</li>
+							                <li><code>137</code>: Gelic Andosols</li>
+							                <li><code>138</code>: Umbric Leptosols</li>
+							                <li><code>139</code>: Mollic Leptosols</li>
+							                <li><code>140</code>: Eutric Vertisols</li>
+							                <li><code>141</code>: Mollic Planosols</li>
+							                <li><code>142</code>: Haplic Calcisols</li>
+							                <li><code>143</code>: Luvic Calcisols</li>
+							                <li><code>144</code>: Haplic Solonchaks</li>
+							                <li><code>145</code>: Haplic Luvisols</li>
+							                <li><code>146</code>: Haplic Arenosols</li>
+							                <li><code>147</code>: Stagnic Luvisols</li>
+							                <li><code>148</code>: Umbric Andosols</li>
+							                <li><code>149</code>: Cambic Podzols</li>
+							                <li><code>150</code>: Haplic Gypsisols</li>
+							                <li><code>151</code>: Haplic Alisols</li>
+							                <li><code>152</code>: Stagnic Phaeozems</li>
+							                <li><code>153</code>: Haplic Acrisols</li>
+							                <li><code>154</code>: Gleyic Arenosols</li>
+							                <li><code>155</code>: Thionic Gleysols</li>
+							                <li><code>156</code>: Cumulic Anthrosols</li>
+							                <li><code>157</code>: Calcaric Arenosols</li>
+							                <li><code>158</code>: Aric Anthrosols</li>
+							                <li><code>159</code>: Fimic Anthrosols</li>
+							                <li><code>160</code>: Gleyic Chernozems</li>
+							                <li><code>161</code>: Petric Calcisols</li>
+							                <li><code>162</code>: Luvic Gypsisols</li>
+							                <li><code>163</code>: Calcic Gypsisols</li>
+							                <li><code>164</code>: Petric Gypsisols</li>
+							                <li><code>165</code>: Umbric Fluvisols</li>
+							                <li><code>166</code>: Calcic Vertisols</li>
+							                <li><code>167</code>: Leptosols</li>
+							                <li><code>168</code>: Ferric Lixisols</li>
+							                <li><code>169</code>: Eutric Leptosols</li>
+							                <li><code>170</code>: Dystric Vertisols</li>
+							                <li><code>171</code>: Salic Fluviosls</li>
+							                <li><code>172</code>: Mollic Solonchaks</li>
+							                <li><code>173</code>: Gypsic Solonchaks</li>
+							                <li><code>174</code>: Sodic Solonchaks</li>
+							                <li><code>175</code>: Calcic Solonchaks</li>
+							                <li><code>176</code>: Calcic Solonetz</li>
+							                <li><code>177</code>: Gypsic Solonetz</li>
+							                <li><code>178</code>: Plinthic Alisols</li>
+							                <li><code>179</code>: Anthrosols</li>
+							                <li><code>180</code>: Gelic Leptosols</li>
+							                <li><code>181</code>: Haplic Ferralsols</li>
+							                <li><code>182</code>: Humic Nitisols</li>
+							                <li><code>183</code>: Ferric Alisols</li>
+							                <li><code>184</code>: Albic Lixisols</li>
+							                <li><code>185</code>: Stagnic Alisols</li>
+							                <li><code>186</code>: Dunes & shift.sands</li>
+							                <li><code>187</code>: Island</li>
+							                <li><code>188</code>: Fishpond</li>
+							                <li><code>189</code>: Haplic Lixisols</li>
+							                <li><code>190</code>: Gleyic Alisols</li>
+							                <li><code>191</code>: Haplic Nitisols</li>
+							                <li><code>192</code>: Carbic Podzols</li>
+							                <li><code>193</code>: Rhodic Nitisols</li>
+							                <li><code>194</code>: Albic Plinthosols</li>
+							                <li><code>195</code>: Eutric Plinthosols</li>
+							                <li><code>196</code>: Dystric Plinthosols</li>
+							                <li><code>197</code>: Geric Ferralsols</li>
+							                <li><code>198</code>: Humic Plinthosols</li>
+							                <li><code>199</code>: Umbric Regosols</li>
+							                <li><code>200</code>: Humic Alisols</li>
+							                <li><code>201</code>: Chernozems</li>
+							                <li><code>202</code>: Calcisols</li>
+							                <li><code>203</code>: Cambisols</li>
+							                <li><code>204</code>: Gypsisols</li>
+							                <li><code>205</code>: SOLONETZ</li>
+							                <li><code>206</code>: Umbric Planosols</li>
+							                <li><code>207</code>: Plinthic Lixisols</li>
+							                <li><code>208</code>: Stagnic Lixisols</li>
+							                <li><code>209</code>: Stagnic Solonetz</li>
+							                <li><code>210</code>: Glossic Chernozems</li>
+							                <li><code>211</code>: Gleyic Lixisols</li>
+				                        </ul>
+			                        </dl>
+			                        <dl id="ghf">
+				                        <dt>Global Human Footprint [<strong><code>ghf</code></strong>]&nbsp;<span class="label label-info">NEW</span></dt>
+				                        <dd>
+					                        This element provides an updated map of anthropogenic
+					                        impacts on the environment in geographic projection which
+					                        can be used in wildlife conservation planning, natural
+					                        resource management, and research on human-environment
+					                        interactions.
+					                        More information can be found <a href="http://sedac.ciesin.columbia.edu/data/set/wildareas-v2-human-footprint-geographic">here</a>.
+					                        The provided value is a value ranging from <code>0</code>
+					                        to <code>100</code> where 0 indicates no human impact.
+				                        </dd>
+			                        </dl>
+			                        <dl id="gcov">
+				                        <dt>Global Land Cover [<strong><code>gcov</code></strong>]&nbsp;<span class="label label-info">NEW</span></dt>
+				                        <dd>
+					                        This element provides a land cover map, reference information
+					                        can be found <a href="docs/GCOV.pdf">here</a>.
+					                        This information is coded as follows:
+				                        </dd>
+				                        <ul>
+							                <li><code>011</code>: Post-flooding or irrigated croplands (or aquatic)</li>
+							                <li><code>014</code>: Rainfed croplands</li>
+							                <li><code>020</code>: Mosaic cropland (50-70%) / vegetation (grassland/shrubland/forest) (20-50%)</li>
+							                <li><code>030</code>: Mosaic vegetation (grassland/shrubland/forest) (50-70%) / cropland (20-50%)</li>
+							                <li><code>040</code>: Closed to open (&gt;15%) broadleaved evergreen or semi-deciduous forest (&gt;5m)</li>
+							                <li><code>050</code>: Closed (&gt;40%) broadleaved deciduous forest (&gt;5m)</li>
+							                <li><code>060</code>: Open (15-40%) broadleaved deciduous forest/woodland (&gt;5m)</li>
+							                <li><code>070</code>: Closed (&gt;40%) needleleaved evergreen forest (&gt;5m)</li>
+							                <li><code>090</code>: Open (15-40%) needleleaved deciduous or evergreen forest (&gt;5m)</li>
+							                <li><code>100</code>: Closed to open (&gt;15%) mixed broadleaved and needleleaved forest (&gt;5m)</li>
+							                <li><code>110</code>: Mosaic forest or shrubland (50-70%) / grassland (20-50%)</li>
+							                <li><code>120</code>: Mosaic grassland (50-70%) / forest or shrubland (20-50%)</li>
+							                <li><code>130</code>: Closed to open (&gt;15%) (broadleaved or needleleaved, evergreen or deciduous) shrubland (&lt;5m)</li>
+							                <li><code>140</code>: Closed to open (&gt;15%) herbaceous vegetation (grassland, savannas or lichens/mosses)</li>
+							                <li><code>150</code>: Sparse (&lt;15%) vegetation</li>
+							                <li><code>160</code>: Closed to open (&gt;15%) broadleaved forest regularly flooded (semi-permanently or temporarily) - Fresh or brackish water</li>
+							                <li><code>170</code>: Closed (&gt;40%) broadleaved forest or shrubland permanently flooded - Saline or brackish water</li>
+							                <li><code>180</code>: Closed to open (&gt;15%) grassland or woody vegetation on regularly flooded or waterlogged soil - Fresh, brackish or saline water</li>
+							                <li><code>190</code>: Artificial surfaces and associated areas (Urban areas &gt;50%)</li>
+							                <li><code>200</code>: Bare areas</li>
+							                <li><code>210</code>: Water bodies</li>
+							                <li><code>220</code>: Permanent snow and ice</li>
+							                <li><code>230</code>: No data (burnt areas, clouds,&hellip;)</li>
 				                        </ul>
 			                        </dl>
 			                        <dl id="bio">
