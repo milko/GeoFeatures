@@ -2004,6 +2004,18 @@ class CGeoFeatureService extends ArrayObject
 
 					else
 						$this->_Status( kAPI_STATUS_TOTAL, 0 );
+					
+					//
+					// Filter empty elements.
+					//
+					$ref = & $results[ kAPI_DATA_CLIMATE ];
+					$ref = & $ref[ '2000' ];
+					if( ! count( $ref[ kAPI_DATA_CLIMATE_HWSD ] ) )
+						unset( $ref[ kAPI_DATA_CLIMATE_HWSD ] );
+					if( ! count( $ref[ kAPI_DATA_CLIMATE_GHF ] ) )
+						unset( $ref[ kAPI_DATA_CLIMATE_GHF ] );
+					if( ! count( $ref[ kAPI_DATA_CLIMATE_GCOV ] ) )
+						unset( $ref[ kAPI_DATA_CLIMATE_GCOV ] );
 
 					//
 					// Set results.
@@ -2277,6 +2289,18 @@ class CGeoFeatureService extends ArrayObject
 									= (int) round( $results[ $value ][ $key ] );
 						}
 					}
+					
+					//
+					// Filter empty elements.
+					//
+					$ref = & $results[ kAPI_DATA_CLIMATE ];
+					$ref = & $ref[ '2000' ];
+					if( ! count( $ref[ kAPI_DATA_CLIMATE_HWSD ] ) )
+						unset( $ref[ kAPI_DATA_CLIMATE_HWSD ] );
+					if( ! count( $ref[ kAPI_DATA_CLIMATE_GHF ] ) )
+						unset( $ref[ kAPI_DATA_CLIMATE_GHF ] );
+					if( ! count( $ref[ kAPI_DATA_CLIMATE_GCOV ] ) )
+						unset( $ref[ kAPI_DATA_CLIMATE_GCOV ] );
 
 					//
 					// Set results.
@@ -2531,6 +2555,18 @@ class CGeoFeatureService extends ArrayObject
 									= (int) round( $results[ $value ][ $key ] );
 						}
 					}
+					
+					//
+					// Filter empty elements.
+					//
+					$ref = & $results[ kAPI_DATA_CLIMATE ];
+					$ref = & $ref[ '2000' ];
+					if( ! count( $ref[ kAPI_DATA_CLIMATE_HWSD ] ) )
+						unset( $ref[ kAPI_DATA_CLIMATE_HWSD ] );
+					if( ! count( $ref[ kAPI_DATA_CLIMATE_GHF ] ) )
+						unset( $ref[ kAPI_DATA_CLIMATE_GHF ] );
+					if( ! count( $ref[ kAPI_DATA_CLIMATE_GCOV ] ) )
+						unset( $ref[ kAPI_DATA_CLIMATE_GCOV ] );
 
 					//
 					// Set results.
@@ -2800,6 +2836,18 @@ class CGeoFeatureService extends ArrayObject
 							}
 						}
 					}
+					
+					//
+					// Filter empty elements.
+					//
+					$ref = & $results[ kAPI_DATA_CLIMATE ];
+					$ref = & $ref[ '2000' ];
+					if( ! count( $ref[ kAPI_DATA_CLIMATE_HWSD ] ) )
+						unset( $ref[ kAPI_DATA_CLIMATE_HWSD ] );
+					if( ! count( $ref[ kAPI_DATA_CLIMATE_GHF ] ) )
+						unset( $ref[ kAPI_DATA_CLIMATE_GHF ] );
+					if( ! count( $ref[ kAPI_DATA_CLIMATE_GCOV ] ) )
+						unset( $ref[ kAPI_DATA_CLIMATE_GCOV ] );
 
 					//
 					// Set results.
@@ -3227,19 +3275,19 @@ class CGeoFeatureService extends ArrayObject
 		// Add harmonized world soil database.
 		//
 		$pipeline[ kAPI_DATA_CLIMATE ][ '2000' ][ kAPI_DATA_CLIMATE_HWSD ]
-			= array( kAPI_DATA_CLIMATE_HWSD => '$'.kAPI_DATA_CLIMATE_HWSD;
+			= '$'.kAPI_DATA_CLIMATE_HWSD;
 
 		//
 		// Add global human footprint.
 		//
 		$pipeline[ kAPI_DATA_CLIMATE ][ '2000' ][ kAPI_DATA_CLIMATE_GHF ]
-			= array( kAPI_DATA_CLIMATE_GHF => '$'.kAPI_DATA_CLIMATE_GHF;
+			= '$'.kAPI_DATA_CLIMATE_GHF;
 
 		//
 		// Add global cover 2009.
 		//
 		$pipeline[ kAPI_DATA_CLIMATE ][ '2000' ][ kAPI_DATA_CLIMATE_GCOV ]
-			= array( kAPI_DATA_CLIMATE_GCOV => '$'.kAPI_DATA_CLIMATE_GCOV;
+			= '$'.kAPI_DATA_CLIMATE_GCOV;
 
 		//
 		// Add bioclimatic variables.
@@ -3616,6 +3664,9 @@ class CGeoFeatureService extends ArrayObject
 		//
 		if( $theData !== NULL )
 		{
+			//
+			// Filter empty elements.
+			//
 			$this->mResponse = $theData;
 			$response[ kAPI_RESPONSE_DATA ] = & $this->mResponse;
 		}
