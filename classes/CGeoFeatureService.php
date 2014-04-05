@@ -1943,7 +1943,13 @@ class CGeoFeatureService extends ArrayObject
 				//
 				// Perform aggregation.
 				//
-				$results = $this->Collection()->aggregate( $pipeline );
+			//	$results = $this->Collection()->aggregate( $pipeline );
+				$results
+					= $this->Database()
+						->command(
+							array( 'aggregate' => kDEFAULT_COLLECTION,
+								   'pipeline' => $pipeline ),
+							array( 'timeout' => kDEFAULT_TIMEOUT ) );
 				if( $results[ 'ok' ] )
 				{
 					//
@@ -2788,7 +2794,13 @@ class CGeoFeatureService extends ArrayObject
 				//
 				// Perform query.
 				//
-				$results = $this->Collection()->aggregate( $pipeline );
+			//	$results = $this->Collection()->aggregate( $pipeline );
+				$results
+					= $this->Database()
+						->command(
+							array( 'aggregate' => kDEFAULT_COLLECTION,
+								   'pipeline' => $pipeline ),
+							array( 'socketTimeoutMS' => kDEFAULT_TIMEOUT ) );
 				if( $results[ 'ok' ] )
 				{
 					//

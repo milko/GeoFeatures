@@ -1,0 +1,1 @@
+<?php header( "Location: http://geo.grinfo.net/help/index.html" ); exit; ?>

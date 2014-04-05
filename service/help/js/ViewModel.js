@@ -76,7 +76,7 @@ function MyViewModel() {
             "coordinates" : ko.observable("33065587,774896741")
         },
         "point" : {
-            "coordinates" : ko.observable("-27.16,-59.47")
+            "coordinates" : ko.observable("7.456,46.302")
         },
         "rect" : {
             "coordinates" : ko.observable("-10,30;-11,29")

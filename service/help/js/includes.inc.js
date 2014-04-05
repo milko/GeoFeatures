@@ -5,4 +5,4 @@
  * Time: 1:36
  * To change this template use File | Settings | File Templates.
  */
-var baseURL = "http://localhost/lib/GeoFeatures/service/GeoFeatures.php";
+var baseURL = "http://geo.grinfo.net/features.php";

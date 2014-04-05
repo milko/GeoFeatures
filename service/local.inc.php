@@ -39,7 +39,7 @@ define( "kPATH_GEOFEATURES_LIBRARY_ROOT",	"/Library/WebServer/Library/GeoFeature
  *
  * This tag indicates the default MongoDB server connection string.
  */
-define( "kDEFAULT_SERVER",					"mongodb://192.168.181.101:27017" );
+define( "kDEFAULT_SERVER",					"mongodb://geo.mongos.grinfo.local:27017" );
 
 /**
  * Default database name.
@@ -54,6 +54,18 @@ define( "kDEFAULT_DATABASE",				"GEO" );
  * This tag indicates the default collection name.
  */
 define( "kDEFAULT_COLLECTION",				"LAYERS-30" );
+
+/*=======================================================================================
+ *	RUN-TIME DEFINITIONS																*
+ *======================================================================================*/
+
+/**
+ * Operation timeout.
+ *
+ * This represents the maximum time in milliseconds before a timeout is issued for an
+ * operation.
+ */
+define( "kDEFAULT_TIMEOUT",					29000 );	// 29 seconds.
 
 /*=======================================================================================
  *	FILE PATHS																			*

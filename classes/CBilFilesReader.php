@@ -62,7 +62,8 @@ class CBilFilesReader extends FilterIterator
 	/**
 	 * Instantiate class.
 	 *
-	 * We overload the constructor to assert that the iterator is a {@link CBilFilesIterator}.
+	 * We overload the constructor to assert that the iterator is a
+	 * {@link CBilFilesIterator}.
 	 *
 	 * @param CBilFilesIterator		$theIterator		Iterator instance.
 	 */
