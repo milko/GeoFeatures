@@ -726,6 +726,24 @@ define( "kAPI_DATA_ELEVATION",			'elev' );
 define( "kAPI_DATA_DISTANCE",			'dist' );
 
 /**
+ * Duration.
+ *
+ * This tag represents the duration of the query in milliseconds.
+ *
+ * Type: integer.
+ */
+define( "kAPI_DATA_DURATION",			'time' );
+
+/**
+ * Tiles.
+ *
+ * This tag represents the number of tiles scanned in the query.
+ *
+ * Type: integer.
+ */
+define( "kAPI_DATA_TILES",				'tiles' );
+
+/**
  * Climate section.
  *
  * This tag represents the climate data section, this section is divided in a series of

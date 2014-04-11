@@ -1949,7 +1949,7 @@ class CGeoFeatureService extends ArrayObject
 						->command(
 							array( 'aggregate' => kDEFAULT_COLLECTION,
 								   'pipeline' => $pipeline ),
-							array( 'timeout' => kDEFAULT_TIMEOUT ) );
+							array( 'socketTimeoutMS' => kDEFAULT_TIMEOUT ) );
 				if( $results[ 'ok' ] )
 				{
 					//
@@ -1993,11 +1993,20 @@ class CGeoFeatureService extends ArrayObject
 									// Round ranges.
 									//
 									$keys = array( kAPI_AGGREGATE_MINIMUM,
-										kAPI_AGGREGATE_MEAN,
-										kAPI_AGGREGATE_MAXIMUM );
+												   kAPI_AGGREGATE_MEAN,
+												   kAPI_AGGREGATE_MAXIMUM );
 									foreach( $keys as $key )
-										$results[ $value ][ $key ]
-											= (int) round( $results[ $value ][ $key ] );
+									{
+										if( $value == kAPI_DATA_ELEVATION )
+											$results[ $value ][ $key ]
+												= (int) round(
+													$results[ $value ][ $key ] );
+										else
+											$results[ $value ][ $key ]
+												= (int) round(
+													$results[ $value ][ $key ]
+														/ self::kDistMult );
+									}
 								}
 							}
 
@@ -2288,11 +2297,20 @@ class CGeoFeatureService extends ArrayObject
 							// Round ranges.
 							//
 							$keys = array( kAPI_AGGREGATE_MINIMUM,
-								kAPI_AGGREGATE_MEAN,
-								kAPI_AGGREGATE_MAXIMUM );
+										   kAPI_AGGREGATE_MEAN,
+										   kAPI_AGGREGATE_MAXIMUM );
 							foreach( $keys as $key )
-								$results[ $value ][ $key ]
-									= (int) round( $results[ $value ][ $key ] );
+							{
+								if( $value == kAPI_DATA_ELEVATION )
+									$results[ $value ][ $key ]
+										= (int) round(
+											$results[ $value ][ $key ] );
+								else
+									$results[ $value ][ $key ]
+										= (int) round(
+											$results[ $value ][ $key ]
+												/ self::kDistMult );
+							}
 						}
 					}
 					
@@ -2554,11 +2572,20 @@ class CGeoFeatureService extends ArrayObject
 							// Round ranges.
 							//
 							$keys = array( kAPI_AGGREGATE_MINIMUM,
-								kAPI_AGGREGATE_MEAN,
-								kAPI_AGGREGATE_MAXIMUM );
+										   kAPI_AGGREGATE_MEAN,
+										   kAPI_AGGREGATE_MAXIMUM );
 							foreach( $keys as $key )
-								$results[ $value ][ $key ]
-									= (int) round( $results[ $value ][ $key ] );
+							{
+								if( $value == kAPI_DATA_ELEVATION )
+									$results[ $value ][ $key ]
+										= (int) round(
+											$results[ $value ][ $key ] );
+								else
+									$results[ $value ][ $key ]
+										= (int) round(
+											$results[ $value ][ $key ]
+												/ self::kDistMult );
+							}
 						}
 					}
 					
@@ -2794,7 +2821,7 @@ class CGeoFeatureService extends ArrayObject
 				//
 				// Perform query.
 				//
-			//	$results = $this->Collection()->aggregate( $pipeline );
+			//	$results = $this->Collection()->aggregate( $pipeline, $options );
 				$results
 					= $this->Database()
 						->command(
@@ -2843,8 +2870,17 @@ class CGeoFeatureService extends ArrayObject
 											   kAPI_AGGREGATE_MEAN,
 											   kAPI_AGGREGATE_MAXIMUM );
 								foreach( $keys as $key )
-									$results[ $value ][ $key ]
-										= (int) round( $results[ $value ][ $key ] );
+								{
+									if( $value == kAPI_DATA_ELEVATION )
+										$results[ $value ][ $key ]
+											= (int) round(
+												$results[ $value ][ $key ] );
+									else
+										$results[ $value ][ $key ]
+											= (int) round(
+												$results[ $value ][ $key ]
+													/ self::kDistMult );
+								}
 							}
 						}
 					}
@@ -2878,7 +2914,13 @@ class CGeoFeatureService extends ArrayObject
 				//
 				// Perform query.
 				//
-				$results = $this->Collection()->aggregate( $pipeline );
+			//	$results = $this->Collection()->aggregate( $pipeline, $options );
+				$results
+					= $this->Database()
+						->command(
+							array( 'aggregate' => kDEFAULT_COLLECTION,
+								   'pipeline' => $pipeline ),
+							array( 'socketTimeoutMS' => kDEFAULT_TIMEOUT ) );
 				if( $results[ 'ok' ] )
 				{
 					//
@@ -2892,7 +2934,7 @@ class CGeoFeatureService extends ArrayObject
 					// Set total.
 					//
 					$this->_Status( kAPI_STATUS_TOTAL, count( $results ) );
-
+						
 					//
 					// Handle count.
 					//
@@ -2910,7 +2952,9 @@ class CGeoFeatureService extends ArrayObject
 						$keys = array_keys( $results );
 						foreach( $keys as $key )
 							$results[ $key ][ kAPI_DATA_DISTANCE ]
-								= (int) round( $results[ $key ][ kAPI_DATA_DISTANCE ] );
+								= (int) round(
+									$results[ $key ][ kAPI_DATA_DISTANCE ]
+										/ self::kDistMult );
 
 						//
 						// Set limit.
