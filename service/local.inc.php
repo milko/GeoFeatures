@@ -39,7 +39,7 @@ define( "kPATH_GEOFEATURES_LIBRARY_ROOT",	"/Library/WebServer/Library/GeoFeature
  *
  * This tag indicates the default MongoDB server connection string.
  */
-define( "kDEFAULT_SERVER",					"mongodb://mongo2.grinfo.private:27017" );
+define( "kDEFAULT_SERVER",					"mongodb://192.168.181.103:27017" );
 
 /**
  * Default database name.

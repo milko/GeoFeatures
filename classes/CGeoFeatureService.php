@@ -2821,13 +2821,24 @@ class CGeoFeatureService extends ArrayObject
 				//
 				// Perform query.
 				//
-			//	$results = $this->Collection()->aggregate( $pipeline, $options );
+				$results
+					= $this->Collection()
+						->aggregate(
+							$pipeline,
+							array( 'allowDiskUse' => TRUE,
+								   'maxTimeMS' => kDEFAULT_TIMEOUT ) );
+			/*
 				$results
 					= $this->Database()
 						->command(
 							array( 'aggregate' => kDEFAULT_COLLECTION,
 								   'pipeline' => $pipeline ),
 							array( 'socketTimeoutMS' => kDEFAULT_TIMEOUT ) );
+			*/
+
+				//
+				// Handle results.
+				//
 				if( $results[ 'ok' ] )
 				{
 					//
@@ -2877,9 +2888,13 @@ class CGeoFeatureService extends ArrayObject
 												$results[ $value ][ $key ] );
 									else
 										$results[ $value ][ $key ]
+											= (int) $results[ $value ][ $key ];
+							/*
+										$results[ $value ][ $key ]
 											= (int) round(
 												$results[ $value ][ $key ]
 													/ self::kDistMult );
+							*/
 								}
 							}
 						}
@@ -2914,13 +2929,24 @@ class CGeoFeatureService extends ArrayObject
 				//
 				// Perform query.
 				//
-			//	$results = $this->Collection()->aggregate( $pipeline, $options );
+				$results
+					= $this->Collection()
+						->aggregate(
+							$pipeline,
+							array( 'allowDiskUse' => TRUE,
+								   'maxTimeMS' => kDEFAULT_TIMEOUT ) );
+			/*
 				$results
 					= $this->Database()
 						->command(
 							array( 'aggregate' => kDEFAULT_COLLECTION,
 								   'pipeline' => $pipeline ),
 							array( 'socketTimeoutMS' => kDEFAULT_TIMEOUT ) );
+			*/
+
+				//
+				// Handle results.
+				//
 				if( $results[ 'ok' ] )
 				{
 					//
@@ -2952,9 +2978,15 @@ class CGeoFeatureService extends ArrayObject
 						$keys = array_keys( $results );
 						foreach( $keys as $key )
 							$results[ $key ][ kAPI_DATA_DISTANCE ]
+								= (int) $results[ $key ][ kAPI_DATA_DISTANCE ];
+					/*
+						{
+							$results[ $key ][ kAPI_DATA_DISTANCE ]
 								= (int) round(
 									$results[ $key ][ kAPI_DATA_DISTANCE ]
 										/ self::kDistMult );
+						}
+					*/
 
 						//
 						// Set limit.
